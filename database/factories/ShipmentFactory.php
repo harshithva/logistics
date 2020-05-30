@@ -11,7 +11,7 @@ use Faker\Generator as Faker;
 $factory->define(Shipment::class, function (Faker $faker) {
     return [
         'receiver_name' => $faker->name,
-        'receiver_company' => $faker->text(10),
+        'receiver_company' => $faker->company,
         'receiver_gst' => $faker->numerify('GST#######'),
         'receiver_phone' => $faker->phoneNumber,
         'receiver_secondary_phone' => $faker->phoneNumber,

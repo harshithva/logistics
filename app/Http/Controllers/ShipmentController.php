@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Shipment;
+use App\Http\Resources\Shipment as ShipmentResource;
 use Illuminate\Http\Request;
 
 class ShipmentController extends Controller
@@ -14,7 +15,8 @@ class ShipmentController extends Controller
      */
     public function index()
     {
-        //
+        $shipments = Shipment::paginate(15);
+        return ShipmentResource::collection($shipments);
     }
 
     /**
