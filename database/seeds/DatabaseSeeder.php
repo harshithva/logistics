@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\User;
+use App\Agency;
+use App\Shipment;
 
 class DatabaseSeeder extends Seeder
 {
@@ -11,6 +14,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UserSeeder::class);
+       factory(User::class,5)->create();
+       factory(Agency::class,15)->create();
+       factory(Shipment::class,15)->create();
+      
     }
 }
