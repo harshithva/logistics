@@ -25,9 +25,11 @@ class CreateShipmentsTable extends Migration
             $table->string('receiver_state');
             $table->string('receiver_pincode');
 
-            $table->string('customer_id');
-            $table->string('agency_id');
+            $table->unsignedBigInteger('customer_id');
+            $table->unsignedBigInteger('agency_id');
             $table->timestamps();
+
+        
         });
     }
 

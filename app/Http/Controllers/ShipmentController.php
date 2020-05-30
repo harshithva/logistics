@@ -37,7 +37,8 @@ class ShipmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $shipment = Shipment::create($request->all());
+        return response()->json($shipment,201);
     }
 
     /**
@@ -48,7 +49,7 @@ class ShipmentController extends Controller
      */
     public function show(Shipment $shipment)
     {
-        //
+        return new ShipmentResource($shipment);
     }
 
     /**
@@ -71,7 +72,8 @@ class ShipmentController extends Controller
      */
     public function update(Request $request, Shipment $shipment)
     {
-        //
+        $shipment->update($request->all());
+        return response()->json($shipment,200);
     }
 
     /**
@@ -82,6 +84,7 @@ class ShipmentController extends Controller
      */
     public function destroy(Shipment $shipment)
     {
-        //
+        $shipment->delete();
+        return response()->json(null,204);
     }
 }
