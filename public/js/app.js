@@ -38265,7 +38265,7 @@ var render = function() {
                   _c(
                     "div",
                     { staticClass: "h5 mb-0 font-weight-bold text-gray-800" },
-                    [_vm._v("$40,000")]
+                    [_vm._v("₹40,000")]
                   )
                 ]),
                 _vm._v(" "),
@@ -38300,13 +38300,13 @@ var render = function() {
                   _c(
                     "div",
                     { staticClass: "h5 mb-0 font-weight-bold text-gray-800" },
-                    [_vm._v("$215,000")]
+                    [_vm._v("₹215,000")]
                   )
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-auto" }, [
                   _c("i", {
-                    staticClass: "fas fa-dollar-sign fa-2x text-gray-300"
+                    staticClass: "fas fa-rupee-sign fa-2x text-gray-300"
                   })
                 ])
               ])
