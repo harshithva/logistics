@@ -3,18 +3,18 @@
     <!-- Sidebar -->
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
+      <router-link class="sidebar-brand d-flex align-items-center justify-content-center" to="/admin">
         <div class="sidebar-brand-icon">
-          <img :src="logo_src" alt style="width:2rem;"/>
+          <img :src="logo_src" />
         </div>
-      </a>
+      </router-link>
 
       <!-- Divider -->
       <hr class="sidebar-divider my-0" />
 
       <li class="nav-item ml-2 mt-3 mr-1">
          
-       <router-link to="admin/customers" class="btn bg-white text-primary"><i class="fas fa-box"></i> &nbsp;Create Shipment</router-link>
+       <router-link to="/admin/shipments/create" class="btn bg-white text-primary"><i class="fas fa-box"></i> &nbsp;Create Shipment</router-link>
 
         </router-link>
       
@@ -22,7 +22,7 @@
 
       <!-- Nav Item - Dashboard -->
       <li class="nav-item active">
-        <router-link class="nav-link" to="admin">
+        <router-link class="nav-link" to="/admin">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span>
         </router-link>
@@ -36,19 +36,19 @@
      <li class="nav-item">
         <router-link
           class="nav-link collapsed"
-          to="admin/customers/create">
+          to="/admin/customers/create">
         <i class="fas fa-user-plus"></i>
           <span>Add Customer</span>
         </router-link>
       </li>
 
        <li class="nav-item">
-        <a
+        <router-link
           class="nav-link collapsed"
-          href="#">
+          to="/admin/customers">
           <i class="fas fa-user"></i>
           <span>Customer List</span>
-        </a>
+        </router-link>
       </li>
       <!-- end customer -->
 
@@ -165,4 +165,7 @@ export default {
   data() {
     return {
       logo_src: "/dashboard/img/gurukal.png"
-    };
+    };
+  }
+};
+</script>

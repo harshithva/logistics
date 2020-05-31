@@ -13,6 +13,8 @@ import VueRouter from 'vue-router'
 
 import router from './router/router.js';
 
+const axios = require('axios').default;
+
 
 /**
  * The following block of code may be used to automatically register your
