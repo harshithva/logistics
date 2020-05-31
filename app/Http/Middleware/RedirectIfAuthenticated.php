@@ -18,9 +18,9 @@ class RedirectIfAuthenticated
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        if ( ! Auth::check()) {
-            abort(403, 'Unauthorized action.');
-        }
+        // if ( ! Auth::check()) {
+        //     abort(403, 'Unauthorized action.');
+        // }
         
         if (Auth::guard($guard)->check()) {
             // return redirect(RouteServiceProvider::HOME);

@@ -60,22 +60,22 @@
 
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
-        <a
+        <router-link
           class="nav-link collapsed"
-          href="#">
+          to="/admin/quotes/create">
           <i class="fas fa-plus"></i>
           <span>Create Quote</span>
-        </a>
+        </router-link>
       </li>
 
       <!-- Nav Item - Utilities Collapse Menu -->
        <li class="nav-item">
-        <a
+        <router-link
           class="nav-link collapsed"
-          href="#">
+          to="/admin/quotes">
           <i class="fas fa-scroll"></i>
           <span>Quote Lists</span>
-        </a>
+        </router-link>
       </li>
       <!-- Divider -->
       <hr class="sidebar-divider" />
@@ -83,14 +83,7 @@
       <!-- Heading -->
       <div class="sidebar-heading">Shipment</div>
 
-     <li class="nav-item">
-        <a
-          class="nav-link collapsed"
-          href="#">
-          <i class="fas fa-truck"></i>
-          <span>Create Shipment</span>
-        </a>
-      </li>
+     
 
        <li class="nav-item">
         <a

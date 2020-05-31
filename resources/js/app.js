@@ -37,6 +37,8 @@ Vue.component('Dashboard', require('./components/Dashboard.vue').default);
  * 
  */
 
+
+
 Vue.use(Fragment.Plugin);
 
 const app = new Vue({
