@@ -110,6 +110,22 @@
                   </tr>
                 </tfoot>
                 <tbody>
+                  <tr role="row" class="odd">
+                    <td class="sorting_1">Vinyas</td>
+                    <td>vinyas@vawebsites.in</td>
+                    <td>+91 7975503096</td>
+                    <td>Mangalore</td>
+                    <td align="center">
+                      <router-link
+                        to="/admin/customers/1"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        title="View Customer"
+                      >
+                        <i class="fas fa-eye text-secondary"></i>
+                      </router-link>
+                    </td>
+                  </tr>
                   <tr role="row" class="odd" v-for="customer in customers" :key="customer.id">
                     <td class="sorting_1">{{customer.name}}</td>
                     <td>{{customer.email}}</td>
