@@ -106,12 +106,28 @@
                     <th rowspan="1" colspan="1">Email</th>
                     <th rowspan="1" colspan="1">Phone</th>
                     <th rowspan="1" colspan="1">Location</th>
-                    <th rowspan="1" colspan="1">Action</th>
+                    <th rowspan="1" colspan="1" align="center">Action</th>
                   </tr>
                 </tfoot>
                 <tbody>
                   <tr role="row" class="odd">
                     <td class="sorting_1">Vinyas</td>
+                    <td>vinyas@vawebsites.in</td>
+                    <td>+91 7975503096</td>
+                    <td>Mangalore</td>
+                    <td align="center">
+                      <router-link
+                        to="/admin/customers/1"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        title="View Customer"
+                      >
+                        <i class="fas fa-eye text-secondary"></i>
+                      </router-link>
+                    </td>
+                  </tr>
+                  <tr role="row" class="odd">
+                    <td class="sorting_1">Customer 2</td>
                     <td>vinyas@vawebsites.in</td>
                     <td>+91 7975503096</td>
                     <td>Mangalore</td>

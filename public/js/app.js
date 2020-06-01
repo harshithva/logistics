@@ -2847,6 +2847,38 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -40411,24 +40443,20 @@ var render = function() {
                     _vm._v(" "),
                     _c(
                       "tbody",
-                      _vm._l(_vm.customers, function(customer) {
-                        return _c(
+                      [
+                        _c(
                           "tr",
-                          {
-                            key: customer.id,
-                            staticClass: "odd",
-                            attrs: { role: "row" }
-                          },
+                          { staticClass: "odd", attrs: { role: "row" } },
                           [
                             _c("td", { staticClass: "sorting_1" }, [
-                              _vm._v(_vm._s(customer.name))
+                              _vm._v("Vinyas")
                             ]),
                             _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(customer.email))]),
+                            _c("td", [_vm._v("vinyas@vawebsites.in")]),
                             _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(customer.phone))]),
+                            _c("td", [_vm._v("+91 7975503096")]),
                             _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(customer.city))]),
+                            _c("td", [_vm._v("Mangalore")]),
                             _vm._v(" "),
                             _c(
                               "td",
@@ -40454,9 +40482,95 @@ var render = function() {
                               1
                             )
                           ]
-                        )
-                      }),
-                      0
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "tr",
+                          { staticClass: "odd", attrs: { role: "row" } },
+                          [
+                            _c("td", { staticClass: "sorting_1" }, [
+                              _vm._v("Customer 2")
+                            ]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v("vinyas@vawebsites.in")]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v("+91 7975503096")]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v("Mangalore")]),
+                            _vm._v(" "),
+                            _c(
+                              "td",
+                              { attrs: { align: "center" } },
+                              [
+                                _c(
+                                  "router-link",
+                                  {
+                                    attrs: {
+                                      to: "/admin/customers/1",
+                                      "data-toggle": "tooltip",
+                                      "data-placement": "top",
+                                      title: "View Customer"
+                                    }
+                                  },
+                                  [
+                                    _c("i", {
+                                      staticClass: "fas fa-eye text-secondary"
+                                    })
+                                  ]
+                                )
+                              ],
+                              1
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _vm._l(_vm.customers, function(customer) {
+                          return _c(
+                            "tr",
+                            {
+                              key: customer.id,
+                              staticClass: "odd",
+                              attrs: { role: "row" }
+                            },
+                            [
+                              _c("td", { staticClass: "sorting_1" }, [
+                                _vm._v(_vm._s(customer.name))
+                              ]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(customer.email))]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(customer.phone))]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(customer.city))]),
+                              _vm._v(" "),
+                              _c(
+                                "td",
+                                { attrs: { align: "center" } },
+                                [
+                                  _c(
+                                    "router-link",
+                                    {
+                                      attrs: {
+                                        to: "/admin/customers/1",
+                                        "data-toggle": "tooltip",
+                                        "data-placement": "top",
+                                        title: "View Customer"
+                                      }
+                                    },
+                                    [
+                                      _c("i", {
+                                        staticClass: "fas fa-eye text-secondary"
+                                      })
+                                    ]
+                                  )
+                                ],
+                                1
+                              )
+                            ]
+                          )
+                        })
+                      ],
+                      2
                     )
                   ]
                 )
@@ -40652,7 +40766,9 @@ var staticRenderFns = [
           _vm._v("Location")
         ]),
         _vm._v(" "),
-        _c("th", { attrs: { rowspan: "1", colspan: "1" } }, [_vm._v("Action")])
+        _c("th", { attrs: { rowspan: "1", colspan: "1", align: "center" } }, [
+          _vm._v("Action")
+        ])
       ])
     ])
   },
@@ -64529,7 +64645,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_customers_ViewCustomer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/customers/ViewCustomer */ "./resources/js/components/customers/ViewCustomer.vue");
 /* harmony import */ var _components_customers_CustomerInvoice__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/customers/CustomerInvoice */ "./resources/js/components/customers/CustomerInvoice.vue");
 /* harmony import */ var _components_customers_CreateCustomer__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/customers/CreateCustomer */ "./resources/js/components/customers/CreateCustomer.vue");
-/* harmony import */ var _components_customers_CustomerQuote__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../components/customers/CustomerQuote */ "./resources/js/components/customers/CustomerQuote.vue");
+/* harmony import */ var _components_customers_CustomerQuote__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/customers/CustomerQuote */ "./resources/js/components/customers/CustomerQuote.vue");
 /* harmony import */ var _components_quotes_CreateQuote__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/quotes/CreateQuote */ "./resources/js/components/quotes/CreateQuote.vue");
 /* harmony import */ var _components_quotes_Quotes__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../components/quotes/Quotes */ "./resources/js/components/quotes/Quotes.vue");
 /* harmony import */ var _components_shipments_CreateShipment__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../components/shipments/CreateShipment */ "./resources/js/components/shipments/CreateShipment.vue");
@@ -64573,7 +64689,7 @@ var routes = [{
   component: _components_customers_CustomerInvoice__WEBPACK_IMPORTED_MODULE_5__["default"]
 }, {
   path: '/admin/customers/:id/quotes',
-  component: _components_customers_CustomerQuote__WEBPACK_IMPORTED_MODULE_18__["default"]
+  component: _components_customers_CustomerQuote__WEBPACK_IMPORTED_MODULE_7__["default"]
 }, {
   path: '/admin/customers',
   component: _components_customers_Customer__WEBPACK_IMPORTED_MODULE_3__["default"]
