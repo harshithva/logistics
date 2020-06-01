@@ -18,5 +18,6 @@ class DatabaseSeeder extends Seeder
        factory(Agency::class,15)->create();
        factory(Shipment::class,15)->create();
       
+       $this->call(AdminCustomerUserSeeder::class);
     }
 }
