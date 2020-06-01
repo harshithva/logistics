@@ -89,13 +89,14 @@
                       style="width: 31px;"
                     >Location</th>
                     <th
-                      class="sorting"
+                      class="text-center"
                       tabindex="0"
                       aria-controls="dataTable"
                       rowspan="1"
                       colspan="1"
                       aria-label="Start date: activate to sort column ascending"
                       style="width: 69px;"
+                      scope="col"
                     >Action</th>
                   </tr>
                 </thead>
@@ -114,7 +115,34 @@
                     <td>{{customer.email}}</td>
                     <td>{{customer.phone}}</td>
                     <td>{{customer.city}}</td>
-                    <td>$162,700</td>
+                    <td align="center">
+                      <router-link
+                        to="/admin/customers/1"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        title="View Customer"
+                      >
+                        <i class="fas fa-eye text-secondary"></i>
+                      </router-link>
+
+                      <!-- <a
+                        href="/admin/customers"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        title="Edit Customer"
+                      >
+                        <i class="fas fa-edit"></i>
+                      </a>-->
+
+                      <!-- <a
+                        href="/admin/customers"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        title="Delete Customer"
+                      >
+                        <i class="fas fa-trash text-danger"></i>
+                      </a>-->
+                    </td>
                   </tr>
                 </tbody>
               </table>

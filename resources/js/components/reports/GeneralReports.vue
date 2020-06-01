@@ -9,21 +9,24 @@
         </a>
       </div>
       <div class="row">
-        <a
-          href="#"
+        <router-link
+          to="/admin/reports"
           class="d-none d-sm-inline-block btn btn-sm btn-outline-primary shadow-sm ml-2 mr-2"
         >
           <i class="fas fa-scroll fa-sm"></i> Reports
-        </a>
-        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-outline-primary shadow-sm">
+        </router-link>
+        <router-link
+          to="/admin/payment_log"
+          class="d-none d-sm-inline-block btn btn-sm btn-outline-primary shadow-sm"
+        >
           <i class="fas fa-rupee-sign fa-sm"></i> Payment Log
-        </a>
-        <a
-          href="#"
+        </router-link>
+        <router-link
+          to="/admin/delivery_reports"
           class="d-none d-sm-inline-block btn btn-sm btn-outline-primary shadow-sm ml-2 mr-2"
         >
           <i class="fas fa-truck fa-sm"></i> Delivery Reports
-        </a>
+        </router-link>
       </div>
     </div>
     <div class="card-body">

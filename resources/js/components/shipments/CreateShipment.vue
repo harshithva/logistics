@@ -432,6 +432,16 @@
                           <i class="icon-ok"></i>
                         </span>
                       </button>
+                      <button
+                        class="btn btn-outline-secondary btn-confirmation"
+                        name="dosubmit"
+                        type="submit"
+                      >
+                        Send Mail
+                        <span>
+                          <i class="icon-ok"></i>
+                        </span>
+                      </button>
                       <router-link to="/admin" class="btn btn-outline-secondary btn-confirmation">
                         <span>
                           <i class="ti-share-alt"></i>

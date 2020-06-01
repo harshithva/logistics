@@ -123,7 +123,7 @@
       </li>
 
        <hr class="sidebar-divider" />
-
+<div class="sidebar-heading">Reports</div>
   <li class="nav-item">
         <router-link
           class="nav-link collapsed"
