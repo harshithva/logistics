@@ -86,12 +86,12 @@
      
 
        <li class="nav-item">
-        <a
+        <router-link
           class="nav-link collapsed"
-          href="#">
+          to="/admin/shipments">
           <i class="fas fa-truck-loading"></i>
           <span>Shipment List</span>
-        </a>
+        </router-link>
       </li>
 
       <!-- customer -->
@@ -105,42 +105,42 @@
       <div class="sidebar-heading">Staff</div>
 
      <li class="nav-item">
-        <a
+        <router-link
           class="nav-link collapsed"
-          href="#">
+          to="/admin/staff/create">
           <i class="fas fa-plus"></i>
           <span>Create Staff</span>
-        </a>
+        </router-link>
       </li>
 
        <li class="nav-item">
-        <a
+        <router-link
           class="nav-link collapsed"
-          href="#">
+          to="/admin/staff">
           <i class="fas fa-users"></i>
           <span>Staff List</span>
-        </a>
+        </router-link>
       </li>
 
        <hr class="sidebar-divider" />
 
   <li class="nav-item">
-        <a
+        <router-link
           class="nav-link collapsed"
-          href="#">
+          to="/admin/reports">
           <i class="fas fa-file-invoice"></i>
           <span>General Reports</span>
-        </a>
+        </router-link>
       </li>
 
-        <li class="nav-item">
-        <a
+        <!-- <li class="nav-item">
+        <router-link
           class="nav-link collapsed"
-          href="#">
+          to="/admin/settings">
           <i class="fas fa-fw fa-cog"></i>
           <span>Settings</span>
-        </a>
-      </li>
+        </router-link>
+      </li> -->
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block" />
 

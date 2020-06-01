@@ -4,19 +4,41 @@ import VueRouter from 'vue-router'
 import Analytics from "../components/Analytics";
 import Customer from "../components/customer/Customer";
 import CreateCustomer from "../components/customer/CreateCustomer";
-import CreateShipment from "../components/shipments/CreateShipment";
+
 import CreateQuote from "../components/quotes/CreateQuote";
 import Quotes from "../components/quotes/Quotes";
+
+import CreateShipment from "../components/shipments/CreateShipment";
+import Shipments from "../components/shipments/Shipments";
+
+
+import CreateStaff from "../components/staff/CreateStaff";
+import Staff from "../components/staff/Staff";
+
+import GeneralReports from "../components/reports/GeneralReports";
+
+import Settings from "../components/settings/Settings";
 
 Vue.use(VueRouter)
 
 const routes = [
     { path: '/admin', component: Analytics },
+
     { path: '/admin/customers/create', component: CreateCustomer },
     { path: '/admin/customers', component: Customer },
-    { path: '/admin/shipments/create', component: CreateShipment },
+
     { path: '/admin/quotes/create', component: CreateQuote },
     { path: '/admin/quotes', component: Quotes },
+
+    { path: '/admin/shipments', component: Shipments },
+    { path: '/admin/shipments/create', component: CreateShipment },
+
+    { path: '/admin/staff/create', component: CreateStaff },
+    { path: '/admin/staff', component: Staff },
+
+    { path: '/admin/reports', component: GeneralReports },
+
+    { path: '/admin/settings', component: Settings },
 ]
 
 
