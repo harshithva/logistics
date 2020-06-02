@@ -271,7 +271,7 @@
                           </td>
                           <td align="center">
                             <router-link
-                              to="/admin/customers/1"
+                              to="/admin/customers/1/invoices/1/view"
                               data-toggle="tooltip"
                               data-placement="top"
                               title="View Customer"

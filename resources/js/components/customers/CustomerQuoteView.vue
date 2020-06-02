@@ -1,14 +1,14 @@
 <template>
   <fragment>
-    <div class="row m-3">
+    <div class="row mt-3 mb-3 ml-3 d-print-none">
       <div class="col"></div>
       <div class="col">
-        <a href class="btn btn-primary">
+        <a class="btn btn-primary text-white" onclick="javascript:window.print()">
           <i class="fas fa-print"></i> Print
         </a>
-        <a href class="btn btn-secondary ml-2">
-          <i class="fas fa-download"></i> Download
-        </a>
+        <button class="btn btn-secondary ml-2">
+          <i class="fas fa-download" @click="downloadPDF"></i> Download
+        </button>
         <a href class="btn btn-info ml-2">
           <i class="fas fa-envelope"></i> Mail
         </a>
@@ -20,7 +20,7 @@
         </a>
       </div>
     </div>
-    <div class="card">
+    <div class="card" ref="content">
       <div class="card-body">
         <div class="row mt-2">
           <div class="col">
@@ -159,11 +159,45 @@
 </template>
 
 <script>
+import jsPDF from "jspdf";
+import domtoimage from "dom-to-image";
 export default {
   data() {
     return {
       logo: "https://gurukal.co.in/wp-content/uploads/2020/02/guru1-1.png"
     };
+  },
+  methods: {
+    downloadPdf() {
+      alert("hi");
+      /** WITH CSS */
+      domtoimage
+        .toPng(this.$refs.content)
+        .then(function(dataUrl) {
+          var img = new Image();
+          img.src = dataUrl;
+          const doc = new jsPDF({
+            orientation: "portrait",
+            // unit: "pt",
+            format: [900, 1400]
+          });
+          doc.addImage(img, "JPEG", 20, 20);
+          const date = new Date();
+          const filename =
+            "timechart_" +
+            date.getFullYear() +
+            ("0" + (date.getMonth() + 1)).slice(-2) +
+            ("0" + date.getDate()).slice(-2) +
+            ("0" + date.getHours()).slice(-2) +
+            ("0" + date.getMinutes()).slice(-2) +
+            ("0" + date.getSeconds()).slice(-2) +
+            ".pdf";
+          doc.save(filename);
+        })
+        .catch(function(error) {
+          console.error("oops, something went wrong!", error);
+        });
+    }
   }
 };
 </script>
