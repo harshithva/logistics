@@ -1,8 +1,8 @@
 <template>
   <fragment>
     <div class="row mt-3 mb-3 ml-3 d-print-none">
-      <div class="col"></div>
-      <div class="col">
+      <div class="col-5"></div>
+      <div class="col-7">
         <a class="btn btn-primary text-white" onclick="javascript:window.print()">
           <i class="fas fa-print"></i> Print
         </a>
@@ -17,6 +17,9 @@
         </a>
         <a href class="btn btn-success ml-2">
           <i class="fas fa-check"></i> Approve
+        </a>
+        <a href class="btn btn-warning ml-2">
+          <i class="fas fa-edit"></i> Edit
         </a>
       </div>
     </div>

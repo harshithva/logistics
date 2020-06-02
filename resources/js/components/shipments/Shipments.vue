@@ -1,7 +1,7 @@
 <template>
   <div class="card shadow mb-4">
     <div class="card-header py-3">
-      <h6 class="m-0 font-weight-bold text-primary">Quotation List</h6>
+      <h6 class="m-0 font-weight-bold text-primary">Shipment List</h6>
     </div>
     <div class="card-body">
       <div class="table-responsive">
@@ -98,7 +98,7 @@
                       style="width: 31px;"
                     >To</th>
                     <th
-                      class="sorting"
+                      class="text-center"
                       tabindex="0"
                       aria-controls="dataTable"
                       rowspan="1"
@@ -115,16 +115,43 @@
                     <th rowspan="1" colspan="1">Name</th>
                     <th rowspan="1" colspan="1">From</th>
                     <th rowspan="1" colspan="1">To</th>
-                    <th rowspan="1" colspan="1">Action</th>
+                    <th rowspan="1" colspan="1" class="text-center">Action</th>
                   </tr>
                 </tfoot>
                 <tbody>
                   <tr role="row" class="odd">
-                    <td class="sorting_1"></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td class="sorting_1">455445415</td>
+                    <td>02/06/2020</td>
+                    <td>Vinyas</td>
+                    <td>Mangalore</td>
+                    <td>Bangalore</td>
+                    <td align="center">
+                      <router-link
+                        to="/admin/customers/1/invoices/1/view"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        title="View Customer"
+                      >
+                        <i class="fas fa-truck text-primary"></i>
+                      </router-link>
+                      <router-link
+                        to="/admin/customers/1/invoices/1/view"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        title="View Customer"
+                      >
+                        <i class="fas fa-eye text-secondary"></i>
+                      </router-link>
+                      <router-link
+                        to="/admin/customers/1/invoices/1/view"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        title="View Customer"
+                      >
+                        <i class="fas fa-edit text-primary"></i>
+                      </router-link>
+                      <span class="badge badge-pill badge-info">Intransit</span>
+                    </td>
                   </tr>
                 </tbody>
               </table>

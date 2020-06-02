@@ -35,6 +35,39 @@
         </a>
       </div>
     </div>
+    <div class="row">
+      <div class="col">
+        <div class="card">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-3">
+                <p>Sender Details</p>
+                <p>Pickup Location : Bangalore</p>
+                <p>Sender name : ABC Farm</p>
+                <p>Contact : +91 785 596 4522</p>
+              </div>
+              <div class="col-3">
+                <p>Receiver Details</p>
+                <p>Dropoff Location : Mangalore</p>
+                <p>Receiver Name : Vinyas</p>
+                <p>Contact : +91 744 596 4522</p>
+              </div>
+              <div class="col-3">
+                <p>Transport Details</p>
+                <p>Driver Name : Manjesh</p>
+                <p>Contact : +91 985 454 5654</p>
+                <p>Vechile Details : Ashok Leyland KA05.EY.2025</p>
+              </div>
+              <div class="col-3">
+                <p>Current Status</p>
+                <p>Location : Mysore</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="card" ref="content">
       <div class="card-body">
         <div class="row">

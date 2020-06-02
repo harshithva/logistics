@@ -105,16 +105,34 @@
                     <th rowspan="1" colspan="1">Name</th>
                     <th rowspan="1" colspan="1">From</th>
                     <th rowspan="1" colspan="1">To</th>
-                    <th rowspan="1" colspan="1">Action</th>
+                    <th rowspan="1" colspan="1" class="text-center">Action</th>
                   </tr>
                 </tfoot>
                 <tbody>
                   <tr role="row" class="odd">
-                    <td class="sorting_1"></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td class="sorting_1">41635221</td>
+                    <td>Vinyas</td>
+                    <td>Bangalore</td>
+                    <td>Mangalore</td>
+                    <td align="center">
+                      <router-link
+                        to="/admin/customers/1/quotes/1/view"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        title="View Customer"
+                      >
+                        <i class="fas fa-eye text-secondary"></i>
+                      </router-link>
+                      <router-link
+                        to="/admin/customers/1/quotes/1/view"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        title="View Customer"
+                      >
+                        <i class="fas fa-edit text-primary"></i>
+                      </router-link>
+                      <span class="badge badge-pill badge-success">Approved</span>
+                    </td>
                   </tr>
                 </tbody>
               </table>
