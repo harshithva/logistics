@@ -14,6 +14,7 @@ import VueRouter from 'vue-router'
 import router from './router/router.js';
 
 const axios = require('axios').default;
+axios.defaults.baseURL = '/';
 
 
 /**

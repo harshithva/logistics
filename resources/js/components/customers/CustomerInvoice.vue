@@ -45,29 +45,29 @@
       <div class="col-lg-8 col-xlg-9 col-md-7">
         <div class="card">
           <div class="card-body">
+            <div id="loader" style="display:none"></div>
+            <div id="msgholder"></div>
             <div class="row mb-4">
-              <a
-                href="/admin/customers/1"
+              <router-link
+                to="/admin/customers/1"
                 aria-current="page"
-                class="d-none d-sm-inline-block btn btn-sm btn-outline-primary shadow-sm ml-2 mr-2 router-link-exact-active router-link-active"
+                class="d-none d-sm-inline-block btn btn-sm btn-outline-primary shadow-sm ml-3"
               >
                 <i class="fas fa-edit fa-sm"></i> Edit
-              </a>
-              <a
-                href="/admin/customers/1/invoice"
-                class="d-none d-sm-inline-block btn btn-sm btn-outline-primary shadow-sm"
+              </router-link>
+              <router-link
+                to="/admin/customers/1/invoice"
+                class="d-none d-sm-inline-block btn btn-sm btn-outline-primary shadow-sm ml-2"
               >
                 <i class="fas fa-rupee-sign fa-sm"></i> Invoices
-              </a>
-              <a
-                href="/admin/customers/1/quotes"
+              </router-link>
+              <router-link
+                to="/admin/customers/1/quotes"
                 class="d-none d-sm-inline-block btn btn-sm btn-outline-primary shadow-sm ml-2 mr-2"
               >
                 <i class="fas fa-scroll fa-sm"></i> Quotes
-              </a>
+              </router-link>
             </div>
-            <div id="loader" style="display:none"></div>
-            <div id="msgholder"></div>
             <div class="row">
               <div class="col-xl-4 col-md-6 mb-4">
                 <div class="card border-left-primary shadow h-100 py-2">

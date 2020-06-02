@@ -285,7 +285,7 @@ export default {
     console.log("HELLO");
 
     axios
-      .get("http://127.0.0.1:8000/api/customers")
+      .get("/api/customers")
       .then(response => (this.customers = response.data.data))
       .catch(function(error) {
         // handle error

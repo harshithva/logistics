@@ -8,6 +8,7 @@ import ViewCustomer from "../components/customers/ViewCustomer";
 import CustomerInvoice from "../components/customers/CustomerInvoice";
 import CreateCustomer from "../components/customers/CreateCustomer";
 import CustomerQuote from "../components/customers/CustomerQuote";
+import CustomerQuoteView from "../components/customers/CustomerQuoteView";
 
 import CreateQuote from "../components/quotes/CreateQuote";
 import Quotes from "../components/quotes/Quotes";
@@ -34,6 +35,7 @@ const routes = [
     { path: '/admin/customers/:id', component: ViewCustomer },
     { path: '/admin/customers/:id/invoice', component: CustomerInvoice },
     { path: '/admin/customers/:id/quotes', component: CustomerQuote },
+    { path: '/admin/customers/:id/quotes/:id/view', component: CustomerQuoteView },
     { path: '/admin/customers', component: Customer },
 
     { path: '/admin/quotes/create', component: CreateQuote },
