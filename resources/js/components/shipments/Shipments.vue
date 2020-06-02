@@ -130,7 +130,7 @@
                         to="/admin/customers/1/invoices/1/view"
                         data-toggle="tooltip"
                         data-placement="top"
-                        title="View Customer"
+                        title="Updated statu"
                       >
                         <i class="fas fa-truck text-primary"></i>
                       </router-link>
@@ -138,7 +138,7 @@
                         to="/admin/customers/1/invoices/1/view"
                         data-toggle="tooltip"
                         data-placement="top"
-                        title="View Customer"
+                        title="View"
                       >
                         <i class="fas fa-eye text-secondary"></i>
                       </router-link>
@@ -146,7 +146,7 @@
                         to="/admin/customers/1/invoices/1/view"
                         data-toggle="tooltip"
                         data-placement="top"
-                        title="View Customer"
+                        title="Edit"
                       >
                         <i class="fas fa-edit text-primary"></i>
                       </router-link>

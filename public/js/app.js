@@ -49968,7 +49968,7 @@ var render = function() {
                                   to: "/admin/customers/1/invoices/1/view",
                                   "data-toggle": "tooltip",
                                   "data-placement": "top",
-                                  title: "View Customer"
+                                  title: "Updated statu"
                                 }
                               },
                               [
@@ -49985,7 +49985,7 @@ var render = function() {
                                   to: "/admin/customers/1/invoices/1/view",
                                   "data-toggle": "tooltip",
                                   "data-placement": "top",
-                                  title: "View Customer"
+                                  title: "View"
                                 }
                               },
                               [
@@ -50002,7 +50002,7 @@ var render = function() {
                                   to: "/admin/customers/1/invoices/1/view",
                                   "data-toggle": "tooltip",
                                   "data-placement": "top",
-                                  title: "View Customer"
+                                  title: "Edit"
                                 }
                               },
                               [
