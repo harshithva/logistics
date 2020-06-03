@@ -27,15 +27,14 @@
       <div class="card-body">
         <div class="row mt-2">
           <div class="col">
-            <img :src="logo" />
+            <img :src="logo" style="max-width:8rem" />
           </div>
           <div class="col"></div>
           <div class="col">
             <p>
               GURUKAL LOGISTICS
               <br />Anchepalya, Bangalore - 560073
-              <br />Mob: +91-9342244267 /
-              +91-9663222686
+              <br />Mob: +91 9620202001
               <br />E-mail : logistics@gurukal.co.in
               <br />Website: www.gurukal.co.in
               <br />
@@ -73,7 +72,7 @@
 
         <div class="row mt-2">
           <div class="col text-center">
-            <h6>Sub: Transit Quote for</h6>
+            <h6>Sub: Transit Quote for Managalore</h6>
           </div>
         </div>
 
@@ -81,7 +80,7 @@
           <div class="col">
             <p>
               Dear Sir,
-              <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;As per our discussion regarding transportation requirement for the consignment to
+              <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;As per our discussion regarding transportation requirement for the consignment to Managalore
             </p>
           </div>
         </div>
@@ -127,7 +126,7 @@
               <li>Rates quoted above are valid for 48Hrs only.</li>
               <li>Extra charges will be implied If the consignment exceeds the limit of fleet dimension.</li>
               <li>Advance payment is to be made (unless stated above, in which case you shall pay the quoted price).</li>
-              <li>if the unloading time exceeds 8Hrs halting will be charged on pro rate basis.</li>
+              <li>if the unloading time exceeds 4Hrs halting will be charged on pro rate basis.</li>
               <li>Payments are to be made within 7 days from the date of invoice.</li>
             </ol>
           </div>
@@ -147,9 +146,12 @@
         </div>
 
         <div class="row mt-2">
+          <div class="col-10"></div>
           <div class="col">
             <p>
               For and behalf of
+              <br />
+              <br />
               <br />
 
               <u>Gurukal Logistics</u>
@@ -167,7 +169,7 @@ import domtoimage from "dom-to-image";
 export default {
   data() {
     return {
-      logo: "https://gurukal.co.in/wp-content/uploads/2020/02/guru1-1.png"
+      logo: "https://i.ibb.co/WFdrW4M/Logo-Color-Text-Below.jpg"
     };
   },
   methods: {

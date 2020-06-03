@@ -12,10 +12,12 @@ import Fragment from 'vue-fragment';
 import VueRouter from 'vue-router'
 
 import router from './router/router.js';
-
+import BootstrapVue from 'bootstrap-vue'
 const axios = require('axios').default;
 axios.defaults.baseURL = '/';
 
+
+import 'bootstrap-vue/dist/bootstrap-vue.css';
 
 /**
  * The following block of code may be used to automatically register your
@@ -30,7 +32,7 @@ axios.defaults.baseURL = '/';
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('Dashboard', require('./components/Dashboard.vue').default);
-
+Vue.use(BootstrapVue);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

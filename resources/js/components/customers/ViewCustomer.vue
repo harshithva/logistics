@@ -188,7 +188,7 @@
   </div>
 </template>
 
-<style>
+<style scoped>
 .router-link-exact-active {
   background-color: #4e73df;
   color: white;

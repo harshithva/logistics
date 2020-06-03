@@ -353,6 +353,24 @@
                     </div>
                   </div>
 
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <textarea class="form-control" name="notes" rows="6" placeholder="Remarks"></textarea>
+                    </div>
+                  </div>
+
+                  <div class="col-md-12">
+                    <p>Upload Docs</p>
+                    <div class="row">
+                      <div class="col-6 d-flex d-inline">
+                        <b-form-file v-model="file" ref="file-input" class="mb-2"></b-form-file>
+                      </div>
+                      <div class="col-6">
+                        <b-button @click="clearFiles" class="mr-2">Reset</b-button>
+                      </div>
+                    </div>
+                  </div>
+
                   <div class="row m-2">
                     <div class="col">
                       <p class="form-check-inline">Bill To</p>
@@ -596,3 +614,19 @@
     </div>
   </div>
 </template>
+
+
+<script>
+export default {
+  data() {
+    return {
+      file: null
+    };
+  },
+  methods: {
+    clearFiles() {
+      this.$refs["file-input"].reset();
+    }
+  }
+};
+</script>

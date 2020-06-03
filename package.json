@@ -24,6 +24,7 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
+        "bootstrap-vue": "^2.15.0",
         "dom-to-image": "^2.6.0",
         "jspdf": "^1.5.3",
         "vue-fragment": "^1.5.1",
