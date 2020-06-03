@@ -16,8 +16,11 @@ import BootstrapVue from 'bootstrap-vue'
 const axios = require('axios').default;
 axios.defaults.baseURL = '/';
 
+import VueQrcode from '@chenfengyuan/vue-qrcode';
 
 import 'bootstrap-vue/dist/bootstrap-vue.css';
+
+Vue.component(VueQrcode.name, VueQrcode);
 
 /**
  * The following block of code may be used to automatically register your

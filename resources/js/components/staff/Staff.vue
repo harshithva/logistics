@@ -90,7 +90,7 @@
                     >Email</th>
 
                     <th
-                      class="sorting"
+                      class="text-center"
                       tabindex="0"
                       aria-controls="dataTable"
                       rowspan="1"
@@ -106,16 +106,33 @@
                     <th rowspan="1" colspan="1">Role</th>
                     <th rowspan="1" colspan="1">Phone</th>
                     <th rowspan="1" colspan="1">Email</th>
-                    <th rowspan="1" colspan="1">Action</th>
+                    <th rowspan="1" colspan="1" class="text-center">Action</th>
                   </tr>
                 </tfoot>
                 <tbody>
                   <tr role="row" class="odd">
-                    <td class="sorting_1"></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td class="sorting_1">Jack</td>
+                    <td>employee</td>
+                    <td>+91 896 568 9656</td>
+                    <td>jack@gurukal.co.in</td>
+                    <td align="center">
+                      <router-link
+                        to="/admin/staff/1/edit"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        title="Edit Staff"
+                      >
+                        <i class="fas fa-edit text-secondary"></i>
+                      </router-link>
+                      <router-link
+                        to="/admin/staff"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        title="Delete Staff"
+                      >
+                        <i class="fas fa-trash text-danger"></i>
+                      </router-link>
+                    </td>
                   </tr>
                 </tbody>
               </table>

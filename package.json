@@ -20,13 +20,15 @@
         "resolve-url-loader": "^2.3.1",
         "sass": "^1.20.1",
         "sass-loader": "^8.0.0",
-        "vue": "^2.5.17",
+        "vue": "^2.6.11",
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
+        "@chenfengyuan/vue-qrcode": "^1.0.2",
         "bootstrap-vue": "^2.15.0",
         "dom-to-image": "^2.6.0",
         "jspdf": "^1.5.3",
+        "vue-barcode": "^1.2.0",
         "vue-fragment": "^1.5.1",
         "vue-router": "^3.3.2"
     }

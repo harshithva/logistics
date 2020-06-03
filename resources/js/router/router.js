@@ -21,6 +21,7 @@ import Shipments from "../components/shipments/Shipments";
 
 import CreateStaff from "../components/staff/CreateStaff";
 import Staff from "../components/staff/Staff";
+import EditStaff from "../components/staff/EditStaff";
 
 import GeneralReports from "../components/reports/GeneralReports";
 import PaymentLog from "../components/reports/PaymentLog";
@@ -50,6 +51,7 @@ const routes = [
 
     { path: '/admin/staff/create', component: CreateStaff },
     { path: '/admin/staff', component: Staff },
+    { path: '/admin/staff/:id/edit', component: EditStaff },
 
     { path: '/admin/reports', component: GeneralReports },
     { path: '/admin/payment_log', component: PaymentLog },

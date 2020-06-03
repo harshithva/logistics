@@ -23,6 +23,7 @@
                             class="form-control"
                             name="username"
                             placeholder="Email"
+                            value="jack@gurukal.co.in"
                           />
                         </div>
                       </div>
@@ -33,6 +34,7 @@
                             class="form-control"
                             name="password"
                             placeholder="Password"
+                            value="adjsjnd"
                           />
                         </div>
                       </div>
@@ -50,6 +52,7 @@
                             class="form-control"
                             name="fname"
                             placeholder="Designation"
+                            value="Employee"
                           />
                         </div>
                       </div>
@@ -72,9 +75,9 @@
                             placeholder="Staff Role"
                           />
                           <datalist id="browsers6">
-                            <option value="admin" selected disabled>Roles</option>
+                            <option value="admin" disabled>Roles</option>
                             <option value="admin">Admin</option>
-                            <option value="employee">Employee</option>
+                            <option value="employee" selected>Employee</option>
                             <option value="driver">Driver</option>
                             <option value="user">User</option>
                           </datalist>
@@ -102,7 +105,7 @@
                         name="dosubmit"
                         type="submit"
                       >
-                        Add Staff
+                        Update Staff
                         <span>
                           <i class="icon-ok"></i>
                         </span>
