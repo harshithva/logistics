@@ -114,16 +114,15 @@
                   </section>
                   <div class="form-group">
                     <div class="col-sm-12">
-                      <button
+                      <router-link
                         class="btn btn-outline-primary btn-confirmation"
-                        name="dosubmit"
-                        type="submit"
+                        to="/admin/customers"
                       >
                         Add Customer
                         <span>
                           <i class="icon-ok"></i>
                         </span>
-                      </button>
+                      </router-link>
                       <router-link to="/admin" class="btn btn-outline-secondary btn-confirmation">
                         <span>
                           <i class="ti-share-alt"></i>

@@ -99,36 +99,16 @@
 
                 <div class="form-group">
                   <div class="col-sm-12">
-                    <button
+                    <router-link
                       class="btn btn-outline-primary btn-confirmation"
-                      name="dosubmit"
-                      type="submit"
+                      to="/admin/customers/1/quotes/1/view"
                     >
                       Save
                       <span>
                         <i class="icon-ok"></i>
                       </span>
-                    </button>
-                    <button
-                      class="btn btn-outline-secondary btn-confirmation"
-                      name="dosubmit"
-                      type="submit"
-                    >
-                      Print
-                      <span>
-                        <i class="icon-ok"></i>
-                      </span>
-                    </button>
-                    <button
-                      class="btn btn-outline-danger btn-confirmation"
-                      name="dosubmit"
-                      type="submit"
-                    >
-                      Mail
-                      <span>
-                        <i class="icon-ok"></i>
-                      </span>
-                    </button>
+                    </router-link>
+
                     <router-link to="/admin" class="btn btn-outline-secondary btn-confirmation">
                       <span>
                         <i class="ti-share-alt"></i>

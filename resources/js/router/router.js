@@ -17,6 +17,7 @@ import Quotes from "../components/quotes/Quotes";
 
 import CreateShipment from "../components/shipments/CreateShipment";
 import Shipments from "../components/shipments/Shipments";
+import EditShipment from "../components/shipments/EditShipment";
 
 
 import CreateStaff from "../components/staff/CreateStaff";
@@ -48,6 +49,7 @@ const routes = [
 
     { path: '/admin/shipments', component: Shipments },
     { path: '/admin/shipments/create', component: CreateShipment },
+    { path: '/admin/shipments/:id/edit', component: EditShipment },
 
     { path: '/admin/staff/create', component: CreateStaff },
     { path: '/admin/staff', component: Staff },
