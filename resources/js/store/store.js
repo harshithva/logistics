@@ -5,6 +5,7 @@ import axios from 'axios'
 Vue.use(Vuex)
 
 export const store = new Vuex.Store({
+    namespaced: true,
     state: {
         customers: [],
         errors: []
