@@ -15,6 +15,10 @@ export const store = new Vuex.Store({
         },
         getAllErrors(state) {
             return state.errors;
+        },
+        getCustomer(state, id) {
+            console.log(id);
+            return state.customers.filter(item => item.id === id);
         }
     },
     mutations: {
@@ -34,8 +38,8 @@ export const store = new Vuex.Store({
                 .catch(function (error) {
                     // handle error
                     console.log(error);
-                    catchErrors(context.commit('catchErrors', error.response.data)
-                });
+                    context.commit('catchErrors', error.response.data)
+                })
         },
         createCustomer(context, customer) {
 
@@ -45,7 +49,7 @@ export const store = new Vuex.Store({
                 .catch(function (error) {
                     // handle error
                     console.log(error.response.data);
-                    catchErrors(context.commit('catchErrors', error.response.data)
+                    context.commit('catchErrors', error.response.data)
                 });
         }
     }

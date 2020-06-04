@@ -39,9 +39,9 @@ const routes = [
     { path: '/admin/customers/:id', component: ViewCustomer },
     { path: '/admin/customers/:id/invoice', component: CustomerInvoice },
     { path: '/admin/customers/:id/quotes', component: CustomerQuote },
-    { path: '/admin/customers/:id/quotes/:id/view', component: CustomerQuoteView },
-    { path: '/admin/customers/:id/invoices/:id/view', component: CustomerInvoiceView },
-    { path: '/admin/customers/:id/invoices/:id/view/docket', component: CustomerInvoiceViewDocket },
+    { path: '/admin/customers/:id/quotes/:quote_id/view', component: CustomerQuoteView },
+    { path: '/admin/customers/:id/invoices/:invoice_id/view', component: CustomerInvoiceView },
+    { path: '/admin/customers/:id/invoices/:invoice_id/view/docket', component: CustomerInvoiceViewDocket },
     { path: '/admin/customers', component: Customer },
 
     { path: '/admin/quotes/create', component: CreateQuote },

@@ -194,3 +194,16 @@
   color: white;
 }
 </style>
+
+
+<script>
+export default {
+  computed: {
+    customer() {
+      console.log(this.$route.params.id);
+
+      return this.$store.getters.getCustomer(this.$route.params.id);
+    }
+  }
+};
+</script>

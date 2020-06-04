@@ -32,6 +32,26 @@
                   ></b-progress>
                 </b-alert>
 
+                <!--error -->
+                <b-alert
+                  :show="dismissErrorCountDown"
+                  variant="danger"
+                  dismissible
+                  fade
+                  @dismissed="dismissErrorCountDown=0"
+                  @dismiss-count-down="countDownChanged"
+                  v-if="errors.length>0"
+                  v-text="errors.get('message')"
+                >
+                  <p>This alert will dismiss after {{ dismissErrorCountDown }} seconds...</p>
+                  <b-progress
+                    variant="success"
+                    :max="dismissSecs"
+                    :value="dismissCountDown"
+                    height="4px"
+                  ></b-progress>
+                </b-alert>
+
                 <section>
                   <div class="row">
                     <div class="col-md-6">
@@ -172,21 +192,26 @@ export default {
 
       dismissSecs: 5,
       dismissCountDown: 0,
-      showDismissibleAlert: false
+      showDismissibleAlert: false,
+      dismissErrorCountDown: 0
     };
   },
   methods: {
     onSubmit() {
       this.$store.dispatch("createCustomer", this.form);
-      this.dismissCountDown = 10;
-      this.form.name = "";
-      this.form.email = "";
-      this.form.password = "";
-      this.form.company_name = "";
-      this.form.gst = "";
-      this.form.phone = "";
-      this.form.address = "";
-      this.form.user_notes = "";
+      if (this.errors.length < 0) {
+        this.dismissCountDown = 10;
+        this.form.name = "";
+        this.form.email = "";
+        this.form.password = "";
+        this.form.company_name = "";
+        this.form.gst = "";
+        this.form.phone = "";
+        this.form.address = "";
+        this.form.user_notes = "";
+      } else {
+        this.dismissErrorCountDown = 10;
+      }
     },
     countDownChanged(dismissCountDown) {
       this.dismissCountDown = dismissCountDown;
