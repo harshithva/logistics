@@ -110,43 +110,11 @@
                   </tr>
                 </tfoot>
                 <tbody>
-                  <tr role="row" class="odd">
-                    <td class="sorting_1">Vinyas</td>
-                    <td>vinyas@vawebsites.in</td>
-                    <td>+91 7975503096</td>
-                    <td>Mangalore</td>
-                    <td align="center">
-                      <router-link
-                        to="/admin/customers/1"
-                        data-toggle="tooltip"
-                        data-placement="top"
-                        title="View Customer"
-                      >
-                        <i class="fas fa-eye text-secondary"></i>
-                      </router-link>
-                    </td>
-                  </tr>
-                  <tr role="row" class="odd">
-                    <td class="sorting_1">Customer 2</td>
-                    <td>vinyas@vawebsites.in</td>
-                    <td>+91 7975503096</td>
-                    <td>Mangalore</td>
-                    <td align="center">
-                      <router-link
-                        to="/admin/customers/1"
-                        data-toggle="tooltip"
-                        data-placement="top"
-                        title="View Customer"
-                      >
-                        <i class="fas fa-eye text-secondary"></i>
-                      </router-link>
-                    </td>
-                  </tr>
                   <tr role="row" class="odd" v-for="customer in customers" :key="customer.id">
                     <td class="sorting_1">{{customer.name}}</td>
                     <td>{{customer.email}}</td>
                     <td>{{customer.phone}}</td>
-                    <td>{{customer.city}}</td>
+                    <td>{{customer.address}}</td>
                     <td align="center">
                       <router-link
                         to="/admin/customers/1"
@@ -277,20 +245,15 @@
 <script>
 export default {
   data() {
-    return {
-      customers: []
-    };
+    return {};
   },
   mounted() {
-    console.log("HELLO");
-
-    axios
-      .get("/api/customers")
-      .then(response => (this.customers = response.data.data))
-      .catch(function(error) {
-        // handle error
-        console.log(error);
-      });
+    return this.$store.dispatch("retrieveCustomers");
+  },
+  computed: {
+    customers() {
+      return this.$store.getters.getAllCustomers;
+    }
   }
 };
 </script>

@@ -37,7 +37,14 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name'=>'required|max:255',
+            'email'=>'required|email|unique:users|max:255',
+            'password'=>'required|max:255',
+        ]);
+     
+        $customer = User::create($request->all());
+        return new CustomerResource($customer);
     }
 
     /**
@@ -48,7 +55,8 @@ class CustomerController extends Controller
      */
     public function show($id)
     {
-        //
+       $customer = User::findOrFail($id);
+       return new CustomerResource($customer);
     }
 
     /**
@@ -59,7 +67,7 @@ class CustomerController extends Controller
      */
     public function edit($id)
     {
-        //
+        
     }
 
     /**
@@ -71,7 +79,9 @@ class CustomerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $customer = User::findOrFail($id);
+        $customer->update($request->all());
+        return new CustomerResource($customer);
     }
 
     /**
@@ -82,6 +92,8 @@ class CustomerController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $customer = User::findOrFail($id);
+        $customer->delete();
+        return response()->json(null,204);
     }
 }

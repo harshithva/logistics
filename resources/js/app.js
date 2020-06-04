@@ -8,8 +8,10 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
-import Fragment from 'vue-fragment';
+import Fragment from 'vue-fragment'
 import VueRouter from 'vue-router'
+import { store } from './store/store'
+
 
 import router from './router/router.js';
 import BootstrapVue from 'bootstrap-vue'
@@ -20,7 +22,7 @@ import VueQrcode from '@chenfengyuan/vue-qrcode';
 
 import 'bootstrap-vue/dist/bootstrap-vue.css';
 
-Vue.component(VueQrcode.name, VueQrcode);
+
 
 /**
  * The following block of code may be used to automatically register your
@@ -35,7 +37,9 @@ Vue.component(VueQrcode.name, VueQrcode);
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('Dashboard', require('./components/Dashboard.vue').default);
+Vue.component(VueQrcode.name, VueQrcode);
 Vue.use(BootstrapVue);
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -49,5 +53,6 @@ Vue.use(Fragment.Plugin);
 
 const app = new Vue({
     el: '#wrapper',
-    router
+    router,
+    store
 });

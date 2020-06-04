@@ -58,34 +58,15 @@
     <div class="card" ref="content">
       <div class="card-body">
         <div class="row">
-          <div class="col text-center">
-            <p class="font-s">
-              OM SHREE GANESHAYA NAMAHA
-              <br />Subject to Bangalore Jurisdiction
-            </p>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-7">
+          <div class="col">
             <p>GST No: 29AYGPS3509N2Q</p>
           </div>
-          <div class="col"></div>
+          <div class="col-7"></div>
+          <div class="col text-right">Docket receipt</div>
         </div>
+
         <div class="row mt-2">
-          <div class="col">
-            <qrcode
-              value="http://127.0.0.1:8000/admin/customers/1/invoices/1/view/docket"
-              :options="{ width: 200 }"
-            ></qrcode>
-          </div>
-          <div class="col"></div>
-          <div class="col">
-            <br />
-            <barcode v-bind:value="barcodeValue">Show this if the rendering fails.</barcode>
-          </div>
-        </div>
-        <div class="row mt-2">
-          <div class="col-2">
+          <div class="col-4">
             <img :src="logo" style="max-width:8rem" />
           </div>
           <div class="col caution-border text-center">
@@ -93,24 +74,29 @@
               <b>GURUKAL LOGISTICS</b>
             </h3>
             <p>
-              <br />Transport Contractor
-              <br />Anchepalya, Bangalore - 560073
-              <br />Mob: +91 9620202001
-              <br />E-mail : logistics@gurukal.co.in
-              <br />Website: www.gurukal.co.in
               <br />
+              <b>
+                Transport Contractor
+                <br />Anchepalya, Bangalore - 560073
+                <br />Mob: +91 9620202001
+                <br />E-mail : logistics@gurukal.co.in
+                <br />Website: www.gurukal.co.in
+                <br />
+              </b>
             </p>
           </div>
-          <div class="col border border-danger p-2">
-            <h6 class="text-danger text-center">CAUTION</h6>
-            <p class="text-danger" style="font-size:0.8rem;">
-              The consignment covered by this set of special lorry receipt from shall be stored at the destination under the control of the transport operator and
-              shall be delivered t or to the order of the consignee bank whose name is mentioned in the lorry receipt it will under no circumstances be delivered
-              to anyone without the written authority from the consignee bank or its order endorsed on the consignee copy or on a separate letter of Authority.
+          <div class="col text-right">
+            <p>Date: 03/06/2020</p>
+            <p>Docket No</p>
+            <br />
+            <p>Transaction Type</p>
+            <p>
+              <span class="badge badge-pill badge-success">Full Load</span>
             </p>
           </div>
         </div>
         <hr />
+
         <div class="row mt-4">
           <div class="col border border-danger p-2 m-2">
             <h6 class="text-danger text-center">CAUTION</h6>
@@ -119,120 +105,83 @@
               style="font-size:0.8rem;"
             >This Consignment will not be detained delivered re-routed or re booked without consignee Banks written permission will be delivered at the destination</p>
           </div>
-          <div class="col border border-success p-2 m-2">
+          <div class="col border border-success p-4 m-2">
             <h6 class="text-center">
               <b>DELIVERY ADDRESS</b>
               <hr />
             </h6>
             <p style="font-size:0.8rem;"></p>
           </div>
-          <div class="col">
-            <p>Date of Invoice</p>
-            <p>Invoice No.</p>
-            <p>Transaction Type</p>
-            <p>
-              <span class="badge badge-pill badge-success">Full Load</span>
+
+          <div class="col border border-info p-2 m-2">
+            <h6 class="text-info text-center">Notice</h6>
+            <p class="text-info" style="font-size:0.8rem;">
+              The consignment covered by this set of special lorry receipt from shall be stored at the destination under the control of the transport operator and
+              shall be delivered t or to the order of the consignee bank whose name is mentioned in the lorry receipt it will under no circumstances be delivered
+              to anyone without the written authority from the consignee bank or its order endorsed on the consignee copy or on a separate letter of Authority.
             </p>
           </div>
         </div>
         <hr />
         <div class="row mt-2">
           <div class="col">
-            <p>BILL TO</p>
-          </div>
-
-          <div class="col">Consignor Name</div>
-        </div>
-
-        <div class="row mt-2">
-          <div class="col"></div>
-          <div class="col">
-            Consignor GST &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            Address
-          </div>
-        </div>
-        <br />
-
-        <div class="row">
-          <div class="col"></div>
-          <div class="col">
+            <p>Consignor Name</p>
+            <br />
+            <p>
+              Consignor GST &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              Address
+            </p>
+            <p>Consignor Address</p>
+            <br />
             <p>Consignee Name</p>
+            <br />
+            <p>Consignee GST &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+          </div>
+
+          <div class="col p-4 m-2">
+            <h6>
+              <b>
+                Payment By:&nbsp;
+                <span class="badge badge-pill badge-success">Consignor</span>
+              </b>
+              <br />
+            </h6>
+            <h6>
+              <b>Bank</b>
+              <br />
+              <br />
+              <br />
+              <br />
+              <br />
+              <p>Consignee Address</p>
+            </h6>
+            <p style="font-size:0.8rem;"></p>
           </div>
         </div>
 
         <div class="row mt-2">
-          <div class="col"></div>
           <div class="col">
-            Consignee GST &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            Consignee Address
-          </div>
-        </div>
-        <br />
-
-        <div class="row mt-2">
-          <div class="col-8">
             <table class="table-bordered table">
               <thead>
                 <th scope="col">SL No.</th>
                 <th scope="col" style="width:20rem">Description</th>
                 <th scope="col">Serial No.</th>
                 <th scope="col">Docket No.</th>
+                <th scope="col">Weight</th>
+                <th scope="col">Declared value</th>
               </thead>
               <tr>
                 <th scope="row">1</th>
                 <td>Medical Equipments</td>
                 <td>Gl4551</td>
                 <td>DN45415</td>
-              </tr>
-            </table>
-
-            <table class="table-bordered table" style>
-              <tr>
-                <th scope="row">Advance Paid</th>
-                <td>500</td>
-              </tr>
-              <tr>
-                <th scope="row">Balance Amount</th>
-                <td>500</td>
+                <td>5 kg</td>
+                <td>1000</td>
               </tr>
             </table>
 
             <h6 class="mt-4">Consignment Note</h6>
             <p></p>
-          </div>
-          <div class="col">
-            <table class="table-bordered table">
-              <!-- <thead>
-                <th scope="col" colspan="4" class="text-center">Amount</th>
-              </thead>-->
-              <tr>
-                <th scope="row">Transportation</th>
-                <td>500</td>
-              </tr>
-
-              <tr>
-                <th scope="row">Handling or ODC Charges</th>
-                <td>500</td>
-              </tr>
-
-              <tr>
-                <th scope="row">Halting</th>
-                <td>500</td>
-              </tr>
-
-              <tr>
-                <th scope="row">Insurance</th>
-                <td>500</td>
-              </tr>
-              <tr>
-                <th scope="row">GST</th>
-                <td>500</td>
-              </tr>
-              <tr>
-                <th>Total</th>
-                <td>1545</td>
-              </tr>
-            </table>
           </div>
         </div>
 
@@ -242,22 +191,33 @@
               <b>Payment Conditions</b>
             </h6>
             <p>
-              Delivery of goods against freight & other charges only Payment by Nc payee in favour of
-              M/s GURUKAL LOGISTICS only
-              IN CASE OF LOSS OR DAMAGE TO GOOOS THE LIABILITY OF THE CARRIER SHALL NOT EXCEEDA SUM OF Rs 500). (FIVE HUNDRED ONLY)
-              The company is not responsible for leakage, Breakage & Accident Damage Subied to Terms & Conditions of carriage printed overleaf
+              Delivery of goods against freight & other charges only Payment by A/c payee in favour of
+              M/s GURUKAL LOGISTICS only.
             </p>
+            <hr />
+            <p>
+              IN CASE OF LOSS OR DAMAGE TO GOOOS THE LIABILITY OF THE CARRIER SHALL NOT EXCEED A SUM OF Rs 500). (FIVE HUNDRED ONLY)
+              The company is not responsible for leakage, Breakage & Accident Damage Subject to Terms & Conditions of carriage printed overleaf.
+            </p>
+          </div>
+        </div>
+        <hr />
+        <div class="row mt-2">
+          <div class="col d-flex d-inline-block">
+            <qrcode
+              value="http://127.0.0.1:8000/admin/customers/1/invoices/1/view/docket"
+              :options="{ width: 200 }"
+            ></qrcode>
+
+            <barcode v-bind:value="barcodeValue" class="mt-2">Show this if the rendering fails.</barcode>
           </div>
         </div>
 
         <div class="row mt-4">
-          <div class="col-6"></div>
-          <div class="col">
-            <p>Sign of Big Clerk</p>
-          </div>
+          <div class="col-8"></div>
 
           <div class="col">
-            <p>Consignor Sign with Seal</p>
+            <p>Receiver Sign with Seal</p>
           </div>
         </div>
       </div>

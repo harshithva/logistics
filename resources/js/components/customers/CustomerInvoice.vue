@@ -278,23 +278,6 @@
                             >
                               <i class="fas fa-eye text-secondary"></i>
                             </router-link>
-                            <a
-                              type="button"
-                              data-toggle="modal"
-                              data-placement="top"
-                              title="Add Payment"
-                              data-target="#paymentmodal"
-                            >
-                              <i class="fas fa-rupee-sign text-secondary"></i>
-                            </a>
-                            <router-link
-                              to="/admin/customers/1"
-                              data-toggle="tooltip"
-                              data-placement="top"
-                              title="View Customer"
-                            >
-                              <i class="fas fa-print text-secondary"></i>
-                            </router-link>
                           </td>
                         </tr>
                       </tbody>

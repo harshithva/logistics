@@ -27,9 +27,6 @@ $factory->define(User::class, function (Faker $faker) {
         'company_name' => $faker->company,
         'phone' => $faker->phoneNumber,
         'address' => $faker->address,
-        'city' => $faker->city,
-        'country' => $faker->country,
-        'postal_code' => $faker->postcode,
-        'profile_img' => 'https://randomuser.me/api/portraits/women/69.jpg'
+    
     ];
 });

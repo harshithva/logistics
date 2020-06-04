@@ -81,11 +81,9 @@
           </div>
           <div class="col"></div>
           <div class="col">
-            <p>
-              Payment Status :
-              <span class="badge badge-pill badge-warning">Partial</span>
-            </p>
-            <h6>FREIGHT INVOICE</h6>
+            <h5>
+              <b>FREIGHT INVOICE</b>
+            </h5>
           </div>
         </div>
         <div class="row mt-4">
@@ -106,6 +104,10 @@
             <p>Transaction Type</p>
             <p>
               <span class="badge badge-pill badge-success">Full Load</span>
+            </p>
+            <p>
+              Payment Status :
+              <span class="badge badge-pill badge-warning">Partial</span>
             </p>
           </div>
         </div>
@@ -149,12 +151,14 @@
               <thead>
                 <th scope="col">SL No.</th>
                 <th scope="col" style="width:20rem">Description</th>
+                <th scope="col">Weight</th>
                 <th scope="col">Serial No.</th>
                 <th scope="col">Docket No.</th>
               </thead>
               <tr>
                 <th scope="row">1</th>
                 <td>Medical Equipments</td>
+                <td>50 kg</td>
                 <td>Gl4551</td>
                 <td>DN45415</td>
               </tr>

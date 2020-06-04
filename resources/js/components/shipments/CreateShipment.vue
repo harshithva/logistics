@@ -109,6 +109,19 @@
                       <div class="row">
                         <div class="col-md-12">
                           <div class="form-group">
+                            <label for="exampleFormControlTextarea1">Bank Details</label>
+                            <textarea
+                              class="form-control"
+                              id="exampleFormControlTextarea1"
+                              rows="3"
+                            ></textarea>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="form-group">
                             <label for="exampleFormControlTextarea1">Address</label>
                             <textarea
                               class="form-control"
@@ -530,7 +543,7 @@
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label for="Size">Cost</label>
+                    <label for="Size">Declared value</label>
                     <input type="text" class="form-control" />
                   </div>
                 </div>
