@@ -117,31 +117,13 @@
                     <td>{{customer.address}}</td>
                     <td align="center">
                       <router-link
-                        to="/admin/customers/1"
+                        :to="'/admin/customers/' + customer.id"
                         data-toggle="tooltip"
                         data-placement="top"
                         title="View Customer"
                       >
                         <i class="fas fa-eye text-secondary"></i>
                       </router-link>
-
-                      <!-- <a
-                        href="/admin/customers"
-                        data-toggle="tooltip"
-                        data-placement="top"
-                        title="Edit Customer"
-                      >
-                        <i class="fas fa-edit"></i>
-                      </a>-->
-
-                      <!-- <a
-                        href="/admin/customers"
-                        data-toggle="tooltip"
-                        data-placement="top"
-                        title="Delete Customer"
-                      >
-                        <i class="fas fa-trash text-danger"></i>
-                      </a>-->
                     </td>
                   </tr>
                 </tbody>
@@ -245,7 +227,21 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+      form: new Form({
+        name: "",
+        email: "",
+        password: "",
+        company_name: "",
+        gst: "",
+        phone: "",
+        address: "",
+        user_notes: ""
+      }),
+      dismissSecs: 5,
+      dismissCountDown: 0,
+      showDismissibleAlert: false
+    };
   },
   mounted() {
     return this.$store.dispatch("retrieveCustomers");
@@ -254,6 +250,18 @@ export default {
     customers() {
       return this.$store.getters.getAllCustomers;
     }
+  },
+  onSubmit() {
+    this.form
+      .submit("patch", "/api/customers")
+      .then(response => (this.dismissCountDown = 10))
+      .catch(error);
+  },
+  countDownChanged(dismissCountDown) {
+    this.dismissCountDown = dismissCountDown;
+  },
+  showAlert() {
+    this.dismissCountDown = this.dismissSecs;
   }
 };
 </script>

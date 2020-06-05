@@ -23,6 +23,23 @@ import VueQrcode from '@chenfengyuan/vue-qrcode';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
 
 
+import moment from 'moment';
+Vue.prototype.moment = moment
+
+import Swal from 'sweetalert2'
+window.Swal = Swal;
+
+
+
+// helpers
+// import Form from './Helpers/Form'
+// import Error from './Helpers/Error'
+
+// window.Form = Form
+// window.Error = Error
+
+import Form from 'vue-js-form-helper';
+window.Form = Form;
 
 /**
  * The following block of code may be used to automatically register your
@@ -54,5 +71,5 @@ Vue.use(Fragment.Plugin);
 const app = new Vue({
     el: '#wrapper',
     router,
-    store
+    store,
 });

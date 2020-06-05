@@ -59,21 +59,23 @@
       <div class="card-body">
         <div class="row">
           <div class="col">
-            <p>GST No: 29AYGPS3509N2Q</p>
+            <p>Docket</p>
           </div>
           <div class="col-7"></div>
-          <div class="col text-right">Docket receipt</div>
+          <div class="col">
+            <p class="text-right">original</p>
+          </div>
         </div>
 
         <div class="row mt-2">
-          <div class="col-4">
+          <div class="col-3">
             <img :src="logo" style="max-width:8rem" />
           </div>
-          <div class="col caution-border text-center">
-            <h3 class="text-danger" style="font-family:'Times New Roman';margin-bottom:-1rem;">
+          <div class="col-6 caution-border text-center">
+            <h1 class="text-danger" style="font-family:'Times New Roman';margin-bottom:-1rem;">
               <b>GURUKAL LOGISTICS</b>
-            </h3>
-            <p>
+            </h1>
+            <p class="font-md">
               <br />
               <b>
                 Transport Contractor
@@ -81,23 +83,24 @@
                 <br />Mob: +91 9620202001
                 <br />E-mail : logistics@gurukal.co.in
                 <br />Website: www.gurukal.co.in
-                <br />
+                <br />GST No: 29AYGPS3509N2Q
               </b>
             </p>
           </div>
           <div class="col text-right">
-            <p>Date: 03/06/2020</p>
-            <p>Docket No</p>
+            <p>Date: 05/06/2020</p>
+            <p>Docket No: GLBNG0003</p>
             <br />
             <p>Transaction Type</p>
             <p>
-              <span class="badge badge-pill badge-success">Full Load</span>
+              <!-- <span class="badge badge-pill badge-success">Full Load</span> -->
+              ---
             </p>
           </div>
         </div>
         <hr />
 
-        <div class="row mt-4">
+        <div class="row">
           <div class="col border border-danger p-2 m-2">
             <h6 class="text-danger text-center">CAUTION</h6>
             <p
@@ -108,7 +111,7 @@
           <div class="col border border-success p-4 m-2">
             <h6 class="text-center">
               <b>DELIVERY ADDRESS</b>
-              <hr />
+              <hr />Vikhroli(W) MUMBAI
             </h6>
             <p style="font-size:0.8rem;"></p>
           </div>
@@ -123,43 +126,37 @@
           </div>
         </div>
         <hr />
-        <div class="row mt-2">
+        <div class="row mt-1">
           <div class="col">
-            <p>Consignor Name</p>
+            <p>Consignor:</p>HOMAG INDIA PVT LIMITED
+            <br />Rajadhani estate veerananjipura village
+            <br />nelamangala Bangalore rural-562123
             <br />
-            <p>
-              Consignor GST &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              Address
-            </p>
-            <p>Consignor Address</p>
-            <br />
-            <p>Consignee Name</p>
-            <br />
-            <p>Consignee GST &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+            <p>Consignor GST: 29AABCH4923P1Z3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
           </div>
 
-          <div class="col p-4 m-2">
+          <div class="col mb-2">
+            <h6>
+              <p>Consignee</p>TEEJAN VENTURES LLP
+              <br />11/A Amber compound next to Mahajan Mill, LBS Marg
+              <br />Vikhroli MUMBAI-400079
+              <br />
+              <p>Consignee GST: 27AAOFT0890R1Z6</p>
+            </h6>
+            <p style="font-size:0.8rem;"></p>
+
             <h6>
               <b>
                 Payment By:&nbsp;
-                <span class="badge badge-pill badge-success">Consignor</span>
+                <!-- <span class="badge badge-pill badge-success">Consignor</span> -->
+                ---
               </b>
               <br />
             </h6>
-            <h6>
-              <b>Bank</b>
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
-              <p>Consignee Address</p>
-            </h6>
-            <p style="font-size:0.8rem;"></p>
           </div>
         </div>
 
-        <div class="row mt-2">
+        <div class="row mt-1">
           <div class="col">
             <table class="table-bordered table">
               <thead>
@@ -172,15 +169,18 @@
               </thead>
               <tr>
                 <th scope="row">1</th>
-                <td>Medical Equipments</td>
+                <td>
+                  EDGETEQ S-230 / NKR220FCP (0-261-80-3442)
+                  <br />HOMAG SINGLE SIDED EDGE BANDING MACHINE
+                </td>
                 <td>Gl4551</td>
-                <td>DN45415</td>
-                <td>5 kg</td>
-                <td>1000</td>
+                <td>GLBNG0003</td>
+                <td>--</td>
+                <td>&#8377; 3,58,200.00</td>
               </tr>
             </table>
 
-            <h6 class="mt-4">Consignment Note</h6>
+            <h6 class="mt-1">Consignment Note</h6>
             <p></p>
           </div>
         </div>
@@ -204,12 +204,15 @@
         <hr />
         <div class="row mt-2">
           <div class="col d-flex d-inline-block">
-            <qrcode
-              value="http://127.0.0.1:8000/admin/customers/1/invoices/1/view/docket"
-              :options="{ width: 200 }"
-            ></qrcode>
+            <qrcode value="GLBNG0003" :options="{ width: 100 }"></qrcode>
 
-            <barcode v-bind:value="barcodeValue" class="mt-2">Show this if the rendering fails.</barcode>
+            <barcode
+              v-bind:value="barcodeValue"
+              class="mt-2"
+              id="barcode"
+              :width="2"
+              :height="50"
+            >Show this if the rendering fails.</barcode>
           </div>
         </div>
 
@@ -231,7 +234,7 @@
           <b>Terms & Conditions of Carriage At Owner's Risk</b>
         </h6>
         <div class="row font-xs">
-          <div class="col-4">
+          <div class="col">
             <ul class="list-group">
               <li
                 class="list-group-item"
@@ -253,8 +256,8 @@
               >The delivery office cf the transport operator shall have the right to re-weight, re-measure and recalculate the freight amount mentioned on the lorry receipt and it would be binding on part of the consignee. Consignor or holder thereof pay the charge according to the calculation arrived at by the destination branch of the transport operator.</li>
             </ul>
           </div>
-          <div class="col-4">
-            <ul>
+          <div class="col">
+            <ul class="list-group">
               <li
                 class="list-group-item"
               >The consignor is responsible, for all consequences of any Incorrect or false declarations made by him in his invoice copy surrendered to the transport operator at the booking branch</li>
@@ -281,30 +284,32 @@
               >Only the courts cf Bangalore shall have the junsdiction to decide any claim, dispute suit or any other legal proceeding arising under this contract of goods entrusted to the transport operator for transportation and delivery under this lorry receipt</li>
             </ul>
           </div>
-          <div class="col-4">
-            <li
-              class="list-group-item"
-            >The transport operator shall have the right to dispose of perishable goods lying undelivered after 3 days or arrival at the destination with notice of 48 hours to the consignor, consignee and or holder thereof The sale proceeds to realized would be first adjusted against the transport operators dues and balance if remaining shall be remitted to the consignor, consignee or holder thereof In case after adjustment of dues of transport operator there remains further dues to the recovered by the transport operator then, the consignor, consignee or holder thereof shall be liable to pay the same to the transport operator</li>
-            <li
-              class="list-group-item"
-            >In case of non penshable goods the transport operator shall have the nght to dispose itself within 30 days of arrival after giving to the Consignor, Consignee or holder there of 15 days notice and a runner reminder of a weak where after it the consignor, consignee or holder thereof fail to obtain delivery the goods would be sold by the transport operator without any further notice and the procedure as stated In clause 14 above would apply</li>
-            <li class="list-group-item"></li>
-            <li class="list-group-item">
-              The transport operator not liable for leakage, breakage, or any loss or damage due to fire, Accident, Theft, Whether Conditions etc., in absence of any Negligence, default or misconduct.
-              Received the consignment as per particulars overleaf from GURUKAL LOGISTICS properly packed in Dry, Sound and Good condition.
-            </li>
-            <h6 class="m-4">TERMS & CONDITIONS OF GST</h6>
-            <li
-              class="list-group-item"
-            >Notificalon No. 17/2017-Central Tax (Rate), ',;:p dated 28106/2017 as amended by Notification c No. 20/2017-Central Tax (Rata), dated 22/08120172 the GST on GTA is 5% (CGST 2.5%, SGST 2.5%) 0 cf")</li>
-            <li
-              class="list-group-item"
-            >The person liable to pay GST on this Invoice IE Consignor /Consignee.</li>
-            <li class="list-group-item">
-              ITC NOT availed by the service provider." -o 0. co
-              Signature of authorized representative of the consignor / Consignee with Rubber Stamp
-            </li>
-            <li class="list-group-item">Date........................</li>
+          <div class="col">
+            <ul class="list-group">
+              <li
+                class="list-group-item"
+              >The transport operator shall have the right to dispose of perishable goods lying undelivered after 3 days or arrival at the destination with notice of 48 hours to the consignor, consignee and or holder thereof The sale proceeds to realized would be first adjusted against the transport operators dues and balance if remaining shall be remitted to the consignor, consignee or holder thereof In case after adjustment of dues of transport operator there remains further dues to the recovered by the transport operator then, the consignor, consignee or holder thereof shall be liable to pay the same to the transport operator</li>
+              <li
+                class="list-group-item"
+              >In case of non penshable goods the transport operator shall have the nght to dispose itself within 30 days of arrival after giving to the Consignor, Consignee or holder there of 15 days notice and a runner reminder of a weak where after it the consignor, consignee or holder thereof fail to obtain delivery the goods would be sold by the transport operator without any further notice and the procedure as stated In clause 14 above would apply</li>
+              <li class="list-group-item"></li>
+              <li class="list-group-item">
+                The transport operator not liable for leakage, breakage, or any loss or damage due to fire, Accident, Theft, Whether Conditions etc., in absence of any Negligence, default or misconduct.
+                Received the consignment as per particulars overleaf from GURUKAL LOGISTICS properly packed in Dry, Sound and Good condition.
+              </li>
+              <h6 class="m-4">TERMS & CONDITIONS OF GST</h6>
+              <li
+                class="list-group-item"
+              >Notificalon No. 17/2017-Central Tax (Rate), ',;:p dated 28106/2017 as amended by Notification c No. 20/2017-Central Tax (Rata), dated 22/08120172 the GST on GTA is 5% (CGST 2.5%, SGST 2.5%) 0 cf")</li>
+              <li
+                class="list-group-item"
+              >The person liable to pay GST on this Invoice IE Consignor /Consignee.</li>
+              <li class="list-group-item">
+                ITC NOT availed by the service provider." -o 0. co
+                Signature of authorized representative of the consignor / Consignee with Rubber Stamp
+              </li>
+              <li class="list-group-item">Date........................</li>
+            </ul>
           </div>
         </div>
       </div>
@@ -321,6 +326,10 @@
 .font-s {
   font-size: 0.8rem;
 }
+
+.font-md {
+  font-size: 1.1rem;
+}
 @media print {
   .pagebreak {
     page-break-before: always;
@@ -334,7 +343,7 @@ import VueBarcode from "vue-barcode";
 export default {
   data() {
     return {
-      barcodeValue: "INV4568345",
+      barcodeValue: "GLBNG0003",
       logo: "https://i.ibb.co/WFdrW4M/Logo-Color-Text-Below.jpg"
     };
   },

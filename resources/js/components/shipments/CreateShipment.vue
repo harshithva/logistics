@@ -107,9 +107,19 @@
                       </div>
 
                       <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                           <div class="form-group">
-                            <label for="exampleFormControlTextarea1">Bank Details</label>
+                            <label for="exampleFormControlTextarea1">Address</label>
+                            <textarea
+                              class="form-control"
+                              id="exampleFormControlTextarea1"
+                              rows="3"
+                            ></textarea>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label for="exampleFormControlTextarea1">Delivery Address</label>
                             <textarea
                               class="form-control"
                               id="exampleFormControlTextarea1"
@@ -122,7 +132,7 @@
                       <div class="row">
                         <div class="col-md-12">
                           <div class="form-group">
-                            <label for="exampleFormControlTextarea1">Address</label>
+                            <label for="exampleFormControlTextarea1">Note</label>
                             <textarea
                               class="form-control"
                               id="exampleFormControlTextarea1"
@@ -393,7 +403,12 @@
 
                     <div class="col-md-12">
                       <div class="form-group">
-                        <textarea class="form-control" name="notes" rows="6" placeholder="Remarks"></textarea>
+                        <textarea
+                          class="form-control"
+                          name="notes"
+                          rows="6"
+                          placeholder="Consignment Note"
+                        ></textarea>
                       </div>
                     </div>
 

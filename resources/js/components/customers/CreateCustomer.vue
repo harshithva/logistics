@@ -12,6 +12,7 @@
                 id="admin_form"
                 action="/admin/customers"
                 @submit.prevent="onSubmit"
+                @keydown="form.errors.clear()"
               >
                 <!-- customer created alert -->
                 <b-alert
@@ -21,37 +22,73 @@
                   fade
                   @dismissed="dismissCountDown=0"
                   @dismiss-count-down="countDownChanged"
-                >
-                  Well! You just created a customer
-                  <p>This alert will dismiss after {{ dismissCountDown }} seconds...</p>
-                  <b-progress
-                    variant="success"
-                    :max="dismissSecs"
-                    :value="dismissCountDown"
-                    height="4px"
-                  ></b-progress>
-                </b-alert>
+                >Well Done! You just created a customer</b-alert>
 
-                <!--error -->
+                <!-- show errors -->
+
                 <b-alert
-                  :show="dismissErrorCountDown"
-                  variant="danger"
+                  v-if="form.errors.has('email')"
                   dismissible
-                  fade
-                  @dismissed="dismissErrorCountDown=0"
-                  @dismiss-count-down="countDownChanged"
-                  v-if="errors.length>0"
-                  v-text="errors.get('message')"
-                >
-                  <p>This alert will dismiss after {{ dismissErrorCountDown }} seconds...</p>
-                  <b-progress
-                    variant="success"
-                    :max="dismissSecs"
-                    :value="dismissCountDown"
-                    height="4px"
-                  ></b-progress>
-                </b-alert>
+                  show
+                  variant="danger"
+                >{{form.errors.get('email')}}</b-alert>
 
+                <b-alert
+                  v-if="form.errors.has('password')"
+                  v-text="form.errors.get('password')"
+                  dismissible
+                  show
+                  variant="danger"
+                ></b-alert>
+
+                <b-alert
+                  v-if="form.errors.has('name')"
+                  v-text="form.errors.get('name')"
+                  dismissible
+                  show
+                  variant="danger"
+                ></b-alert>
+
+                <b-alert
+                  v-if="form.errors.has('company_name')"
+                  v-text="form.errors.get('company_name')"
+                  dismissible
+                  show
+                  variant="danger"
+                ></b-alert>
+
+                <b-alert
+                  v-if="form.errors.has('gst')"
+                  v-text="form.errors.get('gst')"
+                  dismissible
+                  show
+                  variant="danger"
+                ></b-alert>
+
+                <b-alert
+                  v-if="form.errors.has('phone')"
+                  v-text="form.errors.get('phone')"
+                  dismissible
+                  show
+                  variant="danger"
+                ></b-alert>
+
+                <b-alert
+                  v-if="form.errors.has('address')"
+                  v-text="form.errors.get('address')"
+                  dismissible
+                  show
+                  variant="danger"
+                ></b-alert>
+
+                <b-alert
+                  v-if="form.errors.has('user_notes')"
+                  v-text="form.errors.get('user_notes')"
+                  dismissible
+                  show
+                  variant="danger"
+                ></b-alert>
+                <!-- end errors -->
                 <section>
                   <div class="row">
                     <div class="col-md-6">
@@ -61,7 +98,7 @@
                           class="form-control"
                           v-model="form.email"
                           placeholder="Email"
-                          required
+                          :class="{'border border-danger': form.errors.has('email')}"
                         />
                       </div>
                     </div>
@@ -72,6 +109,7 @@
                           class="form-control"
                           v-model="form.password"
                           placeholder="Password"
+                          :class="{'border border-danger': form.errors.has('password')}"
                           required
                         />
                       </div>
@@ -85,6 +123,7 @@
                           class="form-control"
                           v-model="form.name"
                           placeholder="Name"
+                          :class="{'border border-danger': form.errors.has('name')}"
                           required
                         />
                       </div>
@@ -95,6 +134,7 @@
                           type="text"
                           class="form-control"
                           v-model="form.company_name"
+                          :class="{'border border-danger': form.errors.has('company_name')}"
                           placeholder="Company Name"
                         />
                       </div>
@@ -107,6 +147,7 @@
                           type="text"
                           class="form-control"
                           v-model="form.gst"
+                          :class="{'border border-danger': form.errors.has('gst')}"
                           placeholder="GST No"
                         />
                       </div>
@@ -117,6 +158,7 @@
                           type="text"
                           class="form-control"
                           v-model="form.phone"
+                          :class="{'border border-danger': form.errors.has('phone')}"
                           placeholder="Phone Number"
                         />
                       </div>
@@ -132,6 +174,7 @@
                           class="form-control"
                           id="exampleFormControlTextarea1"
                           rows="3"
+                          :class="{'border border-danger': form.errors.has('address')}"
                         ></textarea>
                       </div>
                     </div>
@@ -143,6 +186,7 @@
                         <textarea
                           class="form-control"
                           v-model="form.user_notes"
+                          :class="{'border border-danger': form.errors.has('user_notes')}"
                           rows="6"
                           placeholder="User Notes - For internal use only."
                         ></textarea>
@@ -152,7 +196,7 @@
                 </section>
                 <div class="form-group">
                   <div class="col-sm-12">
-                    <button type="submit" class="btn btn-outline-primary">
+                    <button type="submit" class="btn btn-primary" :disabled="form.errors.any()">
                       Add Customer
                       <span>
                         <i class="icon-ok"></i>
@@ -179,7 +223,7 @@
 export default {
   data() {
     return {
-      form: {
+      form: new Form({
         name: "",
         email: "",
         password: "",
@@ -188,41 +232,25 @@ export default {
         phone: "",
         address: "",
         user_notes: ""
-      },
+      }),
 
       dismissSecs: 5,
       dismissCountDown: 0,
-      showDismissibleAlert: false,
-      dismissErrorCountDown: 0
+      showDismissibleAlert: false
     };
   },
   methods: {
     onSubmit() {
-      this.$store.dispatch("createCustomer", this.form);
-      if (this.errors.length < 0) {
-        this.dismissCountDown = 10;
-        this.form.name = "";
-        this.form.email = "";
-        this.form.password = "";
-        this.form.company_name = "";
-        this.form.gst = "";
-        this.form.phone = "";
-        this.form.address = "";
-        this.form.user_notes = "";
-      } else {
-        this.dismissErrorCountDown = 10;
-      }
+      this.form
+        .submit("post", "/api/customers")
+        .then(response => (this.dismissCountDown = 10))
+        .catch(error);
     },
     countDownChanged(dismissCountDown) {
       this.dismissCountDown = dismissCountDown;
     },
     showAlert() {
       this.dismissCountDown = this.dismissSecs;
-    }
-  },
-  computed: {
-    errors() {
-      return this.$store.getters.getAllErrors;
     }
   }
 };

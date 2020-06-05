@@ -41,6 +41,10 @@ class CustomerController extends Controller
             'name'=>'required|max:255',
             'email'=>'required|email|unique:users|max:255',
             'password'=>'required|max:255',
+            'gst'=>'max:255',
+            'address'=>'max:500',
+            'phone'=>'max:255',
+            'company_name'=>'max:255',
         ]);
      
         $customer = User::create($request->all());
@@ -79,8 +83,28 @@ class CustomerController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'name'=>'required|max:255',
+            'email'=>'required|email|max:255',
+            'password'=>'max:255',
+            'gst'=>'max:255',
+            'address'=>'max:500',
+            'phone'=>'max:255',
+            'company_name'=>'max:255',
+        ]);
         $customer = User::findOrFail($id);
-        $customer->update($request->all());
+        $customer->name = $request->name;
+        $customer->email = $request->email;
+        if($request->password !== "")
+        {
+            $customer->password = $request->password;
+        }
+        $customer->company_name = $request->company_name;
+        $customer->gst = $request->gst;
+        $customer->phone = $request->phone;
+        $customer->address = $request->address;
+        $customer->user_notes = $request->user_notes;
+        $customer->save();
         return new CustomerResource($customer);
     }
 

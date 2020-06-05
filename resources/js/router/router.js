@@ -36,7 +36,7 @@ const routes = [
     { path: '/admin', component: Analytics },
 
     { path: '/admin/customers/create', component: CreateCustomer },
-    { path: '/admin/customers/:id', component: ViewCustomer },
+    { path: '/admin/customers/:id', component: ViewCustomer, props: true },
     { path: '/admin/customers/:id/invoice', component: CustomerInvoice },
     { path: '/admin/customers/:id/quotes', component: CustomerQuote },
     { path: '/admin/customers/:id/quotes/:quote_id/view', component: CustomerQuoteView },

@@ -9,10 +9,16 @@
               class="rounded-circle"
               width="100"
             />
-            <h4 class="card-title m-t-10">vinyas poojary</h4>
+            <h4 class="card-title m-t-10">{{form.name}}</h4>
             <h6 class="card-subtitle">
-              <div class="badge badge-pill badge-success font-16">
-                <span class="ti-user text-success"></span> Active
+              <div class="badge badge-pill badge-success font-16" v-if="form.status == true">
+                <span class="ti-user text-success"></span>
+                Active
+              </div>
+
+              <div class="badge badge-pill badge-success font-16" v-else-if="form.status == false">
+                <span class="ti-user text-success"></span>
+                Inactive
               </div>
             </h6>
           </center>
@@ -21,21 +27,27 @@
           <hr />
         </div>
         <div class="card-body">
+          <!-- customer created alert -->
+          <b-alert
+            :show="dismissCountDown"
+            variant="success"
+            dismissible
+            fade
+            @dismissed="dismissCountDown=0"
+            @dismiss-count-down="countDownChanged"
+          >Customer Updated!</b-alert>
+
           <small class="text-muted">E-mail</small>
-          <h6>harshith11032001@gmail.com</h6>
+          <h6>{{form.email}}</h6>
           <small class="text-muted p-t-30 db">Phone</small>
-          <h6>91 7975503096</h6>
+          <h6>{{form.phone}}</h6>
           <small class="text-muted p-t-30 db">Address</small>
-          <h6>india, MANGALORE, 574154, MULKI, SHAMA SADANA SHIMANTHUR PANJINADKA POST</h6>
+          <h6>{{form.email}}</h6>
         </div>
-        <div class="card-body row text-center">
-          <div class="col-6 border-right">
-            <h6>2020-05-29 09:02:39</h6>
-            <span>Registration Date</span>
-          </div>
-          <div class="col-6">
-            <h6>2020-05-29 11:27:07</h6>
-            <span>Last Login</span>
+        <div class="card-body row">
+          <div class="col-12">
+            <p class="font-s">Registration Date: {{moment(form.created_at).format('YYYY-MM-DD')}}</p>
+            <p></p>
           </div>
         </div>
       </div>
@@ -48,82 +60,79 @@
           <div id="msgholder"></div>
           <div class="row mb-4">
             <router-link
-              to="/admin/customers/1"
+              :to="'/admin/customers/' + form.id"
               aria-current="page"
               class="d-none d-sm-inline-block btn btn-sm btn-outline-primary shadow-sm ml-3"
             >
               <i class="fas fa-edit fa-sm"></i> Edit
             </router-link>
             <router-link
-              to="/admin/customers/1/invoice"
+              :to="'/admin/customers/' + form.id + '/invoice'"
               class="d-none d-sm-inline-block btn btn-sm btn-outline-primary shadow-sm ml-2"
             >
               <i class="fas fa-rupee-sign fa-sm"></i> Invoices
             </router-link>
             <router-link
-              to="/admin/customers/1/quotes"
+              :to="'/admin/customers/' + form.id + '/quotes'"
               class="d-none d-sm-inline-block btn btn-sm btn-outline-primary shadow-sm ml-2 mr-2"
             >
               <i class="fas fa-scroll fa-sm"></i> Quotes
             </router-link>
           </div>
-          <form class="form-horizontal form-material" id="admin_form" method="post">
+          <form
+            class="form-horizontal form-material"
+            :action="'/admin/customers/' + form.id"
+            @keydown="form.errors.clear()"
+          >
             <section>
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <input type="text" class="form-control" name="username" placeholder="Username" />
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <input type="text" class="form-control" name="password" placeholder="Password" />
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <input type="text" class="form-control" name="fname" placeholder="Name" />
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <input type="text" class="form-control" name="fname" placeholder="Company Name" />
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <input type="text" class="form-control" name="gst" placeholder="GST No" />
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <input type="email" class="form-control" name="phone" placeholder="Email" />
-                  </div>
-                </div>
-              </div>
-
               <div class="row">
                 <div class="col-md-6">
                   <div class="form-group">
                     <input
                       type="text"
                       class="form-control"
-                      name="phone"
-                      placeholder="Primary Phone"
+                      placeholder="Email"
+                      v-model="form.email"
+                      :class="{'border border-danger': form.errors.has('email')}"
                     />
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Password" />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Name" v-model="form.name" />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
                     <input
-                      type="email"
+                      type="text"
                       class="form-control"
-                      name="phone"
-                      placeholder="Secondary Phone"
+                      placeholder="Company Name"
+                      v-model="form.company_name"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <input type="text" class="form-control" placeholder="GST No" v-model="form.gst" />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Email"
+                      v-model="form.phone"
                     />
                   </div>
                 </div>
@@ -133,7 +142,12 @@
                 <div class="col-md-12">
                   <div class="form-group">
                     <label for="exampleFormControlTextarea1">Address</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    <textarea
+                      class="form-control"
+                      id="exampleFormControlTextarea1"
+                      rows="3"
+                      v-model="form.address"
+                    ></textarea>
                   </div>
                 </div>
               </div>
@@ -146,6 +160,7 @@
                       name="notes"
                       rows="6"
                       placeholder="User Notes - For internal use only."
+                      v-model="form.user_notes"
                     ></textarea>
                   </div>
                 </div>
@@ -154,9 +169,11 @@
             <div class="form-group">
               <div class="col-sm-12">
                 <button
-                  class="btn btn-outline-primary btn-confirmation"
+                  class="btn btn-outline-primary"
                   name="dosubmit"
                   type="submit"
+                  :disabled="form.errors.any()"
+                  @click.prevent="onSubmit"
                 >
                   Update Customer
                   <span>
@@ -167,6 +184,7 @@
                   class="btn btn-outline-danger btn-confirmation"
                   name="dosubmit"
                   type="submit"
+                  @click.prevent="deleteCustomer"
                 >
                   Delete Customer
                   <span>
@@ -198,12 +216,66 @@
 
 <script>
 export default {
-  computed: {
-    customer() {
-      console.log(this.$route.params.id);
-
-      return this.$store.getters.getCustomer(this.$route.params.id);
+  data() {
+    return {
+      customer: {},
+      dismissSecs: 5,
+      dismissCountDown: 0,
+      showDismissibleAlert: false
+    };
+  },
+  methods: {
+    onSubmit() {
+      this.form
+        .submit("patch", "/api/customers/" + this.form.id)
+        .then(response => (this.dismissCountDown = 10))
+        .catch(error =>
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Something went wrong!"
+          })
+        );
+    },
+    deleteCustomer() {
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+      }).then(result => {
+        if (result.value) {
+          this.form
+            .submit("delete", "/api/customers/" + this.form.id)
+            .then(response => this.$router.push("/admin/customers"))
+            .catch(error =>
+              Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Something went wrong!"
+              })
+            );
+          Swal.fire("Deleted!", "Your file has been deleted.", "success");
+        }
+      });
+    },
+    countDownChanged(dismissCountDown) {
+      this.dismissCountDown = dismissCountDown;
+    },
+    showAlert() {
+      this.dismissCountDown = this.dismissSecs;
     }
+  },
+  computed: {
+    form() {
+      return new Form(this.$store.getters.getSingleCustomer);
+    }
+  },
+  created() {
+    this.$store.dispatch("retrieveSingleCustomer", this.$route.params.id);
   }
 };
 </script>
