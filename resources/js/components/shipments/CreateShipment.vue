@@ -485,7 +485,7 @@
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
-                    <label for="docket">Docket Number</label>
+                    <label for="Invoice">Invoice Number</label>
                     <input type="text" class="form-control" />
                   </div>
                 </div>

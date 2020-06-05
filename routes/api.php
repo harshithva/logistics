@@ -18,6 +18,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::resource("shipments", 'ShipmentController');
-Route::resource("agencies", 'AgencyController');
-Route::resource("customers", 'CustomerController');
+Route::apiResource("shipments", 'ShipmentController');
+Route::apiResource("customers", 'CustomerController');
