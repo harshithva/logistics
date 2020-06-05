@@ -251,12 +251,6 @@ export default {
       return this.$store.getters.getAllCustomers;
     }
   },
-  onSubmit() {
-    this.form
-      .submit("patch", "/api/customers")
-      .then(response => (this.dismissCountDown = 10))
-      .catch(error);
-  },
   countDownChanged(dismissCountDown) {
     this.dismissCountDown = dismissCountDown;
   },

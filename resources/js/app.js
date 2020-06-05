@@ -19,6 +19,8 @@ const axios = require('axios').default;
 axios.defaults.baseURL = '/';
 
 import VueQrcode from '@chenfengyuan/vue-qrcode';
+import vSelect from "vue-select";
+import "vue-select/dist/vue-select.css";
 
 import 'bootstrap-vue/dist/bootstrap-vue.css';
 
@@ -32,14 +34,13 @@ window.Swal = Swal;
 
 
 // helpers
-// import Form from './Helpers/Form'
-// import Error from './Helpers/Error'
+import Form from './Helpers/Form'
 
-// window.Form = Form
-// window.Error = Error
+window.Form = Form
 
-import Form from 'vue-js-form-helper';
-window.Form = Form;
+
+// import Form from 'vue-js-form-helper';
+// window.Form = Form;
 
 /**
  * The following block of code may be used to automatically register your
@@ -56,6 +57,7 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 Vue.component('Dashboard', require('./components/Dashboard.vue').default);
 Vue.component(VueQrcode.name, VueQrcode);
 Vue.use(BootstrapVue);
+Vue.component("vSelect", vSelect);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

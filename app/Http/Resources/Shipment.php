@@ -16,4 +16,5 @@ class Shipment extends JsonResource
     {
         return parent::toArray($request);
     }
+    
 }

@@ -43,4 +43,8 @@ class User extends Authenticatable
         $this->attributes['password'] = Hash::make($pass);
         
         }
+
+        public function shipment(){
+            return $this->hasMany(Shipment::class, 'customer_id');
+        }
 }

@@ -35,59 +35,52 @@
 
                 <b-alert
                   v-if="form.errors.has('password')"
-                  v-text="form.errors.get('password')"
                   dismissible
                   show
                   variant="danger"
-                ></b-alert>
+                >{{form.errors.get('password')}}</b-alert>
 
                 <b-alert
                   v-if="form.errors.has('name')"
-                  v-text="form.errors.get('name')"
                   dismissible
                   show
                   variant="danger"
-                ></b-alert>
+                >{{form.errors.get('name')}}</b-alert>
 
                 <b-alert
                   v-if="form.errors.has('company_name')"
-                  v-text="form.errors.get('company_name')"
                   dismissible
                   show
                   variant="danger"
-                ></b-alert>
+                >{{form.errors.get('company_name')}}</b-alert>
 
                 <b-alert
                   v-if="form.errors.has('gst')"
-                  v-text="form.errors.get('gst')"
                   dismissible
                   show
                   variant="danger"
-                ></b-alert>
+                >{{form.errors.get('gst')}}</b-alert>
 
                 <b-alert
                   v-if="form.errors.has('phone')"
-                  v-text="form.errors.get('phone')"
                   dismissible
                   show
                   variant="danger"
-                ></b-alert>
+                >{{form.errors.get('phone')}}</b-alert>
 
                 <b-alert
                   v-if="form.errors.has('address')"
-                  v-text="form.errors.get('address')"
                   dismissible
                   show
                   variant="danger"
-                ></b-alert>
+                >{{form.errors.get('address')}}</b-alert>
 
                 <b-alert
                   v-if="form.errors.has('user_notes')"
-                  v-text="form.errors.get('user_notes')"
                   dismissible
                   show
                   variant="danger"
-                ></b-alert>
+                >{{ form.errors.get('user_notes')}}</b-alert>
                 <!-- end errors -->
                 <section>
                   <div class="row">
@@ -110,7 +103,6 @@
                           v-model="form.password"
                           placeholder="Password"
                           :class="{'border border-danger': form.errors.has('password')}"
-                          required
                         />
                       </div>
                     </div>
@@ -124,7 +116,6 @@
                           v-model="form.name"
                           placeholder="Name"
                           :class="{'border border-danger': form.errors.has('name')}"
-                          required
                         />
                       </div>
                     </div>

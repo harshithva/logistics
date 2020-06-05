@@ -20,9 +20,6 @@ $factory->define(Shipment::class, function (Faker $faker) {
         'receiver_address' => $faker->address,
         'receiver_pincode' => $faker->postcode,
   
-        'agency_id' => function() {
-            return Agency::all()->random();
-        },
         'customer_id' => function() {
             return User::all()->random();
         }
