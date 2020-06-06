@@ -10,7 +10,8 @@ export const store = new Vuex.Store({
         customers: [],
         errors: [],
         customer: {},
-        shipments: []
+        shipments: [],
+        invoice: {}
     },
     getters: {
         getAllCustomers(state) {
@@ -25,7 +26,10 @@ export const store = new Vuex.Store({
         },
         getAllShipments(state) {
             return state.shipments;
-        }
+        },
+        getSingleInvoice(state) {
+            return state.invoice;
+        },
     },
     mutations: {
         retrieveCustomers(state, customers) {
@@ -43,6 +47,9 @@ export const store = new Vuex.Store({
 
         retrieveShipments(state, shipments) {
             state.shipments = shipments;
+        },
+        retrieveSingleInvoice(state, invoice) {
+            state.invoice = invoice;
         },
     },
     actions: {
@@ -72,6 +79,16 @@ export const store = new Vuex.Store({
             axios
                 .get("/api/shipments")
                 .then(response => (context.commit('retrieveShipments', response.data.data)))
+                .catch(function (error) {
+                    // handle error
+
+                    context.commit('catchErrors', error.response.data)
+                })
+        },
+        retrieveSingleInvoice(context, invoice_id) {
+            axios
+                .get("/api/shipments/" + invoice_id)
+                .then(response => (context.commit('retrieveSingleInvoice', response.data.data)))
                 .catch(function (error) {
                     // handle error
 

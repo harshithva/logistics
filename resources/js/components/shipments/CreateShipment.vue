@@ -31,6 +31,12 @@
                 variant="danger"
               >{{form.errors.get('charge_total')}}</b-alert>
 
+              <b-alert
+                v-if="form.errors.has('document')"
+                dismissible
+                show
+                variant="danger"
+              >{{form.errors.get('document')}}</b-alert>
               <!-- end errors -->
               <div class="row">
                 <div class="col-md-4">
@@ -50,6 +56,7 @@
                 class="form-horizontal form-material"
                 action="/admin/shipments"
                 @keydown="form.errors.clear()"
+                enctype="multipart/form-data"
               >
                 <div class="row">
                   <div class="col-md-6">
@@ -232,7 +239,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr v-for="(item, index) in form.package" :key="item.serial_no">
+                    <tr v-for="(item, index) in form.package" :key="index">
                       <td>{{index+1}}</td>
                       <td>{{item.description}}</td>
                       <td>{{item.serial_no}}</td>
@@ -259,31 +266,34 @@
                 <div class="row mb-2">
                   <div class="col-md-4">
                     <div class="form-group">
+                      <label for="transportation">Transportation</label>
                       <input
-                        type="text"
+                        type="number"
                         class="form-control"
                         v-model="form.charge_transportation"
-                        placeholder="Transportation"
+                        @change="calculateTotal"
                       />
                     </div>
                   </div>
                   <div class="col-md-4">
                     <div class="form-group">
+                      <label>Handling</label>
                       <input
-                        type="text"
+                        type="number"
                         class="form-control"
+                        @change="calculateTotal"
                         v-model="form.charge_handling"
-                        placeholder="Handling"
                       />
                     </div>
                   </div>
                   <div class="col-md-4">
                     <div class="form-group">
+                      <label>Halting</label>
                       <input
-                        type="text"
+                        type="number"
                         class="form-control"
                         v-model="form.charge_halting"
-                        placeholder="Halting"
+                        @change="calculateTotal"
                       />
                     </div>
                   </div>
@@ -291,31 +301,34 @@
                 <div class="row">
                   <div class="col-md-4">
                     <div class="form-group">
+                      <label>ODC Charges</label>
                       <input
-                        type="text"
+                        type="number"
                         class="form-control"
-                        v-model="form.charge_insurance"
-                        placeholder="Insurance"
+                        v-model="form.charge_Insurance"
+                        @change="calculateTotal"
                       />
                     </div>
                   </div>
                   <div class="col-md-4">
                     <div class="form-group">
+                      <label>ODC Charges</label>
                       <input
-                        type="text"
+                        type="number"
                         class="form-control"
                         v-model="form.charge_odc"
-                        placeholder="ODC Charges"
+                        @change="calculateTotal"
                       />
                     </div>
                   </div>
                   <div class="col-md-4">
                     <div class="form-group">
+                      <label>Tax Percent (%)</label>
                       <input
-                        type="text"
+                        type="number"
                         class="form-control"
+                        @change="calculateTotal"
                         v-model="form.charge_tax_percent"
-                        placeholder="Tax"
                       />
                     </div>
                   </div>
@@ -328,11 +341,11 @@
                   </div>
                   <div class="col">
                     <input
-                      type="text"
+                      type="number"
                       class="form-control float-right"
+                      @change="calculateTotal"
                       v-model="form.charge_tax_amount"
-                      placeholder="Tax"
-                      style="width:5rem;"
+                      style="width:8rem;"
                     />
                   </div>
                 </div>
@@ -343,11 +356,12 @@
                   </div>
                   <div class="col">
                     <input
-                      type="text"
+                      type="number"
+                      @change="calculateTotal"
                       class="form-control float-right"
                       v-model="form.charge_total"
                       placeholder="Total"
-                      style="width:5rem;"
+                      style="width:8rem;"
                     />
                   </div>
                 </div>
@@ -363,7 +377,7 @@
                   </div>
                 </div>
 
-                <div class="col-md-12">
+                <!-- <div class="col-md-12">
                   <p>Upload Docs</p>
                   <div class="row">
                     <div class="col-6 d-flex d-inline">
@@ -373,7 +387,7 @@
                       <b-button @click="clearFiles" class="mr-2">Reset</b-button>
                     </div>
                   </div>
-                </div>
+                </div>-->
 
                 <div class="row m-2">
                   <div class="col">
@@ -505,7 +519,7 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="Size">Declared value</label>
-                    <input type="text" class="form-control" v-model="packagedetails.cost" />
+                    <input type="number" class="form-control" v-model="packagedetails.cost" />
                   </div>
                 </div>
               </div>
@@ -725,14 +739,14 @@ export default {
         transport_driver_vehicle: "",
         user_notes: "",
         freight_invoice_number: "",
-        charge_transportation: "",
-        charge_handling: "",
-        charge_halting: "",
-        charge_Insurance: "",
-        charge_odc: "",
-        charge_tax_percent: "",
-        charge_tax_amount: "",
-        charge_total: "",
+        charge_transportation: 0,
+        charge_handling: 0,
+        charge_halting: 0,
+        charge_Insurance: 0,
+        charge_odc: 0,
+        charge_tax_percent: 0,
+        charge_tax_amount: 0,
+        charge_total: 0,
         bill_to: "",
         document: "",
         remarks: "",
@@ -747,7 +761,7 @@ export default {
         invoice_no: "",
         size: "",
         weight: "",
-        cost: ""
+        cost: 0
       }
     };
   },
@@ -777,17 +791,30 @@ export default {
         weight: this.packagedetails.weight,
         cost: this.packagedetails.cost
       });
+
+      // this.form.charge_total =
+      //   parseInt(this.form.charge_total) + parseInt(this.packagedetails.cost);
+      // if (this.form.charge_tax_percent > 0) {
+      //   this.form.charge_tax_amount =
+      //     (this.form.charge_total * this.form.charge_tax_percent) / 100;
+      //   this.form.charge_total =
+      //     this.form.charge_total + this.form.charge_tax_amount;
+      // } else {
+      //   this.form.charge_tax_amount = 0;
+      // }
+
+      this.calculateTotal();
       // reset
       (this.packagedetails.description = ""),
         (this.packagedetails.serial_no = ""),
         (this.packagedetails.invoice_no = ""),
         (this.packagedetails.size = ""),
         (this.packagedetails.weight = ""),
-        (this.packagedetails.cost = "");
+        (this.packagedetails.cost = 0);
     },
     onSubmit() {
       this.form
-        .submit("post", "/api/shipments")
+        .submitBinary("post", "/api/shipments")
         .then(response =>
           Swal.fire({
             position: "top-end",
@@ -804,6 +831,25 @@ export default {
             text: "Something went wrong!"
           })
         );
+    },
+    calculateTotal() {
+      const packageTotal = this.form.package.reduce(
+        (accum, item) => accum + parseInt(item.cost),
+        0
+      );
+
+      const total =
+        parseInt(this.form.charge_transportation) +
+        parseInt(this.form.charge_handling) +
+        parseInt(this.form.charge_halting) +
+        parseInt(this.form.charge_Insurance) +
+        parseInt(this.form.charge_odc) +
+        parseInt(this.form.charge_tax_amount) +
+        parseInt(this.form.charge_odc) +
+        parseInt(packageTotal);
+      this.form.charge_tax_amount =
+        (total * parseInt(this.form.charge_tax_percent)) / 100;
+      this.form.charge_total = this.form.charge_tax_amount + total;
     }
   },
   mounted() {

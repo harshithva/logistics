@@ -16,7 +16,7 @@ class ShipmentController extends Controller
      */
     public function index()
     {
-        $shipments = Shipment::with('package','customer')->paginate(15);
+        $shipments = Shipment::with('package','sender')->paginate(15);
         return ShipmentResource::collection($shipments);
     }
 
@@ -38,6 +38,8 @@ class ShipmentController extends Controller
      */
     public function store(Request $request)
     {
+
+      
         $request->validate([
             "delivery_address" => "max:255",
             "receiver_id" => "required|max:255",
@@ -62,7 +64,8 @@ class ShipmentController extends Controller
             "charge_total" => "max:255",
             "sender_id"=>"required|max:255",
             "remarks" => 'max:500',
-            "bill_to" => 'max:500'
+            "bill_to" => 'max:500',
+           
         ]);
 
         $shipment = new Shipment;
@@ -97,14 +100,33 @@ class ShipmentController extends Controller
         $shipment->charge_total = $request->charge_total;
         $shipment->sender_id = $request->sender_id;
         $shipment->remarks = $request->remarks;
-        $shipment->bill_to = $request->remarks;
+        $shipment->bill_to = $request->bill_to;
+                // Handle File Upload
+        if($request->hasFile('document')){
+            // Get filename with the extension
+            $filenameWithExt = $request->file('document')->getClientOriginalName();
+            // Get just filename
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            // Get just ext
+            $extension = $request->file('document')->getClientOriginalExtension();
+            // Filename to store
+            $fileNameToStore= $filename.'_'.time().'.'.$extension;
+            // Upload Image
+            $path = $request->file('document')->storeAs('public/documents', $fileNameToStore);
+            
+            $shipment->document = $fileNameToStore;
+        } 
+
+     
+
+
         $shipment->save();
         
-        return $request->package;
-        // $request->packages = json_encode($request->packages);
-        // $request->packages = json_decode($request->packages);
-        if($request->packages){
-            foreach($request->packages as $data)
+   
+        $request->package = json_encode($request->package);
+        $request->package = json_decode($request->package);
+        if($request->package){
+            foreach($request->package as $data)
             {
                 $package = new Package;
            

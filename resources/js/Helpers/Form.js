@@ -106,6 +106,27 @@ class Form {
     }
 
 
+    submitBinary(requestType, url) {
+        return new Promise((resolve, reject) => {
+            axios({
+                method: requestType,
+                url: url,
+                data: this.data(),
+                config: { headers: { 'Content-Type': 'multipart/form-data' } }
+            })
+                .then(response => {
+                    this.onSuccess(response.data, requestType);
+
+                    resolve(response.data);
+                })
+                .catch(error => {
+                    this.onFail(error.response.data.errors);
+
+                    reject(error.response.data);
+                });
+        });
+    }
+
     /**
      * Handle a successful form submission.
      *

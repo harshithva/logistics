@@ -18,7 +18,7 @@ public function package(){
     return $this->hasMany(Package::class,'shipment_id');
 }
 
-public function customer(){
+public function sender(){
     return $this->hasOne(User::class,'id');
 }
 

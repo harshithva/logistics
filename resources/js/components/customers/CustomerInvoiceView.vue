@@ -18,7 +18,7 @@
         </router-link>
 
         <button class="btn btn-secondary ml-2">
-          <i class="fas fa-download" @click="downloadPDF"></i> Download
+          <i class="fas fa-download"></i> Download
         </button>
         <a href class="btn btn-info ml-2">
           <i class="fas fa-envelope"></i> Mail
@@ -42,7 +42,7 @@
             <div class="row">
               <div class="col-3">
                 <p>Sender Details</p>
-                <p>Pickup Location : Bangalore</p>
+                <p>Pickup Location :</p>
                 <p>Sender name : ABC Farm</p>
                 <p>Contact : +91 785 596 4522</p>
               </div>
@@ -253,13 +253,22 @@
 </template>
 
 <script>
-import jsPDF from "jspdf";
-import domtoimage from "dom-to-image";
 export default {
   data() {
     return {
       logo: "https://i.ibb.co/WFdrW4M/Logo-Color-Text-Below.jpg"
     };
+  },
+  computed: {
+    form() {
+      return new Form(this.$store.getters.getSingleInvoice);
+    }
+  },
+  created() {
+    this.$store.dispatch(
+      "retrieveSingleInvoice",
+      this.$route.params.invoice_id
+    );
   }
 };
 </script>

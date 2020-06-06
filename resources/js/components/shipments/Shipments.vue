@@ -123,8 +123,8 @@
                     <tr role="row" v-for="(shipment,index) in shipments">
                       <td class="sorting_1">{{shipment.invoice_no}}</td>
                       <td>{{shipment.created_at}}</td>
-                      <td>{{shipment.customer.name}}</td>
-                      <td>{{shipment.customer.address}}</td>
+                      <td>{{shipment.sender.name}}</td>
+                      <td>{{shipment.sender.address}}</td>
                       <td>{{shipment.delivery_address}}</td>
                       <td align="center">
                         <a
@@ -354,7 +354,7 @@ export default {
       this.$refs["file-input"].reset();
     }
   },
-  mounted() {
+  created() {
     return this.$store.dispatch("retrieveShipments");
   },
   computed: {
