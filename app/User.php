@@ -52,4 +52,8 @@ class User extends Authenticatable
             return $this->hasMany(Shipment::class, 'sender_id');
         }
 
+        public function receiver(){
+            return $this->hasMany(Shipment::class, 'receiver_id');
+        }
+
 }

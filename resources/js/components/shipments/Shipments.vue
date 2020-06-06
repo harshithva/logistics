@@ -121,7 +121,7 @@
                   </tfoot>
                   <tbody>
                     <tr role="row" v-for="(shipment,index) in shipments">
-                      <td class="sorting_1">{{shipment.invoice_no}}</td>
+                      <td class="sorting_1">{{shipment.freight_invoice_number}}</td>
                       <td>{{shipment.created_at}}</td>
                       <td>{{shipment.sender.name}}</td>
                       <td>{{shipment.sender.address}}</td>

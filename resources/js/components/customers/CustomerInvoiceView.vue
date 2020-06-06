@@ -1,6 +1,6 @@
 <template>
   <fragment>
-    <div class="row mt-3 mb-3 ml-3 d-print-none">
+    <div class="row mt-3 mb-3 ml-3 d-print-none" v-if="!loading">
       <div class="col-3">
         <p>
           Delivery Status :
@@ -42,21 +42,29 @@
             <div class="row">
               <div class="col-3">
                 <p>Sender Details</p>
-                <p>Pickup Location :</p>
-                <p>Sender name : ABC Farm</p>
-                <p>Contact : +91 785 596 4522</p>
+                <p>
+                  Pickup Location :
+                  <br />
+                  {{form.package_pickup_address}}
+                </p>
+                <p>Sender name : {{form.sender.name}}</p>
+                <p>Contact : {{form.sender.phone}}</p>
               </div>
               <div class="col-3">
                 <p>Receiver Details</p>
-                <p>Dropoff Location : Mangalore</p>
-                <p>Receiver Name : Vinyas</p>
-                <p>Contact : +91 744 596 4522</p>
+                <p>
+                  Dropoff Location :
+                  <br />
+                  {{form.delivery_address}}
+                </p>
+                <p>Receiver Name : {{form.receiver.name}}</p>
+                <p>Contact : {{form.receiver.phone}}</p>
               </div>
               <div class="col-3">
                 <p>Transport Details</p>
-                <p>Driver Name : Manjesh</p>
-                <p>Contact : +91 985 454 5654</p>
-                <p>Vechile Details : Ashok Leyland KA05.EY.2025</p>
+                <p>Driver Name : {{form.transport_driver_name}}</p>
+                <p>Contact : {{form.transport_driver_phone}}</p>
+                <p>Vechile Details : {{form.transport_driver_vehicle}}</p>
               </div>
               <div class="col-3">
                 <p>Current Status</p>
@@ -99,15 +107,15 @@
           </div>
           <div class="col"></div>
           <div class="col">
-            <p>Date of Invoice</p>
+            <p>Date of Invoice: {{moment(form.created_at).format('DD/MM/YYYY')}}</p>
             <p>Invoice No.</p>
             <p>Transaction Type</p>
             <p>
-              <span class="badge badge-pill badge-success">Full Load</span>
+              <span class="badge badge-pill badge-success">{{form.package_transaction_type}}</span>
             </p>
             <p>
               Payment Status :
-              <span class="badge badge-pill badge-warning">Partial</span>
+              <span class="badge badge-pill badge-warning">---</span>
             </p>
           </div>
         </div>
@@ -115,33 +123,38 @@
         <div class="row mt-2">
           <div class="col">
             <p>BILL TO</p>
+            {{form.sender.address}}
+            <!-- <p v-if="form.bill_to == 'Consginor'">{{form.sender.address}}</p>
+            <p v-if="form.bill_to == 'Consginee'">{{form.receiver.address}}</p>-->
           </div>
 
-          <div class="col">Consignor Name</div>
+          <div class="col">
+            Consignor Name: {{form.sender.company_name}}
+            <br />
+            {{form.sender.address}}
+          </div>
         </div>
 
         <div class="row mt-2">
           <div class="col"></div>
-          <div class="col">
-            Consignor GST &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            Address
-          </div>
+          <div class="col">Consignor GST: {{form.sender.gst}}</div>
         </div>
         <br />
 
         <div class="row">
           <div class="col"></div>
           <div class="col">
-            <p>Consignee Name</p>
+            <p>
+              Consignee Name: {{form.receiver.name}}
+              <br />
+              {{form.receiver.address}}
+            </p>
           </div>
         </div>
 
         <div class="row mt-2">
           <div class="col"></div>
-          <div class="col">
-            Consignee GST &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            Consignee Address
-          </div>
+          <div class="col">Consignee GST {{form.receiver.gst}}</div>
         </div>
         <br />
 
@@ -155,12 +168,12 @@
                 <th scope="col">Serial No.</th>
                 <th scope="col">Docket No.</th>
               </thead>
-              <tr>
-                <th scope="row">1</th>
-                <td>Medical Equipments</td>
-                <td>50 kg</td>
-                <td>Gl4551</td>
-                <td>DN45415</td>
+              <tr v-for="(item,index) in form.package">
+                <th scope="row">{{index+1}}</th>
+                <td>{{item.description}}</td>
+                <td>{{item.weight}} kg</td>
+                <td>{{item.serial_no}}</td>
+                <td>{{item.invoice_no}}</td>
               </tr>
             </table>
 
@@ -176,7 +189,7 @@
             </table>
 
             <h6 class="mt-4">Remarks</h6>
-            <p></p>
+            <p>{{form.remarks}}</p>
           </div>
           <div class="col">
             <table class="table-bordered table">
@@ -185,30 +198,34 @@
               </thead>-->
               <tr>
                 <th scope="row">Transportation</th>
-                <td>500</td>
+                <td>{{form.charge_transportation}}</td>
               </tr>
 
               <tr>
-                <th scope="row">Handling or ODC Charges</th>
-                <td>500</td>
+                <th scope="row">Handling</th>
+                <td>{{form.charge_handling}}</td>
+              </tr>
+              <tr>
+                <th scope="row">ODC Charges</th>
+                <td>{{form.charge_odc}}</td>
               </tr>
 
               <tr>
                 <th scope="row">Halting</th>
-                <td>500</td>
+                <td>{{form.charge_halting}}</td>
               </tr>
 
               <tr>
                 <th scope="row">Insurance</th>
-                <td>500</td>
+                <td>{{form.charge_Insurance}}</td>
               </tr>
               <tr>
                 <th scope="row">GST</th>
-                <td>500</td>
+                <td>{{form.charge_tax_amount}}</td>
               </tr>
               <tr>
                 <th>Total</th>
-                <td>1545</td>
+                <td>{{form.charge_total}}</td>
               </tr>
             </table>
           </div>
@@ -256,17 +273,24 @@
 export default {
   data() {
     return {
-      logo: "https://i.ibb.co/WFdrW4M/Logo-Color-Text-Below.jpg"
+      logo: "https://i.ibb.co/WFdrW4M/Logo-Color-Text-Below.jpg",
+      loading: false
     };
   },
   computed: {
     form() {
-      return new Form(this.$store.getters.getSingleInvoice);
+      return new Form(this.$store.getters.getSingleShipment[0]);
     }
+    // sender() {
+    //   return this.shipment.sender ? this.shipment.sender : "";
+    // },
+    // package() {
+    //   return this.shipment.package ? this.shipment.package : "";
+    // }
   },
   created() {
     this.$store.dispatch(
-      "retrieveSingleInvoice",
+      "retrieveSingleShipment",
       this.$route.params.invoice_id
     );
   }

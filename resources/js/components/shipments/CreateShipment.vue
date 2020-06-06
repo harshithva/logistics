@@ -301,7 +301,7 @@
                 <div class="row">
                   <div class="col-md-4">
                     <div class="form-group">
-                      <label>ODC Charges</label>
+                      <label>Insurance</label>
                       <input
                         type="number"
                         class="form-control"

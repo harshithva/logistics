@@ -13,10 +13,6 @@
           <i class="fas fa-print"></i> Print Docket
         </a>
 
-        <button class="btn btn-secondary ml-2">
-          <i class="fas fa-download" @click="downloadPDF"></i> Download
-        </button>
-
         <router-link to="/admin/customers/1/invoices/1/view" class="btn btn-dark ml-2">
           <i class="fas fa-undo-alt"></i> Return
         </router-link>
@@ -88,13 +84,12 @@
             </p>
           </div>
           <div class="col text-right">
-            <p>Date: 05/06/2020</p>
-            <p>Docket No: GLBNG0003</p>
+            <p>Date: {{moment(form.created_at).format('DD/MM/YYYY')}}</p>
+            <p>Docket No: {{form.freight_invoice_number}}</p>
             <br />
             <p>Transaction Type</p>
             <p>
-              <!-- <span class="badge badge-pill badge-success">Full Load</span> -->
-              ---
+              <span class="badge badge-pill badge-success">{{form.package_transaction_type}}</span>
             </p>
           </div>
         </div>
@@ -111,7 +106,8 @@
           <div class="col border border-success p-4 m-2">
             <h6 class="text-center">
               <b>DELIVERY ADDRESS</b>
-              <hr />Vikhroli(W) MUMBAI
+              <hr />
+              {{form.delivery_address}}
             </h6>
             <p style="font-size:0.8rem;"></p>
           </div>
@@ -128,20 +124,20 @@
         <hr />
         <div class="row mt-1">
           <div class="col">
-            <p>Consignor:</p>HOMAG INDIA PVT LIMITED
-            <br />Rajadhani estate veerananjipura village
-            <br />nelamangala Bangalore rural-562123
+            <p>Consignor:</p>
+            {{form.sender.company_name}}
             <br />
-            <p>Consignor GST: 29AABCH4923P1Z3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+            {{form.sender.address}}
+            <p>Consignor GST: {{form.sender.gst}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
           </div>
 
           <div class="col mb-2">
             <h6>
-              <p>Consignee</p>TEEJAN VENTURES LLP
-              <br />11/A Amber compound next to Mahajan Mill, LBS Marg
-              <br />Vikhroli MUMBAI-400079
+              <p>Consignee</p>
+              {{form.receiver.company_name}}
               <br />
-              <p>Consignee GST: 27AAOFT0890R1Z6</p>
+              {{form.receiver.address}}
+              <p>Consignee GST: {{form.receiver.gst}}</p>
             </h6>
             <p style="font-size:0.8rem;"></p>
 
@@ -167,16 +163,13 @@
                 <th scope="col">Weight</th>
                 <th scope="col">Declared value</th>
               </thead>
-              <tr>
-                <th scope="row">1</th>
-                <td>
-                  EDGETEQ S-230 / NKR220FCP (0-261-80-3442)
-                  <br />HOMAG SINGLE SIDED EDGE BANDING MACHINE
-                </td>
-                <td>Gl4551</td>
-                <td>GLBNG0003</td>
+              <tr v-for="(item,index) in form.package">
+                <th scope="row">{{index+1}}</th>
+                <td>{{item.description}}</td>
+                <td>{{item.serial_no}}</td>
+                <td>{{item.invoice_no}}</td>
                 <td>--</td>
-                <td>&#8377; 3,58,200.00</td>
+                <td>&#8377; {{item.cost}}</td>
               </tr>
             </table>
 
@@ -344,11 +337,23 @@ export default {
   data() {
     return {
       barcodeValue: "GLBNG0003",
+      loading: false,
       logo: "https://i.ibb.co/WFdrW4M/Logo-Color-Text-Below.jpg"
     };
   },
   components: {
     barcode: VueBarcode
+  },
+  computed: {
+    form() {
+      return new Form(this.$store.getters.getSingleShipment[0]);
+    },
+    created() {
+      this.$store.dispatch(
+        "retrieveSingleShipment",
+        this.$route.params.invoice_id
+      );
+    }
   }
 };
 </script>

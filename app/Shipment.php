@@ -23,7 +23,7 @@ public function sender(){
 }
 
 public function receiver(){
-    return $this->hasOne(User::class,'receiver_id');
+    return $this->hasOne(User::class,'id');
 }
 
 }

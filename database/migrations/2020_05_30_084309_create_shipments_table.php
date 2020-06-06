@@ -32,13 +32,13 @@ class CreateShipmentsTable extends Migration
             $table->string('user_notes')->nullable();
             $table->string('freight_invoice_number')->nullable();
             // Additional Expenses
-            $table->string('charge_transportation')->nullable();
-            $table->string('charge_handling')->nullable();
-            $table->string('charge_halting')->nullable();
-            $table->string('charge_Insurance')->nullable();
-            $table->string('charge_odc')->nullable();
-            $table->string('charge_tax_percent')->nullable();
-            $table->string('charge_tax_amount')->nullable();
+            $table->decimal('charge_transportation',10,2)->nullable();
+            $table->decimal('charge_handling',10,2)->nullable();
+            $table->decimal('charge_halting',10,2)->nullable();
+            $table->decimal('charge_Insurance',10,2)->nullable();
+            $table->decimal('charge_odc',10,2)->nullable();
+            $table->decimal('charge_tax_percent',10,2)->nullable();
+            $table->decimal('charge_tax_amount',10,2)->nullable();
             $table->decimal('charge_total',10,2)->default(0);
         //    extra
             $table->text('remarks')->nullable();
