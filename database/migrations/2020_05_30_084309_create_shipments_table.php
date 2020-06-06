@@ -15,17 +15,9 @@ class CreateShipmentsTable extends Migration
     {
         Schema::create('shipments', function (Blueprint $table) {
             $table->id();
-            $table->string('receiver_name');
-            $table->string('receiver_company');
-            $table->string('receiver_gst')->nullable();
-            $table->string('receiver_email')->nullable();
-            $table->string('receiver_phone');
-            $table->string('receiver_secondary_phone')->nullable(); 
-            $table->text('receiver_address')->nullable();
-            $table->text('receiver_delivery_address')->nullable();
-            $table->text('receiver_note')->nullable();
-            $table->string('receiver_state')->nullable();
-            $table->string('receiver_pincode');
+            $table->string('receiver_id');
+            $table->text('delivery_address')->nullable();
+          
         // package details
             $table->string('package_contact_person')->nullable();
             $table->string('package_contact_person_phone')->nullable();
@@ -48,9 +40,15 @@ class CreateShipmentsTable extends Migration
             $table->string('charge_tax_percent')->nullable();
             $table->string('charge_tax_amount')->nullable();
             $table->decimal('charge_total',10,2)->default(0);
+        //    extra
+            $table->text('remarks')->nullable();
+            $table->string('document')->nullable();
+            $table->string('bill_to')->nullable();
 
-            $table->unsignedBigInteger('customer_id');
-            $table->foreign('customer_id')->references('id')->on('users')->onDelete('cascade');
+
+            $table->unsignedBigInteger('sender_id');
+            $table->foreign('sender_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('receiver_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

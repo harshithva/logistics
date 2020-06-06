@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class Shipment extends JsonResource
+class Package extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,9 +15,5 @@ class Shipment extends JsonResource
     public function toArray($request)
     {
         return parent::toArray($request);
-        // return [
-        //     parent::toArray($request),
-        //     'packages' => PackageResource::collection($this->package)
-        // ];
     }
 }

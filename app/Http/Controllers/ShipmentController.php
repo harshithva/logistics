@@ -16,7 +16,7 @@ class ShipmentController extends Controller
      */
     public function index()
     {
-        $shipments = Shipment::paginate(15);
+        $shipments = Shipment::with('package','customer')->paginate(15);
         return ShipmentResource::collection($shipments);
     }
 
@@ -39,17 +39,8 @@ class ShipmentController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            "receiver_name" => "required|max:255",
-            "receiver_company"=> "required|max:255",
-            "receiver_gst" => "max:255",
-            "receiver_email" => "max:255",
-            "receiver_phone" => "required|max:255",
-            "receiver_secondary_phone" => "max:255",
-            "receiver_address" => "max:500",
-            "receiver_delivery_address" => "max:500",
-            "receiver_note"=> "max:500",
-            "receiver_state" => "max:255",
-            "receiver_pincode" => "required|max:255",
+            "delivery_address" => "max:255",
+            "receiver_id" => "required|max:255",
             "package_contact_person" => "max:255",
             "package_contact_person_phone" => "max:255",
             "package_transaction_type" => "max:255",
@@ -69,20 +60,17 @@ class ShipmentController extends Controller
             "charge_tax_percent"=> "max:255",
             "charge_tax_amount" => "max:255",
             "charge_total" => "max:255",
-            "customer_id"=>"required|max:255",
+            "sender_id"=>"required|max:255",
+            "remarks" => 'max:500',
+            "bill_to" => 'max:500'
         ]);
 
         $shipment = new Shipment;
-        $shipment->receiver_name = $request->receiver_name;
-        $shipment->receiver_company = $request->receiver_company;
-        $shipment->receiver_gst = $request->receiver_gst;
-        $shipment->receiver_email = $request->receiver_email;
-        $shipment->receiver_phone = $request->receiver_phone;
-        $shipment->receiver_secondary_phone = $request->receiver_secondary_phone;
-        $shipment->receiver_address = $request->receiver_address;
-        $shipment->receiver_delivery_address = $request->receiver_delivery_address;
-        $shipment->receiver_note = $request->receiver_note;
-        $shipment->receiver_pincode = $request->receiver_pincode;
+        $shipment->receiver_id = $request->receiver_id;
+      
+      
+        $shipment->delivery_address = $request->delivery_address;
+       
 
         $shipment->package_contact_person = $request->package_contact_person;
         $shipment->package_contact_person_phone = $request->package_contact_person_phone;
@@ -107,16 +95,19 @@ class ShipmentController extends Controller
         $shipment->charge_tax_percent = $request->charge_tax_percent;
         $shipment->charge_tax_amount = $request->charge_tax_amount;
         $shipment->charge_total = $request->charge_total;
-        $shipment->customer_id = $request->customer_id;
+        $shipment->sender_id = $request->sender_id;
+        $shipment->remarks = $request->remarks;
+        $shipment->bill_to = $request->remarks;
         $shipment->save();
         
-        $request->packages = json_encode($request->packages);
-        $request->packages = json_decode($request->packages);
+        return $request->package;
+        // $request->packages = json_encode($request->packages);
+        // $request->packages = json_decode($request->packages);
         if($request->packages){
             foreach($request->packages as $data)
             {
                 $package = new Package;
-                $package->name = $data->name;
+           
                 $package->description = $data->description;
                 $package->serial_no = $data->serial_no;
                 $package->invoice_no = $data->invoice_no;

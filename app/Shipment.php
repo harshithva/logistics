@@ -17,4 +17,13 @@ class Shipment extends Model
 public function package(){
     return $this->hasMany(Package::class,'shipment_id');
 }
+
+public function customer(){
+    return $this->hasOne(User::class,'id');
+}
+
+public function receiver(){
+    return $this->hasOne(User::class,'receiver_id');
+}
+
 }

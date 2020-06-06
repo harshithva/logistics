@@ -8,6 +8,30 @@
               <div id="loader" style="display:none"></div>
               <div id="msgholder"></div>
               <h4 class="mb-4">Shipment Info</h4>
+              <!-- show errors -->
+
+              <b-alert
+                v-if="form.errors.has('sender_id')"
+                dismissible
+                show
+                variant="danger"
+              >{{form.errors.get('sender_id')}}</b-alert>
+
+              <b-alert
+                v-if="form.errors.has('receiver_id')"
+                dismissible
+                show
+                variant="danger"
+              >{{form.errors.get('receiver_id')}}</b-alert>
+
+              <b-alert
+                v-if="form.errors.has('charge_total')"
+                dismissible
+                show
+                variant="danger"
+              >{{form.errors.get('charge_total')}}</b-alert>
+
+              <!-- end errors -->
               <div class="row">
                 <div class="col-md-4">
                   <div class="form-group">
@@ -22,111 +46,47 @@
                   </div>
                 </div>
               </div>
-
-              <h6 class="mb-2">Sender Info</h6>
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <v-select v-model="selected" :options="customers" value="id" label="name"></v-select>
-                    <div class="mt-2">
-                      <router-link to="/admin/customers/create">Add new</router-link>
+              <form
+                class="form-horizontal form-material"
+                action="/admin/shipments"
+                @keydown="form.errors.clear()"
+              >
+                <div class="row">
+                  <div class="col-md-6">
+                    <h6 class="mb-2">Sender Info</h6>
+                    <div class="form-group">
+                      <v-select :options="customers" label="name" @input="selectCustomer($event)"></v-select>
+                      <div class="mt-2">
+                        <router-link to="/admin/customers/create">Add new</router-link>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <h6 class="mb-2">Receiver Info</h6>
+                    <div class="form-group">
+                      <v-select :options="customers" label="name" @input="selectReceiver($event)"></v-select>
+                      <div class="mt-2">
+                        <router-link to="/admin/customers/create">Add new</router-link>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <h6 class="mb-4">Receiver Info</h6>
-              <form class="form-horizontal form-material" id="admin_form" method="post">
-                <section>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <input type="text" class="form-control" name="fname" placeholder="Name" />
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <input
-                          type="text"
-                          class="form-control"
-                          name="fname"
-                          placeholder="Company Name"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <input type="text" class="form-control" name="gst" placeholder="GST No" />
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <input type="email" class="form-control" name="phone" placeholder="Email" />
-                      </div>
-                    </div>
-                  </div>
 
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <input
-                          type="text"
-                          class="form-control"
-                          name="phone"
-                          placeholder="Primary Phone"
-                        />
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <input
-                          type="email"
-                          class="form-control"
-                          name="phone"
-                          placeholder="Secondary Phone"
-                        />
-                      </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label for="delivery_address">Delivery Address</label>
+                      <textarea
+                        class="form-control"
+                        id="delivery_address"
+                        rows="3"
+                        v-model="form.delivery_address"
+                      ></textarea>
                     </div>
                   </div>
+                </div>
 
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label for="exampleFormControlTextarea1">Address</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label for="exampleFormControlTextarea1">Delivery Address</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="form-group">
-                        <label for="exampleFormControlTextarea1">Note</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <input type="text" class="form-control" name="fname" placeholder="State" />
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <input type="text" class="form-control" name="fname" placeholder="Pincode" />
-                      </div>
-                    </div>
-                  </div>
-                </section>
+                <hr />
                 <h6 class="mb-4">Package Pickup Location</h6>
                 <div class="row">
                   <div class="col-md-6">
@@ -134,7 +94,7 @@
                       <input
                         type="text"
                         class="form-control"
-                        name="fname"
+                        v-model="form.package_contact_person"
                         placeholder="Contact Person"
                       />
                     </div>
@@ -142,7 +102,12 @@
 
                   <div class="col-md-6">
                     <div class="form-group">
-                      <input type="text" class="form-control" name="fname" placeholder="Phone" />
+                      <input
+                        type="text"
+                        class="form-control"
+                        v-model="form.package_contact_person_phone"
+                        placeholder="Phone"
+                      />
                     </div>
                   </div>
                 </div>
@@ -150,21 +115,26 @@
                 <div class="input-group mb-2">
                   <select
                     class="custom-select"
-                    id="inputGroupSelect04"
-                    aria-label="Example select with button addon"
+                    aria-label="Select Transaction Type"
+                    v-model="form.package_transaction_type"
                   >
                     <option selected disabled>Transaction Type</option>
 
-                    <option value="2">Full Load</option>
-                    <option value="3">Part Load</option>
+                    <option value="Full Load">Full Load</option>
+                    <option value="Part Load">Part Load</option>
                   </select>
                 </div>
 
                 <div class="row">
                   <div class="col-md-12">
                     <div class="form-group">
-                      <label for="exampleFormControlTextarea1">Address</label>
-                      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                      <label for="exampleFormControlTextarea1">Pickup Address</label>
+                      <textarea
+                        class="form-control"
+                        id="pickup_address"
+                        rows="3"
+                        v-model="form.package_pickup_address"
+                      ></textarea>
                     </div>
                   </div>
                 </div>
@@ -176,14 +146,19 @@
                       <input
                         type="text"
                         class="form-control"
-                        name="fname"
+                        v-model="form.transport_company_name"
                         placeholder="Company Name"
                       />
                     </div>
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
-                      <input type="text" class="form-control" name="fname" placeholder="Phone" />
+                      <input
+                        type="text"
+                        class="form-control"
+                        v-model="form.transport_company_phone"
+                        placeholder="Phone"
+                      />
                     </div>
                   </div>
                 </div>
@@ -193,7 +168,7 @@
                       <input
                         type="text"
                         class="form-control"
-                        name="fname"
+                        v-model="form.transport_driver_name"
                         placeholder="Driver Name"
                       />
                     </div>
@@ -203,7 +178,7 @@
                       <input
                         type="text"
                         class="form-control"
-                        name="fname"
+                        v-model="form.transport_driver_phone"
                         placeholder="Driver Phone number"
                       />
                     </div>
@@ -213,7 +188,7 @@
                       <input
                         type="text"
                         class="form-control"
-                        name="fname"
+                        v-model="form.transport_driver_vehicle"
                         placeholder="Vehicle Details"
                       />
                     </div>
@@ -223,7 +198,7 @@
                     <div class="form-group">
                       <textarea
                         class="form-control"
-                        name="notes"
+                        v-model="form.user_notes"
                         rows="6"
                         placeholder="User Notes - For internal use only."
                       ></textarea>
@@ -238,7 +213,7 @@
                       <input
                         type="text"
                         class="form-control"
-                        name="fname"
+                        v-model="form.freight_invoice_number"
                         placeholder="Freight Invoice Number"
                       />
                     </div>
@@ -257,6 +232,15 @@
                     </tr>
                   </thead>
                   <tbody>
+                    <tr v-for="(item, index) in form.package" :key="item.serial_no">
+                      <td>{{index+1}}</td>
+                      <td>{{item.description}}</td>
+                      <td>{{item.serial_no}}</td>
+                      <td>{{item.invoice_no}}</td>
+                      <td>{{item.size}}</td>
+                      <td>{{item.weight}}</td>
+                      <td>{{item.cost}}</td>
+                    </tr>
                     <tr>
                       <td>
                         <button
@@ -278,26 +262,9 @@
                       <input
                         type="text"
                         class="form-control"
-                        name="fname"
+                        v-model="form.charge_transportation"
                         placeholder="Transportation"
                       />
-                    </div>
-                  </div>
-                  <div class="col-md-4">
-                    <div class="form-group">
-                      <input type="text" class="form-control" name="fname" placeholder="Handling" />
-                    </div>
-                  </div>
-                  <div class="col-md-4">
-                    <div class="form-group">
-                      <input type="text" class="form-control" name="fname" placeholder="Halting" />
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-4">
-                    <div class="form-group">
-                      <input type="text" class="form-control" name="fname" placeholder="Insurance" />
                     </div>
                   </div>
                   <div class="col-md-4">
@@ -305,14 +272,51 @@
                       <input
                         type="text"
                         class="form-control"
-                        name="fname"
+                        v-model="form.charge_handling"
+                        placeholder="Handling"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <input
+                        type="text"
+                        class="form-control"
+                        v-model="form.charge_halting"
+                        placeholder="Halting"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <input
+                        type="text"
+                        class="form-control"
+                        v-model="form.charge_insurance"
+                        placeholder="Insurance"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <input
+                        type="text"
+                        class="form-control"
+                        v-model="form.charge_odc"
                         placeholder="ODC Charges"
                       />
                     </div>
                   </div>
                   <div class="col-md-4">
                     <div class="form-group">
-                      <input type="text" class="form-control" name="fname" placeholder="Tax" />
+                      <input
+                        type="text"
+                        class="form-control"
+                        v-model="form.charge_tax_percent"
+                        placeholder="Tax"
+                      />
                     </div>
                   </div>
                 </div>
@@ -326,7 +330,7 @@
                     <input
                       type="text"
                       class="form-control float-right"
-                      name="fname"
+                      v-model="form.charge_tax_amount"
                       placeholder="Tax"
                       style="width:5rem;"
                     />
@@ -341,7 +345,7 @@
                     <input
                       type="text"
                       class="form-control float-right"
-                      name="fname"
+                      v-model="form.charge_total"
                       placeholder="Total"
                       style="width:5rem;"
                     />
@@ -352,9 +356,9 @@
                   <div class="form-group">
                     <textarea
                       class="form-control"
-                      name="notes"
                       rows="6"
-                      placeholder="Consignment Note"
+                      placeholder="Remarks"
+                      v-model="form.remarks"
                     ></textarea>
                   </div>
                 </div>
@@ -363,7 +367,7 @@
                   <p>Upload Docs</p>
                   <div class="row">
                     <div class="col-6 d-flex d-inline">
-                      <b-form-file v-model="file" ref="file-input" class="mb-2"></b-form-file>
+                      <b-form-file v-model="form.document" ref="file-input" class="mb-2"></b-form-file>
                     </div>
                     <div class="col-6">
                       <b-button @click="clearFiles" class="mr-2">Reset</b-button>
@@ -374,26 +378,18 @@
                 <div class="row m-2">
                   <div class="col">
                     <p class="form-check-inline">Bill To</p>
-                    <div class="form-check form-check-inline">
-                      <input
-                        class="form-check-input"
-                        type="radio"
-                        name="inlineRadioOptions"
-                        id="inlineRadio1"
-                        value="consignor"
-                      />
-                      <label class="form-check-label" for="inlineRadio1">Consignor</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                      <input
-                        class="form-check-input"
-                        type="radio"
-                        name="inlineRadioOptions"
-                        id="inlineRadio2"
-                        value="consignee"
-                      />
-                      <label class="form-check-label" for="inlineRadio2">Consignee</label>
-                    </div>
+                    <b-form-group label="Individual radios">
+                      <b-form-radio
+                        v-model="form.bill_to"
+                        name="some-radios"
+                        value="Consignor"
+                      >Consignor</b-form-radio>
+                      <b-form-radio
+                        v-model="form.bill_to"
+                        name="some-radios"
+                        value="Consignee"
+                      >Consignee</b-form-radio>
+                    </b-form-group>
                   </div>
                 </div>
 
@@ -421,17 +417,17 @@
                         <i class="icon-ok"></i>
                       </span>
                     </button>
-                    <router-link
+                    <button
                       class="btn btn-outline-primary btn-confirmation"
-                      name="dosubmit"
                       type="submit"
-                      to="/admin/customers/1/invoices/1/view"
+                      :disabled="form.errors.any()"
+                      @click.prevent="onSubmit"
                     >
                       Save
                       <span>
                         <i class="icon-ok"></i>
                       </span>
-                    </router-link>
+                    </button>
                     <button
                       class="btn btn-outline-danger btn-confirmation"
                       name="dosubmit"
@@ -473,45 +469,50 @@
                 <div class="col-md-12">
                   <div class="form-group">
                     <label for="exampleFormControlTextarea1">Description</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    <textarea
+                      class="form-control"
+                      id="exampleFormControlTextarea1"
+                      rows="3"
+                      v-model="packagedetails.description"
+                    ></textarea>
                   </div>
                 </div>
 
                 <div class="col-md-4">
                   <div class="form-group">
                     <label for="Serial Number">Serial Number</label>
-                    <input type="text" class="form-control" />
+                    <input type="text" class="form-control" v-model="packagedetails.serial_no" />
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
                     <label for="Invoice">Invoice Number</label>
-                    <input type="text" class="form-control" />
+                    <input type="text" class="form-control" v-model="packagedetails.invoice_no" />
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
                     <label for="Size">Size</label>
-                    <input type="text" class="form-control" />
+                    <input type="text" class="form-control" v-model="packagedetails.size" />
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="docket">Weight</label>
-                    <input type="text" class="form-control" />
+                    <input type="text" class="form-control" v-model="packagedetails.weight" />
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="Size">Declared value</label>
-                    <input type="text" class="form-control" />
+                    <input type="text" class="form-control" v-model="packagedetails.cost" />
                   </div>
                 </div>
               </div>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Add</button>
+              <button type="button" class="btn btn-primary" @click="addPackage">Add</button>
             </div>
           </div>
         </div>
@@ -710,19 +711,44 @@ export default {
   data() {
     return {
       form: new Form({
-        name: "",
-        email: "",
-        password: "",
-        company_name: "",
-        gst: "",
-        phone: "",
-        address: "",
-        user_notes: ""
+        receiver_id: "",
+        sender_id: "",
+        delivery_address: "",
+        package_contact_person: "",
+        package_contact_person_phone: "",
+        package_transaction_type: "",
+        package_pickup_address: "",
+        transport_company_name: "",
+        transport_company_phone: "",
+        transport_driver_name: "",
+        transport_driver_phone: "",
+        transport_driver_vehicle: "",
+        user_notes: "",
+        freight_invoice_number: "",
+        charge_transportation: "",
+        charge_handling: "",
+        charge_halting: "",
+        charge_Insurance: "",
+        charge_odc: "",
+        charge_tax_percent: "",
+        charge_tax_amount: "",
+        charge_total: "",
+        bill_to: "",
+        document: "",
+        remarks: "",
+        package: []
       }),
       file: null,
       paymentType: null,
       status: "pickup",
-      selected: ""
+      packagedetails: {
+        description: "",
+        serial_no: "",
+        invoice_no: "",
+        size: "",
+        weight: "",
+        cost: ""
+      }
     };
   },
   methods: {
@@ -734,6 +760,50 @@ export default {
         .submit("post", "/api/shipments")
         .then(response)
         .catch(error);
+    },
+    selectCustomer(e) {
+      this.form.sender_id = e.id;
+    },
+
+    selectReceiver(e) {
+      this.form.receiver_id = e.id;
+    },
+    addPackage() {
+      this.form.package.push({
+        description: this.packagedetails.description,
+        serial_no: this.packagedetails.serial_no,
+        invoice_no: this.packagedetails.invoice_no,
+        size: this.packagedetails.size,
+        weight: this.packagedetails.weight,
+        cost: this.packagedetails.cost
+      });
+      // reset
+      (this.packagedetails.description = ""),
+        (this.packagedetails.serial_no = ""),
+        (this.packagedetails.invoice_no = ""),
+        (this.packagedetails.size = ""),
+        (this.packagedetails.weight = ""),
+        (this.packagedetails.cost = "");
+    },
+    onSubmit() {
+      this.form
+        .submit("post", "/api/shipments")
+        .then(response =>
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Well done! Shipment has been created",
+            showConfirmButton: false,
+            timer: 1500
+          })
+        )
+        .catch(error =>
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Something went wrong!"
+          })
+        );
     }
   },
   mounted() {
