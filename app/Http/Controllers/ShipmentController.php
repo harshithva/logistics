@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Shipment;
 use App\Package;
+use App\Payment;
 use App\Http\Resources\Shipment as ShipmentResource;
 use Illuminate\Http\Request;
 
@@ -98,6 +99,9 @@ class ShipmentController extends Controller
         $shipment->charge_tax_percent = $request->charge_tax_percent;
         $shipment->charge_tax_amount = $request->charge_tax_amount;
         $shipment->charge_total = $request->charge_total;
+        $shipment->charge_advance_paid = $request->charge_advance_paid;
+        $shipment->charge_balance = $request->charge_balance;
+
         $shipment->sender_id = $request->sender_id;
         $shipment->remarks = $request->remarks;
         $shipment->bill_to = $request->bill_to;
@@ -154,8 +158,11 @@ class ShipmentController extends Controller
      */
     public function show(Shipment $shipment)
     {
-        $singleShipment = Shipment::findOrFail($shipment->id)->with('package','sender','receiver')->get();
-        return new ShipmentResource($singleShipment[0]);
+        $shipment->sender;
+        $shipment->package;
+        $shipment->receiver;
+        $shipment->payment;
+        return response()->json($shipment,200);
     }
 
     /**
@@ -192,5 +199,21 @@ class ShipmentController extends Controller
     {
         $shipment->delete();
         return response()->json(null,204);
+    }
+
+    public function balance_amount($id)
+    {
+        $shipment = Shipment::findOrFail($id);
+        $total_paid = $shipment->payment->sum('amount');
+        if($total_paid > 0)
+        {
+            $balance_amount = ($shipment->charge_total - $total_paid) -  $shipment->charge_advance_paid;
+        }
+      else {
+        $balance_amount = ($shipment->charge_total -  $shipment->charge_advance_paid);
+      }
+        $object = new \stdClass();;
+        $object->balance_amount = $balance_amount;
+        return response()->json( $object ,200);
     }
 }

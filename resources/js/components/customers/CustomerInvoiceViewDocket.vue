@@ -25,7 +25,7 @@
             <div class="row">
               <div class="col-3">
                 <p>Sender Details</p>
-                <p>Pickup Location : {{shipment.package_pickup_address}}}</p>
+                <p>Pickup Location : {{shipment.package_pickup_address}}</p>
                 <p>Sender name : {{shipment.sender.name}}</p>
                 <p>Contact : {{shipment.sender.phone}}</p>
               </div>
@@ -159,7 +159,7 @@
                 <th scope="col">SL No.</th>
                 <th scope="col" style="width:20rem">Description</th>
                 <th scope="col">Serial No.</th>
-                <th scope="col">Docket No.</th>
+                <!-- <th scope="col">Docket No.</th> -->
                 <th scope="col">Weight</th>
                 <th scope="col">Declared value</th>
               </thead>
@@ -167,7 +167,7 @@
                 <th scope="row">{{index+1}}</th>
                 <td>{{item.description}}</td>
                 <td>{{item.serial_no}}</td>
-                <td>{{item.invoice_no}}</td>
+                <!-- <td>{{item.invoice_no}}</td> -->
                 <td>--</td>
                 <td>&#8377; {{item.cost}}</td>
               </tr>
@@ -336,7 +336,8 @@ import VueBarcode from "vue-barcode";
 export default {
   data() {
     return {
-      logo: "https://i.ibb.co/WFdrW4M/Logo-Color-Text-Below.jpg"
+      logo: "https://i.ibb.co/WFdrW4M/Logo-Color-Text-Below.jpg",
+      status: "pickup"
     };
   },
   components: {
@@ -344,7 +345,7 @@ export default {
   },
   computed: {
     shipment() {
-      return new Form(this.$store.getters.getSingleShipment);
+      return this.$store.getters.getSingleShipment;
     },
     created() {
       this.$store.dispatch(

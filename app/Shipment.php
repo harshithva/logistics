@@ -10,20 +10,16 @@ class Shipment extends Model
 {
  protected $guarded = [];
 
- public function shipment(){
-    return $this->belongsTo(User::class);
-}
-
 public function package(){
     return $this->hasMany(Package::class,'shipment_id');
 }
 
 public function sender(){
-    return $this->hasOne(User::class,'id');
+    return $this->hasOne(User::class,'id','sender_id');
 }
 
 public function receiver(){
-    return $this->hasOne(User::class,'id');
+    return $this->hasOne(User::class,'id','receiver_id');
 }
 
 public function payment(){

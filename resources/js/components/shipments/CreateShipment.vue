@@ -290,7 +290,7 @@
                       />
                     </div>
                   </div>
-                  <div class="col-md-4">
+                  <div class="col-md-3">
                     <div class="form-group">
                       <label>Halting</label>
                       <input
@@ -303,7 +303,7 @@
                   </div>
                 </div>
                 <div class="row">
-                  <div class="col-md-4">
+                  <div class="col-md-3">
                     <div class="form-group">
                       <label>Insurance</label>
                       <input
@@ -314,7 +314,7 @@
                       />
                     </div>
                   </div>
-                  <div class="col-md-4">
+                  <div class="col-md-3">
                     <div class="form-group">
                       <label>ODC Charges</label>
                       <input
@@ -325,7 +325,7 @@
                       />
                     </div>
                   </div>
-                  <div class="col-md-4">
+                  <div class="col-md-3">
                     <div class="form-group">
                       <label>Tax Percent (%)</label>
                       <input
@@ -333,6 +333,17 @@
                         class="form-control"
                         @change="calculateTotal"
                         v-model="form.charge_tax_percent"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label>Advance Paid</label>
+                      <input
+                        type="number"
+                        class="form-control"
+                        @change="calculateTotal"
+                        v-model="form.charge_advance_paid"
                       />
                     </div>
                   </div>
@@ -370,6 +381,21 @@
                   </div>
                 </div>
 
+                <div class="row m-2">
+                  <div class="col">
+                    <p>Balance</p>
+                  </div>
+                  <div class="col">
+                    <input
+                      type="number"
+                      @change="calculateTotal"
+                      class="form-control float-right"
+                      v-model="form.charge_balance"
+                      style="width:8rem;"
+                    />
+                  </div>
+                </div>
+
                 <div class="col-md-12">
                   <div class="form-group">
                     <textarea
@@ -380,18 +406,6 @@
                     ></textarea>
                   </div>
                 </div>
-
-                <!-- <div class="col-md-12">
-                  <p>Upload Docs</p>
-                  <div class="row">
-                    <div class="col-6 d-flex d-inline">
-                      <b-form-file v-model="form.document" ref="file-input" class="mb-2"></b-form-file>
-                    </div>
-                    <div class="col-6">
-                      <b-button @click="clearFiles" class="mr-2">Reset</b-button>
-                    </div>
-                  </div>
-                </div>-->
 
                 <div class="row m-2">
                   <div class="col">
@@ -413,7 +427,7 @@
 
                 <div class="form-group">
                   <div class="col-sm-12">
-                    <button
+                    <!-- <button
                       type="button"
                       class="btn btn-outline-success btn-confirmation"
                       data-toggle="modal"
@@ -424,19 +438,9 @@
                         <i class="icon-ok"></i>
                       </span>
                     </button>
+                    -->
                     <button
-                      type="button"
-                      class="btn btn-outline-info btn-confirmation"
-                      data-toggle="modal"
-                      data-target="#updatestatus"
-                    >
-                      Status
-                      <span>
-                        <i class="icon-ok"></i>
-                      </span>
-                    </button>
-                    <button
-                      class="btn btn-outline-primary btn-confirmation"
+                      class="btn btn-outline-primary block"
                       type="submit"
                       :disabled="form.errors.any()"
                       @click.prevent="onSubmit"
@@ -751,6 +755,8 @@ export default {
         charge_tax_percent: 0,
         charge_tax_amount: 0,
         charge_total: 0,
+        charge_advance_paid: 0,
+        charge_balance: 0,
         bill_to: "",
         document: "",
         remarks: "",
@@ -806,17 +812,21 @@ export default {
         (this.packagedetails.cost = 0);
     },
     onSubmit() {
+      const sender_id = this.form.sender_id;
       this.form
         .submitBinary("post", "/api/shipments")
-        .then(response =>
+        .then(response => {
           Swal.fire({
             position: "top-end",
             icon: "success",
             title: "Well done! Shipment has been created",
             showConfirmButton: false,
             timer: 1500
-          })
-        )
+          });
+          this.$router.push(
+            `/admin/customers/${sender_id}/invoices/${response.id}/view`
+          );
+        })
         .catch(error =>
           Swal.fire({
             icon: "error",
@@ -826,11 +836,6 @@ export default {
         );
     },
     calculateTotal() {
-      // const packageTotal = this.form.package.reduce(
-      //   (accum, item) => accum + parseInt(item.cost),
-      //   0
-      // );
-
       const total =
         parseInt(this.form.charge_transportation) +
         parseInt(this.form.charge_handling) +
@@ -842,6 +847,13 @@ export default {
       this.form.charge_tax_amount =
         (total * parseInt(this.form.charge_tax_percent)) / 100;
       this.form.charge_total = this.form.charge_tax_amount + total;
+
+      if (this.form.charge_advance_paid > 0) {
+        this.form.charge_balance =
+          this.form.charge_total - parseInt(this.form.charge_advance_paid);
+      } else {
+        this.form.charge_balance = this.form.charge_total;
+      }
     },
     deletePackage(uid) {
       let i = this.form.package.map(item => item.uid).indexOf(uid); // find index of your object

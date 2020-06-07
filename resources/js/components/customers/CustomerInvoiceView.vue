@@ -6,30 +6,45 @@
           Delivery Status :
           <span class="badge badge-pill badge-primary">Dispatched</span>
         </p>
-        <p>Balance Amount : 5415</p>
+        <p>Balance Amount : {{balance_amount.balance_amount}}</p>
       </div>
       <div class="col-9">
         <a class="btn btn-primary text-white" onclick="javascript:window.print()">
           <i class="fas fa-print"></i> Print Invoice
         </a>
 
-        <router-link to="/admin/customers/1/invoices/1/view/docket" class="btn btn-warning ml-2">
+        <router-link
+          :to="'/admin/customers/'+ shipment.sender.id +'/invoices/'+ shipment.id +'/view/docket'"
+          class="btn btn-warning ml-2"
+        >
           <i class="fas fa-check"></i> Docket
         </router-link>
-
-        <button class="btn btn-secondary ml-2">
-          <i class="fas fa-download"></i> Download
-        </button>
         <a href class="btn btn-info ml-2">
           <i class="fas fa-envelope"></i> Mail
         </a>
-        <a href class="btn btn-warning ml-2">
-          <i class="fas fa-envelope"></i> Status
-        </a>
-        <a href class="btn btn-outline-success ml-2">
-          <i class="fas fa-envelope"></i> Add Payment
-        </a>
-
+        <button
+          type="button"
+          class="btn btn-outline-info"
+          data-toggle="modal"
+          data-target="#updatestatus"
+        >
+          <span>
+            <i class="fas fa-update"></i>
+          </span>
+          Status
+        </button>
+        <button
+          type="button"
+          class="btn btn-success"
+          data-toggle="modal"
+          data-target="#paymentmodal"
+          @click="payment.payment_date = moment(new Date).format('DD/MM/YYYY')"
+        >
+          <span>
+            <i class="fas fa-rupee-sign"></i>
+          </span>
+          Add Payment
+        </button>
         <a href class="btn btn-dark ml-2">
           <i class="fas fa-check"></i> Edit
         </a>
@@ -39,6 +54,13 @@
       <div class="col">
         <div class="card">
           <div class="card-body">
+            <!-- errors -->
+            <b-alert
+              v-if="payment.errors.has('amount')"
+              dismissible
+              show
+              variant="danger"
+            >{{payment.errors.get('amount')}}</b-alert>
             <div class="row">
               <div class="col-3">
                 <p>Sender Details</p>
@@ -180,11 +202,11 @@
             <table class="table-bordered table" style>
               <tr>
                 <th scope="row">Advance Paid</th>
-                <td>500</td>
+                <td>{{shipment.charge_advance_paid}}</td>
               </tr>
               <tr>
                 <th scope="row">Balance Amount</th>
-                <td>500</td>
+                <td>{{balance_amount.balance_amount}}</td>
               </tr>
             </table>
 
@@ -266,6 +288,110 @@
         </div>
       </div>
     </div>
+
+    <!-- Payment Modal-->
+
+    <div
+      class="modal fade"
+      id="paymentmodal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Payment Details</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form @keydown="payment.errors.clear()">
+            <div class="modal-body">
+              <div class="row">
+                <div class="input-group m-2">
+                  <select
+                    class="custom-select"
+                    id="inputGroupSelect04"
+                    v-model="payment.received_from"
+                  >
+                    <option selected disabled>Received From</option>
+                    <option value="consignor">Consignor</option>
+                    <option value="consignee">Consignee</option>
+                    <option value="others">Others</option>
+                  </select>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="Serial Number">Payment Date</label>
+
+                    <input type="text" class="form-control" v-model="payment.payment_date" />
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="Size">Payment Type</label>
+                    <select
+                      class="custom-select"
+                      id="inputGroupSelect04"
+                      aria-label="Example select with button addon"
+                      v-model="payment.payment_type"
+                    >
+                      <option selected disabled>Choose</option>
+                      <option value="cash">Cash</option>
+                      <option value="bank">Bank</option>
+                      <option value="upi">UPI</option>
+                      <option value="cheque">Cheque</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="Size">Amount</label>
+                    <input type="text" class="form-control" v-model="payment.amount" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="row" v-if="payment.payment_type === 'bank'">
+                <div class="col">
+                  <div class="form-group">
+                    <label for="Size">Bank Name</label>
+                    <input type="text" class="form-control" v-model="payment.bank_name" />
+                  </div>
+                </div>
+              </div>
+              <div class="row" v-if="payment.payment_type === 'upi'">
+                <div class="col">
+                  <div class="form-group">
+                    <label for="Size">UPI Ref ID</label>
+                    <input type="text" class="form-control" v-model="payment.upi_ref_id" />
+                  </div>
+                </div>
+              </div>
+              <div class="row" v-if="payment.payment_type === 'cheque'">
+                <div class="col">
+                  <div class="form-group">
+                    <label for="Size">Cheque No</label>
+                    <input type="text" class="form-control" v-model="payment.cheque_no" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              @click.prevent="addPayment"
+              data-dismiss="modal"
+            >Add</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </fragment>
 </template>
 
@@ -273,23 +399,79 @@
 export default {
   data() {
     return {
-      logo: "https://i.ibb.co/WFdrW4M/Logo-Color-Text-Below.jpg"
+      logo: "https://i.ibb.co/WFdrW4M/Logo-Color-Text-Below.jpg",
+
+      payment: new Form({
+        received_from: "consignor",
+        payment_type: "cash",
+        amount: "0",
+        payment_date: "",
+        bank_name: "",
+        upi_ref_id: "",
+        cheque_no: "",
+        shipment_id: "",
+        customer_id: ""
+      })
     };
   },
   computed: {
     shipment() {
-      return new Form(this.$store.getters.getSingleShipment);
+      return this.$store.getters.getSingleShipment;
+    },
+    balance_amount() {
+      return this.$store.getters.getShipmentBalanceAmount;
     }
-    // sender() {
-    //   return this.shipment.sender ? this.shipment.sender : "";
-    // },
-    // package() {
-    //   return this.shipment.package ? this.shipment.package : "";
-    // }
+  },
+  methods: {
+    addPayment() {
+      this.payment.shipment_id = this.shipment.id;
+      this.payment.customer_id = this.shipment.sender.id;
+      if (this.payment.amount == 0 || "") {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Amount cannot be 0"
+        });
+        return;
+      }
+      this.payment
+        .submit("post", "api/shipments/" + this.shipment.id + "/payments")
+        .then(response => {
+          Swal.fire({
+            icon: "success",
+            title: "Well done! Payment added",
+            showConfirmButton: false,
+            timer: 1500
+          });
+
+          this.$store.dispatch(
+            "retrieveShipmentBalanceAmount",
+            this.$route.params.invoice_id
+          );
+
+          this.balance_amount = this.$store.getters.getShipmentBalanceAmount;
+
+          this.payment.received_from = "consignor";
+          this.payment.amount = 0;
+          this.payment.payment_type = "cash";
+        })
+        .catch(error => {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Something went wrong!",
+            footer: "Amount and Payment Date field is required"
+          });
+        });
+    }
   },
   created() {
     this.$store.dispatch(
       "retrieveSingleShipment",
+      this.$route.params.invoice_id
+    );
+    this.$store.dispatch(
+      "retrieveShipmentBalanceAmount",
       this.$route.params.invoice_id
     );
   }

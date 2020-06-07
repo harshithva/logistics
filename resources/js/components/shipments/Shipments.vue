@@ -137,7 +137,7 @@
                           <i class="fas fa-truck text-primary"></i>
                         </a>
                         <router-link
-                          to="/admin/customers/1/invoices/1/view"
+                          :to="'/admin/customers/'+ shipment.sender.id +'/invoices/'+ shipment.id + '/view'"
                           data-toggle="tooltip"
                           data-placement="top"
                           title="View"

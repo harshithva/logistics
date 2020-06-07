@@ -40,6 +40,8 @@ class CreateShipmentsTable extends Migration
             $table->decimal('charge_tax_percent',10,2)->nullable();
             $table->decimal('charge_tax_amount',10,2)->nullable();
             $table->decimal('charge_total',10,2)->default(0);
+            $table->decimal('charge_advance_paid',10,2)->nullable();
+            $table->decimal('charge_balance',10,2)->nullable();
         //    extra
             $table->text('remarks')->nullable();
             $table->string('document')->nullable();

@@ -11,7 +11,8 @@ export const store = new Vuex.Store({
         errors: [],
         customer: {},
         shipments: [],
-        shipment: {}
+        shipment: {},
+        balance_amount: {}
     },
     getters: {
         getAllCustomers(state) {
@@ -28,7 +29,11 @@ export const store = new Vuex.Store({
             return state.shipments;
         },
         getSingleShipment(state) {
+
             return state.shipment;
+        },
+        getShipmentBalanceAmount(state) {
+            return state.balance_amount;
         },
     },
     mutations: {
@@ -49,7 +54,12 @@ export const store = new Vuex.Store({
             state.shipments = shipments;
         },
         retrieveSingleShipment(state, shipment) {
+
             state.shipment = shipment;
+        },
+        retrieveShipmentBalanceAmount(state, balance_amount) {
+
+            state.balance_amount = balance_amount;
         },
     },
     actions: {
@@ -65,7 +75,7 @@ export const store = new Vuex.Store({
                 })
         },
         retrieveSingleCustomer(context, customer_id) {
-            console.log(customer_id);
+
 
             axios
                 .get("/api/customers/" + customer_id)
@@ -86,9 +96,22 @@ export const store = new Vuex.Store({
                 })
         },
         retrieveSingleShipment(context, invoice_id) {
+
+
             axios
-                .get("/api/shipments/" + invoice_id)
-                .then(response => (context.commit('retrieveSingleShipment', response.data.data)))
+                .get(`/api/shipments/${invoice_id}`)
+                .then(response => (context.commit('retrieveSingleShipment', response.data)))
+                .catch(function (error) {
+                    // handle error
+
+                    context.commit('catchErrors', error.response.data)
+                })
+        },
+        retrieveShipmentBalanceAmount(context, invoice_id) {
+
+            axios
+                .get("/api/shipments/" + invoice_id + "/balance_amount")
+                .then(response => (context.commit('retrieveShipmentBalanceAmount', response.data)))
                 .catch(function (error) {
                     // handle error
 
