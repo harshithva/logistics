@@ -16,6 +16,7 @@ import { store } from './store/store'
 import router from './router/router.js';
 import BootstrapVue from 'bootstrap-vue'
 const axios = require('axios').default;
+
 axios.defaults.baseURL = '/';
 
 import VueQrcode from '@chenfengyuan/vue-qrcode';
@@ -31,7 +32,8 @@ Vue.prototype.moment = moment
 import Swal from 'sweetalert2'
 window.Swal = Swal;
 
-
+import { v4 as uuidv4 } from 'uuid';
+window.uuidv4 = uuidv4;
 
 // helpers
 import Form from './Helpers/Form'

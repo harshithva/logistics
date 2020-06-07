@@ -32,6 +32,7 @@
         "jspdf": "^1.5.3",
         "moment": "^2.26.0",
         "sweetalert2": "^9.14.0",
+        "uuid": "^8.1.0",
         "vue-barcode": "^1.2.0",
         "vue-fragment": "^1.5.1",
         "vue-js-form-helper": "^2.1.3",

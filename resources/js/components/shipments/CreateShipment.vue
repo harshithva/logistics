@@ -236,6 +236,7 @@
                       <th scope="col">Size</th>
                       <th scope="col">Weight</th>
                       <th scope="col">Cost</th>
+                      <th scope="col">Action</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -247,6 +248,9 @@
                       <td>{{item.size}}</td>
                       <td>{{item.weight}}</td>
                       <td>{{item.cost}}</td>
+                      <td @click="deletePackage(item.uid)">
+                        <i class="fas fa-times text-danger"></i>
+                      </td>
                     </tr>
                     <tr>
                       <td>
@@ -784,6 +788,7 @@ export default {
     },
     addPackage() {
       this.form.package.push({
+        uid: uuidv4(),
         description: this.packagedetails.description,
         serial_no: this.packagedetails.serial_no,
         invoice_no: this.packagedetails.invoice_no,
@@ -792,18 +797,6 @@ export default {
         cost: this.packagedetails.cost
       });
 
-      // this.form.charge_total =
-      //   parseInt(this.form.charge_total) + parseInt(this.packagedetails.cost);
-      // if (this.form.charge_tax_percent > 0) {
-      //   this.form.charge_tax_amount =
-      //     (this.form.charge_total * this.form.charge_tax_percent) / 100;
-      //   this.form.charge_total =
-      //     this.form.charge_total + this.form.charge_tax_amount;
-      // } else {
-      //   this.form.charge_tax_amount = 0;
-      // }
-
-      this.calculateTotal();
       // reset
       (this.packagedetails.description = ""),
         (this.packagedetails.serial_no = ""),
@@ -833,10 +826,10 @@ export default {
         );
     },
     calculateTotal() {
-      const packageTotal = this.form.package.reduce(
-        (accum, item) => accum + parseInt(item.cost),
-        0
-      );
+      // const packageTotal = this.form.package.reduce(
+      //   (accum, item) => accum + parseInt(item.cost),
+      //   0
+      // );
 
       const total =
         parseInt(this.form.charge_transportation) +
@@ -845,11 +838,14 @@ export default {
         parseInt(this.form.charge_Insurance) +
         parseInt(this.form.charge_odc) +
         parseInt(this.form.charge_tax_amount) +
-        parseInt(this.form.charge_odc) +
-        parseInt(packageTotal);
+        parseInt(this.form.charge_odc);
       this.form.charge_tax_amount =
         (total * parseInt(this.form.charge_tax_percent)) / 100;
       this.form.charge_total = this.form.charge_tax_amount + total;
+    },
+    deletePackage(uid) {
+      let i = this.form.package.map(item => item.uid).indexOf(uid); // find index of your object
+      this.form.package.splice(i, 1); // remove it from array
     }
   },
   mounted() {

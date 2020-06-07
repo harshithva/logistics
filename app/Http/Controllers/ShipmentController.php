@@ -154,8 +154,8 @@ class ShipmentController extends Controller
      */
     public function show(Shipment $shipment)
     {
-        $singleShipment = Shipment::where('id',$shipment->id)->with('package','sender','receiver')->get();
-        return new ShipmentResource($singleShipment);
+        $singleShipment = Shipment::findOrFail($shipment->id)->with('package','sender','receiver')->get();
+        return new ShipmentResource($singleShipment[0]);
     }
 
     /**

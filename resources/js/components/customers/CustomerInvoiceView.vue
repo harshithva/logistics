@@ -1,6 +1,6 @@
 <template>
   <fragment>
-    <div class="row mt-3 mb-3 ml-3 d-print-none" v-if="!loading">
+    <div class="row mt-3 mb-3 ml-3 d-print-none">
       <div class="col-3">
         <p>
           Delivery Status :
@@ -45,26 +45,26 @@
                 <p>
                   Pickup Location :
                   <br />
-                  {{form.package_pickup_address}}
+                  {{shipment.package_pickup_address}}
                 </p>
-                <p>Sender name : {{form.sender.name}}</p>
-                <p>Contact : {{form.sender.phone}}</p>
+                <p>Sender name : {{shipment.sender.name}}</p>
+                <p>Contact : {{shipment.sender.phone}}</p>
               </div>
               <div class="col-3">
                 <p>Receiver Details</p>
                 <p>
                   Dropoff Location :
                   <br />
-                  {{form.delivery_address}}
+                  {{shipment.delivery_address}}
                 </p>
-                <p>Receiver Name : {{form.receiver.name}}</p>
-                <p>Contact : {{form.receiver.phone}}</p>
+                <p>Receiver Name : {{shipment.receiver.name}}</p>
+                <p>Contact : {{shipment.receiver.phone}}</p>
               </div>
               <div class="col-3">
                 <p>Transport Details</p>
-                <p>Driver Name : {{form.transport_driver_name}}</p>
-                <p>Contact : {{form.transport_driver_phone}}</p>
-                <p>Vechile Details : {{form.transport_driver_vehicle}}</p>
+                <p>Driver Name : {{shipment.transport_driver_name}}</p>
+                <p>Contact : {{shipment.transport_driver_phone}}</p>
+                <p>Vechile Details : {{shipment.transport_driver_vehicle}}</p>
               </div>
               <div class="col-3">
                 <p>Current Status</p>
@@ -107,11 +107,11 @@
           </div>
           <div class="col"></div>
           <div class="col">
-            <p>Date of Invoice: {{moment(form.created_at).format('DD/MM/YYYY')}}</p>
+            <p>Date of Invoice: {{moment(shipment.created_at).format('DD/MM/YYYY')}}</p>
             <p>Invoice No.</p>
             <p>Transaction Type</p>
             <p>
-              <span class="badge badge-pill badge-success">{{form.package_transaction_type}}</span>
+              <span class="badge badge-pill badge-success">{{shipment.package_transaction_type}}</span>
             </p>
             <p>
               Payment Status :
@@ -123,21 +123,21 @@
         <div class="row mt-2">
           <div class="col">
             <p>BILL TO</p>
-            {{form.sender.address}}
-            <!-- <p v-if="form.bill_to == 'Consginor'">{{form.sender.address}}</p>
-            <p v-if="form.bill_to == 'Consginee'">{{form.receiver.address}}</p>-->
+            {{shipment.sender.address}}
+            <!-- <p v-if="shipment.bill_to == 'Consginor'">{{shipment.sender.address}}</p>
+            <p v-if="shipment.bill_to == 'Consginee'">{{shipment.receiver.address}}</p>-->
           </div>
 
           <div class="col">
-            Consignor Name: {{form.sender.company_name}}
+            Consignor Name: {{shipment.sender.company_name}}
             <br />
-            {{form.sender.address}}
+            {{shipment.sender.address}}
           </div>
         </div>
 
         <div class="row mt-2">
           <div class="col"></div>
-          <div class="col">Consignor GST: {{form.sender.gst}}</div>
+          <div class="col">Consignor GST: {{shipment.sender.gst}}</div>
         </div>
         <br />
 
@@ -145,16 +145,16 @@
           <div class="col"></div>
           <div class="col">
             <p>
-              Consignee Name: {{form.receiver.name}}
+              Consignee Name: {{shipment.receiver.name}}
               <br />
-              {{form.receiver.address}}
+              {{shipment.receiver.address}}
             </p>
           </div>
         </div>
 
         <div class="row mt-2">
           <div class="col"></div>
-          <div class="col">Consignee GST {{form.receiver.gst}}</div>
+          <div class="col">Consignee GST {{shipment.receiver.gst}}</div>
         </div>
         <br />
 
@@ -168,7 +168,7 @@
                 <th scope="col">Serial No.</th>
                 <th scope="col">Docket No.</th>
               </thead>
-              <tr v-for="(item,index) in form.package">
+              <tr v-for="(item,index) in shipment.package">
                 <th scope="row">{{index+1}}</th>
                 <td>{{item.description}}</td>
                 <td>{{item.weight}} kg</td>
@@ -189,7 +189,7 @@
             </table>
 
             <h6 class="mt-4">Remarks</h6>
-            <p>{{form.remarks}}</p>
+            <p>{{shipment.remarks}}</p>
           </div>
           <div class="col">
             <table class="table-bordered table">
@@ -198,34 +198,34 @@
               </thead>-->
               <tr>
                 <th scope="row">Transportation</th>
-                <td>{{form.charge_transportation}}</td>
+                <td>{{shipment.charge_transportation}}</td>
               </tr>
 
               <tr>
                 <th scope="row">Handling</th>
-                <td>{{form.charge_handling}}</td>
+                <td>{{shipment.charge_handling}}</td>
               </tr>
               <tr>
                 <th scope="row">ODC Charges</th>
-                <td>{{form.charge_odc}}</td>
+                <td>{{shipment.charge_odc}}</td>
               </tr>
 
               <tr>
                 <th scope="row">Halting</th>
-                <td>{{form.charge_halting}}</td>
+                <td>{{shipment.charge_halting}}</td>
               </tr>
 
               <tr>
                 <th scope="row">Insurance</th>
-                <td>{{form.charge_Insurance}}</td>
+                <td>{{shipment.charge_Insurance}}</td>
               </tr>
               <tr>
                 <th scope="row">GST</th>
-                <td>{{form.charge_tax_amount}}</td>
+                <td>{{shipment.charge_tax_amount}}</td>
               </tr>
               <tr>
                 <th>Total</th>
-                <td>{{form.charge_total}}</td>
+                <td>{{shipment.charge_total}}</td>
               </tr>
             </table>
           </div>
@@ -273,13 +273,12 @@
 export default {
   data() {
     return {
-      logo: "https://i.ibb.co/WFdrW4M/Logo-Color-Text-Below.jpg",
-      loading: false
+      logo: "https://i.ibb.co/WFdrW4M/Logo-Color-Text-Below.jpg"
     };
   },
   computed: {
-    form() {
-      return new Form(this.$store.getters.getSingleShipment[0]);
+    shipment() {
+      return new Form(this.$store.getters.getSingleShipment);
     }
     // sender() {
     //   return this.shipment.sender ? this.shipment.sender : "";

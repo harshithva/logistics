@@ -13,9 +13,9 @@
           <i class="fas fa-print"></i> Print Docket
         </a>
 
-        <router-link to="/admin/customers/1/invoices/1/view" class="btn btn-dark ml-2">
-          <i class="fas fa-undo-alt"></i> Return
-        </router-link>
+        <button @click="$router.go(-1)" class="btn btn-dark ml-2">
+          <i class="fas fa-arrow-left"></i> Return
+        </button>
       </div>
     </div>
     <div class="row d-print-none">
@@ -25,21 +25,21 @@
             <div class="row">
               <div class="col-3">
                 <p>Sender Details</p>
-                <p>Pickup Location : Bangalore</p>
-                <p>Sender name : ABC Farm</p>
-                <p>Contact : +91 785 596 4522</p>
+                <p>Pickup Location : {{shipment.package_pickup_address}}}</p>
+                <p>Sender name : {{shipment.sender.name}}</p>
+                <p>Contact : {{shipment.sender.phone}}</p>
               </div>
               <div class="col-3">
                 <p>Receiver Details</p>
-                <p>Dropoff Location : Mangalore</p>
-                <p>Receiver Name : Vinyas</p>
-                <p>Contact : +91 744 596 4522</p>
+                <p>Dropoff Location : {{shipment.delivery_address}}</p>
+                <p>Receiver Name : {{shipment.receiver.name}}</p>
+                <p>Contact : {{shipment.receiver.phone}}</p>
               </div>
               <div class="col-3">
                 <p>Transport Details</p>
-                <p>Driver Name : Manjesh</p>
-                <p>Contact : +91 985 454 5654</p>
-                <p>Vechile Details : Ashok Leyland KA05.EY.2025</p>
+                <p>Driver Name : {{shipment.transport_driver_name}}</p>
+                <p>Contact : {{shipment.transport_driver_phone}}</p>
+                <p>Vechile Details : {{shipment.transport_driver_vehicle}}</p>
               </div>
               <div class="col-3">
                 <p>Current Status</p>
@@ -84,12 +84,12 @@
             </p>
           </div>
           <div class="col text-right">
-            <p>Date: {{moment(form.created_at).format('DD/MM/YYYY')}}</p>
-            <p>Docket No: {{form.freight_invoice_number}}</p>
+            <p>Date: {{moment(shipment.created_at).format('DD/MM/YYYY')}}</p>
+            <p>Docket No: {{shipment.freight_invoice_number}}</p>
             <br />
             <p>Transaction Type</p>
             <p>
-              <span class="badge badge-pill badge-success">{{form.package_transaction_type}}</span>
+              <span class="badge badge-pill badge-success">{{shipment.package_transaction_type}}</span>
             </p>
           </div>
         </div>
@@ -107,7 +107,7 @@
             <h6 class="text-center">
               <b>DELIVERY ADDRESS</b>
               <hr />
-              {{form.delivery_address}}
+              {{shipment.delivery_address}}
             </h6>
             <p style="font-size:0.8rem;"></p>
           </div>
@@ -125,19 +125,19 @@
         <div class="row mt-1">
           <div class="col">
             <p>Consignor:</p>
-            {{form.sender.company_name}}
+            {{shipment.sender.company_name}}
             <br />
-            {{form.sender.address}}
-            <p>Consignor GST: {{form.sender.gst}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+            {{shipment.sender.address}}
+            <p>Consignor GST: {{shipment.sender.gst}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
           </div>
 
           <div class="col mb-2">
             <h6>
               <p>Consignee</p>
-              {{form.receiver.company_name}}
+              {{shipment.receiver.company_name}}
               <br />
-              {{form.receiver.address}}
-              <p>Consignee GST: {{form.receiver.gst}}</p>
+              {{shipment.receiver.address}}
+              <p>Consignee GST: {{shipment.receiver.gst}}</p>
             </h6>
             <p style="font-size:0.8rem;"></p>
 
@@ -163,7 +163,7 @@
                 <th scope="col">Weight</th>
                 <th scope="col">Declared value</th>
               </thead>
-              <tr v-for="(item,index) in form.package">
+              <tr v-for="(item,index) in shipment.package">
                 <th scope="row">{{index+1}}</th>
                 <td>{{item.description}}</td>
                 <td>{{item.serial_no}}</td>
@@ -197,10 +197,10 @@
         <hr />
         <div class="row mt-2">
           <div class="col d-flex d-inline-block">
-            <qrcode value="GLBNG0003" :options="{ width: 100 }"></qrcode>
+            <qrcode :value="shipment.freight_invoice_number" :options="{ width: 100 }"></qrcode>
 
             <barcode
-              v-bind:value="barcodeValue"
+              :value="shipment.freight_invoice_number"
               class="mt-2"
               id="barcode"
               :width="2"
@@ -336,8 +336,6 @@ import VueBarcode from "vue-barcode";
 export default {
   data() {
     return {
-      barcodeValue: "GLBNG0003",
-      loading: false,
       logo: "https://i.ibb.co/WFdrW4M/Logo-Color-Text-Below.jpg"
     };
   },
@@ -345,8 +343,8 @@ export default {
     barcode: VueBarcode
   },
   computed: {
-    form() {
-      return new Form(this.$store.getters.getSingleShipment[0]);
+    shipment() {
+      return new Form(this.$store.getters.getSingleShipment);
     },
     created() {
       this.$store.dispatch(

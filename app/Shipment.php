@@ -26,4 +26,8 @@ public function receiver(){
     return $this->hasOne(User::class,'id');
 }
 
+public function payment(){
+    return $this->hasMany(Payment::class,'shipment_id');
+}
+
 }
