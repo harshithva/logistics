@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Mail\ShipmentCreated;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +20,9 @@ Route::get('/', function () {
 
 Route::get('/admin', function () {
     return view('admin.master');
+});
+Route::get('/template', function () {
+    return new ShipmentCreated();
 });
 
 Auth::routes();

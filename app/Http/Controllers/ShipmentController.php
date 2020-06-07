@@ -1,12 +1,16 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Mail\ShipmentCreated;
 
+use Mail;
 use App\Shipment;
 use App\Package;
 use App\Payment;
+use App\ShipmentStatus;
 use App\Http\Resources\Shipment as ShipmentResource;
 use Illuminate\Http\Request;
+
 
 class ShipmentController extends Controller
 {
@@ -17,8 +21,11 @@ class ShipmentController extends Controller
      */
     public function index()
     {
-        $shipments = Shipment::with('package','sender')->paginate(15);
+       
+        $shipments = Shipment::with('package','sender')->get();
         return ShipmentResource::collection($shipments);
+
+
     }
 
     /**
@@ -40,7 +47,7 @@ class ShipmentController extends Controller
     public function store(Request $request)
     {
 
-      
+        
         $request->validate([
             "delivery_address" => "max:255",
             "receiver_id" => "required|max:255",
@@ -68,13 +75,14 @@ class ShipmentController extends Controller
             "bill_to" => 'max:500',
            
         ]);
-
+ 
+       
         $shipment = new Shipment;
+       
         $shipment->receiver_id = $request->receiver_id;
       
-      
         $shipment->delivery_address = $request->delivery_address;
-       
+   
 
         $shipment->package_contact_person = $request->package_contact_person;
         $shipment->package_contact_person_phone = $request->package_contact_person_phone;
@@ -89,7 +97,7 @@ class ShipmentController extends Controller
         $shipment->package_pickup_address = $request->package_pickup_address;
 
         $shipment->user_notes = $request->user_notes;
-        $shipment->freight_invoice_number = $request->freight_invoice_number;
+    
         $shipment->charge_transportation = $request->charge_transportation;
         $shipment->charge_handling = $request->charge_handling;
         $shipment->charge_halting = $request->charge_halting;
@@ -125,7 +133,12 @@ class ShipmentController extends Controller
 
 
         $shipment->save();
-        
+        $my_id = sprintf('%04d', $shipment->id);
+        $freight_invoice_no = 'GL202021' .  $my_id;
+        $docket_no = 'GLBNG' . $my_id;
+        $shipment->docket_no = $docket_no;
+        $shipment->freight_invoice_number = $freight_invoice_no;
+        $shipment->save();
    
         $request->package = json_encode($request->package);
         $request->package = json_decode($request->package);
@@ -145,7 +158,25 @@ class ShipmentController extends Controller
             }
           
         }
+
+        $shipment_status = new ShipmentStatus;
+        $shipment_status->status = 'Awaiting pickup';
+        $shipment_status->shipment_id = $shipment->id;
+        $shipment_status->customer_id= $request->sender_id;
+        $shipment_status->save();
        
+
+
+         
+          
+
+        $data = [
+            'docket_no' => $shipment->docket_no,
+          
+     ];
+
+    //  Mail::to($shipment->sender->email)->send(new ShipmentCreated($data));
+     Mail::to($shipment->sender->email)->send(new ShipmentCreated($data));
       
         return response()->json($shipment,201);
     }
@@ -156,8 +187,10 @@ class ShipmentController extends Controller
      * @param  \App\Shipment  $shipment
      * @return \Illuminate\Http\Response
      */
-    public function show(Shipment $shipment)
+    public function show(Request $request, Shipment $shipment)
     {
+    
+       
         $shipment->sender;
         $shipment->package;
         $shipment->receiver;
@@ -215,5 +248,49 @@ class ShipmentController extends Controller
         $object = new \stdClass();;
         $object->balance_amount = $balance_amount;
         return response()->json( $object ,200);
+    }
+
+    public function shipment_status($id) {
+        $shipment = Shipment::findOrFail($id);
+        
+        return response()->json( $shipment->status->sortByDesc('created_at')->first() ,200);
+    }
+
+
+    public function send_sms($msg,$phone) {
+
+        
+     
+
+        $curl = curl_init();
+        $authentication_key = '238341A2R5ezqRDIW5edd541bP1';
+
+        curl_setopt_array($curl, array(
+          CURLOPT_URL => "https://api.msg91.com/api/v2/sendsms",
+          CURLOPT_RETURNTRANSFER => true,
+          CURLOPT_ENCODING => "",
+          CURLOPT_MAXREDIRS => 10,
+          CURLOPT_TIMEOUT => 30,
+          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+          CURLOPT_CUSTOMREQUEST => "POST",
+          CURLOPT_POSTFIELDS => "{ \"sender\": \"SOCKET\", \"route\": \"4\", \"country\": \"91\", \"sms\": [ { \"message\": \"Message1\", \"to\": [ \"7975503096\" ] }] }",
+          CURLOPT_SSL_VERIFYHOST => 0,
+          CURLOPT_SSL_VERIFYPEER => 0,
+          CURLOPT_HTTPHEADER => array(
+            "authkey: $authentication_key",
+            "content-type: application/json"
+          ),
+        ));
+        
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+        
+        curl_close($curl);
+        
+        if ($err) {
+          echo "cURL Error #:" . $err;
+        } else {
+          echo $response;
+        }
     }
 }

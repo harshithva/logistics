@@ -12,7 +12,8 @@ export const store = new Vuex.Store({
         customer: {},
         shipments: [],
         shipment: {},
-        balance_amount: {}
+        balance_amount: {},
+        shipment_status: {}
     },
     getters: {
         getAllCustomers(state) {
@@ -34,6 +35,9 @@ export const store = new Vuex.Store({
         },
         getShipmentBalanceAmount(state) {
             return state.balance_amount;
+        },
+        getShipmentStatus(state) {
+            return state.shipment_status;
         },
     },
     mutations: {
@@ -60,6 +64,11 @@ export const store = new Vuex.Store({
         retrieveShipmentBalanceAmount(state, balance_amount) {
 
             state.balance_amount = balance_amount;
+        },
+        retrieveShipmentStatus(state, status) {
+            console.log(status);
+
+            state.shipment_status = status;
         },
     },
     actions: {
@@ -112,6 +121,17 @@ export const store = new Vuex.Store({
             axios
                 .get("/api/shipments/" + invoice_id + "/balance_amount")
                 .then(response => (context.commit('retrieveShipmentBalanceAmount', response.data)))
+                .catch(function (error) {
+                    // handle error
+
+                    context.commit('catchErrors', error.response.data)
+                })
+        },
+        retrieveShipmentStatus(context, invoice_id) {
+
+            axios
+                .get("/api/shipments/" + invoice_id + "/shipment_status")
+                .then(response => (context.commit('retrieveShipmentStatus', response.data)))
                 .catch(function (error) {
                     // handle error
 

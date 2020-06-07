@@ -4,7 +4,10 @@
       <div class="col-3">
         <p>
           Delivery Status :
-          <span class="badge badge-pill badge-primary">Dispatched</span>
+          <span
+            class="badge badge-pill badge-primary"
+            v-model="shipment_status.status !== ''"
+          >{{shipment_status.status}}</span>
         </p>
         <p>Balance Amount : {{balance_amount.balance_amount}}</p>
       </div>
@@ -29,8 +32,8 @@
           data-target="#updatestatus"
         >
           <span>
-            <i class="fas fa-update"></i>
-          </span>
+            <i class="fas fa-scroll"></i>
+          </span>&nbsp;
           Status
         </button>
         <button
@@ -130,14 +133,23 @@
           <div class="col"></div>
           <div class="col">
             <p>Date of Invoice: {{moment(shipment.created_at).format('DD/MM/YYYY')}}</p>
-            <p>Invoice No.</p>
+            <p>Invoice No: {{shipment.freight_invoice_number}}</p>
             <p>Transaction Type</p>
             <p>
               <span class="badge badge-pill badge-success">{{shipment.package_transaction_type}}</span>
             </p>
             <p>
               Payment Status :
-              <span class="badge badge-pill badge-warning">---</span>
+              <span
+                class="badge badge-pill badge-success"
+                v-if="balance_amount.balance_amount <= 0"
+              >Paid</span>
+              <span
+                class="badge badge-pill badge-danger"
+                v-else-if="balance_amount.balance_amount == shipment.charge_total"
+              >Pending</span>
+
+              <span class="badge badge-pill badge-warning" v-else>Partial</span>
             </p>
           </div>
         </div>
@@ -195,7 +207,7 @@
                 <td>{{item.description}}</td>
                 <td>{{item.weight}} kg</td>
                 <td>{{item.serial_no}}</td>
-                <td>{{item.invoice_no}}</td>
+                <td>{{shipment.docket_no}}</td>
               </tr>
             </table>
 
@@ -392,6 +404,113 @@
         </div>
       </div>
     </div>
+
+    <!-- update status modal  -->
+
+    <div
+      class="modal fade"
+      id="updatestatus"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Update Status</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+          <div class="modal-body">
+            <div class="row">
+              <div class="input-group m-2">
+                <select
+                  class="custom-select"
+                  id="inputGroupSelect04"
+                  aria-label="Example select with button addon"
+                  v-model="status.status"
+                >
+                  <option disabled>Shipment Status</option>
+                  <option value="Awaiting Pickup">Awaiting Pickup</option>
+                  <option value="Dispatched">Dispatched</option>
+                  <option value="Intrasit">Intrasit</option>
+                  <option value="Delivered">Delivered</option>
+                </select>
+              </div>
+
+              <div v-if="status.status == 'delivered'">
+                <div class="col">
+                  <div class="form-group">
+                    <input
+                      type="text"
+                      class="form-control"
+                      v-model="status.location"
+                      placeholder="Location"
+                    />
+                  </div>
+                </div>
+
+                <div class="row m-1">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Receiver Name"
+                        v-model="status.receiver_name"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Phone"
+                        v-model="status.phone"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row m-1">
+                  <div class="col">
+                    <b-form-file v-model="status.document" ref="file-input" class="mb-2"></b-form-file>
+                  </div>
+                  <div class="col">
+                    <b-button @click="clearFiles" class="mr-2">Reset</b-button>
+                  </div>
+                </div>
+              </div>
+
+              <div v-else-if="status.status == 'pickup'"></div>
+              <div v-else>
+                <div class="row m-2">
+                  <div class="col">
+                    <div class="form-group">
+                      <input type="text" class="form-control" placeholder="Location" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              @click.prevent="updateStatus"
+              data-dismiss="modal"
+            >Update</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </fragment>
 </template>
 
@@ -400,7 +519,15 @@ export default {
   data() {
     return {
       logo: "https://i.ibb.co/WFdrW4M/Logo-Color-Text-Below.jpg",
-
+      status: new Form({
+        status: "pickup",
+        customer_id: "",
+        shipment_id: "",
+        location: "",
+        receiver_name: "",
+        phone: "",
+        document: ""
+      }),
       payment: new Form({
         received_from: "consignor",
         payment_type: "cash",
@@ -420,6 +547,9 @@ export default {
     },
     balance_amount() {
       return this.$store.getters.getShipmentBalanceAmount;
+    },
+    shipment_status() {
+      return this.$store.getters.getShipmentStatus;
     }
   },
   methods: {
@@ -463,6 +593,37 @@ export default {
             footer: "Amount and Payment Date field is required"
           });
         });
+    },
+    updateStatus() {
+      this.status.shipment_id = this.shipment.id;
+      this.status.customer_id = this.shipment.sender.id;
+      const last_status = this.shipment.status;
+      this.status
+        .submit("post", "api/shipments/" + this.shipment.id + "/status")
+        .then(response => {
+          Swal.fire({
+            icon: "success",
+            title: "Shipment Status Updated",
+            showConfirmButton: false,
+            timer: 1500
+          });
+
+          this.$store.dispatch(
+            "retrieveShipmentStatus",
+            this.$route.params.invoice_id
+          );
+
+          this.shipment_status = this.$store.getters.getShipmentStatus;
+
+          this.status.status = last_status;
+        })
+        .catch(error => {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Something went wrong!"
+          });
+        });
     }
   },
   created() {
@@ -472,6 +633,10 @@ export default {
     );
     this.$store.dispatch(
       "retrieveShipmentBalanceAmount",
+      this.$route.params.invoice_id
+    );
+    this.$store.dispatch(
+      "retrieveShipmentStatus",
       this.$route.params.invoice_id
     );
   }

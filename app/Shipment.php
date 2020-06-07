@@ -3,6 +3,7 @@
 namespace App;
 use App\User;
 use App\Package;
+use App\ShipmentStatus;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -24,6 +25,10 @@ public function receiver(){
 
 public function payment(){
     return $this->hasMany(Payment::class,'shipment_id');
+}
+
+public function status(){
+    return $this->hasMany(ShipmentStatus::class,'shipment_id');
 }
 
 }

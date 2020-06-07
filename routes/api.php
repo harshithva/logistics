@@ -20,5 +20,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::apiResource("shipments", 'ShipmentController');
 Route::apiResource("shipments/{id}/payments", 'PaymentController');
+Route::apiResource("shipments/{id}/status", 'ShipmentStatusController');
+
 Route::get("shipments/{id}/balance_amount", 'ShipmentController@balance_amount');
+Route::get("shipments/{id}/shipment_status", 'ShipmentController@shipment_status');
+
 Route::apiResource("customers", 'CustomerController');

@@ -15,7 +15,7 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        $customers = User::where('role','customer')->paginate(15);
+        $customers = User::where('role','customer')->get();
         return CustomerResource::collection($customers);
     }
 

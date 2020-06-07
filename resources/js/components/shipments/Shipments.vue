@@ -121,13 +121,13 @@
                   </tfoot>
                   <tbody>
                     <tr role="row" v-for="(shipment,index) in shipments">
-                      <td class="sorting_1">{{shipment.freight_invoice_number}}</td>
+                      <td class="sorting_1">{{shipment.docket_no}}</td>
                       <td>{{shipment.created_at}}</td>
                       <td>{{shipment.sender.name}}</td>
                       <td>{{shipment.sender.address}}</td>
                       <td>{{shipment.delivery_address}}</td>
                       <td align="center">
-                        <a
+                        <!-- <a
                           type="button"
                           data-toggle="modal"
                           data-target="#updatestatus"
@@ -135,7 +135,7 @@
                           title="Updated status"
                         >
                           <i class="fas fa-truck text-primary"></i>
-                        </a>
+                        </a>-->
                         <router-link
                           :to="'/admin/customers/'+ shipment.sender.id +'/invoices/'+ shipment.id + '/view'"
                           data-toggle="tooltip"
@@ -144,15 +144,15 @@
                         >
                           <i class="fas fa-eye text-secondary"></i>
                         </router-link>
-                        <router-link
+                        <!-- <router-link
                           to="/admin/shipments/1/edit"
                           data-toggle="tooltip"
                           data-placement="top"
                           title="Edit"
                         >
                           <i class="fas fa-edit text-primary"></i>
-                        </router-link>
-                        <span class="badge badge-pill badge-info">Intransit</span>
+                        </router-link>-->
+                        <!-- <span class="badge badge-pill badge-info">Intransit</span> -->
                       </td>
                     </tr>
                   </tbody>

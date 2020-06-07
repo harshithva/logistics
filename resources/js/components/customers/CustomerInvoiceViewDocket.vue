@@ -1,13 +1,7 @@
 <template>
   <fragment>
     <div class="row mt-3 mb-3 ml-3 d-print-none">
-      <div class="col">
-        <p>
-          Delivery Status :
-          <span class="badge badge-pill badge-primary">Dispatched</span>
-        </p>
-        <p>Balance Amount : 5415</p>
-      </div>
+      <div class="col"></div>
       <div class="col">
         <a class="btn btn-primary text-white" onclick="javascript:window.print()">
           <i class="fas fa-print"></i> Print Docket
@@ -85,7 +79,7 @@
           </div>
           <div class="col text-right">
             <p>Date: {{moment(shipment.created_at).format('DD/MM/YYYY')}}</p>
-            <p>Docket No: {{shipment.freight_invoice_number}}</p>
+            <p>Docket No: {{shipment.docket_no}}</p>
             <br />
             <p>Transaction Type</p>
             <p>

@@ -46,6 +46,7 @@ class CreateShipmentsTable extends Migration
             $table->text('remarks')->nullable();
             $table->string('document')->nullable();
             $table->string('bill_to')->nullable();
+            $table->string('docket_no')->nullable();
 
 
             $table->unsignedBigInteger('sender_id');

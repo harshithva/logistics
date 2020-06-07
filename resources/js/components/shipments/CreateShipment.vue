@@ -214,18 +214,7 @@
                 </div>
 
                 <h6 class="mb-4">Add Package Details</h6>
-                <div class="row">
-                  <div class="col-md-4">
-                    <div class="form-group">
-                      <input
-                        type="text"
-                        class="form-control"
-                        v-model="form.freight_invoice_number"
-                        placeholder="Freight Invoice Number"
-                      />
-                    </div>
-                  </div>
-                </div>
+
                 <table class="table table-responsive-sm">
                   <thead>
                     <tr>
@@ -812,6 +801,34 @@ export default {
         (this.packagedetails.cost = 0);
     },
     onSubmit() {
+      let timerInterval;
+      Swal.fire({
+        title: "Your shipment being created!",
+        html: "I will close in <b></b> milliseconds.",
+        timer: 2000,
+        timerProgressBar: true,
+        onBeforeOpen: () => {
+          Swal.showLoading();
+          timerInterval = setInterval(() => {
+            const content = Swal.getContent();
+            if (content) {
+              const b = content.querySelector("b");
+              if (b) {
+                b.textContent = Swal.getTimerLeft();
+              }
+            }
+          }, 100);
+        },
+        onClose: () => {
+          clearInterval(timerInterval);
+        }
+      }).then(result => {
+        /* Read more about handling dismissals below */
+        if (result.dismiss === Swal.DismissReason.timer) {
+          console.log("I was closed by the timer");
+        }
+      });
+
       const sender_id = this.form.sender_id;
       this.form
         .submitBinary("post", "/api/shipments")
