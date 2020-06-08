@@ -123,9 +123,12 @@
                     <tr role="row" v-for="(shipment,index) in shipments">
                       <td class="sorting_1">{{shipment.docket_no}}</td>
                       <td>{{shipment.created_at}}</td>
-                      <td>{{shipment.sender.name}}</td>
-                      <td>{{shipment.sender.address}}</td>
-                      <td>{{shipment.delivery_address}}</td>
+                      <td v-if="shipment.sender.name">{{shipment.sender.name}}</td>
+                      <td v-else>---</td>
+                      <td v-if="shipment.sender.address">{{shipment.sender.address}}</td>
+                      <td v-else>---</td>
+                      <td v-if="shipment.delivery_address">{{shipment.delivery_address}}</td>
+                      <td v-else>---</td>
                       <td align="center">
                         <!-- <a
                           type="button"
