@@ -51,7 +51,7 @@
         <hr />
         <div class="row">
           <div class="col">
-            <p>Ref No: BNG/001/2020-21</p>
+            <p>Ref No: {{quote.quotation_no}}</p>
           </div>
           <div class="col"></div>
           <div class="col">Date: {{ moment(quote.created_at).format('DD/MM/YYYY')}}</div>
