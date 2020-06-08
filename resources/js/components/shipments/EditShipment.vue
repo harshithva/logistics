@@ -587,21 +587,23 @@ export default {
     onSubmit() {
       this.shipment
         .submit("patch", `/api/shipments/${this.shipment.id}`)
-        .then(response => console.log(response))
-        .catch(error => console.log(error));
-
-      // axios
-      //   .patch(`/api/shipments/${this.shipment.id}`, {
-      //     receiver_id: this.shipment.receiver_id,
-      //     sender_id: this.shipment.receiver_id,
-      //     charge_total: this.shipment.charge_total
-      //   })
-      //   .then(function(response) {
-      //     console.log(response);
-      //   })
-      //   .catch(function(error) {
-      //     console.log(error);
-      //   });
+        .then(response => {
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Shipment Updated",
+            showConfirmButton: false,
+            timer: 1500
+          });
+        })
+        .catch(error => {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Something went wrong!",
+            footer: "Sender, Receiver and Total field is required."
+          });
+        });
     },
     selectCustomer(e) {
       this.shipment.sender_id = e.id;
