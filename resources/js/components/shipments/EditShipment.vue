@@ -52,17 +52,17 @@
                   </div>
                 </div>
               </div>
-              <form
-                class="form-horizontal form-material"
-                action="/admin/shipments"
-                @keydown="shipment.errors.clear()"
-                enctype="multipart/form-data"
-              >
+              <form class="form" @keydown="shipment.errors.clear()" enctype="multipart/form-data">
                 <div class="row">
                   <div class="col-md-6">
                     <h6 class="mb-2">Sender Info</h6>
                     <div class="form-group">
-                      <v-select :options="customers" label="name" @input="selectCustomer($event)"></v-select>
+                      <v-select
+                        :options="customers"
+                        label="name"
+                        @input="selectCustomer($event)"
+                        :value="shipment.sender.name"
+                      ></v-select>
                       <div class="mt-2">
                         <router-link to="/admin/customers/create">Add new</router-link>
                       </div>
@@ -71,7 +71,12 @@
                   <div class="col-md-6">
                     <h6 class="mb-2">Receiver Info</h6>
                     <div class="form-group">
-                      <v-select :options="customers" label="name" @input="selectReceiver($event)"></v-select>
+                      <v-select
+                        :options="customers"
+                        label="name"
+                        @input="selectReceiver($event)"
+                        :value="shipment.receiver.name"
+                      ></v-select>
                       <div class="mt-2">
                         <router-link to="/admin/customers/create">Add new</router-link>
                       </div>
@@ -209,6 +214,31 @@
                         rows="6"
                         placeholder="User Notes - For internal use only."
                       ></textarea>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col">
+                    <div class="form-group">
+                      <label for>Freight Invoice no</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        v-model="shipment.freight_invoice_number"
+                        placeholder="Freight Invoice no"
+                      />
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="form-group">
+                      <label for>Docekt no</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        v-model="shipment.docket_no"
+                        placeholder="Docekt no"
+                      />
                     </div>
                   </div>
                 </div>
@@ -403,12 +433,12 @@
                       <b-form-radio
                         v-model="shipment.bill_to"
                         name="some-radios"
-                        value="Consignor"
+                        value="consignor"
                       >Consignor</b-form-radio>
                       <b-form-radio
                         v-model="shipment.bill_to"
                         name="some-radios"
-                        value="Consignee"
+                        value="consignee"
                       >Consignee</b-form-radio>
                     </b-form-group>
                   </div>
@@ -434,7 +464,7 @@
                       :disabled="shipment.errors.any()"
                       @click.prevent="onSubmit"
                     >
-                      Save
+                      Update
                       <span>
                         <i class="icon-ok"></i>
                       </span>
@@ -451,7 +481,6 @@
                     </button>
                   </div>
                 </div>
-                <input name="locker" type="hidden" value="274218" />
               </form>
             </div>
           </div>
@@ -528,190 +557,6 @@
           </div>
         </div>
       </div>
-
-      <!-- Payment Modal-->
-
-      <div
-        class="modal fade"
-        id="paymentmodal"
-        tabindex="-1"
-        role="dialog"
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="true"
-      >
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Payment Details</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <div class="row">
-                <div class="input-group m-2">
-                  <select
-                    class="custom-select"
-                    id="inputGroupSelect04"
-                    aria-label="Example select with button addon"
-                  >
-                    <option selected disabled>Received From</option>
-                    <option value="1">Consignor</option>
-                    <option value="2">Consignee</option>
-                    <option value="3">Others</option>
-                  </select>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                    <label for="Serial Number">Payment Date</label>
-
-                    <input type="text" class="form-control" value="31/05/2020" />
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                    <label for="Size">Payment Type</label>
-                    <select
-                      class="custom-select"
-                      id="inputGroupSelect04"
-                      aria-label="Example select with button addon"
-                      v-model="paymentType"
-                    >
-                      <option selected disabled>Choose</option>
-                      <option value="cash">Cash</option>
-                      <option value="bank">Bank</option>
-                      <option value="upi">UPI</option>
-                      <option value="cheque">Cheque</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                    <label for="Size">Amount</label>
-                    <input type="text" class="form-control" />
-                  </div>
-                </div>
-              </div>
-
-              <div class="row" v-if="paymentType === 'bank'">
-                <div class="col">
-                  <div class="form-group">
-                    <label for="Size">Bank Name</label>
-                    <input type="text" class="form-control" />
-                  </div>
-                </div>
-              </div>
-              <div class="row" v-if="paymentType === 'upi'">
-                <div class="col">
-                  <div class="form-group">
-                    <label for="Size">UPI Ref ID</label>
-                    <input type="text" class="form-control" />
-                  </div>
-                </div>
-              </div>
-              <div class="row" v-if="paymentType === 'cheque'">
-                <div class="col">
-                  <div class="form-group">
-                    <label for="Size">Cheque No</label>
-                    <input type="text" class="form-control" />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Add</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- update status modal  -->
-
-    <div
-      class="modal fade"
-      id="updatestatus"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Update Status</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-
-          <div class="modal-body">
-            <div class="row">
-              <div class="input-group m-2">
-                <select
-                  class="custom-select"
-                  id="inputGroupSelect04"
-                  aria-label="Example select with button addon"
-                  v-model="status"
-                >
-                  <option disabled>Shipment Status</option>
-                  <option value="pickup">Awaiting Pickup</option>
-                  <option value="dispatched">Dispatched</option>
-                  <option value="intrasit">Intrasit</option>
-                  <option value="delivered">Delivered</option>
-                </select>
-              </div>
-
-              <div v-if="status === 'delivered'">
-                <div class="col">
-                  <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Location" />
-                  </div>
-                </div>
-
-                <div class="row m-1">
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <input type="text" class="form-control" placeholder="Receiver Name" />
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <input type="text" class="form-control" placeholder="Phone" />
-                    </div>
-                  </div>
-                </div>
-
-                <div class="row m-1">
-                  <div class="col">
-                    <b-form-file v-model="file" ref="file-input" class="mb-2"></b-form-file>
-                  </div>
-                  <div class="col">
-                    <b-button @click="clearFiles" class="mr-2">Reset</b-button>
-                  </div>
-                </div>
-              </div>
-
-              <div v-else-if="status == 'pickup'"></div>
-              <div v-else>
-                <div class="row m-2">
-                  <div class="col">
-                    <div class="form-group">
-                      <input type="text" class="form-control" placeholder="Location" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Update</button>
-          </div>
-        </div>
-      </div>
     </div>
   </fragment>
 </template>
@@ -740,21 +585,36 @@ export default {
       this.$refs["file-input"].reset();
     },
     onSubmit() {
-      this.form
-        .submit("post", "/api/shipments")
-        .then(response)
-        .catch(error);
+      this.shipment
+        .submit("patch", `/api/shipments/${this.shipment.id}`)
+        .then(response => console.log(response))
+        .catch(error => console.log(error));
+
+      // axios
+      //   .patch(`/api/shipments/${this.shipment.id}`, {
+      //     receiver_id: this.shipment.receiver_id,
+      //     sender_id: this.shipment.receiver_id,
+      //     charge_total: this.shipment.charge_total
+      //   })
+      //   .then(function(response) {
+      //     console.log(response);
+      //   })
+      //   .catch(function(error) {
+      //     console.log(error);
+      //   });
     },
     selectCustomer(e) {
-      this.form.sender_id = e.id;
+      this.shipment.sender_id = e.id;
+      this.shipment.sender.name = e.name;
     },
 
     selectReceiver(e) {
-      this.form.receiver_id = e.id;
+      this.shipment.receiver_id = e.id;
+      this.shipment.receiver.name = e.name;
     },
 
     addPackage() {
-      this.form.package.push({
+      this.shipment.package.push({
         uid: uuidv4(),
         description: this.packagedetails.description,
         serial_no: this.packagedetails.serial_no,
@@ -775,27 +635,28 @@ export default {
 
     calculateTotal() {
       const total =
-        parseInt(this.form.charge_transportation) +
-        parseInt(this.form.charge_handling) +
-        parseInt(this.form.charge_halting) +
-        parseInt(this.form.charge_Insurance) +
-        parseInt(this.form.charge_odc) +
-        parseInt(this.form.charge_tax_amount) +
-        parseInt(this.form.charge_odc);
-      this.form.charge_tax_amount =
-        (total * parseInt(this.form.charge_tax_percent)) / 100;
-      this.form.charge_total = this.form.charge_tax_amount + total;
+        parseInt(this.shipment.charge_transportation) +
+        parseInt(this.shipment.charge_handling) +
+        parseInt(this.shipment.charge_halting) +
+        parseInt(this.shipment.charge_Insurance) +
+        parseInt(this.shipment.charge_odc) +
+        parseInt(this.shipment.charge_tax_amount) +
+        parseInt(this.shipment.charge_odc);
+      this.shipment.charge_tax_amount =
+        (total * parseInt(this.shipment.charge_tax_percent)) / 100;
+      this.shipment.charge_total = this.shipment.charge_tax_amount + total;
 
-      if (this.form.charge_advance_paid > 0) {
-        this.form.charge_balance =
-          this.form.charge_total - parseInt(this.form.charge_advance_paid);
+      if (this.shipment.charge_advance_paid > 0) {
+        this.shipment.charge_balance =
+          this.shipment.charge_total -
+          parseInt(this.shipment.charge_advance_paid);
       } else {
-        this.form.charge_balance = this.form.charge_total;
+        this.shipment.charge_balance = this.shipment.charge_total;
       }
     },
     deletePackage(uid) {
-      let i = this.form.package.map(item => item.uid).indexOf(uid); // find index of your object
-      this.form.package.splice(i, 1); // remove it from array
+      let i = this.shipment.package.map(item => item.uid).indexOf(uid); // find index of your object
+      this.shipment.package.splice(i, 1); // remove it from array
     }
   },
 

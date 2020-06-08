@@ -65,7 +65,7 @@
               variant="danger"
             >{{payment.errors.get('amount')}}</b-alert>
             <div class="row">
-              <div class="col-3">
+              <div class="col-4">
                 <p>Sender Details</p>
                 <p>
                   Pickup Location :
@@ -75,7 +75,7 @@
                 <p>Sender name : {{shipment.sender.name}}</p>
                 <p>Contact : {{shipment.sender.phone}}</p>
               </div>
-              <div class="col-3">
+              <div class="col-4">
                 <p>Receiver Details</p>
                 <p>
                   Dropoff Location :
@@ -85,15 +85,11 @@
                 <p>Receiver Name : {{shipment.receiver.name}}</p>
                 <p>Contact : {{shipment.receiver.phone}}</p>
               </div>
-              <div class="col-3">
+              <div class="col-4">
                 <p>Transport Details</p>
                 <p>Driver Name : {{shipment.transport_driver_name}}</p>
                 <p>Contact : {{shipment.transport_driver_phone}}</p>
                 <p>Vechile Details : {{shipment.transport_driver_vehicle}}</p>
-              </div>
-              <div class="col-3">
-                <p>Current Status</p>
-                <p>Location : Mysore</p>
               </div>
             </div>
           </div>
