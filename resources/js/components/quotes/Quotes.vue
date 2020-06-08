@@ -109,29 +109,34 @@
                   </tr>
                 </tfoot>
                 <tbody>
-                  <tr role="row" class="odd">
-                    <td class="sorting_1">41635221</td>
-                    <td>Vinyas</td>
-                    <td>Bangalore</td>
-                    <td>Mangalore</td>
+                  <tr role="row" v-if="quotes" v-for="(item,index) in quotes">
+                    <td>{{index+1}}</td>
+                    <td>{{item.customer.name}}</td>
+                    <td v-if="item.list[0]">{{item.list[0].from}}</td>
+                    <td v-else>---</td>
+
+                    <td v-if="item.list[0]">{{item.list[0].to}}</td>
+                    <td v-else>---</td>
                     <td align="center">
                       <router-link
-                        to="/admin/customers/1/quotes/1/view"
+                        :to="'/admin/customers/'+ item.customer.id+ '/quotes/'+item.id +'/view'"
                         data-toggle="tooltip"
                         data-placement="top"
                         title="View Customer"
                       >
                         <i class="fas fa-eye text-secondary"></i>
                       </router-link>
-                      <router-link
-                        to="/admin/customers/1/quotes/1/view"
-                        data-toggle="tooltip"
-                        data-placement="top"
-                        title="View Customer"
-                      >
-                        <i class="fas fa-edit text-primary"></i>
-                      </router-link>
-                      <span class="badge badge-pill badge-success">Approved</span>
+                      <span
+                        class="badge badge-pill badge-success"
+                        v-if="item.status == 'approved'"
+                      >Approved</span>
+
+                      <span
+                        class="badge badge-pill badge-danger"
+                        v-else-if="item.status == 'declined'"
+                      >Declined</span>
+
+                      <span class="badge badge-pill badge-warning" v-else>Pending</span>
                     </td>
                   </tr>
                 </tbody>
@@ -231,3 +236,20 @@
     </div>
   </div>
 </template>
+
+
+<script>
+export default {
+  data() {
+    return {};
+  },
+  computed: {
+    quotes() {
+      return this.$store.getters.getAllQuotes;
+    }
+  },
+  mounted() {
+    this.$store.dispatch("retrieveQuotations");
+  }
+};
+</script>

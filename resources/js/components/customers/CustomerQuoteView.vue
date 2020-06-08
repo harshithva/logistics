@@ -1,23 +1,30 @@
 <template>
   <fragment>
     <div class="row mt-3 mb-3 ml-3 d-print-none">
-      <div class="col-5"></div>
-      <div class="col-7">
+      <div class="col-6"></div>
+      <div class="col-6">
         <a class="btn btn-primary text-white" onclick="javascript:window.print()">
           <i class="fas fa-print"></i> Print
         </a>
-        <button class="btn btn-secondary ml-2">
-          <i class="fas fa-download" @click="downloadPDF"></i> Download
-        </button>
+
         <a href class="btn btn-info ml-2">
           <i class="fas fa-envelope"></i> Mail
         </a>
-        <a href class="btn btn-danger ml-2">
+        <button
+          href
+          class="btn btn-danger ml-2"
+          @click.prevent="updateStatus('decline')"
+          v-show="!quote.status"
+        >
           <i class="fas fa-times"></i> Decline
-        </a>
-        <a href class="btn btn-success ml-2">
+        </button>
+        <button
+          class="btn btn-success ml-2"
+          @click.prevent="updateStatus('approve')"
+          v-show="!quote.status"
+        >
           <i class="fas fa-check"></i> Approve
-        </a>
+        </button>
         <a href class="btn btn-warning ml-2">
           <i class="fas fa-edit"></i> Edit
         </a>
@@ -47,7 +54,7 @@
             <p>Ref No: BNG/001/2020-21</p>
           </div>
           <div class="col"></div>
-          <div class="col">Date: 02/06/2020</div>
+          <div class="col">Date: {{ moment(quote.created_at).format('DD/MM/YYYY')}}</div>
         </div>
 
         <div class="row mt-2">
@@ -62,9 +69,12 @@
           <div class="col">
             <p>
               To,
-              <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Vinyas
-              <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VAwebsites Managalore
-              <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;India - 574154
+              <br />
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{quote.customer.company_name}}
+              <br />
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{quote.customer.address}}
+              <br />
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{quote.customer.gst}}
               <br />
             </p>
           </div>
@@ -72,7 +82,7 @@
 
         <div class="row mt-2">
           <div class="col text-center">
-            <h6>Sub: Transit Quote for Managalore</h6>
+            <h6>Sub: Transit Quote for {{quote.list[0].to.charAt(0).toUpperCase() + quote.list[0].to.slice(1)}}</h6>
           </div>
         </div>
 
@@ -80,7 +90,8 @@
           <div class="col">
             <p>
               Dear Sir,
-              <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;As per our discussion regarding transportation requirement for the consignment to Managalore
+              <br />
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;As per our discussion regarding transportation requirement for the consignment to {{quote.list[0].to.charAt(0).toUpperCase() + quote.list[0].to.slice(1)}}.
             </p>
           </div>
         </div>
@@ -106,15 +117,15 @@
                 <th scope="col">Rate</th>
                 <th scope="col">Advance</th>
               </thead>
-              <tr>
-                <th scope="row">1</th>
-                <td>Vinyas</td>
-                <td>customer1</td>
-                <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Et neque, similique adipisci provident hic cum recusandae saepe? Doloremque, ullam dolorem quae repudiandae id modi unde tempore explicabo odio sequi dolor.</td>
-                <td>5kg</td>
-                <td>5 days</td>
-                <td>500</td>
-                <td>100</td>
+              <tr v-if="quote.list" v-for="(item,index) in quote.list">
+                <th scope="row">{{index+1}}</th>
+                <td>{{item.from}}</td>
+                <td>{{item.to}}</td>
+                <td>{{item.description}}</td>
+                <td>{{item.size}} && {{item.weight}}</td>
+                <td>{{item.eta}} days</td>
+                <td>{{item.rate}}</td>
+                <td>{{item.advance}}</td>
               </tr>
             </table>
           </div>
@@ -148,14 +159,12 @@
         <div class="row mt-2">
           <div class="col-10"></div>
           <div class="col">
-            <p>
-              For and behalf of
-              <br />
-              <br />
-              <br />
+            <p>For and behalf of</p>
+            <img :src="sign" alt="Rohith" class="img-fluid ml-3" style="width:4rem;" />
+            <br />
+            <br />
 
-              <u>Gurukal Logistics</u>
-            </p>
+            <u>Gurukal Logistics</u>
           </div>
         </div>
       </div>
@@ -164,45 +173,52 @@
 </template>
 
 <script>
-import jsPDF from "jspdf";
-import domtoimage from "dom-to-image";
 export default {
   data() {
     return {
-      logo: "https://i.ibb.co/WFdrW4M/Logo-Color-Text-Below.jpg"
+      showUpdation: true,
+      logo: "https://i.ibb.co/WFdrW4M/Logo-Color-Text-Below.jpg",
+      sign: "https://i.ibb.co/8BwTXcT/sign-rohith.png"
     };
   },
   methods: {
-    downloadPdf() {
-      alert("hi");
-      /** WITH CSS */
-      domtoimage
-        .toPng(this.$refs.content)
-        .then(function(dataUrl) {
-          var img = new Image();
-          img.src = dataUrl;
-          const doc = new jsPDF({
-            orientation: "portrait",
-            // unit: "pt",
-            format: [900, 1400]
+    updateStatus(status) {
+      if (status == "approve") {
+        axios
+          .post(`/api/quotations/${this.quote.id}/status/approve`)
+          .then(response => {
+            this.$store.dispatch(
+              "retrieveSingleQuote",
+              this.$route.params.quote_id
+            );
+            this.showUpdation = false;
+          })
+          .catch(function(error) {
+            console.log("Something went wrong");
           });
-          doc.addImage(img, "JPEG", 20, 20);
-          const date = new Date();
-          const filename =
-            "timechart_" +
-            date.getFullYear() +
-            ("0" + (date.getMonth() + 1)).slice(-2) +
-            ("0" + date.getDate()).slice(-2) +
-            ("0" + date.getHours()).slice(-2) +
-            ("0" + date.getMinutes()).slice(-2) +
-            ("0" + date.getSeconds()).slice(-2) +
-            ".pdf";
-          doc.save(filename);
-        })
-        .catch(function(error) {
-          console.error("oops, something went wrong!", error);
-        });
+      } else if (status == "decline") {
+        axios
+          .post(`/api/quotations/${this.quote.id}/status/decline`)
+          .then(response => {
+            this.$store.dispatch(
+              "retrieveSingleQuote",
+              this.$route.params.quote_id
+            );
+            this.showUpdation = false;
+          })
+          .catch(function(error) {
+            console.log("Something went wrong");
+          });
+      }
     }
+  },
+  computed: {
+    quote() {
+      return new Form(this.$store.getters.getSingleQuote);
+    }
+  },
+  created() {
+    this.$store.dispatch("retrieveSingleQuote", this.$route.params.quote_id);
   }
 };
 </script>

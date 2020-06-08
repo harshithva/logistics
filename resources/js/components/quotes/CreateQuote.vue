@@ -8,52 +8,35 @@
               <h4 class="mb-3">Quotation Form</h4>
               <div id="loader" style="display:none"></div>
               <div id="msgholder"></div>
-              <form class="form-horizontal form-material" id="admin_form" method="post">
+              <form
+                class="form-horizontal form-material"
+                @submit.prevent="onSubmit"
+                @keydown="form.errors.clear()"
+              >
                 <section>
                   <div class="row">
                     <div class="col-md-6">
                       <div class="form-group">
-                        <input
-                          type="text"
-                          class="form-control"
-                          name="code_phone"
-                          list="browsers6"
-                          autocomplete="off"
-                          required="required"
-                          placeholder="Search Customer"
-                        />
-                        <datalist id="browsers6">
-                          <option data-countrycode="AF" value="Vinyas">Vinyas</option>
-                          <option data-countrycode="AL" value="Gurukal">Gurukal</option>
-                        </datalist>
+                        <label for>Select Customer</label>
+                        <v-select :options="customers" label="name" @input="selectCustomer($event)"></v-select>
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
+                        <label for>Date</label>
                         <input
                           type="text"
                           class="form-control"
                           name="password"
-                          value="31/05/2020"
+                          :value="moment(new Date).format('DD/MM/YYYY')"
                           placeholder="Date"
+                          disabled
                         />
                       </div>
                     </div>
                   </div>
 
                   <h6 class="mb-2 mt-2">Quotation Details</h6>
-                  <div class="row">
-                    <div class="col-md-4">
-                      <div class="form-group">
-                        <input
-                          type="text"
-                          class="form-control"
-                          name="fname"
-                          placeholder="Ref Number"
-                        />
-                      </div>
-                    </div>
-                  </div>
 
                   <div>
                     <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
@@ -74,14 +57,29 @@
                                 <th scope="col">From</th>
                                 <th scope="col">To</th>
                                 <th scope="col">Description</th>
-                                <th scope="col">Serial No</th>
+
                                 <th scope="col">Size</th>
                                 <th scope="col">Weight</th>
                                 <th scope="col">ETA</th>
                                 <th scope="col">Rate</th>
                                 <th scope="col">Advance</th>
+                                <th scope="col">Action</th>
                               </tr>
                             </thead>
+                            <tr v-for="(quotation,index) in form.quotations" :key="index">
+                              <td>{{index+1}}</td>
+                              <td>{{quotation.from}}</td>
+                              <td>{{quotation.to}}</td>
+                              <td>{{quotation.description}}</td>
+                              <td>{{quotation.size}}</td>
+                              <td>{{quotation.weight}}</td>
+                              <td>{{quotation.eta}}</td>
+                              <td>{{quotation.rate}}</td>
+                              <td>{{quotation.advance}}</td>
+                              <td @click="deleteQuotation(quotation.uid)">
+                                <i class="fas fa-times text-danger"></i>
+                              </td>
+                            </tr>
                             <tbody>
                               <button
                                 type="button"
@@ -99,15 +97,15 @@
 
                 <div class="form-group">
                   <div class="col-sm-12">
-                    <router-link
+                    <button
                       class="btn btn-outline-primary btn-confirmation"
-                      to="/admin/customers/1/quotes/1/view"
+                      @click.prevent="onSubmit"
                     >
                       Save
                       <span>
                         <i class="icon-ok"></i>
                       </span>
-                    </router-link>
+                    </button>
 
                     <router-link to="/admin" class="btn btn-outline-secondary btn-confirmation">
                       <span>
@@ -148,13 +146,13 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="Serial Number">From</label>
-                  <input type="text" class="form-control" />
+                  <input type="text" class="form-control" v-model="from" />
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="docket">To</label>
-                  <input type="text" class="form-control" />
+                  <input type="text" class="form-control" v-model="to" />
                 </div>
               </div>
             </div>
@@ -162,48 +160,145 @@
               <div class="col-md-12">
                 <div class="form-group">
                   <label for="exampleFormControlTextarea1">Description</label>
-                  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                  <textarea
+                    class="form-control"
+                    id="exampleFormControlTextarea1"
+                    rows="3"
+                    v-model="description"
+                  ></textarea>
                 </div>
               </div>
 
               <div class="col-md-4">
                 <div class="form-group">
                   <label for="Serial Number">Size</label>
-                  <input type="text" class="form-control" />
+                  <input type="text" class="form-control" v-model="size" />
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="form-group">
                   <label for="docket">Weight</label>
-                  <input type="text" class="form-control" />
+                  <input type="text" class="form-control" v-model="weight" />
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="form-group">
                   <label for="Size">ETA</label>
-                  <input type="text" class="form-control" />
+                  <input type="text" class="form-control" v-model="eta" />
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="docket">Rate</label>
-                  <input type="text" class="form-control" />
+                  <input type="number" class="form-control" v-model="rate" />
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
-                  <label for="Size">Advance</label>
-                  <input type="text" class="form-control" />
+                  <label for="advance">Advance</label>
+                  <input type="number" class="form-control" v-model="advance" />
                 </div>
               </div>
             </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Add</button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              @click="addQuotation"
+              data-dismiss="modal"
+            >Add</button>
           </div>
         </div>
       </div>
     </div>
   </fragment>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      from: "",
+      to: "",
+      description: "",
+      size: "",
+      weight: "",
+      eta: "",
+      rate: "",
+      advance: "",
+      form: new Form({
+        customer_id: "",
+        quotations: []
+      })
+    };
+  },
+  methods: {
+    selectCustomer(e) {
+      this.form.customer_id = e.id;
+    },
+    addQuotation() {
+      this.form.quotations.push({
+        uid: uuidv4(),
+        from: this.from,
+        to: this.to,
+        description: this.description,
+        size: this.size,
+        weight: this.weight,
+        eta: this.eta,
+        rate: this.rate,
+        advance: this.advance
+      });
+
+      // reset
+
+      this.from = "";
+      this.to = "";
+      this.description = "";
+      this.size = "";
+      this.weight = "";
+      this.eta = "";
+      this.rate = "";
+      this.advance = "";
+    },
+
+    onSubmit() {
+      const customer_id = this.form.customer_id;
+      this.form
+        .submit("post", "/api/quotations")
+        .then(response => {
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Well done! Quote has been created",
+            showConfirmButton: false,
+            timer: 1500
+          });
+          this.$router.push(
+            `/admin/customers/${customer_id}/quotes/${response.id}/view`
+          );
+        })
+        .catch(error =>
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Something went wrong!"
+          })
+        );
+    },
+    deleteQuotation(uid) {
+      let i = this.form.quotations.map(item => item.uid).indexOf(uid); // find index of your object
+      this.form.quotations.splice(i, 1); // remove it from array
+    }
+  },
+  computed: {
+    customers() {
+      return this.$store.getters.getAllCustomers;
+    }
+  },
+  created() {
+    this.$store.dispatch("retrieveCustomers");
+  }
+};
+</script>

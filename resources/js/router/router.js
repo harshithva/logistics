@@ -42,6 +42,7 @@ const routes = [
     { path: '/admin/customers/:id/quotes/:quote_id/view', component: CustomerQuoteView },
     { path: '/admin/customers/:id/invoices/:invoice_id/view', component: CustomerInvoiceView, meta: { reuse: false } },
     { path: '/admin/customers/:id/invoices/:invoice_id/view/docket', component: CustomerInvoiceViewDocket },
+
     { path: '/admin/customers', component: Customer },
 
     { path: '/admin/quotes/create', component: CreateQuote },
@@ -49,7 +50,7 @@ const routes = [
 
     { path: '/admin/shipments', component: Shipments },
     { path: '/admin/shipments/create', component: CreateShipment },
-    { path: '/admin/shipments/:id/edit', component: EditShipment },
+    { path: '/admin/shipments/:shipment_id/edit', component: EditShipment },
 
     { path: '/admin/staff/create', component: CreateStaff },
     { path: '/admin/staff', component: Staff },

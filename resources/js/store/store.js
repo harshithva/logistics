@@ -13,7 +13,9 @@ export const store = new Vuex.Store({
         shipments: [],
         shipment: {},
         balance_amount: {},
-        shipment_status: {}
+        shipment_status: {},
+        quote: {},
+        quotes: []
     },
     getters: {
         getAllCustomers(state) {
@@ -38,6 +40,12 @@ export const store = new Vuex.Store({
         },
         getShipmentStatus(state) {
             return state.shipment_status;
+        },
+        getSingleQuote(state) {
+            return state.quote;
+        },
+        getAllQuotes(state) {
+            return state.quotes;
         },
     },
     mutations: {
@@ -66,9 +74,16 @@ export const store = new Vuex.Store({
             state.balance_amount = balance_amount;
         },
         retrieveShipmentStatus(state, status) {
-            console.log(status);
 
             state.shipment_status = status;
+        },
+        retrieveSingleQuote(state, quote) {
+
+            state.quote = quote;
+        },
+        retrieveQuotations(state, quotes) {
+
+            state.quotes = quotes;
         },
     },
     actions: {
@@ -137,6 +152,29 @@ export const store = new Vuex.Store({
 
                     context.commit('catchErrors', error.response.data)
                 })
-        }
+        },
+        retrieveSingleQuote(context, quote_id) {
+
+            axios
+                .get("/api/quotations/" + quote_id)
+                .then(response => (context.commit('retrieveSingleQuote', response.data))
+                )
+                .catch(function (error) {
+                    // handle error
+
+                    context.commit('catchErrors', error.response.data)
+                })
+        },
+
+        retrieveQuotations(context) {
+            axios
+                .get("/api/quotations")
+                .then(response => (context.commit('retrieveQuotations', response.data)))
+                .catch(function (error) {
+                    // handle error
+
+                    context.commit('catchErrors', error.response.data)
+                })
+        },
     }
 })

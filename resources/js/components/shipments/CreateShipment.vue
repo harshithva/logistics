@@ -403,12 +403,12 @@
                       <b-form-radio
                         v-model="form.bill_to"
                         name="some-radios"
-                        value="Consignor"
+                        value="consignor"
                       >Consignor</b-form-radio>
                       <b-form-radio
                         v-model="form.bill_to"
                         name="some-radios"
-                        value="Consignee"
+                        value="consignee"
                       >Consignee</b-form-radio>
                     </b-form-group>
                   </div>

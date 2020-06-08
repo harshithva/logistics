@@ -131,7 +131,7 @@
                     <input
                       type="text"
                       class="form-control"
-                      placeholder="Email"
+                      placeholder="Phone"
                       v-model="form.phone"
                     />
                   </div>

@@ -15,17 +15,10 @@ class CreateQuotesTable extends Migration
     {
         Schema::create('quotes', function (Blueprint $table) {
             $table->id();
-            $table->string('from_city');
-            $table->string('to_city');
-            $table->text('description');
-            $table->decimal('length',10,2);
-            $table->decimal('width',10,2);
-            $table->decimal('height');
-            $table->decimal('weight',10,2);
-            $table->string('eta');
-            $table->decimal('advance',10,2);
-            $table->unsignedBigInteger('tax_id');
-            $table->decimal('amount',10,2);
+            $table->unsignedBigInteger('customer_id');
+            $table->string('quotation_no')->nullable();
+            $table->string('status')->nullable();
+            $table->foreign('customer_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

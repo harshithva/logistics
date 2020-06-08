@@ -165,9 +165,10 @@ class ShipmentController extends Controller
         $shipment_status->customer_id= $request->sender_id;
         $shipment_status->save();
        
-
-
-         
+        $phone= $shipment->sender->phone;
+        $message = 'This is to inform you that your shipment with Docket no'.$shipment->docket_no .'has been created.';
+        $this->send_sms($phone,$message);
+                
           
 
         $data = [
@@ -257,7 +258,7 @@ class ShipmentController extends Controller
     }
 
 
-    public function send_sms($msg,$phone) {
+    public function send_sms($phone,$msg) {
 
         
      
@@ -273,7 +274,7 @@ class ShipmentController extends Controller
           CURLOPT_TIMEOUT => 30,
           CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
           CURLOPT_CUSTOMREQUEST => "POST",
-          CURLOPT_POSTFIELDS => "{ \"sender\": \"SOCKET\", \"route\": \"4\", \"country\": \"91\", \"sms\": [ { \"message\": \"Message1\", \"to\": [ \"7975503096\" ] }] }",
+          CURLOPT_POSTFIELDS => "{ \"sender\": \"SOCKET\", \"route\": \"4\", \"country\": \"91\", \"sms\": [ { \"message\": \"$msg\", \"to\": [ \"$phone\" ] }] }",
           CURLOPT_SSL_VERIFYHOST => 0,
           CURLOPT_SSL_VERIFYPEER => 0,
           CURLOPT_HTTPHEADER => array(
@@ -286,11 +287,6 @@ class ShipmentController extends Controller
         $err = curl_error($curl);
         
         curl_close($curl);
-        
-        if ($err) {
-          echo "cURL Error #:" . $err;
-        } else {
-          echo $response;
-        }
+
     }
 }

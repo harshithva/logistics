@@ -48,9 +48,9 @@
           </span>
           Add Payment
         </button>
-        <a href class="btn btn-dark ml-2">
+        <router-link :to="'/admin/shipments/' + shipment.id +'/edit'" class="btn btn-dark ml-2">
           <i class="fas fa-check"></i> Edit
-        </a>
+        </router-link>
       </div>
     </div>
     <div class="row d-print-none">
@@ -157,40 +157,50 @@
         <div class="row mt-2">
           <div class="col">
             <p>BILL TO</p>
-            {{shipment.sender.address}}
-            <!-- <p v-if="shipment.bill_to == 'Consginor'">{{shipment.sender.address}}</p>
-            <p v-if="shipment.bill_to == 'Consginee'">{{shipment.receiver.address}}</p>-->
-          </div>
 
-          <div class="col">
-            Consignor Name: {{shipment.sender.company_name}}
-            <br />
-            {{shipment.sender.address}}
-          </div>
-        </div>
-
-        <div class="row mt-2">
-          <div class="col"></div>
-          <div class="col">Consignor GST: {{shipment.sender.gst}}</div>
-        </div>
-        <br />
-
-        <div class="row">
-          <div class="col"></div>
-          <div class="col">
-            <p>
-              Consignee Name: {{shipment.receiver.name}}
+            <p v-if="shipment.bill_to == 'consignor'">
+              {{shipment.sender.company_name}}
+              <br />
+              {{shipment.sender.address}}
+            </p>
+            <p v-else-if="shipment.bill_to == 'consignee'">
+              {{shipment.receiver.company_name}}
               <br />
               {{shipment.receiver.address}}
             </p>
+
+            <p v-else>
+              {{shipment.sender.company_name}}
+              <br />
+              {{shipment.sender.address}}
+            </p>
+          </div>
+
+          <div class="col">
+            Consignor Name:
+            <br />
+            {{shipment.sender.company_name}}
+            <br />
+            {{shipment.sender.address}}
+            <br />
+            GST: {{shipment.sender.gst}}
           </div>
         </div>
 
         <div class="row mt-2">
           <div class="col"></div>
-          <div class="col">Consignee GST {{shipment.receiver.gst}}</div>
+          <div class="col">
+            <p>
+              Consignee Name:
+              <br />
+              {{shipment.receiver.name}}
+              <br />
+              {{shipment.receiver.address}}
+              <br />
+              GST: {{shipment.receiver.gst}}
+            </p>
+          </div>
         </div>
-        <br />
 
         <div class="row mt-2">
           <div class="col-8">
@@ -289,13 +299,12 @@
           </div>
           <div class="col-6"></div>
           <div class="col">
-            <p>
-              For and behalf of
-              <br />
-              <br />
-              <br />
-              <u>Gurukal Logistics</u>
-            </p>
+            <p>For and behalf of</p>
+            <img :src="sign" alt="Rohith" class="img-fluid ml-3" style="width:4rem;" />
+            <br />
+            <br />
+
+            <u>Gurukal Logistics</u>
           </div>
         </div>
       </div>
@@ -519,6 +528,7 @@ export default {
   data() {
     return {
       logo: "https://i.ibb.co/WFdrW4M/Logo-Color-Text-Below.jpg",
+      sign: "https://i.ibb.co/8BwTXcT/sign-rohith.png",
       status: new Form({
         status: "pickup",
         customer_id: "",
