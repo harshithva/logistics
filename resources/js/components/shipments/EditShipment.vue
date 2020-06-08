@@ -625,16 +625,17 @@
                         <i class="icon-ok"></i>
                       </span>
                     </button>
-                    <button
+                    <router-link
                       class="btn btn-outline-danger btn-confirmation"
                       name="dosubmit"
                       type="submit"
+                      :to="'/admin/customers/'+ shipment.sender.id +'/invoices/'+shipment.id+'/view'"
                     >
-                      Reset
+                      Return
                       <span>
                         <i class="icon-ok"></i>
                       </span>
-                    </button>
+                    </router-link>
                   </div>
                 </div>
               </form>
