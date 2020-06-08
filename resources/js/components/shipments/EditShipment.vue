@@ -753,7 +753,9 @@ export default {
       this.$refs["file-input"].reset();
     },
     onSubmit() {
-      this.getData();
+      if (this.editExpenses) {
+        this.getData();
+      }
 
       this.shipment
         .submit("patch", `/api/shipments/${this.shipment.id}`)
