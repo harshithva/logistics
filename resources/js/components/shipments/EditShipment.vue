@@ -285,135 +285,291 @@
                 </table>
 
                 <hr />
-                <h6 class="mb-4">Additional Expenses</h6>
-                <div class="row mb-2">
-                  <div class="col-md-4">
-                    <div class="form-group">
-                      <label for="transportation">Transportation</label>
-                      <input
-                        type="number"
-                        class="form-control"
-                        v-model="shipment.charge_transportation"
-                        @change="calculateTotal"
-                      />
-                    </div>
-                  </div>
-                  <div class="col-md-4">
-                    <div class="form-group">
-                      <label>Handling</label>
-                      <input
-                        type="number"
-                        class="form-control"
-                        @change="calculateTotal"
-                        v-model="shipment.charge_handling"
-                      />
-                    </div>
-                  </div>
-                  <div class="col-md-3">
-                    <div class="form-group">
-                      <label>Halting</label>
-                      <input
-                        type="number"
-                        class="form-control"
-                        v-model="shipment.charge_halting"
-                        @change="calculateTotal"
-                      />
-                    </div>
-                  </div>
-                </div>
                 <div class="row">
-                  <div class="col-md-3">
-                    <div class="form-group">
-                      <label>Insurance</label>
+                  <div class="col">
+                    <h6 class="mb-4">Additional Expenses</h6>
+                  </div>
+
+                  <div class="col text-right">
+                    <button
+                      class="btn btn-primary"
+                      @click.prevent="changeEditingExpense"
+                    >Edit Expenses</button>
+                  </div>
+                </div>
+
+                <div v-if="editExpenses">
+                  <div class="row mb-2">
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="transportation">Transportation</label>
+                        <input
+                          type="number"
+                          class="form-control"
+                          v-model="charge_transportation"
+                          @change="calculateTotal"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label>Handling</label>
+                        <input
+                          type="number"
+                          class="form-control"
+                          @change="calculateTotal"
+                          v-model="charge_handling"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label>Halting</label>
+                        <input
+                          type="number"
+                          class="form-control"
+                          v-model="charge_halting"
+                          @change="calculateTotal"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label>Insurance</label>
+                        <input
+                          type="number"
+                          class="form-control"
+                          v-model="charge_Insurance"
+                          @change="calculateTotal"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label>ODC Charges</label>
+                        <input
+                          type="number"
+                          class="form-control"
+                          v-model="charge_odc"
+                          @change="calculateTotal"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label>Tax Percent (%)</label>
+                        <input
+                          type="number"
+                          class="form-control"
+                          @change="calculateTotal"
+                          v-model="charge_tax_percent"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label>Advance Paid</label>
+                        <input
+                          type="number"
+                          class="form-control"
+                          @change="calculateTotal"
+                          v-model="charge_advance_paid"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <hr />
+                  <div class="row m-2">
+                    <div class="col">
+                      <p>Total Taxes</p>
+                    </div>
+                    <div class="col">
                       <input
                         type="number"
-                        class="form-control"
-                        v-model="shipment.charge_Insurance"
+                        class="form-control float-right"
                         @change="calculateTotal"
+                        v-model="charge_tax_amount"
+                        style="width:8rem;"
                       />
                     </div>
                   </div>
-                  <div class="col-md-3">
-                    <div class="form-group">
-                      <label>ODC Charges</label>
+
+                  <div class="row m-2">
+                    <div class="col">
+                      <p>Total</p>
+                    </div>
+                    <div class="col">
                       <input
                         type="number"
-                        class="form-control"
-                        v-model="shipment.charge_odc"
                         @change="calculateTotal"
+                        class="form-control float-right"
+                        v-model="charge_total"
+                        style="width:8rem;"
                       />
                     </div>
                   </div>
-                  <div class="col-md-3">
-                    <div class="form-group">
-                      <label>Tax Percent (%)</label>
-                      <input
-                        type="number"
-                        class="form-control"
-                        @change="calculateTotal"
-                        v-model="shipment.charge_tax_percent"
-                      />
+
+                  <div class="row m-2">
+                    <div class="col">
+                      <p>Balance</p>
                     </div>
-                  </div>
-                  <div class="col-md-3">
-                    <div class="form-group">
-                      <label>Advance Paid</label>
+                    <div class="col">
                       <input
                         type="number"
-                        class="form-control"
                         @change="calculateTotal"
-                        v-model="shipment.charge_advance_paid"
+                        class="form-control float-right"
+                        v-model="charge_balance"
+                        style="width:8rem;"
                       />
                     </div>
                   </div>
                 </div>
 
-                <hr />
-                <div class="row m-2">
-                  <div class="col">
-                    <p>Total Taxes</p>
+                <!-- dont edit expenses -->
+                <div v-else>
+                  <div class="row mb-2">
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="transportation">Transportation</label>
+                        <input
+                          disabled
+                          type="number"
+                          class="form-control"
+                          v-model="shipment.charge_transportation"
+                          @change="calculateTotal"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label>Handling</label>
+                        <input
+                          disabled
+                          type="number"
+                          class="form-control"
+                          @change="calculateTotal"
+                          v-model="shipment.charge_handling"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label>Halting</label>
+                        <input
+                          disabled
+                          type="number"
+                          class="form-control"
+                          v-model="shipment.charge_halting"
+                          @change="calculateTotal"
+                        />
+                      </div>
+                    </div>
                   </div>
-                  <div class="col">
-                    <input
-                      type="number"
-                      class="form-control float-right"
-                      @change="calculateTotal"
-                      v-model="shipment.charge_tax_amount"
-                      style="width:8rem;"
-                    />
+                  <div class="row">
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label>Insurance</label>
+                        <input
+                          disabled
+                          type="number"
+                          class="form-control"
+                          v-model="shipment.charge_Insurance"
+                          @change="calculateTotal"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label>ODC Charges</label>
+                        <input
+                          disabled
+                          type="number"
+                          class="form-control"
+                          v-model="shipment.charge_odc"
+                          @change="calculateTotal"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label>Tax Percent (%)</label>
+                        <input
+                          disabled
+                          type="number"
+                          class="form-control"
+                          @change="calculateTotal"
+                          v-model="shipment.charge_tax_percent"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label>Advance Paid</label>
+                        <input
+                          disabled
+                          type="number"
+                          class="form-control"
+                          @change="calculateTotal"
+                          v-model="shipment.charge_advance_paid"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <hr />
+                  <div class="row m-2">
+                    <div class="col">
+                      <p>Total Taxes</p>
+                    </div>
+                    <div class="col">
+                      <input
+                        disabled
+                        type="number"
+                        class="form-control float-right"
+                        @change="calculateTotal"
+                        v-model="shipment.charge_tax_amount"
+                        style="width:8rem;"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="row m-2">
+                    <div class="col">
+                      <p>Total</p>
+                    </div>
+                    <div class="col">
+                      <input
+                        disabled
+                        type="number"
+                        @change="calculateTotal"
+                        class="form-control float-right"
+                        v-model="shipment.charge_total"
+                        style="width:8rem;"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="row m-2">
+                    <div class="col">
+                      <p>Balance</p>
+                    </div>
+                    <div class="col">
+                      <input
+                        disabled
+                        type="number"
+                        @change="calculateTotal"
+                        class="form-control float-right"
+                        v-model="shipment.charge_balance"
+                        style="width:8rem;"
+                      />
+                    </div>
                   </div>
                 </div>
 
-                <div class="row m-2">
-                  <div class="col">
-                    <p>Total</p>
-                  </div>
-                  <div class="col">
-                    <input
-                      type="number"
-                      @change="calculateTotal"
-                      class="form-control float-right"
-                      v-model="shipment.charge_total"
-                      placeholder="Total"
-                      style="width:8rem;"
-                    />
-                  </div>
-                </div>
-
-                <div class="row m-2">
-                  <div class="col">
-                    <p>Balance</p>
-                  </div>
-                  <div class="col">
-                    <input
-                      type="number"
-                      @change="calculateTotal"
-                      class="form-control float-right"
-                      v-model="shipment.charge_balance"
-                      style="width:8rem;"
-                    />
-                  </div>
-                </div>
+                <!-- end edit expenses -->
 
                 <div class="col-md-12">
                   <div class="form-group">
@@ -570,6 +726,18 @@ export default {
       file: null,
       paymentType: null,
       status: "pickup",
+      editExpenses: false,
+      charge_transportation: 0,
+      charge_handling: 0,
+      charge_halting: 0,
+      charge_Insurance: 0,
+      charge_odc: 0,
+      charge_tax_amount: 0,
+      charge_total: 0,
+      charge_tax_percent: 0,
+      charge_advance_paid: 0,
+      charge_balance: 0,
+
       packagedetails: {
         description: "",
         serial_no: "",
@@ -585,6 +753,8 @@ export default {
       this.$refs["file-input"].reset();
     },
     onSubmit() {
+      this.getData();
+
       this.shipment
         .submit("patch", `/api/shipments/${this.shipment.id}`)
         .then(response => {
@@ -637,37 +807,64 @@ export default {
 
     calculateTotal() {
       const total =
-        parseInt(this.shipment.charge_transportation) +
-        parseInt(this.shipment.charge_handling) +
-        parseInt(this.shipment.charge_halting) +
-        parseInt(this.shipment.charge_Insurance) +
-        parseInt(this.shipment.charge_odc) +
-        parseInt(this.shipment.charge_tax_amount) +
-        parseInt(this.shipment.charge_odc);
-      this.shipment.charge_tax_amount =
-        (total * parseInt(this.shipment.charge_tax_percent)) / 100;
-      this.shipment.charge_total = this.shipment.charge_tax_amount + total;
-
-      if (this.shipment.charge_advance_paid > 0) {
-        this.shipment.charge_balance =
-          this.shipment.charge_total -
-          parseInt(this.shipment.charge_advance_paid);
+        parseInt(this.charge_transportation) +
+        parseInt(this.charge_handling) +
+        parseInt(this.charge_halting) +
+        parseInt(this.charge_Insurance) +
+        parseInt(this.charge_odc) +
+        parseInt(this.charge_tax_amount) +
+        parseInt(this.charge_odc);
+      this.charge_tax_amount =
+        (total * parseInt(this.charge_tax_percent)) / 100;
+      this.charge_total = this.charge_tax_amount + total;
+      if (this.charge_advance_paid > 0) {
+        this.charge_balance =
+          this.charge_total - parseInt(this.charge_advance_paid);
       } else {
-        this.shipment.charge_balance = this.shipment.charge_total;
+        this.charge_balance = this.charge_total;
       }
     },
     deletePackage(uid) {
       let i = this.shipment.package.map(item => item.uid).indexOf(uid); // find index of your object
       this.shipment.package.splice(i, 1); // remove it from array
+    },
+    changeEditingExpense() {
+      this.editExpenses = !this.editExpenses;
+      // copy value
+      this.charge_transportation = this.shipment.charge_transportation;
+      this.charge_handling = this.shipment.charge_handling;
+      this.charge_halting = this.shipment.charge_halting;
+      this.charge_Insurance = this.shipment.charge_Insurance;
+      this.charge_odc = this.shipment.charge_odc;
+      this.charge_tax_amount = this.shipment.charge_tax_amount;
+      this.charge_total = this.shipment.charge_total;
+      this.charge_tax_percent = this.shipment.charge_tax_percent;
+      this.charge_advance_paid = this.shipment.charge_advance_paid;
+      this.charge_balance = this.shipment.charge_balance;
+    },
+    getData() {
+      this.shipment.charge_transportation = this.charge_transportation;
+      this.shipment.charge_handling = this.charge_handling;
+      this.shipment.charge_halting = this.charge_halting;
+      this.shipment.charge_Insurance = this.charge_Insurance;
+      this.shipment.charge_odc = this.charge_odc;
+      this.shipment.charge_tax_amount = this.charge_tax_amount;
+      this.shipment.charge_total = this.charge_total;
+      this.shipment.charge_tax_percent = this.charge_tax_percent;
+      this.shipment.charge_advance_paid = this.charge_advance_paid;
+      this.shipment.charge_balance = this.charge_balance;
     }
   },
 
   computed: {
-    shipment() {
-      return new Form(this.$store.getters.getSingleShipment);
+    data() {
+      return this.$store.getters.getSingleShipment;
     },
     customers() {
       return this.$store.getters.getAllCustomers;
+    },
+    shipment() {
+      return new Form(this.data);
     }
   },
   created() {
