@@ -193,7 +193,7 @@
             <p>
               Consignee Name:
               <br />
-              {{shipment.receiver.name}}
+              {{shipment.receiver.company_name}}
               <br />
               {{shipment.receiver.address}}
               <br />
