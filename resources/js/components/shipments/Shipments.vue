@@ -246,7 +246,8 @@ export default {
   data() {
     return {
       file: null,
-      status: "pickup"
+      status: "pickup",
+      shipments: []
     };
   },
   methods: {
@@ -258,12 +259,19 @@ export default {
     }
   },
   created() {
-    this.getResults();
+    axios
+      .get("/api/shipments")
+      .then(response => (this.shipments = response.data))
+      .catch(function(error) {
+        // handle error
+
+        context.commit("catchErrors", error.response.data);
+      });
   },
   computed: {
-    shipments() {
-      return this.$store.getters.getAllShipments;
-    }
+    // shipments() {
+    //   return this.$store.getters.getAllShipments;
+    // }
   }
 };
 </script>
