@@ -22,7 +22,7 @@ class ShipmentController extends Controller
     public function index()
     {
        
-        $shipments = Shipment::with('package','sender')->paginate(250);
+        $shipments = Shipment::with('package','sender')->paginate(2);
         return ShipmentResource::collection($shipments);
 
 

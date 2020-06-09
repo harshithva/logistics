@@ -104,9 +104,6 @@
                     </tr>
                   </tfoot>
                   <tbody>
-                    <tr>
-                      <td>test</td>
-                    </tr>
                     <tr
                       role="row"
                       v-if="shipments.data"
@@ -149,10 +146,10 @@
             <div class="row">
               <div class="col-sm-12 col-md-5"></div>
               <div class="col-sm-12 col-md-7">
-                <!-- <pagination :data="shipments" @pagination-change-page="getResults">
+                <pagination :data="shipments" @pagination-change-page="getResults">
                   <span slot="prev-nav">&lt; Previous</span>
                   <span slot="next-nav">Next &gt;</span>
-                </pagination>-->
+                </pagination>
               </div>
             </div>
           </div>
@@ -254,8 +251,7 @@ export default {
   data() {
     return {
       file: null,
-      status: "pickup",
-      shipments: []
+      status: "pickup"
     };
   },
   methods: {
@@ -267,23 +263,12 @@ export default {
     }
   },
   created() {
-    axios
-      .get("/api/shipments")
-      .then(response => {
-        this.shipments = response.data;
-        console.log(response.data);
-      })
-
-      .catch(function(error) {
-        // handle error
-
-        context.commit("catchErrors", error.response.data);
-      });
+    this.getResults();
   },
   computed: {
-    // shipments() {
-    //   return this.$store.getters.getAllShipments;
-    // }
+    shipments() {
+      return this.$store.getters.getAllShipments;
+    }
   }
 };
 </script>

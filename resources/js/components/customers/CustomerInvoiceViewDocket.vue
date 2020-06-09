@@ -138,8 +138,7 @@
             <h6>
               <b>
                 Payment By:&nbsp;
-                <!-- <span class="badge badge-pill badge-success">Consignor</span> -->
-                ---
+                <span class="badge badge-pill badge-success">{{shipment.bill_to}}</span>
               </b>
               <br />
             </h6>

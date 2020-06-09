@@ -15,7 +15,7 @@ class QuoteController extends Controller
      */
     public function index()
     {
-        $quotes = Quote::with('customer','list')->paginate(200);
+        $quotes = Quote::with('customer','list')->paginate(15);
         return response()->json($quotes,200);
     }
 

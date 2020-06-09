@@ -62,11 +62,7 @@
                   <div class="col-md-6">
                     <h6 class="mb-2">Sender Info</h6>
                     <div class="form-group">
-                      <v-select
-                        :options="customers.data"
-                        label="name"
-                        @input="selectCustomer($event)"
-                      ></v-select>
+                      <v-select :options="customers" label="name" @input="selectCustomer($event)"></v-select>
                       <div class="mt-2">
                         <router-link to="/admin/customers/create">Add new</router-link>
                       </div>
@@ -75,11 +71,7 @@
                   <div class="col-md-6">
                     <h6 class="mb-2">Receiver Info</h6>
                     <div class="form-group">
-                      <v-select
-                        :options="customers.data"
-                        label="name"
-                        @input="selectReceiver($event)"
-                      ></v-select>
+                      <v-select :options="customers" label="name" @input="selectReceiver($event)"></v-select>
                       <div class="mt-2">
                         <router-link to="/admin/customers/create">Add new</router-link>
                       </div>
