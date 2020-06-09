@@ -105,8 +105,9 @@
                   </tfoot>
                   <tbody>
                     <tr role="row" v-for="(shipment,index) in shipments.data">
-                      <td class="sorting_1">{{shipment.docket_no}}</td>
-                      <td>{{shipment.created_at}}</td>
+                      <td class="sorting_1" v-if="shipment.docket_no">{{shipment.docket_no}}</td>
+                      <td class="sorting_1" v-else>---</td>
+                      <td>{{moment(shipment.created_at).format('DD/MM/YYYY')}}</td>
                       <td v-if="shipment.sender.name">{{shipment.sender.name}}</td>
                       <td v-else>---</td>
                       <td v-if="shipment.sender.address">{{shipment.sender.address}}</td>
