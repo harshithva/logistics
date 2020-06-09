@@ -117,10 +117,10 @@
           <div class="row">
             <div class="col-sm-12 col-md-5"></div>
             <div class="col-sm-12 col-md-7">
-              <pagination :data="customers" @pagination-change-page="getResults">
+              <!-- <pagination :data="customers" @pagination-change-page="getResults">
                 <span slot="prev-nav">&lt; Previous</span>
                 <span slot="next-nav">Next &gt;</span>
-              </pagination>
+              </pagination>-->
             </div>
           </div>
         </div>
