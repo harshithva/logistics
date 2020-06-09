@@ -269,7 +269,10 @@ export default {
   created() {
     axios
       .get("/api/shipments")
-      .then(response => console.log(response.data))
+      .then(response => {
+        this.shipments = response.data;
+        console.log(response.data);
+      })
 
       .catch(function(error) {
         // handle error
