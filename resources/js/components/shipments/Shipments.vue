@@ -132,15 +132,6 @@
                         >
                           <i class="fas fa-eye text-secondary"></i>
                         </router-link>
-                        <!-- <router-link
-                          to="/admin/shipments/1/edit"
-                          data-toggle="tooltip"
-                          data-placement="top"
-                          title="Edit"
-                        >
-                          <i class="fas fa-edit text-primary"></i>
-                        </router-link>-->
-                        <!-- <span class="badge badge-pill badge-info">Intransit</span> -->
                       </td>
                     </tr>
                   </tbody>
