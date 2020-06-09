@@ -90,7 +90,7 @@ export const store = new Vuex.Store({
         retrieveCustomers(context, page) {
 
             axios
-                .get("/api/customers?page=" + page)
+                .get("/api/customers")
                 .then(response => (context.commit('retrieveCustomers', response.data.data)))
                 .catch(function (error) {
                     // handle error

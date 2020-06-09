@@ -94,7 +94,7 @@
                   </tr>
                 </tfoot>
                 <tbody>
-                  <tr role="row" class="odd" v-for="customer in customers.data" :key="customer.id">
+                  <tr role="row" class="odd" v-for="customer in customers" :key="customer.id">
                     <td class="sorting_1">{{customer.name}}</td>
                     <td>{{customer.email}}</td>
                     <td>{{customer.phone}}</td>
@@ -164,7 +164,7 @@ export default {
   },
   methods: {
     getResults(page = 1) {
-      this.$store.dispatch("retrieveCustomers", page);
+      this.$store.dispatch("retrieveCustomers");
     }
   }
 };
