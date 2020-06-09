@@ -23,6 +23,12 @@ import VueQrcode from '@chenfengyuan/vue-qrcode';
 import vSelect from "vue-select";
 import "vue-select/dist/vue-select.css";
 
+import Vue from 'vue'
+import Chartkick from 'vue-chartkick'
+import Chart from 'chart.js'
+
+
+
 import 'bootstrap-vue/dist/bootstrap-vue.css';
 
 
@@ -61,6 +67,7 @@ Vue.component(VueQrcode.name, VueQrcode);
 Vue.use(BootstrapVue);
 Vue.component("vSelect", vSelect);
 Vue.component('pagination', require('laravel-vue-pagination'));
+Vue.use(Chartkick.use(Chart))
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

@@ -137,7 +137,7 @@
           <!-- Card Body -->
           <div class="card-body">
             <div class="chart-area">
-              <canvas id="myAreaChart"></canvas>
+              <column-chart :data="[['Sun', 32], ['Mon', 46], ['Tue', 28]]"></column-chart>
             </div>
           </div>
         </div>
