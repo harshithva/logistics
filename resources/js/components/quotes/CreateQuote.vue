@@ -18,7 +18,11 @@
                     <div class="col-md-6">
                       <div class="form-group">
                         <label for>Select Customer</label>
-                        <v-select :options="customers" label="name" @input="selectCustomer($event)"></v-select>
+                        <v-select
+                          :options="customers.data"
+                          label="name"
+                          @input="selectCustomer($event)"
+                        ></v-select>
                       </div>
                     </div>
                     <div class="col-md-6">

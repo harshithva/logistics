@@ -14,6 +14,7 @@ import CustomerInvoiceViewDocket from "../components/customers/CustomerInvoiceVi
 
 import CreateQuote from "../components/quotes/CreateQuote";
 import Quotes from "../components/quotes/Quotes";
+import EditQuote from "../components/quotes/EditQuote";
 
 import CreateShipment from "../components/shipments/CreateShipment";
 import Shipments from "../components/shipments/Shipments";
@@ -47,6 +48,7 @@ const routes = [
 
     { path: '/admin/quotes/create', component: CreateQuote },
     { path: '/admin/quotes', component: Quotes },
+    { path: '/admin/quotes/:quote_id/edit', component: EditQuote },
 
     { path: '/admin/shipments', component: Shipments },
     { path: '/admin/shipments/create', component: CreateShipment },

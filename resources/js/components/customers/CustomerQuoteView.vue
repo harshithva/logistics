@@ -25,9 +25,9 @@
         >
           <i class="fas fa-check"></i> Approve
         </button>
-        <a href class="btn btn-warning ml-2">
+        <router-link :to="'/admin/quotes/'+quote.id +'/edit'" class="btn btn-warning ml-2">
           <i class="fas fa-edit"></i> Edit
-        </a>
+        </router-link>
       </div>
     </div>
     <div class="card" ref="content">
@@ -122,7 +122,7 @@
                 <td>{{item.from}}</td>
                 <td>{{item.to}}</td>
                 <td>{{item.description}}</td>
-                <td>{{item.size}} && {{item.weight}}</td>
+                <td>{{item.size}} & {{item.weight}}</td>
                 <td>{{item.eta}} days</td>
                 <td>{{item.rate}}</td>
                 <td>{{item.advance}}</td>

@@ -27,5 +27,7 @@ Route::post("quotations/{id}/status/decline", 'QuoteController@decline_status');
 
 Route::get("shipments/{id}/balance_amount", 'ShipmentController@balance_amount');
 Route::get("shipments/{id}/shipment_status", 'ShipmentController@shipment_status');
+Route::post("shipments/{id}/shipment_send_email", 'ShipmentController@shipment_send_email');
+Route::post("shipments/{id}/shipment_send_sms", 'ShipmentController@shipment_send_sms');
 
 Route::apiResource("customers", 'CustomerController');

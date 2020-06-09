@@ -22,9 +22,13 @@
         >
           <i class="fas fa-check"></i> Docket
         </router-link>
-        <a href class="btn btn-info ml-2">
+        <button @click.prevent="sendMail" class="btn btn-info ml-2">
           <i class="fas fa-envelope"></i> Mail
-        </a>
+        </button>
+
+        <button @click.prevent="sendSms" class="btn btn-danger ml-2">
+          <i class="fas fa-envelope"></i> Sms
+        </button>
         <button
           type="button"
           class="btn btn-outline-info"
@@ -628,6 +632,36 @@ export default {
             icon: "error",
             title: "Oops...",
             text: "Something went wrong!"
+          });
+        });
+    },
+    sendMail() {
+      axios
+        .post(`/api/shipments/${this.shipment.id}/shipment_send_email`)
+        .then(function(response) {
+          Swal.fire("Good job!", "Email Sent Successfully", "success");
+        })
+        .catch(function(error) {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Something went wrong!",
+            footer: "Check Whether Sender email is valid"
+          });
+        });
+    },
+    sendSms() {
+      axios
+        .post(`/api/shipments/${this.shipment.id}/shipment_send_sms`)
+        .then(function(response) {
+          Swal.fire("Good job!", "Sms Sent Successfully", "success");
+        })
+        .catch(function(error) {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Something went wrong!",
+            footer: "Check Whether Sender phone number is valid"
           });
         });
     }

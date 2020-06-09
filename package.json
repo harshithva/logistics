@@ -30,6 +30,7 @@
         "bootstrap-vue": "^2.15.0",
         "dom-to-image": "^2.6.0",
         "jspdf": "^1.5.3",
+        "laravel-vue-pagination": "^2.3.1",
         "moment": "^2.26.0",
         "sweetalert2": "^9.14.0",
         "uuid": "^8.1.0",

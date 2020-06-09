@@ -60,6 +60,7 @@ Vue.component('Dashboard', require('./components/Dashboard.vue').default);
 Vue.component(VueQrcode.name, VueQrcode);
 Vue.use(BootstrapVue);
 Vue.component("vSelect", vSelect);
+Vue.component('pagination', require('laravel-vue-pagination'));
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

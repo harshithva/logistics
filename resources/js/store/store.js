@@ -87,11 +87,11 @@ export const store = new Vuex.Store({
         },
     },
     actions: {
-        retrieveCustomers(context) {
+        retrieveCustomers(context, page) {
 
             axios
-                .get("/api/customers")
-                .then(response => (context.commit('retrieveCustomers', response.data.data)))
+                .get("/api/customers?page=" + page)
+                .then(response => (context.commit('retrieveCustomers', response.data)))
                 .catch(function (error) {
                     // handle error
 
@@ -109,10 +109,10 @@ export const store = new Vuex.Store({
                     context.commit('catchErrors', error.response.data)
                 })
         },
-        retrieveShipments(context) {
+        retrieveShipments(context, page) {
             axios
-                .get("/api/shipments")
-                .then(response => (context.commit('retrieveShipments', response.data.data)))
+                .get("/api/shipments?page=" + page)
+                .then(response => (context.commit('retrieveShipments', response.data)))
                 .catch(function (error) {
                     // handle error
 
@@ -166,9 +166,9 @@ export const store = new Vuex.Store({
                 })
         },
 
-        retrieveQuotations(context) {
+        retrieveQuotations(context, page) {
             axios
-                .get("/api/quotations")
+                .get('/api/quotations?page=' + page)
                 .then(response => (context.commit('retrieveQuotations', response.data)))
                 .catch(function (error) {
                     // handle error

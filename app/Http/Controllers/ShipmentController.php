@@ -22,7 +22,7 @@ class ShipmentController extends Controller
     public function index()
     {
        
-        $shipments = Shipment::with('package','sender')->get();
+        $shipments = Shipment::with('package','sender')->paginate(2);
         return ShipmentResource::collection($shipments);
 
 
@@ -166,19 +166,6 @@ class ShipmentController extends Controller
         $shipment_status->customer_id= $request->sender_id;
         $shipment_status->save();
        
-        $phone= $shipment->sender->phone;
-        $message = 'This is to inform you that your shipment with Docket no'.$shipment->docket_no .'has been created.';
-        $this->send_sms($phone,$message);
-                
-          
-
-        $data = [
-            'docket_no' => $shipment->docket_no,
-          
-     ];
-
-    //  Mail::to($shipment->sender->email)->send(new ShipmentCreated($data));
-     Mail::to($shipment->sender->email)->send(new ShipmentCreated($data));
       
         return response()->json($shipment,201);
     }
@@ -349,12 +336,26 @@ class ShipmentController extends Controller
         return response()->json( $shipment->status->sortByDesc('created_at')->first() ,200);
     }
 
+    public function shipment_send_email($id) {
+        $shipment = Shipment::findOrFail($id); 
+        // $phone= $shipment->sender->phone;
+        // $message = 'This is to inform you that your shipment with Docket no: '.$shipment->docket_no .'has been created.';
+        // $this->send_sms($phone,$message);
+        $data = [
+            'docket_no' => $shipment->docket_no,
+          
+     ];
+     Mail::to($shipment->sender->email)->send(new ShipmentCreated($data));
+        return response()->json('sent',200);
+    }
 
-    public function send_sms($phone,$msg) {
 
-        
+    public function shipment_send_sms($id) {
+        $shipment = Shipment::findOrFail($id); 
+        $phone= $shipment->sender->phone;
+        $msg = 'This is to inform you that your shipment with Docket no: '.$shipment->docket_no.' has been created.';
+      
      
-
         $curl = curl_init();
         $authentication_key = '238341A2R5ezqRDIW5edd541bP1';
 
@@ -366,7 +367,7 @@ class ShipmentController extends Controller
           CURLOPT_TIMEOUT => 30,
           CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
           CURLOPT_CUSTOMREQUEST => "POST",
-          CURLOPT_POSTFIELDS => "{ \"sender\": \"SOCKET\", \"route\": \"4\", \"country\": \"91\", \"sms\": [ { \"message\": \"$msg\", \"to\": [ \"$phone\" ] }] }",
+          CURLOPT_POSTFIELDS => "{ \"sender\": \"GURUKL\", \"route\": \"4\", \"country\": \"91\", \"sms\": [ { \"message\": \"$msg\", \"to\": [ \"$phone\" ] }] }",
           CURLOPT_SSL_VERIFYHOST => 0,
           CURLOPT_SSL_VERIFYPEER => 0,
           CURLOPT_HTTPHEADER => array(
@@ -381,4 +382,5 @@ class ShipmentController extends Controller
         curl_close($curl);
 
     }
+       
 }
