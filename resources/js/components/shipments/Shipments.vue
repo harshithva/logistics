@@ -104,7 +104,7 @@
                     </tr>
                   </tfoot>
                   <tbody>
-                    <tr role="row" v-for="(shipment,index) in shipments.data">
+                    <tr role="row" v-for="(shipment,index) in shipments.data" :key="shipment.id">
                       <td class="sorting_1" v-if="shipment.docket_no">{{shipment.docket_no}}</td>
                       <td class="sorting_1" v-else>---</td>
                       <td>{{moment(shipment.created_at).format('DD/MM/YYYY')}}</td>
