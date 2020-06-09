@@ -261,7 +261,8 @@ export default {
   created() {
     axios
       .get("/api/shipments")
-      .then(response => (this.shipments = response.data))
+      .then(response => console.log(response.data))
+
       .catch(function(error) {
         // handle error
 
