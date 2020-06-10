@@ -285,6 +285,7 @@ class ShipmentController extends Controller
 
         $shipment->docket_no = $request->docket_no;
         $shipment->freight_invoice_number = $request->freight_invoice_number;
+        $shipment->date = $request->date;
         $shipment->save();
      
 

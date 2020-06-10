@@ -38,16 +38,17 @@
                 variant="danger"
               >{{shipment.errors.get('document')}}</b-alert>
               <!-- end errors -->
+                <form class="form" @keydown="shipment.errors.clear()" enctype="multipart/form-data">
               <div class="row">
                 <div class="col-md-4">
                   <div class="form-group">
                     <label for="Date">Shipment Date</label>
-                    <b-form-datepicker id="example-datepicker" v-model="form.date" class="mb-2"></b-form-datepicker>
+                    <b-form-datepicker id="example-datepicker" v-model="shipment.date" class="mb-2"></b-form-datepicker>
                   </div>
                 </div>
               </div>
 
-              <form class="form" @keydown="shipment.errors.clear()" enctype="multipart/form-data">
+            
                 <div class="row">
                   <div class="col-md-6">
                     <h6 class="mb-2">Sender Info</h6>
