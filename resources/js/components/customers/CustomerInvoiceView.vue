@@ -132,7 +132,7 @@
           </div>
           <div class="col"></div>
           <div class="col">
-            <p>Date of Invoice: {{moment(shipment.created_at).format('DD/MM/YYYY')}}</p>
+            <p>Date of Invoice: {{moment(shipment.date).format('DD/MM/YYYY')}}</p>
             <p>Invoice No: {{shipment.freight_invoice_number}}</p>
             <p>Transaction Type</p>
             <p>

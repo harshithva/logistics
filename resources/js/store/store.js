@@ -15,7 +15,10 @@ export const store = new Vuex.Store({
         balance_amount: {},
         shipment_status: {},
         quote: {},
-        quotes: []
+        quotes: [],
+        customer_invoice: {},
+        customer_quotes: {},
+        dashboard: {}
     },
     getters: {
         getAllCustomers(state) {
@@ -46,6 +49,15 @@ export const store = new Vuex.Store({
         },
         getAllQuotes(state) {
             return state.quotes;
+        },
+        getCustomerInvoices(state) {
+            return state.customer_invoice;
+        },
+        getCustomerQuotes(state) {
+            return state.customer_quotes;
+        },
+        getDashboardDetails(state) {
+            return state.dashboard;
         },
     },
     mutations: {
@@ -84,6 +96,18 @@ export const store = new Vuex.Store({
         retrieveQuotations(state, quotes) {
 
             state.quotes = quotes;
+        },
+        retrieveCustomerInvoice(state, invoice) {
+            state.customer_invoice = invoice;
+
+        },
+        retrieveCustomerQuotes(state, quotes) {
+            state.customer_quotes = quotes;
+
+        },
+        retrieveDashboardDetails(state, dashboard) {
+            state.dashboard = dashboard;
+
         },
     },
     actions: {
@@ -170,6 +194,36 @@ export const store = new Vuex.Store({
             axios
                 .get('/api/quotations?page=' + page)
                 .then(response => (context.commit('retrieveQuotations', response.data)))
+                .catch(function (error) {
+                    // handle error
+
+                    context.commit('catchErrors', error.response.data)
+                })
+        },
+        retrieveCustomerInvoice(context, customer_id) {
+            axios
+                .get(`/api/customers/${customer_id}/invoices`)
+                .then(response => (context.commit('retrieveCustomerInvoice', response.data)))
+                .catch(function (error) {
+                    // handle error
+
+                    context.commit('catchErrors', error.response.data)
+                })
+        },
+        retrieveCustomerQuotes(context, customer_id) {
+            axios
+                .get(`/api/customers/${customer_id}/quotes`)
+                .then(response => (context.commit('retrieveCustomerQuotes', response.data)))
+                .catch(function (error) {
+                    // handle error
+
+                    context.commit('catchErrors', error.response.data)
+                })
+        },
+        retrieveDashboardDetails(context, customer_id) {
+            axios
+                .get(`/api/dashboard`)
+                .then(response => (context.commit('retrieveDashboardDetails', response.data)))
                 .catch(function (error) {
                     // handle error
 

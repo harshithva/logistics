@@ -44,7 +44,7 @@
                       aria-sort="ascending"
                       aria-label="Name: activate to sort column descending"
                       style="width: 58px;"
-                    >Ref No</th>
+                    >Quotation No</th>
                     <th
                       class="sorting"
                       tabindex="0"
@@ -85,7 +85,7 @@
                 </thead>
                 <tfoot>
                   <tr>
-                    <th rowspan="1" colspan="1">Ref No</th>
+                    <th rowspan="1" colspan="1">Quotation No</th>
                     <th rowspan="1" colspan="1">Name</th>
                     <th rowspan="1" colspan="1">From</th>
                     <th rowspan="1" colspan="1">To</th>
@@ -94,7 +94,7 @@
                 </tfoot>
                 <tbody>
                   <tr role="row" v-if="quotes" v-for="(item,index) in quotes.data">
-                    <td>{{index+1}}</td>
+                    <td>{{item.quotation_no}}</td>
                     <td>{{item.customer.name}}</td>
                     <td v-if="item.list[0]">{{item.list[0].from}}</td>
                     <td v-else>---</td>

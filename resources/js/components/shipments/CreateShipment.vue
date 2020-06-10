@@ -38,26 +38,21 @@
                 variant="danger"
               >{{form.errors.get('document')}}</b-alert>
               <!-- end errors -->
-              <div class="row">
-                <div class="col-md-4">
-                  <div class="form-group">
-                    <label for="Serial Number">Shipment Date</label>
-
-                    <input
-                      type="text"
-                      class="form-control"
-                      :value="moment(new Date).format('DD/MM/YYYY')"
-                      disabled
-                    />
-                  </div>
-                </div>
-              </div>
               <form
                 class="form-horizontal form-material"
                 action="/admin/shipments"
                 @keydown="form.errors.clear()"
                 enctype="multipart/form-data"
               >
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="Date">Shipment Date</label>
+                      <b-form-datepicker id="example-datepicker" v-model="form.date" class="mb-2"></b-form-datepicker>
+                    </div>
+                  </div>
+                </div>
+
                 <div class="row">
                   <div class="col-md-6">
                     <h6 class="mb-2">Sender Info</h6>
@@ -118,7 +113,7 @@
                     </div>
                   </div>
                 </div>
-
+                <label for>Transaction Type</label>
                 <div class="input-group mb-2">
                   <select
                     class="custom-select"
@@ -749,6 +744,7 @@ export default {
         bill_to: "",
         document: "",
         remarks: "",
+        date: "",
         package: []
       }),
       file: null,
@@ -878,12 +874,15 @@ export default {
     }
   },
   mounted() {
-    return this.$store.dispatch("retrieveCustomers");
+    this.$store.dispatch("retrieveCustomers");
   },
   computed: {
     customers() {
       return this.$store.getters.getAllCustomers;
     }
+  },
+  created() {
+    this.form.date = moment(new Date()).format("YYYY-MM-DD");
   }
 };
 </script>

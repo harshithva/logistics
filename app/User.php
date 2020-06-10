@@ -46,8 +46,12 @@ class User extends Authenticatable
 
         
 
-        public function sender(){
-            return $this->hasMany(Shipment::class, 'sender_id');
+        public function shipment(){
+            return $this->hasMany(Shipment::class, 'sender_id','id');
+        }
+
+        public function quote(){
+            return $this->hasMany(Quote::class, 'customer_id','id');
         }
 
         public function receiver(){

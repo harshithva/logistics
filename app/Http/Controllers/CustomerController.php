@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Shipment;
+use App\Quote;
+use App\Payment;
 use App\Http\Resources\Customer as CustomerResource;
 
 class CustomerController extends Controller
@@ -119,5 +122,53 @@ class CustomerController extends Controller
         $customer = User::findOrFail($id);
         $customer->delete();
         return response()->json(null,204);
+    }
+
+    public function get_customer_invoices($id)
+    {
+        $customer = User::findOrFail($id);
+        // $customer->shipment->sum('charge_total');
+        $customer->paid_invoice = Payment::where('customer_id',$id)->sum('amount');
+       $customer->outstanding_invoice =$customer->shipment->sum('charge_total') -  $customer->paid_invoice;
+       $customer->total_invoice = $customer->shipment->count();
+       foreach($customer->shipment as $item)
+       {
+        $item->total_paid = $item->payment->sum('amount');
+        $item->shipment_status =  $item->status->sortByDesc('created_at')->first();
+       }
+        // $customer->shipment_status = $shipment->status->sortByDesc('created_at')->first();
+       
+        return response()->json($customer,200);
+    }
+
+    public function get_customer_quotes($id)
+    {
+        $customer = User::findOrFail($id);
+        // $customer->shipment->sum('charge_total');
+        $customer->quote_count = $customer->quote->count();
+        $customer->quote_approved_count = $customer->quote->where('status','approved')->count();
+        $customer->quote_approved_declined = $customer->quote->where('status','declined')->count();
+    
+        foreach($customer->quote as $item)
+        {
+         $item->from =  $item->list->first()->from;
+         $item->to =  $item->list->first()->to;
+        }
+       
+        return response()->json($customer,200);
+    }
+
+    public function dashboard()
+    {
+        // $earnings = Payment::sum('amount');
+        // $customers = User::where('role','customer')->count();
+        // $quotations = Quote::count();
+        // $shipments = Shipment::count();
+       $data =  (object) ['earnings' =>  Payment::sum('amount'),
+    'customers' => User::where('role','customer')->count(),
+    'quotations' =>  Quote::count(),
+    'shipments' =>  Shipment::count()
+    ];
+        return response()->json($data, 200);
     }
 }

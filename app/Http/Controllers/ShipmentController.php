@@ -10,6 +10,7 @@ use App\Payment;
 use App\ShipmentStatus;
 use App\Http\Resources\Shipment as ShipmentResource;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 
 class ShipmentController extends Controller
@@ -114,6 +115,14 @@ class ShipmentController extends Controller
         $shipment->sender_id = $request->sender_id;
         $shipment->remarks = $request->remarks;
         $shipment->bill_to = $request->bill_to;
+        if($request->date)
+        {
+            $shipment->date = $request->date;
+        }
+        else{
+            $shipment->date = Carbon::now();
+        }
+       
                 // Handle File Upload
         if($request->hasFile('document')){
             // Get filename with the extension
@@ -235,6 +244,8 @@ class ShipmentController extends Controller
             "bill_to" => 'max:500',
            
         ]);
+
+      
        
         $shipment->receiver_id = $request->receiver_id;
       
@@ -338,9 +349,6 @@ class ShipmentController extends Controller
 
     public function shipment_send_email($id) {
         $shipment = Shipment::findOrFail($id); 
-        // $phone= $shipment->sender->phone;
-        // $message = 'This is to inform you that your shipment with Docket no: '.$shipment->docket_no .'has been created.';
-        // $this->send_sms($phone,$message);
         $data = [
             'docket_no' => $shipment->docket_no,
           
@@ -353,7 +361,17 @@ class ShipmentController extends Controller
     public function shipment_send_sms($id) {
         $shipment = Shipment::findOrFail($id); 
         $phone= $shipment->sender->phone;
-        $msg = 'This is to inform you that your shipment with Docket no: '.$shipment->docket_no.' has been created.';
+        if(strval($shipment->status->first()->status) == 'Awaiting Pickup')
+        {
+            $msg = 'SHIPMENT CREATED Your Consignment is ready for dispatch with docket number '.$shipment->docket_no.' Login at gurukal.co.in Or track your consignment at Gurukal.co.in';
+        }else if(strval($shipment->status->first()->status) == 'Dispatched') {
+            $msg =  'SHIPMENT DISPATCHED Your Consignment with docket number '.$shipment->docket_no.'is Dispatched Login at gurukal.co.in Or track your consignment at Gurukal.co.in';
+        }else if(strval($shipment->status->first()->status) == 'Delivered') {
+            $msg =  'SHIPMENT DELIVERED Your Consignment with docket number '. $shipment->docket_no .' is DELIVERED Kindly let us know how was your experience by clicking the following link Gurukal.co.in/feedback Thank you';
+        }else{
+           $msg = 'Hi, This Message is to inform you that your shipment with Docket number '. $shipment->docket_no . ' has been successfully created.';
+        }
+      
       
      
         $curl = curl_init();

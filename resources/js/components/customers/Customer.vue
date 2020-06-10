@@ -17,6 +17,7 @@
                     class="form-control form-control-sm"
                     placeholder
                     aria-controls="dataTable"
+                    v-model="search"
                   />
                 </label>
               </div>
@@ -145,15 +146,26 @@ export default {
       }),
       dismissSecs: 5,
       dismissCountDown: 0,
-      showDismissibleAlert: false
+      showDismissibleAlert: false,
+      search: ""
     };
   },
-  mounted() {
-    this.getResults();
+  created() {
+    this.$store.dispatch("retrieveCustomers");
   },
   computed: {
     customers() {
       return this.$store.getters.getAllCustomers;
+
+      if (this.search) {
+        return new Form(
+          this.$store.getters.getAllCustomers.filter(item => {
+            return item.name.match(this.search);
+          })
+        );
+      } else {
+        return new Form(this.$store.getters.getAllCustomers);
+      }
     }
   },
   countDownChanged(dismissCountDown) {
@@ -162,10 +174,6 @@ export default {
   showAlert() {
     this.dismissCountDown = this.dismissSecs;
   },
-  methods: {
-    getResults(page = 1) {
-      this.$store.dispatch("retrieveCustomers");
-    }
-  }
+  methods: {}
 };
 </script>

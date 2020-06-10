@@ -10,10 +10,19 @@
                 class="rounded-circle"
                 width="100"
               />
-              <h4 class="card-title m-t-10">vinyas poojary</h4>
+              <h4 class="card-title m-t-10">{{customer.name}}</h4>
               <h6 class="card-subtitle">
-                <div class="badge badge-pill badge-success font-16">
-                  <span class="ti-user text-success"></span> Active
+                <div class="badge badge-pill badge-success font-16" v-if="customer.status == true">
+                  <span class="ti-user text-success"></span>
+                  Active
+                </div>
+
+                <div
+                  class="badge badge-pill badge-success font-16"
+                  v-else-if="customer.status == false"
+                >
+                  <span class="ti-user text-success"></span>
+                  Inactive
                 </div>
               </h6>
             </center>
@@ -23,20 +32,18 @@
           </div>
           <div class="card-body">
             <small class="text-muted">E-mail</small>
-            <h6>harshith11032001@gmail.com</h6>
+            <h6>{{customer.email}}</h6>
             <small class="text-muted p-t-30 db">Phone</small>
-            <h6>91 7975503096</h6>
+            <h6>91 {{customer.phone}}</h6>
             <small class="text-muted p-t-30 db">Address</small>
-            <h6>india, MANGALORE, 574154, MULKI, SHAMA SADANA SHIMANTHUR PANJINADKA POST</h6>
+            <h6>{{customer.address}}</h6>
           </div>
-          <div class="card-body row text-center">
-            <div class="col-6 border-right">
-              <h6>2020-05-29 09:02:39</h6>
-              <span>Registration Date</span>
-            </div>
-            <div class="col-6">
-              <h6>2020-05-29 11:27:07</h6>
-              <span>Last Login</span>
+          <div class="card-body row">
+            <div class="col-12">
+              <p
+                class="font-s"
+              >Registration Date: {{moment(customer.created_at).format('YYYY-MM-DD')}}</p>
+              <p></p>
             </div>
           </div>
         </div>
@@ -77,10 +84,12 @@
                         <div
                           class="text-xs font-weight-bold text-danger text-uppercase mb-1"
                         >Outstanding Invoices</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">₹40,000</div>
+                        <div
+                          class="h5 mb-0 font-weight-bold text-gray-800"
+                        >₹ {{customer.outstanding_invoice}}</div>
                       </div>
                       <div class="col-auto">
-                        <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                        <i class="fas fa-rupee-sign fa-2x text-gray-300"></i>
                       </div>
                     </div>
                   </div>
@@ -94,7 +103,9 @@
                         <div
                           class="text-xs font-weight-bold text-success text-uppercase mb-1"
                         >Paid Invoices</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">₹215,000</div>
+                        <div
+                          class="h5 mb-0 font-weight-bold text-gray-800"
+                        >₹ {{customer.paid_invoice}}</div>
                       </div>
                       <div class="col-auto">
                         <i class="fas fa-rupee-sign fa-2x text-gray-300"></i>
@@ -113,7 +124,9 @@
                         >Total Invoices</div>
                         <div class="row no-gutters align-items-center">
                           <div class="col-auto">
-                            <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">15</div>
+                            <div
+                              class="h5 mb-0 mr-3 font-weight-bold text-gray-800"
+                            >{{customer.total_invoice}}</div>
                           </div>
                           <div class="col">
                             <div class="progress progress-sm mr-2">
@@ -149,21 +162,7 @@
               <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
                 <div class="row">
                   <div class="col-sm-12 col-md-6">
-                    <div class="dataTables_length" id="dataTable_length">
-                      <label>
-                        Show
-                        <select
-                          name="dataTable_length"
-                          aria-controls="dataTable"
-                          class="custom-select custom-select-sm form-control form-control-sm"
-                        >
-                          <option value="10">10</option>
-                          <option value="25">25</option>
-                          <option value="50">50</option>
-                          <option value="100">100</option>
-                        </select> entries
-                      </label>
-                    </div>
+                    <div class="dataTables_length" id="dataTable_length"></div>
                   </div>
                   <div class="col-sm-12 col-md-6 text-right">
                     <div id="dataTable_filter" class="dataTables_filter">
@@ -174,6 +173,7 @@
                           class="form-control form-control-sm"
                           placeholder
                           aria-controls="dataTable"
+                          v-model="search"
                         />
                       </label>
                     </div>
@@ -211,15 +211,7 @@
                             aria-label="Position: activate to sort column ascending"
                             style="width: 40px;"
                           >Date</th>
-                          <th
-                            class="sorting"
-                            tabindex="0"
-                            aria-controls="dataTable"
-                            rowspan="1"
-                            colspan="1"
-                            aria-label="Office: activate to sort column ascending"
-                            style="width: 50px;"
-                          >Receiver Name</th>
+
                           <th
                             class="sorting"
                             tabindex="0"
@@ -253,28 +245,37 @@
                         <tr>
                           <th rowspan="1" colspan="1">Frieght Invoice No</th>
                           <th rowspan="1" colspan="1">Date</th>
-                          <th rowspan="1" colspan="1">Receiver Name</th>
+
                           <th rowspan="1" colspan="1">Amount</th>
                           <th rowspan="1" colspan="1">Status</th>
                           <th rowspan="1" colspan="1" class="text-center">Action</th>
                         </tr>
                       </tfoot>
                       <tbody>
-                        <tr role="row" class="odd">
-                          <td>#GK859565565</td>
-                          <td>01/06/2020</td>
-                          <td>Vinyas</td>
-                          <td>1000</td>
+                        <tr v-if="customer.shipment" v-for="shipment in customer.shipment">
+                          <td>{{shipment.freight_invoice_number}}</td>
+                          <td>{{shipment.date}}</td>
+
+                          <td>{{shipment.charge_total}}</td>
                           <td>
-                            <span class="badge badge-success">Delivered</span>
-                            <span class="badge badge-danger">Unpaid</span>
+                            <span class="badge badge-success">{{shipment.status[0].status}}</span>
+                            <span
+                              class="badge badge-pill badge-danger"
+                              v-if="shipment.total_paid <= 0"
+                            >Pending</span>
+                            <span
+                              class="badge badge-pill badge-success"
+                              v-else-if="shipment.total_paid >= shipment.charge_total"
+                            >Paid</span>
+
+                            <span class="badge badge-pill badge-warning" v-else>Partial</span>
                           </td>
                           <td align="center">
                             <router-link
-                              to="/admin/customers/1/invoices/1/view"
+                              :to="'/admin/customers/'+ shipment.sender_id +'/invoices/' + shipment.id +'/view'"
                               data-toggle="tooltip"
                               data-placement="top"
-                              title="View Customer"
+                              title="View Invoice"
                             >
                               <i class="fas fa-eye text-secondary"></i>
                             </router-link>
@@ -282,97 +283,6 @@
                         </tr>
                       </tbody>
                     </table>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-sm-12 col-md-5">
-                    <div
-                      class="dataTables_info"
-                      id="dataTable_info"
-                      role="status"
-                      aria-live="polite"
-                    >Showing 1 to 10 of 57 entries</div>
-                  </div>
-                  <div class="col-sm-12 col-md-7">
-                    <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
-                      <ul class="pagination">
-                        <li
-                          class="paginate_button page-item previous disabled"
-                          id="dataTable_previous"
-                        >
-                          <a
-                            href="#"
-                            aria-controls="dataTable"
-                            data-dt-idx="0"
-                            tabindex="0"
-                            class="page-link"
-                          >Previous</a>
-                        </li>
-                        <li class="paginate_button page-item active">
-                          <a
-                            href="#"
-                            aria-controls="dataTable"
-                            data-dt-idx="1"
-                            tabindex="0"
-                            class="page-link"
-                          >1</a>
-                        </li>
-                        <li class="paginate_button page-item">
-                          <a
-                            href="#"
-                            aria-controls="dataTable"
-                            data-dt-idx="2"
-                            tabindex="0"
-                            class="page-link"
-                          >2</a>
-                        </li>
-                        <li class="paginate_button page-item">
-                          <a
-                            href="#"
-                            aria-controls="dataTable"
-                            data-dt-idx="3"
-                            tabindex="0"
-                            class="page-link"
-                          >3</a>
-                        </li>
-                        <li class="paginate_button page-item">
-                          <a
-                            href="#"
-                            aria-controls="dataTable"
-                            data-dt-idx="4"
-                            tabindex="0"
-                            class="page-link"
-                          >4</a>
-                        </li>
-                        <li class="paginate_button page-item">
-                          <a
-                            href="#"
-                            aria-controls="dataTable"
-                            data-dt-idx="5"
-                            tabindex="0"
-                            class="page-link"
-                          >5</a>
-                        </li>
-                        <li class="paginate_button page-item">
-                          <a
-                            href="#"
-                            aria-controls="dataTable"
-                            data-dt-idx="6"
-                            tabindex="0"
-                            class="page-link"
-                          >6</a>
-                        </li>
-                        <li class="paginate_button page-item next" id="dataTable_next">
-                          <a
-                            href="#"
-                            aria-controls="dataTable"
-                            data-dt-idx="7"
-                            tabindex="0"
-                            class="page-link"
-                          >Next</a>
-                        </li>
-                      </ul>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -459,3 +369,36 @@
   color: white;
 }
 </style>
+
+<script>
+export default {
+  data() {
+    return {
+      search: ""
+    };
+  },
+  computed: {
+    customer() {
+      if (this.search) {
+        return new Form(
+          this.$store.getters.getCustomerInvoices.filter(item => {
+            return this.search
+              .toLowerCase()
+              .split(" ")
+              .every(v =>
+                item.shipment.freight_invoice_number.toLowerCase().includes(v)
+              );
+          })
+        );
+      } else {
+        return new Form(this.$store.getters.getCustomerInvoices);
+      }
+    }
+  },
+  created() {
+    this.$store.dispatch("retrieveCustomerInvoice", this.$route.params.id);
+  },
+  mounted() {},
+  methods: {}
+};
+</script>

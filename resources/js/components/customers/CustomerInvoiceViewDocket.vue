@@ -49,11 +49,15 @@
       <div class="card-body">
         <div class="row">
           <div class="col">
-            <p>Docket</p>
+            <p>
+              <b>DOCKET</b>
+            </p>
           </div>
           <div class="col-7"></div>
           <div class="col">
-            <p class="text-right">original</p>
+            <p class="text-right">
+              <b>ORIGINAL</b>
+            </p>
           </div>
         </div>
 
@@ -78,8 +82,10 @@
             </p>
           </div>
           <div class="col text-right">
-            <p>Date: {{moment(shipment.created_at).format('DD/MM/YYYY')}}</p>
-            <p>Docket No: {{shipment.docket_no}}</p>
+            <p>Date: {{moment(shipment.date).format('DD/MM/YYYY')}}</p>
+            <p>
+              <b>Docket No: {{shipment.docket_no}}</b>
+            </p>
             <br />
             <p>Transaction Type</p>
             <p>

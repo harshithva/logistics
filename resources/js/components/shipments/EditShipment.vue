@@ -41,17 +41,12 @@
               <div class="row">
                 <div class="col-md-4">
                   <div class="form-group">
-                    <label for="Serial Number">Shipment Date</label>
-
-                    <input
-                      type="text"
-                      class="form-control"
-                      :value="moment(new Date).format('DD/MM/YYYY')"
-                      disabled
-                    />
+                    <label for="Date">Shipment Date</label>
+                    <b-form-datepicker id="example-datepicker" v-model="form.date" class="mb-2"></b-form-datepicker>
                   </div>
                 </div>
               </div>
+
               <form class="form" @keydown="shipment.errors.clear()" enctype="multipart/form-data">
                 <div class="row">
                   <div class="col-md-6">

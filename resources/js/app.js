@@ -34,6 +34,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css';
 
 import moment from 'moment';
 Vue.prototype.moment = moment
+window.moment = moment
 
 import Swal from 'sweetalert2'
 window.Swal = Swal;
