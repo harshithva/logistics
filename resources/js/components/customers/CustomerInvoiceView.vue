@@ -110,11 +110,11 @@
         </div>
         <div class="row mt-2">
           <div class="col">
-            <img :src="logo" style="max-width:8rem" />
+            <img :src="logo" style="max-width:10rem" />
           </div>
           <div class="col"></div>
           <div class="col">
-            <h5 class="display-4">
+            <h5 style="font-size:2rem">
               <b>FREIGHT INVOICE</b>
             </h5>
           </div>

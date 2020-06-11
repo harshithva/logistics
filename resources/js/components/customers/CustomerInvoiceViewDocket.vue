@@ -63,7 +63,7 @@
 
         <div class="row mt-2">
           <div class="col-3">
-            <img :src="logo" style="max-width:8rem" />
+            <img :src="logo" style="max-width:20rem" />
           </div>
           <div class="col-6 caution-border text-center">
             <h1 class="text-danger" style="font-family:'Times New Roman';margin-bottom:-1rem;">
