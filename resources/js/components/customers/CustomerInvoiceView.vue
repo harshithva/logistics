@@ -105,7 +105,7 @@
       <div class="card-body">
         <div class="row">
           <div class="col">
-            <p>GST No: 29AYGPS3509N2Q</p>
+            <p>GST No: 29AYGPS3509N2ZQ</p>
           </div>
         </div>
         <div class="row mt-2">
@@ -114,7 +114,7 @@
           </div>
           <div class="col"></div>
           <div class="col">
-            <h5>
+            <h5 class="display-4">
               <b>FREIGHT INVOICE</b>
             </h5>
           </div>
@@ -132,8 +132,11 @@
           </div>
           <div class="col"></div>
           <div class="col">
+            <p style="font-size:1.3rem">
+              <b>Invoice No: {{shipment.freight_invoice_number}}</b>
+            </p>
             <p>Date of Invoice: {{moment(shipment.date).format('DD/MM/YYYY')}}</p>
-            <p>Invoice No: {{shipment.freight_invoice_number}}</p>
+
             <p>Transaction Type</p>
             <p>
               <span class="badge badge-pill badge-success">{{shipment.package_transaction_type}}</span>

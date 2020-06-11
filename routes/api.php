@@ -22,8 +22,8 @@ Route::apiResource("shipments", 'ShipmentController');
 Route::apiResource("shipments/{id}/payments", 'PaymentController');
 Route::apiResource("shipments/{id}/status", 'ShipmentStatusController');
 Route::apiResource("quotations", 'QuoteController');
-Route::post("quotations/{id}/status/approve", 'QuoteController@approve_status');
-Route::post("quotations/{id}/status/decline", 'QuoteController@decline_status');
+Route::post("quotations/{quotation}/status/approve", 'QuoteController@approve_status');
+Route::post("quotations/{quotation}/status/decline", 'QuoteController@decline_status');
 
 Route::get("shipments/{id}/balance_amount", 'ShipmentController@balance_amount');
 Route::get("shipments/{id}/shipment_status", 'ShipmentController@shipment_status');

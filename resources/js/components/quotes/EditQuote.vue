@@ -18,7 +18,12 @@
                     <div class="col-md-6">
                       <div class="form-group">
                         <label for>Select Customer</label>
-                        <v-select :options="customers" label="name" @input="selectCustomer($event)"></v-select>
+                        <v-select
+                          :options="customers"
+                          label="name"
+                          @input="selectCustomer($event)"
+                          :value="quote.customer.name"
+                        ></v-select>
                       </div>
                     </div>
                     <div class="col-md-6">
@@ -28,9 +33,32 @@
                           type="text"
                           class="form-control"
                           name="password"
-                          :value="moment(new Date).format('DD/MM/YYYY')"
+                          :value="moment(quote.created_at).format('DD/MM/YYYY')"
                           placeholder="Date"
                           disabled
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for>Change Status</label>
+                        <select class="custom-select" v-model="quote.status">
+                          <option value="approved">Approved</option>
+                          <option value="declined">Declined</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for>Quotation no</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder="Quotation no"
+                          v-model="quote.quotation_no"
                         />
                       </div>
                     </div>
@@ -66,7 +94,7 @@
                                 <th scope="col">Action</th>
                               </tr>
                             </thead>
-                            <tr v-for="(quotation,index) in form.quotations" :key="index">
+                            <tr v-for="(quotation,index) in quote.list" :key="index">
                               <td>{{index+1}}</td>
                               <td>{{quotation.from}}</td>
                               <td>{{quotation.to}}</td>
@@ -76,7 +104,7 @@
                               <td>{{quotation.eta}}</td>
                               <td>{{quotation.rate}}</td>
                               <td>{{quotation.advance}}</td>
-                              <td @click="deleteQuotation(quotation.uid)">
+                              <td @click="deleteQuotation(quotation.id)">
                                 <i class="fas fa-times text-danger"></i>
                               </td>
                             </tr>
@@ -101,7 +129,7 @@
                       class="btn btn-outline-primary btn-confirmation"
                       @click.prevent="onSubmit"
                     >
-                      Save
+                      Update
                       <span>
                         <i class="icon-ok"></i>
                       </span>
@@ -227,19 +255,15 @@ export default {
       weight: "",
       eta: "",
       rate: "",
-      advance: "",
-      form: new Form({
-        customer_id: "",
-        quotations: []
-      })
+      advance: ""
     };
   },
   methods: {
     selectCustomer(e) {
-      this.form.customer_id = e.id;
+      this.quote.customer_id = e.id;
     },
     addQuotation() {
-      this.form.quotations.push({
+      this.quote.list.push({
         uid: uuidv4(),
         from: this.from,
         to: this.to,
@@ -264,14 +288,14 @@ export default {
     },
 
     onSubmit() {
-      const customer_id = this.form.customer_id;
-      this.form
-        .submit("post", "/api/quotations")
+      const customer_id = this.quote.customer_id;
+      this.quote
+        .submit("patch", `/api/quotations/${customer_id}`)
         .then(response => {
           Swal.fire({
             position: "top-end",
             icon: "success",
-            title: "Well done! Quote has been created",
+            title: "Well done! Quote has been Updated",
             showConfirmButton: false,
             timer: 1500
           });
@@ -287,18 +311,28 @@ export default {
           })
         );
     },
-    deleteQuotation(uid) {
-      let i = this.form.quotations.map(item => item.uid).indexOf(uid); // find index of your object
-      this.form.quotations.splice(i, 1); // remove it from array
+    deleteQuotation(id) {
+      let i = this.quote.list.map(item => item.id).indexOf(id); // find index of your object
+      console.log(i);
+
+      this.quote.list.splice(i, 1); // remove it from array
     }
   },
   computed: {
     customers() {
       return this.$store.getters.getAllCustomers;
+    },
+    data() {
+      return this.$store.getters.getSingleQuote;
+    },
+    quote() {
+      return new Form(this.data);
     }
   },
   created() {
     this.$store.dispatch("retrieveCustomers");
+
+    this.$store.dispatch("retrieveSingleQuote", this.$route.params.quote_id);
   }
 };
 </script>

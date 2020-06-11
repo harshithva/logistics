@@ -89,7 +89,8 @@ class QuoteController extends Controller
      */
     public function edit(Quote $quote)
     {
-        //
+
+        
     }
 
     /**
@@ -101,7 +102,32 @@ class QuoteController extends Controller
      */
     public function update(Request $request, Quote $quote)
     {
-        //
+       return $request;
+        $quote->customer_id = $request->customer_id; 
+        $quote->quotation_no = $request->quotation_no;
+        $quote->status = $request->status;
+        $quote->save();
+        
+        $request->list= json_encode($request->list);
+        $request->list= json_decode($request->list);
+
+        QuoteList::where('quote_id', $request->id)->delete();
+        foreach($request->list as $quotation)
+        {
+            $quotelist = new QuoteList;
+            $quotelist->from = $quotation->from;
+            $quotelist->to = $quotation->to;
+            $quotelist->description = $quotation->description;
+            $quotelist->size = $quotation->size;
+            $quotelist->weight = $quotation->weight;
+            $quotelist->eta= $quotation->eta;
+            $quotelist->rate= $quotation->rate;
+            $quotelist->advance= $quotation->advance;
+            $quotelist->quote_id= $quote->id;
+            $quotelist->save();
+        }
+
+        return response()->json($quote,200);
     }
 
     /**

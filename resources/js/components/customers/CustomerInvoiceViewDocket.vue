@@ -77,7 +77,7 @@
                 <br />Mob: +91 9620202001
                 <br />E-mail : logistics@gurukal.co.in
                 <br />Website: www.gurukal.co.in
-                <br />GST No: 29AYGPS3509N2Q
+                <br />GST No: 29AYGPS3509N2ZQ
               </b>
             </p>
           </div>
