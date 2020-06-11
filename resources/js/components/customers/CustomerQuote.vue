@@ -69,7 +69,7 @@
                 <i class="fas fa-rupee-sign fa-sm"></i> Invoices
               </router-link>
               <router-link
-                :to="'/admin/customers/'+ customer.id +/'quotes'"
+                :to="'/admin/customers/'+ customer.id +'/quotes'"
                 class="d-none d-sm-inline-block btn btn-sm btn-outline-primary shadow-sm ml-2 mr-2"
               >
                 <i class="fas fa-scroll fa-sm"></i> Quotes
