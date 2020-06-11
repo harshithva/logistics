@@ -42,7 +42,7 @@
           <small class="text-muted p-t-30 db">Phone</small>
           <h6>{{form.phone}}</h6>
           <small class="text-muted p-t-30 db">Address</small>
-          <h6>{{form.email}}</h6>
+          <h6>{{form.address}}</h6>
         </div>
         <div class="card-body row">
           <div class="col-12">
@@ -198,7 +198,6 @@
                 </router-link>
               </div>
             </div>
-            <input name="locker" type="hidden" value="274218" />
           </form>
         </div>
       </div>

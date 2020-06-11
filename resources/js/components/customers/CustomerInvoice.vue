@@ -34,7 +34,7 @@
             <small class="text-muted">E-mail</small>
             <h6>{{customer.email}}</h6>
             <small class="text-muted p-t-30 db">Phone</small>
-            <h6>91 {{customer.phone}}</h6>
+            <h6>{{customer.phone}}</h6>
             <small class="text-muted p-t-30 db">Address</small>
             <h6>{{customer.address}}</h6>
           </div>
