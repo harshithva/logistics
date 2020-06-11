@@ -288,28 +288,36 @@ export default {
     },
 
     onSubmit() {
-      const customer_id = this.quote.customer_id;
-      this.quote
-        .submit("patch", `/api/quotations/${customer_id}`)
-        .then(response => {
-          Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "Well done! Quote has been Updated",
-            showConfirmButton: false,
-            timer: 1500
-          });
-          this.$router.push(
-            `/admin/customers/${customer_id}/quotes/${response.id}/view`
-          );
-        })
-        .catch(error =>
-          Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "Something went wrong!"
+      if (this.quote.list.length > 0) {
+        const customer_id = this.quote.customer_id;
+        this.quote
+          .submit("patch", `/api/quotations/${customer_id}`)
+          .then(response => {
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "Well done! Quote has been Updated",
+              showConfirmButton: false,
+              timer: 1500
+            });
+            this.$router.push(
+              `/admin/customers/${customer_id}/quotes/${response.id}/view`
+            );
           })
-        );
+          .catch(error =>
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "Something went wrong!"
+            })
+          );
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Add Package!"
+        });
+      }
     },
     deleteQuotation(id) {
       let i = this.quote.list.map(item => item.id).indexOf(id); // find index of your object
