@@ -6,6 +6,8 @@ use App\Quote;
 use App\QuoteList;
 use Illuminate\Http\Request;
 
+use Snowfire\Beautymail\Beautymail;
+
 class QuoteController extends Controller
 {
     /**
@@ -160,5 +162,22 @@ class QuoteController extends Controller
      $quote = Quote::find($request);
      $quote->status = 'declined';
      $quote->save();
+    }
+
+
+    public function quote_send_email($request)
+    {
+        $quote = Quote::find($request);
+        // $quote->customer;
+        // $quote->list;
+        $beautymail = app()->make(\Snowfire\Beautymail\Beautymail::class);
+
+        $beautymail->send('emails.quotes.quote', compact('quote'), function($message)
+        {
+            $message
+                ->from('crm@gurukal.co.in')
+                ->to('harshith11032001@gmail.com', 'John Smith')
+                ->subject('Welcome!');
+        });
     }
 }

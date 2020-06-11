@@ -34,3 +34,18 @@ Auth::routes();
 Route::get('/admin/{any}', function () {
     return view('admin.master');
 })->where('any','.*');
+
+
+Route::get('/test', function()
+{
+    $beautymail = app()->make(Snowfire\Beautymail\Beautymail::class);
+    $data = 'Hi';
+    $beautymail->send('emails.welcome', compact('data'), function($message)
+    {
+        $message
+			->from('crm@gurukal.co.in')
+			->to('harshith11032001@gmail.com', 'John Smith')
+			->subject('Welcome!');
+    });
+
+});
