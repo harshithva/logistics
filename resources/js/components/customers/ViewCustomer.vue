@@ -99,7 +99,12 @@
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Password" />
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Phone"
+                      v-model="form.phone"
+                    />
                   </div>
                 </div>
               </div>
@@ -124,16 +129,6 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <input type="text" class="form-control" placeholder="GST No" v-model="form.gst" />
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <input
-                      type="text"
-                      class="form-control"
-                      placeholder="Phone"
-                      v-model="form.phone"
-                    />
                   </div>
                 </div>
               </div>

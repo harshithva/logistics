@@ -10,11 +10,11 @@ class Payment extends Model
 
 
     public function shipment(){
-        return $this->belongsTo(Shipment::class,'id');
+        return $this->belongsTo(Shipment::class,'shipment_id','id');
     }
 
     public function customer(){
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class,'customer_id','id');
     }
 
   

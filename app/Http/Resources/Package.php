@@ -16,4 +16,5 @@ class Package extends JsonResource
     {
         return parent::toArray($request);
     }
+
 }

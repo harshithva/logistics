@@ -6,93 +6,23 @@
           <div class="card-body">
             <div id="loader" style="display:none"></div>
             <div id="msgholder"></div>
-            <form
-              class="form-horizontal form-material"
-              @submit.prevent="onSubmit"
-              @keydown="form.errors.clear()"
-            >
-              <!-- show errors -->
-
-              <b-alert
-                v-if="form.errors.has('email')"
-                dismissible
-                show
-                variant="danger"
-              >{{form.errors.get('email')}}</b-alert>
-              <b-alert
-                v-if="form.errors.has('role')"
-                dismissible
-                show
-                variant="danger"
-              >{{form.errors.get('role')}}</b-alert>
-
-              <b-alert
-                v-if="form.errors.has('password')"
-                dismissible
-                show
-                variant="danger"
-              >{{form.errors.get('password')}}</b-alert>
-
-              <b-alert
-                v-if="form.errors.has('name')"
-                dismissible
-                show
-                variant="danger"
-              >{{form.errors.get('name')}}</b-alert>
-
-              <b-alert
-                v-if="form.errors.has('phone')"
-                dismissible
-                show
-                variant="danger"
-              >{{form.errors.get('phone')}}</b-alert>
-
-              <b-alert
-                v-if="form.errors.has('user_notes')"
-                dismissible
-                show
-                variant="danger"
-              >{{ form.errors.get('user_notes')}}</b-alert>
-              <!-- end errors -->
+            <form class="form-horizontal form-material">
               <section>
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
+                      <label for>Email</label>
                       <input
                         type="text"
                         class="form-control"
                         v-model="form.email"
                         placeholder="Email"
-                        :class="{'border border-danger': form.errors.has('email')}"
                       />
                     </div>
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
-                      <input
-                        type="text"
-                        class="form-control"
-                        v-model="form.password"
-                        placeholder="Password"
-                        :class="{'border border-danger': form.errors.has('password')}"
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <input
-                        type="text"
-                        class="form-control"
-                        v-model="form.name"
-                        placeholder="Name"
-                        :class="{'border border-danger': form.errors.has('name')}"
-                      />
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
+                      <label for>Phone</label>
                       <input
                         type="text"
                         class="form-control"
@@ -104,13 +34,20 @@
                 </div>
                 <div class="row">
                   <div class="col-md-6">
-                    <label for>Select Role</label>
                     <div class="form-group">
-                      <select
-                        v-model="form.role"
-                        class="custom-select"
-                        :class="{'border border-danger': form.errors.has('role')}"
-                      >
+                      <label for>Name</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        v-model="form.name"
+                        placeholder="Name"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for>Role</label>
+                      <select v-model="form.role" class="custom-select">
                         <option selected disabled>Roles</option>
                         <option value="admin">Admin</option>
                         <option value="employee">Employee</option>
@@ -124,12 +61,12 @@
                 <div class="row">
                   <div class="col-md-12">
                     <div class="form-group">
+                      <label for>User Notes</label>
                       <textarea
                         class="form-control"
                         v-model="form.user_notes"
                         rows="6"
                         placeholder="User Notes - For internal use only."
-                        :class="{'border border-danger': form.errors.has('user_notes')}"
                       ></textarea>
                     </div>
                   </div>
@@ -137,11 +74,7 @@
               </section>
               <div class="form-group">
                 <div class="col-sm-12">
-                  <button
-                    class="btn btn-outline-primary"
-                    type="submit"
-                    :disabled="form.errors.any()"
-                  >
+                  <button class="btn btn-outline-primary" type="submit" @click.prevent="onSubmit">
                     Update Staff
                     <span>
                       <i class="icon-ok"></i>
@@ -164,12 +97,39 @@
 
 <script>
 export default {
+  data() {
+    return {};
+  },
+  methods: {
+    onSubmit() {
+      axios
+        .patch(`/api/staffs/${this.form.id}`, this.form)
+        .then(response => {
+          this.$store.dispatch(
+            "retrieveSingleStaff",
+            this.$route.params.staff_id
+          );
+
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Staff has been updated",
+            showConfirmButton: false,
+            timer: 1500
+          });
+        })
+        .catch(error =>
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Something went wrong!"
+          })
+        );
+    }
+  },
   computed: {
-    data() {
+    form() {
       return this.$store.getters.getSingleStaff;
-    },
-    staff() {
-      return new Form(this.data);
     }
   },
   created() {

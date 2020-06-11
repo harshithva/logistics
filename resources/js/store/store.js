@@ -20,7 +20,9 @@ export const store = new Vuex.Store({
         customer_quotes: {},
         dashboard: {},
         staffs: {},
-        satff: {}
+        staff: {},
+        payments: [],
+        packages: []
     },
     getters: {
         getAllCustomers(state) {
@@ -66,6 +68,12 @@ export const store = new Vuex.Store({
         },
         getSingleStaff(state) {
             return state.staff;
+        },
+        getAllPayments(state) {
+            return state.payments;
+        },
+        getAllPackages(state) {
+            return state.packages;
         },
     },
     mutations: {
@@ -123,8 +131,16 @@ export const store = new Vuex.Store({
 
         },
         retrieveSingleStaff(state, staff) {
-
             state.staff = staff;
+        },
+        retrieveAllPayments(state, payments) {
+
+
+            state.payments = payments;
+        },
+        retrievePackages(state, packages) {
+
+            state.packages = packages;
         },
     },
     actions: {
@@ -261,6 +277,26 @@ export const store = new Vuex.Store({
             axios
                 .get(`/api/staffs/${staff_id}`)
                 .then(response => (context.commit('retrieveSingleStaff', response.data)))
+                .catch(function (error) {
+                    // handle error
+
+                    context.commit('catchErrors', error.response.data)
+                })
+        },
+        retrieveAllPayments(context) {
+            axios
+                .get(`/api/payments`)
+                .then(response => (context.commit('retrieveAllPayments', response.data)))
+                .catch(function (error) {
+                    // handle error
+
+                    context.commit('catchErrors', error.response.data)
+                })
+        },
+        retrievePackages(context) {
+            axios
+                .get(`/api/packages`)
+                .then(response => (context.commit('retrievePackages', response.data)))
                 .catch(function (error) {
                     // handle error
 

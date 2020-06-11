@@ -32,6 +32,9 @@ Route::post("shipments/{id}/shipment_send_email", 'ShipmentController@shipment_s
 
 Route::post("shipments/{id}/shipment_send_sms", 'ShipmentController@shipment_send_sms');
 
+Route::apiResource("payments", 'PaymentController');
+Route::apiResource("packages", 'PackageController');
+
 Route::apiResource("customers", 'CustomerController');
 Route::get("customers/{id}/invoices", 'CustomerController@get_customer_invoices');
 Route::get("customers/{id}/quotes", 'CustomerController@get_customer_quotes');

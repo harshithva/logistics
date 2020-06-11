@@ -80,7 +80,27 @@ class StaffController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name'=>'required|max:255',
+            'email'=>'required|email|max:255',
+            'phone'=>'max:255',
+            'role'=>'required|max:255',
+        ]);
+        $staff = User::findOrFail($id);
+        $staff->email = $request->email;
+        $staff->name = $request->name;
+        $staff->phone = $request->phone;
+        $staff->role = $request->role;
+        $staff->user_notes = $request->user_notes;
+        if($request->password != "")
+        {
+            $staff->password = $request->password;
+        }
+
+        $staff->save();
+
+       
+        return response()->json($staff,200);
     }
 
     /**

@@ -4,9 +4,6 @@
       <!-- Page Heading -->
       <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h6 class="m-0 font-weight-bold text-primary">General Reports</h6>
-        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-          <i class="fas fa-download fa-sm text-white-50"></i> Generate Report
-        </a>
       </div>
       <div class="row">
         <router-link
@@ -21,35 +18,13 @@
         >
           <i class="fas fa-rupee-sign fa-sm"></i> Payment Log
         </router-link>
-        <router-link
-          to="/admin/delivery_reports"
-          class="d-none d-sm-inline-block btn btn-sm btn-outline-primary shadow-sm ml-2 mr-2"
-        >
-          <i class="fas fa-truck fa-sm"></i> Delivery Reports
-        </router-link>
       </div>
     </div>
     <div class="card-body">
       <div class="table-responsive">
         <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
           <div class="row">
-            <div class="col-sm-12 col-md-6">
-              <div class="dataTables_length" id="dataTable_length">
-                <label>
-                  Show
-                  <select
-                    name="dataTable_length"
-                    aria-controls="dataTable"
-                    class="custom-select custom-select-sm form-control form-control-sm"
-                  >
-                    <option value="10">10</option>
-                    <option value="25">25</option>
-                    <option value="50">50</option>
-                    <option value="100">100</option>
-                  </select> entries
-                </label>
-              </div>
-            </div>
+            <div class="col-sm-12 col-md-6"></div>
             <div class="col-sm-12 col-md-6 text-right">
               <div id="dataTable_filter" class="dataTables_filter">
                 <label>
@@ -66,232 +41,52 @@
           </div>
           <div class="row">
             <div class="col-sm-12">
-              <table
-                class="table table-bordered dataTable"
-                id="dataTable"
-                width="100%"
-                cellspacing="0"
-                role="grid"
-                aria-describedby="dataTable_info"
-                style="width: 100%;"
-              >
+              <table class="table table-bordered table-responsive">
                 <thead>
                   <tr role="row">
-                    <th
-                      class="sorting_asc"
-                      tabindex="0"
-                      aria-controls="dataTable"
-                      rowspan="1"
-                      colspan="1"
-                      aria-sort="ascending"
-                      aria-label="Name: activate to sort column descending"
-                      style="width: 58px;"
-                    >Date</th>
-                    <th
-                      class="sorting"
-                      tabindex="0"
-                      aria-controls="dataTable"
-                      rowspan="1"
-                      colspan="1"
-                      aria-label="Position: activate to sort column ascending"
-                      style="width: 40px;"
-                    >Product</th>
-                    <th
-                      class="sorting"
-                      tabindex="0"
-                      aria-controls="dataTable"
-                      rowspan="1"
-                      colspan="1"
-                      aria-label="Office: activate to sort column ascending"
-                      style="width: 50px;"
-                    >From</th>
-                    <th
-                      class="sorting"
-                      tabindex="0"
-                      aria-controls="dataTable"
-                      rowspan="1"
-                      colspan="0.2"
-                      aria-label="Age: activate to sort column ascending"
-                      style="width: 31px;"
-                    >To</th>
-                    <th
-                      class="sorting"
-                      tabindex="0"
-                      aria-controls="dataTable"
-                      rowspan="1"
-                      colspan="0.2"
-                      aria-label="Age: activate to sort column ascending"
-                      style="width: 31px;"
-                    >Docket No</th>
-                    <th
-                      class="sorting"
-                      tabindex="0"
-                      aria-controls="dataTable"
-                      rowspan="1"
-                      colspan="0.2"
-                      aria-label="Age: activate to sort column ascending"
-                      style="width: 31px;"
-                    >Invoice No</th>
-                    <th
-                      class="sorting"
-                      tabindex="0"
-                      aria-controls="dataTable"
-                      rowspan="1"
-                      colspan="0.2"
-                      aria-label="Age: activate to sort column ascending"
-                      style="width: 31px;"
-                    >Amount</th>
-                    <th
-                      class="sorting"
-                      tabindex="0"
-                      aria-controls="dataTable"
-                      rowspan="1"
-                      colspan="0.2"
-                      aria-label="Age: activate to sort column ascending"
-                      style="width: 31px;"
-                    >Consignor</th>
-                    <th
-                      class="sorting"
-                      tabindex="0"
-                      aria-controls="dataTable"
-                      rowspan="1"
-                      colspan="0.2"
-                      aria-label="Age: activate to sort column ascending"
-                      style="width: 31px;"
-                    >Consignor GST</th>
-                    <th
-                      class="sorting"
-                      tabindex="0"
-                      aria-controls="dataTable"
-                      rowspan="1"
-                      colspan="0.2"
-                      aria-label="Age: activate to sort column ascending"
-                      style="width: 31px;"
-                    >Consignee GST</th>
-                    <th
-                      class="sorting"
-                      tabindex="0"
-                      aria-controls="dataTable"
-                      rowspan="1"
-                      colspan="0.2"
-                      aria-label="Age: activate to sort column ascending"
-                      style="width: 31px;"
-                    >Other Charges</th>
+                    <th>Date</th>
+                    <th>Product</th>
+                    <th>From</th>
+                    <th>To</th>
+                    <th>Docket No</th>
+                    <th>Invoice No</th>
+                    <th>Amount</th>
+                    <th>Consignor</th>
+                    <th>Consignee</th>
+                    <th>Consignor GST</th>
+                    <th>Consignee GST</th>
                   </tr>
                 </thead>
+                <tr v-for="item in packages">
+                  <td>{{moment(item.shipment.date).format("DD/MM/YYYY")}}</td>
+                  <td>{{item.description}}</td>
+                  <td>{{item.shipment.sender.address}}</td>
+                  <td>{{item.shipment.delivery_address}}</td>
+                  <td>{{item.shipment.docket_no}}</td>
+                  <td>{{item.shipment.freight_invoice_number}}</td>
+                  <td>{{item.shipment.charge_total}}</td>
+                  <td>{{item.shipment.sender.name}}</td>
+                  <td>{{item.shipment.receiver.name}}</td>
+                  <td>{{item.shipment.sender.gst}}</td>
+                  <td>{{item.shipment.receiver.gst}}</td>
+                </tr>
                 <tfoot>
                   <tr>
-                    <th rowspan="1" colspan="1">Date</th>
-                    <th rowspan="1" colspan="1">Product</th>
-                    <th rowspan="1" colspan="1">From</th>
-                    <th rowspan="1" colspan="1">To</th>
-                    <th rowspan="1" colspan="1">Docket No</th>
-                    <th rowspan="1" colspan="1">Invoice No</th>
-                    <th rowspan="1" colspan="1">Amount</th>
-                    <th rowspan="1" colspan="1">Consignor</th>
-                    <th rowspan="1" colspan="1">Consignor GST</th>
-                    <th rowspan="1" colspan="1">Consignee GST</th>
-                    <th rowspan="1" colspan="1">Other Charges</th>
+                    <th>Date</th>
+                    <th>Product</th>
+                    <th>From</th>
+                    <th>To</th>
+                    <th>Docket No</th>
+                    <th>Invoice No</th>
+                    <th>Amount</th>
+                    <th>Consignor</th>
+                    <th>Consignee</th>
+                    <th>Consignor GST</th>
+                    <th>Consignee GST</th>
                   </tr>
                 </tfoot>
-                <tbody>
-                  <tr role="row" class="odd">
-                    <td class="sorting_1"></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                </tbody>
+                <tbody></tbody>
               </table>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-12 col-md-5">
-              <div
-                class="dataTables_info"
-                id="dataTable_info"
-                role="status"
-                aria-live="polite"
-              >Showing 1 to 10 of 57 entries</div>
-            </div>
-            <div class="col-sm-12 col-md-7">
-              <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
-                <ul class="pagination">
-                  <li class="paginate_button page-item previous disabled" id="dataTable_previous">
-                    <a
-                      href="#"
-                      aria-controls="dataTable"
-                      data-dt-idx="0"
-                      tabindex="0"
-                      class="page-link"
-                    >Previous</a>
-                  </li>
-                  <li class="paginate_button page-item active">
-                    <a
-                      href="#"
-                      aria-controls="dataTable"
-                      data-dt-idx="1"
-                      tabindex="0"
-                      class="page-link"
-                    >1</a>
-                  </li>
-                  <li class="paginate_button page-item">
-                    <a
-                      href="#"
-                      aria-controls="dataTable"
-                      data-dt-idx="2"
-                      tabindex="0"
-                      class="page-link"
-                    >2</a>
-                  </li>
-                  <li class="paginate_button page-item">
-                    <a
-                      href="#"
-                      aria-controls="dataTable"
-                      data-dt-idx="3"
-                      tabindex="0"
-                      class="page-link"
-                    >3</a>
-                  </li>
-                  <li class="paginate_button page-item">
-                    <a
-                      href="#"
-                      aria-controls="dataTable"
-                      data-dt-idx="4"
-                      tabindex="0"
-                      class="page-link"
-                    >4</a>
-                  </li>
-                  <li class="paginate_button page-item">
-                    <a
-                      href="#"
-                      aria-controls="dataTable"
-                      data-dt-idx="5"
-                      tabindex="0"
-                      class="page-link"
-                    >5</a>
-                  </li>
-                  <li class="paginate_button page-item">
-                    <a
-                      href="#"
-                      aria-controls="dataTable"
-                      data-dt-idx="6"
-                      tabindex="0"
-                      class="page-link"
-                    >6</a>
-                  </li>
-                  <li class="paginate_button page-item next" id="dataTable_next">
-                    <a
-                      href="#"
-                      aria-controls="dataTable"
-                      data-dt-idx="7"
-                      tabindex="0"
-                      class="page-link"
-                    >Next</a>
-                  </li>
-                </ul>
-              </div>
             </div>
           </div>
         </div>
@@ -299,3 +94,23 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      file: null,
+      status: "pickup"
+    };
+  },
+  methods: {},
+  created() {
+    this.$store.dispatch("retrievePackages");
+  },
+  computed: {
+    packages() {
+      return this.$store.getters.getAllPackages;
+    }
+  }
+};
+</script>

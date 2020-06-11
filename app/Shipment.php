@@ -28,7 +28,7 @@ public function payment(){
 }
 
 public function status(){
-    return $this->hasMany(ShipmentStatus::class,'shipment_id');
+    return $this->hasOne(ShipmentStatus::class,'shipment_id')->latest();
 }
 
 }

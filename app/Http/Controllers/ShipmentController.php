@@ -23,7 +23,7 @@ class ShipmentController extends Controller
     public function index()
     {
        
-        $shipments = Shipment::with('package','sender')->paginate(30);
+        $shipments = Shipment::with('package','sender')->paginate(200);
         return ShipmentResource::collection($shipments);
 
 
@@ -345,7 +345,7 @@ class ShipmentController extends Controller
     public function shipment_status($id) {
         $shipment = Shipment::findOrFail($id);
         
-        return response()->json( $shipment->status->sortByDesc('created_at')->first() ,200);
+        return response()->json( $shipment->status ,200);
     }
 
     public function shipment_send_email($id) {
