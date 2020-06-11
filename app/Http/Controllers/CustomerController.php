@@ -7,6 +7,7 @@ use App\User;
 use App\Shipment;
 use App\Quote;
 use App\Payment;
+use App\ShipmentStatus;
 use App\Http\Resources\Customer as CustomerResource;
 
 class CustomerController extends Controller
@@ -164,11 +165,13 @@ class CustomerController extends Controller
         // $customers = User::where('role','customer')->count();
         // $quotations = Quote::count();
         // $shipments = Shipment::count();
+      
         $advance = Shipment::sum('charge_advance_paid') + Payment::sum('amount');
        $data =  (object) ['earnings' =>    $advance,
     'customers' => User::where('role','customer')->count(),
     'quotations' =>  Quote::count(),
-    'shipments' =>  Shipment::count()
+    'shipments' =>  Shipment::count(),
+    'pending_delivery' => ShipmentStatus::where('status','!=','Delivered')->count()
     ];
         return response()->json($data, 200);
     }

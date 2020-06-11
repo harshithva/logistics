@@ -14,7 +14,7 @@
         </router-link>
         <router-link
           to="/admin/payment_log"
-          class="d-none d-sm-inline-block btn btn-sm btn-outline-primary shadow-sm ml-3"
+          class="d-none d-sm-inline-block btn btn-sm btn-outline-primary shadow-sm"
         >
           <i class="fas fa-rupee-sign fa-sm"></i> Payment Log
         </router-link>
