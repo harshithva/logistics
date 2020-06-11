@@ -37,7 +37,8 @@
               </div>
               <div class="col-3">
                 <p>Current Status</p>
-                <p>Location : Mysore</p>
+                <p v-if="shipment_status.location">Location : {{shipment_status.location}}</p>
+                <p v-else>Location: Not Updated</p>
               </div>
             </div>
           </div>
@@ -166,8 +167,8 @@
                 <th scope="row">{{index+1}}</th>
                 <td>{{item.description}}</td>
                 <td>{{item.serial_no}}</td>
-                <!-- <td>{{item.invoice_no}}</td> -->
-                <td>--</td>
+                <td v-if="item.weight">{{item.weight}} Kg</td>
+                <td v-else>--</td>
                 <td>&#8377; {{item.cost}}</td>
               </tr>
             </table>
@@ -346,12 +347,19 @@ export default {
     shipment() {
       return this.$store.getters.getSingleShipment;
     },
-    created() {
-      this.$store.dispatch(
-        "retrieveSingleShipment",
-        this.$route.params.invoice_id
-      );
+    shipment_status() {
+      return this.$store.getters.getShipmentStatus;
     }
+  },
+  created() {
+    this.$store.dispatch(
+      "retrieveSingleShipment",
+      this.$route.params.invoice_id
+    );
+    this.$store.dispatch(
+      "retrieveShipmentStatus",
+      this.$route.params.invoice_id
+    );
   }
 };
 </script>

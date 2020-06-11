@@ -44,8 +44,8 @@ window.uuidv4 = uuidv4;
 
 // helpers
 import Form from './Helpers/Form'
-
 window.Form = Form
+
 
 
 // import Form from 'vue-js-form-helper';

@@ -34,3 +34,6 @@ Route::apiResource("customers", 'CustomerController');
 Route::get("customers/{id}/invoices", 'CustomerController@get_customer_invoices');
 Route::get("customers/{id}/quotes", 'CustomerController@get_customer_quotes');
 Route::get("dashboard", 'CustomerController@dashboard');
+
+
+Route::apiResource("staffs", 'StaffController');

@@ -3,124 +3,201 @@
     <div class="row justify-content-center">
       <div class="col-lg-8 col-xlg-12 col-md-12">
         <div class="card">
-          <div class="tab-content" id="pills-tabContent">
-            <div
-              class="tab-pane fade show active"
-              id="previous-month"
-              role="tabpanel"
-              aria-labelledby="pills-setting-tab"
+          <div class="card-body">
+            <div id="loader" style="display:none"></div>
+            <div id="msgholder"></div>
+            <form
+              class="form-horizontal form-material"
+              @submit.prevent="onSubmit"
+              @keydown="form.errors.clear()"
             >
-              <div class="card-body">
-                <div id="loader" style="display:none"></div>
-                <div id="msgholder"></div>
-                <form class="form-horizontal form-material" id="admin_form" method="post">
-                  <section>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <input
-                            type="text"
-                            class="form-control"
-                            name="username"
-                            placeholder="Email"
-                          />
-                        </div>
-                      </div>
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <input
-                            type="text"
-                            class="form-control"
-                            name="password"
-                            placeholder="Password"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <input type="text" class="form-control" name="fname" placeholder="Name" />
-                        </div>
-                      </div>
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <input
-                            type="text"
-                            class="form-control"
-                            name="fname"
-                            placeholder="Designation"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <input type="text" class="form-control" name="gst" placeholder="Phone" />
-                        </div>
-                      </div>
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <input
-                            type="text"
-                            class="form-control"
-                            name="code_phone"
-                            list="browsers6"
-                            autocomplete="off"
-                            required="required"
-                            placeholder="Staff Role"
-                          />
-                          <datalist id="browsers6">
-                            <option value="admin" selected disabled>Roles</option>
-                            <option value="admin">Admin</option>
-                            <option value="employee">Employee</option>
-                            <option value="driver">Driver</option>
-                            <option value="user">User</option>
-                          </datalist>
-                        </div>
-                      </div>
-                    </div>
+              <!-- show errors -->
 
-                    <div class="row">
-                      <div class="col-md-12">
-                        <div class="form-group">
-                          <textarea
-                            class="form-control"
-                            name="notes"
-                            rows="6"
-                            placeholder="User Notes - For internal use only."
-                          ></textarea>
-                        </div>
-                      </div>
-                    </div>
-                  </section>
-                  <div class="form-group">
-                    <div class="col-sm-12">
-                      <button
-                        class="btn btn-outline-primary btn-confirmation"
-                        name="dosubmit"
-                        type="submit"
-                      >
-                        Add Staff
-                        <span>
-                          <i class="icon-ok"></i>
-                        </span>
-                      </button>
-                      <router-link to="/admin" class="btn btn-outline-secondary btn-confirmation">
-                        <span>
-                          <i class="ti-share-alt"></i>
-                        </span> Return to the dashboard
-                      </router-link>
+              <b-alert
+                v-if="form.errors.has('email')"
+                dismissible
+                show
+                variant="danger"
+              >{{form.errors.get('email')}}</b-alert>
+              <b-alert
+                v-if="form.errors.has('role')"
+                dismissible
+                show
+                variant="danger"
+              >{{form.errors.get('role')}}</b-alert>
+
+              <b-alert
+                v-if="form.errors.has('password')"
+                dismissible
+                show
+                variant="danger"
+              >{{form.errors.get('password')}}</b-alert>
+
+              <b-alert
+                v-if="form.errors.has('name')"
+                dismissible
+                show
+                variant="danger"
+              >{{form.errors.get('name')}}</b-alert>
+
+              <b-alert
+                v-if="form.errors.has('phone')"
+                dismissible
+                show
+                variant="danger"
+              >{{form.errors.get('phone')}}</b-alert>
+
+              <b-alert
+                v-if="form.errors.has('user_notes')"
+                dismissible
+                show
+                variant="danger"
+              >{{ form.errors.get('user_notes')}}</b-alert>
+              <!-- end errors -->
+              <section>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <input
+                        type="text"
+                        class="form-control"
+                        v-model="form.email"
+                        placeholder="Email"
+                        :class="{'border border-danger': form.errors.has('email')}"
+                      />
                     </div>
                   </div>
-                  <input name="locker" type="hidden" value="274218" />
-                </form>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <input
+                        type="text"
+                        class="form-control"
+                        v-model="form.password"
+                        placeholder="Password"
+                        :class="{'border border-danger': form.errors.has('password')}"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <input
+                        type="text"
+                        class="form-control"
+                        v-model="form.name"
+                        placeholder="Name"
+                        :class="{'border border-danger': form.errors.has('name')}"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <input
+                        type="text"
+                        class="form-control"
+                        v-model="form.phone"
+                        placeholder="Phone"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <label for>Select Role</label>
+                    <div class="form-group">
+                      <select
+                        v-model="form.role"
+                        class="custom-select"
+                        :class="{'border border-danger': form.errors.has('role')}"
+                      >
+                        <option selected disabled>Roles</option>
+                        <option value="admin">Admin</option>
+                        <option value="employee">Employee</option>
+                        <!-- <option value="driver">Driver</option> -->
+                        <option value="customer">Customer</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <textarea
+                        class="form-control"
+                        v-model="form.user_notes"
+                        rows="6"
+                        placeholder="User Notes - For internal use only."
+                        :class="{'border border-danger': form.errors.has('user_notes')}"
+                      ></textarea>
+                    </div>
+                  </div>
+                </div>
+              </section>
+              <div class="form-group">
+                <div class="col-sm-12">
+                  <button
+                    class="btn btn-outline-primary"
+                    type="submit"
+                    :disabled="form.errors.any()"
+                  >
+                    Add Staff
+                    <span>
+                      <i class="icon-ok"></i>
+                    </span>
+                  </button>
+                  <router-link to="/admin" class="btn btn-outline-secondary">
+                    <span>
+                      <i class="ti-share-alt"></i>
+                    </span> Return to the dashboard
+                  </router-link>
+                </div>
               </div>
-            </div>
+            </form>
           </div>
         </div>
       </div>
     </div>
   </div>
 </template>
+
+
+<script>
+export default {
+  data() {
+    return {
+      form: new Form({
+        name: "",
+        email: "",
+        password: "",
+        phone: "",
+        role: "employee",
+        user_notes: ""
+      })
+    };
+  },
+  methods: {
+    onSubmit() {
+      this.form
+        .submit("post", "/api/staffs")
+        .then(response => {
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Staff Successfully created",
+            showConfirmButton: false,
+            timer: 1500
+          });
+        })
+        .catch(error =>
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Something went wrong!"
+          })
+        );
+    }
+  }
+};
+</script>

@@ -18,7 +18,9 @@ export const store = new Vuex.Store({
         quotes: [],
         customer_invoice: {},
         customer_quotes: {},
-        dashboard: {}
+        dashboard: {},
+        staffs: {},
+        satff: {}
     },
     getters: {
         getAllCustomers(state) {
@@ -58,6 +60,12 @@ export const store = new Vuex.Store({
         },
         getDashboardDetails(state) {
             return state.dashboard;
+        },
+        getAllStaffs(state) {
+            return state.staffs;
+        },
+        getSingleStaff(state) {
+            return state.staff;
         },
     },
     mutations: {
@@ -108,6 +116,15 @@ export const store = new Vuex.Store({
         retrieveDashboardDetails(state, dashboard) {
             state.dashboard = dashboard;
 
+        },
+        retrieveStaffs(state, staffs) {
+            state.staffs = staffs;
+
+
+        },
+        retrieveSingleStaff(state, staff) {
+
+            state.staff = staff;
         },
     },
     actions: {
@@ -224,6 +241,26 @@ export const store = new Vuex.Store({
             axios
                 .get(`/api/dashboard`)
                 .then(response => (context.commit('retrieveDashboardDetails', response.data)))
+                .catch(function (error) {
+                    // handle error
+
+                    context.commit('catchErrors', error.response.data)
+                })
+        },
+        retrieveStaffs(context) {
+            axios
+                .get(`/api/staffs`)
+                .then(response => (context.commit('retrieveStaffs', response.data)))
+                .catch(function (error) {
+                    // handle error
+
+                    context.commit('catchErrors', error.response.data)
+                })
+        },
+        retrieveSingleStaff(context, staff_id) {
+            axios
+                .get(`/api/staffs/${staff_id}`)
+                .then(response => (context.commit('retrieveSingleStaff', response.data)))
                 .catch(function (error) {
                     // handle error
 

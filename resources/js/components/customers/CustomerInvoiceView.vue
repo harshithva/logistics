@@ -453,7 +453,7 @@
                 </select>
               </div>
 
-              <div v-if="status.status == 'delivered'">
+              <div v-if="status.status == 'Delivered'">
                 <div class="col">
                   <div class="form-group">
                     <input
@@ -498,12 +498,17 @@
                 </div>
               </div>
 
-              <div v-else-if="status.status == 'pickup'"></div>
+              <div v-else-if="status.status == 'Awaiting Pickup'"></div>
               <div v-else>
                 <div class="row m-2">
                   <div class="col">
                     <div class="form-group">
-                      <input type="text" class="form-control" placeholder="Location" />
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Location"
+                        v-model="status.location"
+                      />
                     </div>
                   </div>
                 </div>
@@ -533,7 +538,7 @@ export default {
       logo: "https://i.ibb.co/WFdrW4M/Logo-Color-Text-Below.jpg",
       sign: "https://i.ibb.co/8BwTXcT/sign-rohith.png",
       status: new Form({
-        status: "pickup",
+        status: "Awaiting Pickup",
         customer_id: "",
         shipment_id: "",
         location: "",

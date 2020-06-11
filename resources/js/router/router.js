@@ -56,7 +56,7 @@ const routes = [
 
     { path: '/admin/staff/create', component: CreateStaff },
     { path: '/admin/staff', component: Staff },
-    { path: '/admin/staff/:id/edit', component: EditStaff },
+    { path: '/admin/staff/:staff_id/edit', component: EditStaff },
 
     { path: '/admin/reports', component: GeneralReports },
     { path: '/admin/payment_log', component: PaymentLog },

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\User;
 
 use Illuminate\Http\Request;
 
@@ -13,7 +14,8 @@ class StaffController extends Controller
      */
     public function index()
     {
-        //
+        $staff = User::all();
+        return response()->json($staff,200);
     }
 
     /**
@@ -34,7 +36,16 @@ class StaffController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name'=>'required|max:255',
+            'email'=>'required|email|unique:users|max:255',
+            'password'=>'required|max:255',
+            'phone'=>'max:255',
+            'role'=>'required|max:255',
+        ]);
+     
+        $customer = User::create($request->all());
+        return response()->json($customer,200);
     }
 
     /**
@@ -45,7 +56,8 @@ class StaffController extends Controller
      */
     public function show($id)
     {
-        //
+        $staff = User::findOrFail($id);
+        return response()->json($staff,200);
     }
 
     /**
@@ -79,6 +91,8 @@ class StaffController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $staff = User::findOrFail($id);
+        $staff->delete();
+        return response()->json(null,204);
     }
 }
