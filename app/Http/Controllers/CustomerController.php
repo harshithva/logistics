@@ -164,7 +164,8 @@ class CustomerController extends Controller
         // $customers = User::where('role','customer')->count();
         // $quotations = Quote::count();
         // $shipments = Shipment::count();
-       $data =  (object) ['earnings' =>  Payment::sum('amount'),
+        $advance = Shipment::sum('charge_advance_paid') + Payment::sum('amount');
+       $data =  (object) ['earnings' =>    $advance,
     'customers' => User::where('role','customer')->count(),
     'quotations' =>  Quote::count(),
     'shipments' =>  Shipment::count()
