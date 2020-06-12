@@ -135,7 +135,7 @@ class CustomerController extends Controller
        foreach($customer->shipment as $item)
        {
         $item->total_paid = $item->payment->sum('amount');
-        $item->shipment_status =  $item->status->sortByDesc('created_at')->first();
+        $item->shipment_status =  $item->status;
        }
         // $customer->shipment_status = $shipment->status->sortByDesc('created_at')->first();
        

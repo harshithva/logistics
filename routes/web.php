@@ -18,16 +18,18 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::get('/admin', function () {
-    return view('admin.master');
-});
+// Route::get('/admin', function () {
+//     return view('admin.master')
+// });
 Route::get('/template', function () {
     return new ShipmentCreated();
 });
 
 Auth::routes();
 
-// Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/admin', 'HomeController@index')->name('admin');
+Route::get('/staff', 'HomeController@staff')->name('staff');
+Route::get('/customer', 'HomeController@customer')->name('customer');
 
 // Route::view('/admin/{any}', 'admin.master');
 

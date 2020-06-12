@@ -114,10 +114,12 @@ export const store = new Vuex.Store({
             state.quotes = quotes;
         },
         retrieveCustomerInvoice(state, invoice) {
+
             state.customer_invoice = invoice;
 
         },
         retrieveCustomerQuotes(state, quotes) {
+
             state.customer_quotes = quotes;
 
         },

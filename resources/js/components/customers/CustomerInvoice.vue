@@ -258,7 +258,7 @@
 
                           <td>{{shipment.charge_total}}</td>
                           <td>
-                            <span class="badge badge-success">{{shipment.status[0].status}}</span>
+                            <span class="badge badge-success">{{shipment.status.status}}</span>
                             <span
                               class="badge badge-pill badge-danger"
                               v-if="shipment.total_paid <= 0"
@@ -395,10 +395,10 @@ export default {
       }
     }
   },
-  created() {
+  created() {},
+  mounted() {
     this.$store.dispatch("retrieveCustomerInvoice", this.$route.params.id);
   },
-  mounted() {},
   methods: {}
 };
 </script>
