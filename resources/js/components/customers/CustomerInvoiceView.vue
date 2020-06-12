@@ -334,18 +334,6 @@
           <form @keydown="payment.errors.clear()">
             <div class="modal-body">
               <div class="row">
-                <div class="input-group m-2">
-                  <select
-                    class="custom-select"
-                    id="inputGroupSelect04"
-                    v-model="payment.received_from"
-                  >
-                    <option selected disabled>Received From</option>
-                    <option value="consignor">Consignor</option>
-                    <option value="consignee">Consignee</option>
-                    <option value="others">Others</option>
-                  </select>
-                </div>
                 <div class="col-md-4">
                   <div class="form-group">
                     <label for="Serial Number">Payment Date</label>
@@ -547,7 +535,6 @@ export default {
         document: ""
       }),
       payment: new Form({
-        received_from: "consignor",
         payment_type: "cash",
         amount: "0",
         payment_date: "",
@@ -573,7 +560,15 @@ export default {
   methods: {
     addPayment() {
       this.payment.shipment_id = this.shipment.id;
-      this.payment.customer_id = this.shipment.sender.id;
+
+      if (this.shipment.bill_to == "consignor") {
+        this.payment.customer_id = this.shipment.sender.id;
+      } else if (this.shipment.bill_to == "consignee") {
+        this.payment.customer_id = this.shipment.receiver.id;
+      } else {
+        this.payment.customer_id = this.shipment.sender.id;
+      }
+
       if (this.payment.amount == 0 || "") {
         Swal.fire({
           icon: "error",

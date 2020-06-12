@@ -15,7 +15,7 @@ class CreateShipmentsTable extends Migration
     {
         Schema::create('shipments', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('receiver_id');
+      
             $table->text('delivery_address')->nullable();
           
         // package details
@@ -51,8 +51,11 @@ class CreateShipmentsTable extends Migration
 
 
             $table->unsignedBigInteger('sender_id');
+            $table->unsignedBigInteger('receiver_id');
+            $table->unsignedBigInteger('bill_to_id');
             $table->foreign('sender_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('receiver_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('bill_to_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

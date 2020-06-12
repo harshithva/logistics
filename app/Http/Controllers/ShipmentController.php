@@ -115,6 +115,23 @@ class ShipmentController extends Controller
         $shipment->sender_id = $request->sender_id;
         $shipment->remarks = $request->remarks;
         $shipment->bill_to = $request->bill_to;
+
+
+        if($request->bill_to == 'consignor')
+        {
+            $shipment->bill_to_id = $request->sender_id;
+        }
+
+        else if($request->bill_to == 'consignee')
+        {
+            $shipment->bill_to_id = $request->receiver_id;
+        }
+
+        else
+        {
+            $shipment->bill_to_id = $request->sender_id;
+        }
+        
         if($request->date)
         {
             $shipment->date = $request->date;
@@ -282,6 +299,21 @@ class ShipmentController extends Controller
         $shipment->sender_id = $request->sender_id;
         $shipment->remarks = $request->remarks;
         $shipment->bill_to = $request->bill_to;
+        if($request->bill_to == 'consignor')
+        {
+            $shipment->bill_to_id = $request->sender_id;
+        }
+
+        else if($request->bill_to == 'consignee')
+        {
+            $shipment->bill_to_id = $request->receiver_id;
+        }
+
+        else
+        {
+            $shipment->bill_to_id = $request->sender_id;
+        }
+        
 
         $shipment->docket_no = $request->docket_no;
         $shipment->freight_invoice_number = $request->freight_invoice_number;

@@ -15,7 +15,6 @@ class CreatePaymentsTable extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->string('received_from')->default('consignor');
             $table->string('payment_type')->default('cash');
             $table->decimal('amount',10,2)->default(0);
             $table->date('payment_date')->nullable();

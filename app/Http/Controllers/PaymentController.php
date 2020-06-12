@@ -52,7 +52,7 @@ class PaymentController extends Controller
         ]);
     
         $payment = new Payment;
-        $payment->received_from = $request->received_from;
+ 
         $payment->payment_type = $request->payment_type;
         $payment->customer_id = $request->customer_id;
         $payment->shipment_id = $request->shipment_id;

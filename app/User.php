@@ -47,7 +47,7 @@ class User extends Authenticatable
         
 
         public function shipment(){
-            return $this->hasMany(Shipment::class, 'sender_id','id');
+            return $this->hasMany(Shipment::class, 'bill_to_id','id');
         }
 
         public function quote(){
