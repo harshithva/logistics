@@ -207,6 +207,9 @@
               >In case of door delivery consignments the transport operator undertakes to effect door delivery against payment of their accured charges and surrendering the original consignee's copy by the consignor consignee at the destination branch In case door delivery is refused by consignee the transport operator shall unload the goods at their nearest branch at the risk and costs of consignor consignee. In case the Vehicle is detained by consignee upon arrival the consignee will have to pay the detention as demanded by them to the transport operator</li>
               <li
                 class="list-group-item"
+              >Contractual based customer shall make payment as per agreement</li>
+              <li
+                class="list-group-item"
               >The customer undertake to obtain delivery of goods from the transport operators destination office within 3 day of their arrival by surrendering the original consignee copy of lorry receipt and payment of accured freight, octroi and other charges. Upon- failure by any customer to obtain delivery within 3 days of arnval, the transport operator would entitle to levy storage charges of Rs 8 00 per OH Or part the reof per day. it would be the obligation of holder of lorry receipt to ascertain the date and time to arrival, of goods from the destination office of the transport operator</li>
               <li
                 class="list-group-item"

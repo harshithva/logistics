@@ -262,6 +262,9 @@
               >No claim for loss or injury to goods shall be entertained by transport operator after expiry of six months form the date of booking</li>
               <li
                 class="list-group-item"
+              >Contractual based customer shall make payment as per agreement</li>
+              <li
+                class="list-group-item"
               >In case of value not being declared at the time of booking of goods the transport operators Lability in case of loss or injury to goods shall not exceed Rs 100/- as per carriers act, and in any other the liability of transport operators shall not exceed Rs 100/-which would be applicable only in case the goods are not covered with insurance</li>
               <li
                 class="list-group-item"
