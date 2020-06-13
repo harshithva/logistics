@@ -45,7 +45,7 @@ class PaymentController extends Controller
         'customer_id' => 'required|max:255',
         'shipment_id' => 'required|max:255',
         'amount' => 'required|max:255',
-        'payment_date' =>'required|date|max:255',
+        'payment_date' =>'required|max:255',
         'bank_name' => 'max:255',
         'upi_ref_id'=> 'max:255',
         'cheque_no'=> 'max:255',

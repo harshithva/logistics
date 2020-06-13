@@ -147,6 +147,7 @@ export default {
     return {
       logo_src: "../dashboard/img/gurukal.png"
     };
-  }
+  },
+  name: "Sidebar"
 };
 </script>

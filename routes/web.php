@@ -38,6 +38,14 @@ Route::get('/admin/{any}', function () {
 })->where('any','.*');
 
 
+
+Route::get('/customer/{any}', function () {
+    return view('customer.master');
+})->where('any','.*');
+
+
+
+
 Route::get('/test', function()
 {
     $beautymail = app()->make(Snowfire\Beautymail\Beautymail::class);

@@ -17,7 +17,9 @@ import router from './router/router.js';
 import BootstrapVue from 'bootstrap-vue'
 const axios = require('axios').default;
 
+
 axios.defaults.baseURL = '/';
+axios.defaults.withCredentials = true;
 
 import VueQrcode from '@chenfengyuan/vue-qrcode';
 import vSelect from "vue-select";
@@ -64,6 +66,9 @@ window.Form = Form
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('Dashboard', require('./components/Dashboard.vue').default);
+Vue.component('CustomerDashboard', require('./components/CustomerDashboard.vue').default);
+Vue.component('Login', require('./components/auth/Login').default);
+
 Vue.component(VueQrcode.name, VueQrcode);
 Vue.use(BootstrapVue);
 Vue.component("vSelect", vSelect);
@@ -85,4 +90,20 @@ const app = new Vue({
     el: '#wrapper',
     router,
     store,
+    created() {
+        const userInfo = localStorage.getItem('user')
+        if (userInfo) {
+            const userData = JSON.parse(userInfo)
+            this.$store.commit('setUserData', userData)
+        }
+        axios.interceptors.response.use(
+            response => response,
+            error => {
+                if (error.response.status === 401) {
+                    this.$store.dispatch('logout')
+                }
+                return Promise.reject(error)
+            }
+        )
+    },
 });

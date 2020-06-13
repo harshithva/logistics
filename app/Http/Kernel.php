@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http;
+use Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -39,7 +40,13 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
 
+        // 'api' => [
+        //     'throttle:60,1',
+        //     \Illuminate\Routing\Middleware\SubstituteBindings::class,
+        // ],
+
         'api' => [
+            EnsureFrontendRequestsAreStateful::class,
             'throttle:60,1',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],

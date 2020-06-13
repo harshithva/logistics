@@ -390,6 +390,12 @@ class ShipmentController extends Controller
         return response()->json('sent',200);
     }
 
+    public function shipment_track($tracking_no) {
+        $shipment = Shipment::where('docket_no',$tracking_no)->first(); 
+        $shipment->track;
+        return response()->json($shipment,200);
+    }
+
 
     public function shipment_send_sms($id) {
         $shipment = Shipment::findOrFail($id); 

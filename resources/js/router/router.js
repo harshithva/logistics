@@ -30,11 +30,25 @@ import PaymentLog from "../components/reports/PaymentLog";
 import DeliveryReports from "../components/reports/DeliveryReports";
 
 import Settings from "../components/settings/Settings";
+import { LayoutPlugin } from 'bootstrap-vue';
+
+// customer dashboard
+import CustomerDashboardView from '../components/customer-components/CustomerDashboardView'
+import CustomerDashboardInvoice from '../components/customer-components/CustomerDashboardInvoice'
+import CustomerDashboardQuote from '../components/customer-components/CustomerDashboardQuote'
+import CustomerDashboardQuoteView from '../components/customer-components/CustomerDashboardQuoteView'
+import CustomerDashboardInvoiceView from '../components/customer-components/CustomerDashboardInvoiceView'
+import CustomerDashboardDocketView from '../components/customer-components/CustomerDashboardDocketView'
+import CustomerTrackShipment from '../components/customer-components/CustomerTrackShipment'
+
+
+
+// import Login from "../components/auth/Login.vue";
 
 Vue.use(VueRouter)
 
 const routes = [
-    { path: '/admin', component: Analytics },
+    { path: '/admin', component: Analytics, },
 
     { path: '/admin/customers/create', component: CreateCustomer },
     { path: '/admin/customers/:id', component: ViewCustomer, props: true },
@@ -43,6 +57,10 @@ const routes = [
     { path: '/admin/customers/:id/quotes/:quote_id/view', component: CustomerQuoteView },
     { path: '/admin/customers/:id/invoices/:invoice_id/view', component: CustomerInvoiceView, meta: { reuse: false } },
     { path: '/admin/customers/:id/invoices/:invoice_id/view/docket', component: CustomerInvoiceViewDocket },
+
+
+    // { path: '/admin/login', component: Login },
+
 
     { path: '/admin/customers', component: Customer },
 
@@ -63,6 +81,18 @@ const routes = [
     { path: '/admin/delivery_reports', component: DeliveryReports },
 
     { path: '/admin/settings', component: Settings },
+
+
+    // Customer Dashboard
+    { path: '/customer', component: CustomerDashboardInvoice },
+    { path: '/customer/edit', component: CustomerDashboardView },
+    { path: '/customer/quote', component: CustomerDashboardQuote },
+    { path: '/customer/quote/:quote_id/view', component: CustomerDashboardQuoteView },
+    { path: '/customer/invoice/:invoice_id/view', component: CustomerDashboardInvoiceView },
+    { path: '/customer/invoice/:invoice_id/docket/view', component: CustomerDashboardDocketView },
+    {
+        path: '/customer/track/shipment', component: CustomerTrackShipment,
+    },
 ]
 
 

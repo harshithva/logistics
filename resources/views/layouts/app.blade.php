@@ -33,6 +33,8 @@
     <!-- END GLOBAL MANDATORY SCRIPTS -->
     <script src="{{asset('assets/js/authentication/form-1.js')}}"></script>
 
+    <script src="{{asset('js/app.js')}}"></script>
+
 </body>
 
 </html>

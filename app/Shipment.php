@@ -31,4 +31,8 @@ public function status(){
     return $this->hasOne(ShipmentStatus::class,'shipment_id')->latest();
 }
 
+public function track(){
+    return $this->hasMany(ShipmentStatus::class,'shipment_id');
+}
+
 }
