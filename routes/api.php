@@ -40,6 +40,7 @@ Route::post('/login', function (Request $request) {
         ], 404);
     }
 
+
     $token = $user->createToken('my-app-token')->plainTextToken;
 
     $response = [

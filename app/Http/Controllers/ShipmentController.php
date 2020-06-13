@@ -161,7 +161,7 @@ class ShipmentController extends Controller
 
         $shipment->save();
         $my_id = sprintf('%04d', $shipment->id);
-        $freight_invoice_no = 'GL202021' .  $my_id;
+        $freight_invoice_no = 'GLCRM202021' .  $my_id;
         $docket_no = 'GLBNG' . $my_id;
         $shipment->docket_no = $docket_no;
         $shipment->freight_invoice_number = $freight_invoice_no;

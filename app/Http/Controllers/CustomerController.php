@@ -50,7 +50,7 @@ class CustomerController extends Controller
             'phone'=>'max:255',
             'company_name'=>'max:255',
         ]);
-     
+       
         $customer = User::create($request->all());
         return new CustomerResource($customer);
     }
