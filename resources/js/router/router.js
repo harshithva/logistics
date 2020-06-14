@@ -48,6 +48,7 @@ import CustomerTrackShipment from '../components/customer-components/CustomerTra
 Vue.use(VueRouter)
 
 const routes = [
+
     { path: '/admin', component: Analytics, },
 
     { path: '/admin/customers/create', component: CreateCustomer },
@@ -100,6 +101,7 @@ const router = new VueRouter({
     routes,
     hashbang: false,
     mode: 'history',
+
 })
 
 

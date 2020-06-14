@@ -126,7 +126,7 @@
                         >
                           <i class="fas fa-eye text-secondary"></i>
                         </router-link>
-
+                        <!-- 
                         <span
                           class="badge badge-pill badge-primary"
                           v-if="shipment.status.status == 'Awaiting pickup'"
@@ -135,7 +135,7 @@
                           class="badge badge-pill badge-success"
                           v-else-if="shipment.status.status == 'Delivered'"
                         >{{shipment.status.status}}</span>
-                        <span class="badge badge-pill badge-info" v-else>{{shipment.status.status}}</span>
+                        <span class="badge badge-pill badge-info" v-else-if="">{{shipment.status.status}}</span>-->
                       </td>
                     </tr>
                   </tbody>
