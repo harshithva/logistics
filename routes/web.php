@@ -28,6 +28,7 @@ Route::get('/template', function () {
 Auth::routes();
 
 Route::get('/admin', 'HomeController@index')->name('admin');
+Route::get('/track', 'HomeController@track')->name('track');
 Route::get('/staff', 'HomeController@staff')->name('staff');
 Route::get('/customer', 'HomeController@customer')->name('customer');
 

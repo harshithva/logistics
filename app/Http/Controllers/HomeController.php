@@ -35,4 +35,8 @@ class HomeController extends Controller
     {
         return view('customer.master');
     }
+    public function track()
+    {
+        return view('track');
+    }
 }

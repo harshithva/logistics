@@ -74,6 +74,7 @@ window.Form = Form
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('Dashboard', require('./components/Dashboard.vue').default);
 Vue.component('CustomerDashboard', require('./components/CustomerDashboard.vue').default);
+Vue.component('TrackingComponent', require('./components/customer-components/TrackingComponent.vue').default);
 Vue.component('Login', require('./components/auth/Login').default);
 
 Vue.component(VueQrcode.name, VueQrcode);
