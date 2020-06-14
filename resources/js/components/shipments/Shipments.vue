@@ -126,7 +126,7 @@
                           <i class="fas fa-eye text-secondary"></i>
                         </router-link>
 
-                        <!-- <span class="badge badge-pill badge-primary">{{shipment.status.status}}</span> -->
+                        <span class="badge badge-pill badge-primary">{{shipment.status.status}}</span>
                       </td>
                     </tr>
                   </tbody>

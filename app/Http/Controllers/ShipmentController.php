@@ -25,7 +25,7 @@ class ShipmentController extends Controller
     public function index()
     {
        
-        $shipments = Shipment::with('package','sender','status')->get();
+        $shipments = Shipment::with('status','sender')->get();
         return ShipmentResource::collection($shipments);
 
 
