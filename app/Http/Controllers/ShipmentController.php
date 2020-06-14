@@ -25,7 +25,10 @@ class ShipmentController extends Controller
     public function index()
     {
        
-        $shipments = Shipment::with('status','sender')->get();
+        $shipments = Shipment::with('sender')->get();
+        foreach($shipments as $shipment){
+           $shipment->current_status = $shipment->status->status;
+        }
         return ShipmentResource::collection($shipments);
 
 
