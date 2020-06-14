@@ -108,7 +108,7 @@
                   <tbody>
                     <tr role="row" v-for="(shipment,index) in shipments" :key="shipment.id">
                       <td class="sorting_1" v-if="shipment.docket_no">{{shipment.docket_no}}</td>
-                      <td class="sorting_1" v-else>---</td>
+                      <!-- <td class="sorting_1" v-else>---</td>
                       <td v-if="shipment.date">{{moment(shipment.date).format('DD/MM/YYYY')}}</td>
                       <td v-else>---</td>
                       <td v-if="shipment.sender.name">{{shipment.sender.name}}</td>
@@ -136,7 +136,7 @@
                           v-else-if="shipment.status.status == 'Delivered'"
                         >{{shipment.status.status}}</span>
                         <span class="badge badge-pill badge-info" v-else>{{shipment.status.status}}</span>
-                      </td>
+                      </td>-->
                     </tr>
                   </tbody>
                 </table>
