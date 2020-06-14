@@ -17,6 +17,8 @@
                     class="form-control form-control-sm"
                     placeholder
                     aria-controls="dataTable"
+                    v-model="search"
+                    @input="searchQuote"
                   />
                 </label>
               </div>
@@ -93,7 +95,7 @@
                   </tr>
                 </tfoot>
                 <tbody>
-                  <tr role="row" v-if="quotes" v-for="(item,index) in quotes.data">
+                  <tr role="row" v-for="(item,index) in quotes">
                     <td>{{item.quotation_no}}</td>
                     <td>{{item.customer.name}}</td>
                     <td v-if="item.list[0]">{{item.list[0].from}}</td>
@@ -127,15 +129,6 @@
               </table>
             </div>
           </div>
-          <div class="row">
-            <div class="col-sm-12 col-md-5"></div>
-            <div class="col-sm-12 col-md-7">
-              <pagination v-if="quotes" :data="quotes" @pagination-change-page="getResults">
-                <span slot="prev-nav">&lt; Previous</span>
-                <span slot="next-nav">Next &gt;</span>
-              </pagination>
-            </div>
-          </div>
         </div>
       </div>
     </div>
@@ -146,19 +139,21 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+      search: ""
+    };
   },
   computed: {
     quotes() {
-      return this.$store.getters.getAllQuotes;
+      return this.$store.getters.getFilteredQuotes;
     }
   },
   mounted() {
-    this.getResults();
+    this.$store.dispatch("retrieveQuotations");
   },
   methods: {
-    getResults(page = 1) {
-      this.$store.dispatch("retrieveQuotations", page);
+    searchQuote() {
+      this.$store.commit("searchQuote", this.search);
     }
   }
 };

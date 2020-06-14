@@ -1,3 +1,4 @@
+import { log } from "@chenfengyuan/vue-qrcode";
 
 export default ({
     // namespaced: true,
@@ -19,11 +20,18 @@ export default ({
         payments: [],
         packages: [],
         tracking_details: {},
-        isLoading: false
+        isLoading: false,
+        filteredCustomers: {},
+        filteredQuotes: {},
+        filteredShipments: {},
+
     },
     getters: {
         getAllCustomers(state) {
             return state.customers
+        },
+        getFilteredCustomers(state) {
+            return state.filteredCustomers;
         },
         getAllErrors(state) {
 
@@ -34,6 +42,9 @@ export default ({
         },
         getAllShipments(state) {
             return state.shipments;
+        },
+        getFilteredShipments(state) {
+            return state.filteredShipments;
         },
         getSingleShipment(state) {
 
@@ -50,6 +61,9 @@ export default ({
         },
         getAllQuotes(state) {
             return state.quotes;
+        },
+        getFilteredQuotes(state) {
+            return state.filteredQuotes;
         },
         getCustomerInvoices(state) {
             return state.customer_invoice;
@@ -82,6 +96,7 @@ export default ({
     mutations: {
         retrieveCustomers(state, customers) {
             state.customers = customers;
+            state.filteredCustomers = customers
 
         },
         retrieveSingleCustomer(state, customer) {
@@ -96,6 +111,7 @@ export default ({
 
         retrieveShipments(state, shipments) {
             state.shipments = shipments;
+            state.filteredShipments = shipments;
         },
         retrieveSingleShipment(state, shipment) {
 
@@ -116,6 +132,7 @@ export default ({
         retrieveQuotations(state, quotes) {
 
             state.quotes = quotes;
+            state.filteredQuotes = quotes;
         },
         retrieveCustomerInvoice(state, invoice) {
 
@@ -159,10 +176,57 @@ export default ({
             setTimeout(() => {
                 state.isLoading = !state.isLoading
             }, 500)
+        },
+        searchCustomer(state, search) {
+
+            if (search) {
+                state.filteredCustomers = state.customers.filter(item => {
+                    return item.name.trim().toLowerCase().includes(search.trim().toLowerCase()) ||
+                        item.address.trim().toLowerCase().includes(search.trim().toLowerCase()) ||
+                        item.email.trim().toLowerCase().includes(search.trim().toLowerCase()) ||
+                        item.phone.trim().toLowerCase().includes(search.trim().toLowerCase())
+                        ;
+                })
+            }
+            else {
+                state.filteredCustomers = state.customers;
+            }
+        },
+        searchShipment(state, search) {
+
+            if (search) {
+                state.filteredShipments = state.shipments.filter(item => {
+                    return item.docket_no.trim().toLowerCase().includes(search.trim().toLowerCase()) ||
+                        item.sender.name.trim().toLowerCase().includes(search.trim().toLowerCase()) ||
+                        item.sender.company_name.trim().toLowerCase().includes(search.trim().toLowerCase()) ||
+                        item.sender.address.trim().toLowerCase().includes(search.trim().toLowerCase())
+
+                        ;
+
+                })
+            }
+            else {
+                state.filteredShipments = state.shipments;
+            }
+        },
+
+        searchQuote(state, search) {
+
+            if (search) {
+                state.filteredQuotes = state.quotes.filter(item => {
+                    return item.quotation_no.trim().toLowerCase().includes(search.trim().toLowerCase()) ||
+                        item.customer.name.trim().toLowerCase().includes(search.trim().toLowerCase());
+
+                })
+            }
+            else {
+                state.filteredQuotes = state.quotes;
+            }
         }
+
     },
     actions: {
-        retrieveCustomers(context, page) {
+        retrieveCustomers(context) {
             context.commit('ToggleIsLoading');
             axios
                 .get("/api/customers")
@@ -186,11 +250,11 @@ export default ({
                     context.commit('catchErrors', error.response.data)
                 })
         },
-        retrieveShipments(context, page) {
+        retrieveShipments(context) {
             context.commit('ToggleIsLoading');
             axios
-                .get("/api/shipments?page=" + page)
-                .then(response => (context.commit('retrieveShipments', response.data)))
+                .get("/api/shipments")
+                .then(response => (context.commit('retrieveShipments', response.data.data)))
                 .catch(function (error) {
                     // handle error
 
@@ -244,10 +308,10 @@ export default ({
                 })
         },
 
-        retrieveQuotations(context, page) {
+        retrieveQuotations(context) {
             context.commit('ToggleIsLoading');
             axios
-                .get('/api/quotations?page=' + page)
+                .get('/api/quotations')
                 .then(response => (context.commit('retrieveQuotations', response.data)))
                 .catch(function (error) {
                     // handle error

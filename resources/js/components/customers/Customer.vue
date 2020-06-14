@@ -18,6 +18,7 @@
                     placeholder
                     aria-controls="dataTable"
                     v-model="search"
+                    @input="searchCustomer"
                   />
                 </label>
               </div>
@@ -155,17 +156,17 @@ export default {
   },
   computed: {
     customers() {
-      return this.$store.getters.getAllCustomers;
+      return this.$store.getters.getFilteredCustomers;
 
-      if (this.search) {
-        return new Form(
-          this.$store.getters.getAllCustomers.filter(item => {
-            return item.name.match(this.search);
-          })
-        );
-      } else {
-        return new Form(this.$store.getters.getAllCustomers);
-      }
+      // if (this.search) {
+      //   return new Form(
+      //     this.$store.getters.getAllCustomers.filter(item => {
+      //       return item.name.match(this.search);
+      //     })
+      //   );
+      // } else {
+      //   return new Form(this.$store.getters.getAllCustomers);
+      // }
     }
   },
   countDownChanged(dismissCountDown) {
@@ -174,6 +175,10 @@ export default {
   showAlert() {
     this.dismissCountDown = this.dismissSecs;
   },
-  methods: {}
+  methods: {
+    searchCustomer() {
+      this.$store.commit("searchCustomer", this.search);
+    }
+  }
 };
 </script>

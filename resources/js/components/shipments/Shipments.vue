@@ -18,6 +18,8 @@
                       class="form-control form-control-sm"
                       placeholder
                       aria-controls="dataTable"
+                      v-model="search"
+                      @input="searchShipment"
                     />
                   </label>
                 </div>
@@ -104,12 +106,7 @@
                     </tr>
                   </tfoot>
                   <tbody>
-                    <tr
-                      role="row"
-                      v-if="shipments.data"
-                      v-for="(shipment,index) in shipments.data"
-                      :key="shipment.id"
-                    >
+                    <tr role="row" v-for="(shipment,index) in shipments" :key="shipment.id">
                       <td class="sorting_1" v-if="shipment.docket_no">{{shipment.docket_no}}</td>
                       <td class="sorting_1" v-else>---</td>
                       <td v-if="shipment.date">{{moment(shipment.date).format('DD/MM/YYYY')}}</td>
@@ -143,15 +140,6 @@
                     </tr>
                   </tbody>
                 </table>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-sm-12 col-md-5"></div>
-              <div class="col-sm-12 col-md-7">
-                <pagination :data="shipments" @pagination-change-page="getResults">
-                  <span slot="prev-nav">&lt; Previous</span>
-                  <span slot="next-nav">Next &gt;</span>
-                </pagination>
               </div>
             </div>
           </div>
@@ -253,23 +241,24 @@ export default {
   data() {
     return {
       file: null,
-      status: "pickup"
+      status: "pickup",
+      search: ""
     };
   },
   methods: {
+    searchShipment() {
+      this.$store.commit("searchShipment", this.search);
+    },
     clearFiles() {
       this.$refs["file-input"].reset();
-    },
-    getResults(page = 1) {
-      this.$store.dispatch("retrieveShipments", page);
     }
   },
   created() {
-    this.getResults();
+    this.$store.dispatch("retrieveShipments");
   },
   computed: {
     shipments() {
-      return this.$store.getters.getAllShipments;
+      return this.$store.getters.getFilteredShipments;
     }
   }
 };
