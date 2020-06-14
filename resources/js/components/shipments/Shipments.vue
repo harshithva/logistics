@@ -25,7 +25,7 @@
                 </div>
               </div>
             </div>
-            <div class="row">
+            <div class="row" v-if="shipments">
               <div class="col-sm-12">
                 <table
                   class="table table-bordered dataTable"
