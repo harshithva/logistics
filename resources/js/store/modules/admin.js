@@ -186,7 +186,7 @@ export default ({
             if (search) {
                 state.filteredCustomers = state.customers.filter(item => {
                     return item.name.trim().toLowerCase().includes(search.trim().toLowerCase()) ||
-                        item.address.trim().toLowerCase().includes(search.trim().toLowerCase()) ||
+
                         item.email.trim().toLowerCase().includes(search.trim().toLowerCase()) ||
                         item.phone.trim().toLowerCase().includes(search.trim().toLowerCase())
                         ;
@@ -202,10 +202,7 @@ export default ({
                 state.filteredShipments = state.shipments.filter(item => {
                     return item.docket_no.trim().toLowerCase().includes(search.trim().toLowerCase()) ||
                         item.sender.name.trim().toLowerCase().includes(search.trim().toLowerCase()) ||
-                        item.sender.company_name.trim().toLowerCase().includes(search.trim().toLowerCase()) ||
-                        item.sender.address.trim().toLowerCase().includes(search.trim().toLowerCase())
-
-                        ;
+                        item.sender.company_name.trim().toLowerCase().includes(search.trim().toLowerCase());
 
                 })
             }
@@ -271,7 +268,7 @@ export default ({
             context.commit('ToggleIsLoading');
             axios
                 .get("/api/shipments")
-                .then(response => (context.commit('retrieveShipments', response.data.data)))
+                .then(response => (context.commit('retrieveShipments', response.data)))
                 .catch(function (error) {
                     // handle error
 
