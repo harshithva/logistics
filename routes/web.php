@@ -31,6 +31,7 @@ Route::get('/admin', 'HomeController@index')->name('admin');
 Route::get('/track', 'HomeController@track')->name('track');
 Route::get('/staff', 'HomeController@staff')->name('staff');
 Route::get('/customer', 'HomeController@customer')->name('customer');
+Route::get('/customer/quote/{quote_id}/view', 'QuoteController@view_quote');
 
 // Route::view('/admin/{any}', 'admin.master');
 

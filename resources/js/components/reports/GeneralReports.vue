@@ -6,24 +6,32 @@
         <h6 class="m-0 font-weight-bold text-primary">General Reports</h6>
       </div>
       <div class="row">
-        <router-link
-          to="/admin/reports"
-          class="d-none d-sm-inline-block btn btn-sm btn-outline-primary shadow-sm ml-2 mr-2"
-        >
-          <i class="fas fa-scroll fa-sm"></i> Reports
-        </router-link>
-        <router-link
-          to="/admin/payment_log"
-          class="d-none d-sm-inline-block btn btn-sm btn-outline-primary shadow-sm"
-        >
-          <i class="fas fa-rupee-sign fa-sm"></i> Payment Log
-        </router-link>
+        <div class="col">
+          <router-link
+            to="/admin/reports"
+            class="d-none d-sm-inline-block btn btn-sm btn-outline-primary shadow-sm ml-2 mr-2"
+          >
+            <i class="fas fa-scroll fa-sm"></i> Reports
+          </router-link>
+          <router-link
+            to="/admin/payment_log"
+            class="d-none d-sm-inline-block btn btn-sm btn-outline-primary shadow-sm"
+          >
+            <i class="fas fa-rupee-sign fa-sm"></i> Payment Log
+          </router-link>
+        </div>
+        <div class="col"></div>
+        <div class="col">
+          <!-- <a class="btn btn-primary text-white ml-2" onclick="javascript:window.print()">
+            <i class="fas fa-print"></i> Print Report
+          </a>-->
+        </div>
       </div>
     </div>
     <div class="card-body">
-      <div class="table-responsive">
+      <div>
         <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
-          <div class="row">
+          <!-- <div class="row">
             <div class="col-sm-12 col-md-6"></div>
             <div class="col-sm-12 col-md-6 text-right">
               <div id="dataTable_filter" class="dataTables_filter">
@@ -38,7 +46,7 @@
                 </label>
               </div>
             </div>
-          </div>
+          </div>-->
           <div class="row">
             <div class="col-sm-12">
               <table class="table table-bordered table-responsive">

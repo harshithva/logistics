@@ -12,6 +12,8 @@ use App\Http\Resources\Shipment as ShipmentResource;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
+use Snowfire\Beautymail\Beautymail;
+
 
 class ShipmentController extends Controller
 {
@@ -381,12 +383,21 @@ class ShipmentController extends Controller
     }
 
     public function shipment_send_email($id) {
-        $shipment = Shipment::findOrFail($id); 
-        $data = [
-            'docket_no' => $shipment->docket_no,
-          
-     ];
-     Mail::to($shipment->sender->email)->send(new ShipmentCreated($data));
+        $shipment = Shipment::findOrFail($id);
+        $sender =  $shipment->sender;
+        $docket = $shipment->docket_no;
+        $status =  $shipment->status->status;
+        
+        $beautymail = app()->make(\Snowfire\Beautymail\Beautymail::class);
+   
+        $beautymail->send('emails.shipment.created', compact('docket','status'), function($message) use($sender)
+        {
+            $message
+                ->from('crm@gurukal.co.in', 'Gurukal Logistics')
+                ->to($sender->email,$sender->name)
+                ->subject('About Your Shipment');
+        });
+
         return response()->json('sent',200);
     }
 
@@ -399,17 +410,21 @@ class ShipmentController extends Controller
 
     public function shipment_send_sms($id) {
         $shipment = Shipment::findOrFail($id); 
-        $phone= $shipment->sender->phone;
-        if(strval($shipment->status->first()->status) == 'Awaiting Pickup')
+        $phone = $shipment->sender->phone;
+        if($shipment->status == 'Awaiting Pickup')
         {
-            $msg = 'SHIPMENT CREATED Your Consignment is ready for dispatch with docket number '.$shipment->docket_no.' Login at gurukal.co.in Or track your consignment at Gurukal.co.in';
-        }else if(strval($shipment->status->first()->status) == 'Dispatched') {
-            $msg =  'SHIPMENT DISPATCHED Your Consignment with docket number '.$shipment->docket_no.'is Dispatched Login at gurukal.co.in Or track your consignment at Gurukal.co.in';
-        }else if(strval($shipment->status->first()->status) == 'Delivered') {
-            $msg =  'SHIPMENT DELIVERED Your Consignment with docket number '. $shipment->docket_no .' is DELIVERED Kindly let us know how was your experience by clicking the following link Gurukal.co.in/feedback Thank you';
-        }else{
-           $msg = 'Hi, This Message is to inform you that your shipment with Docket number '. $shipment->docket_no . ' has been successfully created.';
+            $msg = 'SHIPMENT CREATED Your Consignment is ready for dispatch with docket number '.$shipment->docket_no.' Login at gurukal.co.in Or track your consignment at Gurukal.co.in Regards Gurukal Logistics.';
+        }else if($shipment->status->status == 'Dispatched') {
+            $msg =  'SHIPMENT DISPATCHED Your Consignment with docket number '.$shipment->docket_no.'is Dispatched Login at gurukal.co.in Or track your consignment at Gurukal.co.in Regards Gurukal Logistics.';
+        }else if($shipment->status->status == 'Delivered') {
+            $msg =  'SHIPMENT DELIVERED Your Consignment with docket number '. $shipment->docket_no .' is DELIVERED Kindly let us know how was your experience by clicking the following link Gurukal.co.in/feedback Thank you. Regards Gurukal Logistics.';
         }
+        else if($shipment->status->status == 'Intrasit'){
+           $msg = 'Hi, This Message is to inform you that your shipment with Docket number '. $shipment->docket_no . ' is Intransit. Regards Gurukal Logistics.';
+        }
+        else{
+            $msg = 'Hi, This Message is to inform you that your shipment with Docket number '. $shipment->docket_no . ' has been successfully created. Regards Gurukal Logistics.';
+         }
       
       
      

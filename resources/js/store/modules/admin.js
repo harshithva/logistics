@@ -24,6 +24,7 @@ export default ({
         filteredCustomers: {},
         filteredQuotes: {},
         filteredShipments: {},
+        filteredStaffs: {}
 
     },
     getters: {
@@ -63,7 +64,7 @@ export default ({
             return state.quotes;
         },
         getFilteredQuotes(state) {
-            return state.filteredQuotes;
+            return state.filteredStaffs;
         },
         getCustomerInvoices(state) {
             return state.customer_invoice;
@@ -76,6 +77,9 @@ export default ({
         },
         getAllStaffs(state) {
             return state.staffs;
+        },
+        getFilteredStaffs(state) {
+            return state.filteredStaffs;
         },
         getSingleStaff(state) {
             return state.staff;
@@ -152,7 +156,7 @@ export default ({
         },
         retrieveStaffs(state, staffs) {
             state.staffs = staffs;
-
+            state.filteredStaffs = staffs;
 
         },
         retrieveSingleStaff(state, staff) {
@@ -221,6 +225,19 @@ export default ({
             }
             else {
                 state.filteredQuotes = state.quotes;
+            }
+        },
+        searchStaff(state, search) {
+            if (search) {
+                state.filteredStaffs = state.staffs.filter(item => {
+                    return item.name.trim().toLowerCase().includes(search.trim().toLowerCase()) ||
+                        item.email.trim().toLowerCase().includes(search.trim().toLowerCase())
+                        ;
+
+                })
+            }
+            else {
+                state.filteredStaffs = state.staffs;
             }
         }
 

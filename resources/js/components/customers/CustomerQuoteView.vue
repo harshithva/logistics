@@ -7,9 +7,9 @@
           <i class="fas fa-print"></i> Print
         </a>
 
-        <a href class="btn btn-info ml-2">
+        <button @click="sendQuoteLink" class="btn btn-info ml-2">
           <i class="fas fa-envelope"></i> Mail
-        </a>
+        </button>
         <button
           href
           class="btn btn-danger ml-2"
@@ -214,6 +214,27 @@ export default {
             console.log("Something went wrong");
           });
       }
+    },
+    sendQuoteLink() {
+      axios
+        .post(`api/quotations/${this.quote.id}/quote_send_email`)
+        .then(response => {
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Quote has sent through mail",
+            showConfirmButton: false,
+            timer: 1500
+          });
+        })
+        .catch(err => {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Something went wrong!",
+            footer: "Make sure customer email is valid."
+          });
+        });
     }
   },
   computed: {

@@ -1,5 +1,7 @@
 <template>
-  <fragment>
+  <fragment
+    v-if="this.$store.getters.getUserData.user.role == 'admin' || this.$store.getters.getUserData.user.role == 'employee'"
+  >
     <loading :active.sync="isLoading" :can-cancel="true" :is-full-page="fullPage" :color="color"></loading>
     <Sidebar></Sidebar>
     <Main></Main>

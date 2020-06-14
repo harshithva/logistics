@@ -19,6 +19,8 @@
                     class="form-control form-control-sm"
                     placeholder
                     aria-controls="dataTable"
+                    v-model="search"
+                    @input="searchStaff"
                   />
                 </label>
               </div>
@@ -136,12 +138,17 @@
 
 <script>
 export default {
+  data() {
+    return {
+      search: ""
+    };
+  },
   created() {
     this.$store.dispatch("retrieveStaffs");
   },
   computed: {
     staffs() {
-      return new Form(this.$store.getters.getAllStaffs);
+      return new Form(this.$store.getters.getFilteredQuotes);
     }
   },
   methods: {
@@ -165,6 +172,9 @@ export default {
             text: "Something went wrong!"
           })
         );
+    },
+    searchStaff() {
+      this.$store.commit("searchStaff", this.search);
     }
   }
 };

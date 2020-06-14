@@ -163,21 +163,28 @@ class QuoteController extends Controller
      $quote->status = 'declined';
      $quote->save();
     }
+    
+    public function view_quote($request)
+    {
+     $quote = Quote::find($request);
+     $quote->list;
+     return view('quote',compact('quote'));
+    }
 
 
     public function quote_send_email($request)
     {
         $quote = Quote::find($request);
-        // $quote->customer;
+        $customer = $quote->customer;
         // $quote->list;
         $beautymail = app()->make(\Snowfire\Beautymail\Beautymail::class);
 
-        $beautymail->send('emails.quotes.quote', compact('quote'), function($message)
+        $beautymail->send('emails.quotes.quote', compact('quote'), function($message) use($customer)
         {
             $message
-                ->from('crm@gurukal.co.in')
-                ->to('harshith11032001@gmail.com', 'John Smith')
-                ->subject('Welcome!');
+                ->from('crm@gurukal.co.in','Gurukal Logistics')
+                ->to($customer->email, $customer->name)
+                ->subject('Quote');
         });
     }
 }

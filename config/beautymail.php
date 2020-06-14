@@ -26,8 +26,8 @@ return [
         'logo'        => [
             // 'path'   => '%PUBLIC%/vendor/beautymail/assets/images/sunny/logo.png',
             'path'   => 'https://i.ibb.co/WFdrW4M/Logo-Color-Text-Below.jpg',
-            'width'  => '',
-            'height' => '',
+            'width'  => '100',
+            'height' => '100',
         ],
 
         'twitter'  => null,
