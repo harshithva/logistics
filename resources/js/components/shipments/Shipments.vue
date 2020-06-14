@@ -126,7 +126,7 @@
                         >
                           <i class="fas fa-eye text-secondary"></i>
                         </router-link>
-                        <!-- 
+
                         <span
                           class="badge badge-pill badge-primary"
                           v-if="shipment.status.status == 'Awaiting pickup'"
@@ -135,100 +135,13 @@
                           class="badge badge-pill badge-success"
                           v-else-if="shipment.status.status == 'Delivered'"
                         >{{shipment.status.status}}</span>
-                        <span class="badge badge-pill badge-info" v-else-if="">{{shipment.status.status}}</span>-->
+                        <span class="badge badge-pill badge-info" v-else>{{shipment.status.status}}</span>
                       </td>
                     </tr>
                   </tbody>
                 </table>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- update status modal  -->
-
-    <div
-      class="modal fade"
-      id="updatestatus"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Update Status</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-
-          <div class="modal-body">
-            <div class="row">
-              <div class="input-group m-2">
-                <select
-                  class="custom-select"
-                  id="inputGroupSelect04"
-                  aria-label="Example select with button addon"
-                  v-model="status"
-                >
-                  <option disabled>Shipment Status</option>
-                  <option value="pickup">Awaiting Pickup</option>
-                  <option value="dispatched">Dispatched</option>
-                  <option value="intrasit">Intrasit</option>
-                  <option value="delivered">Delivered</option>
-                </select>
-              </div>
-
-              <div v-if="status === 'delivered'">
-                <div class="col">
-                  <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Location" />
-                  </div>
-                </div>
-
-                <div class="row m-1">
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <input type="text" class="form-control" placeholder="Receiver Name" />
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <input type="text" class="form-control" placeholder="Phone" />
-                    </div>
-                  </div>
-                </div>
-
-                <div class="row m-1">
-                  <div class="col">
-                    <b-form-file v-model="file" ref="file-input" class="mb-2"></b-form-file>
-                  </div>
-                  <div class="col">
-                    <b-button @click="clearFiles" class="mr-2">Reset</b-button>
-                  </div>
-                </div>
-              </div>
-
-              <div v-else-if="status == 'pickup'"></div>
-              <div v-else>
-                <div class="row m-2">
-                  <div class="col">
-                    <div class="form-group">
-                      <input type="text" class="form-control" placeholder="Location" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Update</button>
           </div>
         </div>
       </div>
@@ -241,7 +154,6 @@ export default {
   data() {
     return {
       file: null,
-      status: "pickup",
       search: ""
     };
   },
