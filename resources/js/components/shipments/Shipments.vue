@@ -116,7 +116,7 @@
                       <td>{{shipment.sender.address}}</td>
 
                       <td>{{shipment.delivery_address}}</td>
-
+                      <!-- 
                       <td align="center">
                         <router-link
                           :to="'/admin/customers/'+ shipment.sender.id +'/invoices/'+ shipment.id + '/view'"
@@ -128,7 +128,7 @@
                         </router-link>
 
                         <span class="badge badge-pill badge-primary">{{shipment.status.status}}</span>
-                      </td>
+                      </td>-->
                     </tr>
                   </tbody>
                 </table>
