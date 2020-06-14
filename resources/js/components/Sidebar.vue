@@ -96,25 +96,28 @@
       <hr class="sidebar-divider" />
 
       <!-- Heading -->
-      <div class="sidebar-heading">Staff</div>
+      <div class="sidebar-heading" v-if="this.$store.getters.getUserData.user.role == 'admin'">Staff</div>
 
-      <li class="nav-item">
+      <li class="nav-item" v-if="this.$store.getters.getUserData.user.role == 'admin'">
         <router-link class="nav-link collapsed" to="/admin/staff/create">
           <i class="fas fa-plus"></i>
           <span>Create Staff</span>
         </router-link>
       </li>
 
-      <li class="nav-item">
+      <li class="nav-item" v-if="this.$store.getters.getUserData.user.role == 'admin'">
         <router-link class="nav-link collapsed" to="/admin/staff">
           <i class="fas fa-users"></i>
           <span>Staff List</span>
         </router-link>
       </li>
 
-      <hr class="sidebar-divider" />
-      <div class="sidebar-heading">Reports</div>
-      <li class="nav-item">
+      <hr class="sidebar-divider" v-if="this.$store.getters.getUserData.user.role == 'admin'" />
+      <div
+        class="sidebar-heading"
+        v-if="this.$store.getters.getUserData.user.role == 'admin'"
+      >Reports</div>
+      <li class="nav-item" v-if="this.$store.getters.getUserData.user.role == 'admin'">
         <router-link class="nav-link collapsed" to="/admin/reports">
           <i class="fas fa-file-invoice"></i>
           <span>General Reports</span>
@@ -130,7 +133,10 @@
         </router-link>
       </li>-->
       <!-- Divider -->
-      <hr class="sidebar-divider d-none d-md-block" />
+      <hr
+        class="sidebar-divider d-none d-md-block"
+        v-if="this.$store.getters.getUserData.user.role == 'admin'"
+      />
 
       <!-- Sidebar Toggler (Sidebar) -->
       <div class="text-center d-none d-md-inline">

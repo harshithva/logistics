@@ -146,7 +146,6 @@
                   </div>
                 </div>
               </div>
-
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
@@ -169,6 +168,7 @@
                   type="submit"
                   :disabled="form.errors.any()"
                   @click.prevent="onSubmit"
+                  v-if="this.$store.getters.getUserData.user.role == 'admin'"
                 >
                   Update Customer
                   <span>
@@ -180,6 +180,7 @@
                   name="dosubmit"
                   type="submit"
                   @click.prevent="deleteCustomer"
+                  v-if="this.$store.getters.getUserData.user.role == 'admin'"
                 >
                   Delete Customer
                   <span>

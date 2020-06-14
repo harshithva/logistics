@@ -25,7 +25,11 @@
         >
           <i class="fas fa-check"></i> Approve
         </button>
-        <router-link :to="'/admin/quotes/'+quote.id +'/edit'" class="btn btn-warning ml-2">
+        <router-link
+          :to="'/admin/quotes/'+quote.id +'/edit'"
+          class="btn btn-warning ml-2"
+          v-if="this.$store.getters.getUserData.user.role == 'admin'"
+        >
           <i class="fas fa-edit"></i> Edit
         </router-link>
       </div>

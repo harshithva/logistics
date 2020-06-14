@@ -48,6 +48,13 @@ window.uuidv4 = uuidv4;
 import Form from './Helpers/Form'
 window.Form = Form
 
+// preloader
+// import Loading from 'vue-loading-overlay';
+// // Import stylesheet
+// import 'vue-loading-overlay/dist/vue-loading.css';
+// // Init plugin
+// Vue.use(Loading);
+
 
 
 // import Form from 'vue-js-form-helper';

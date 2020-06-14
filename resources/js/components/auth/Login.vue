@@ -110,12 +110,14 @@ export default {
           password: this.password
         })
         .then(() => {
+          this.email = "";
+          this.password = "";
           const userInfo = this.$store.getters.getUserData;
 
           if (userInfo.user.role == "admin") {
             window.location = "/admin";
           } else if (userInfo.user.role == "employee") {
-            window.location = "/staff";
+            window.location = "/admin";
           } else if (userInfo.user.role == "customer") {
             window.location = "/customer";
           }

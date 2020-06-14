@@ -52,7 +52,11 @@
           </span>
           Add Payment
         </button>
-        <router-link :to="'/admin/shipments/' + shipment.id +'/edit'" class="btn btn-dark ml-2">
+        <router-link
+          :to="'/admin/shipments/' + shipment.id +'/edit'"
+          class="btn btn-dark ml-2"
+          v-if="this.$store.getters.getUserData.user.role == 'admin'"
+        >
           <i class="fas fa-check"></i> Edit
         </router-link>
       </div>

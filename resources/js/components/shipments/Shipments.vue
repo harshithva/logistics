@@ -121,15 +121,6 @@
                       <td v-if="shipment.delivery_address">{{shipment.delivery_address}}</td>
                       <td v-else>---</td>
                       <td align="center">
-                        <!-- <a
-                          type="button"
-                          data-toggle="modal"
-                          data-target="#updatestatus"
-                          data-placement="top"
-                          title="Updated status"
-                        >
-                          <i class="fas fa-truck text-primary"></i>
-                        </a>-->
                         <router-link
                           :to="'/admin/customers/'+ shipment.sender.id +'/invoices/'+ shipment.id + '/view'"
                           data-toggle="tooltip"
@@ -138,6 +129,16 @@
                         >
                           <i class="fas fa-eye text-secondary"></i>
                         </router-link>
+
+                        <span
+                          class="badge badge-pill badge-primary"
+                          v-if="shipment.status.status == 'Awaiting pickup'"
+                        >{{shipment.status.status}}</span>
+                        <span
+                          class="badge badge-pill badge-success"
+                          v-else-if="shipment.status.status == 'Delivered'"
+                        >{{shipment.status.status}}</span>
+                        <span class="badge badge-pill badge-info" v-else>{{shipment.status.status}}</span>
                       </td>
                     </tr>
                   </tbody>
