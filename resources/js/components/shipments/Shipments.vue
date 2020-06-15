@@ -127,7 +127,9 @@
                           <i class="fas fa-eye text-secondary"></i>
                         </router-link>
 
-                        <span class="badge badge-pill badge-success">{{shipment.current_status}}</span>
+                        <span
+                          class="badge badge-pill badge-success"
+                        >{{shipment.current_status.status}}</span>
                       </td>
                     </tr>
                   </tbody>

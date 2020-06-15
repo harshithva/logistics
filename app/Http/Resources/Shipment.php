@@ -21,7 +21,7 @@ class Shipment extends JsonResource
             'delivery_address'=> $this->delivery_address,
             'sender_name' => $this->sender->name,
             'sender_address' => $this->sender->address,
-            'current_status' => $this->status->status,
+            'current_status' => $this->status,
             'docket_no' => $this->docket_no,
             'sender_id' => $this->sender->id
           ];
