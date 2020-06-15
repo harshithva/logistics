@@ -268,7 +268,7 @@ export default ({
             context.commit('ToggleIsLoading');
             axios
                 .get("/api/shipments")
-                .then(response => (context.commit('retrieveShipments', response.data)))
+                .then(response => (context.commit('retrieveShipments', response.data.data)))
                 .catch(function (error) {
                     // handle error
 
