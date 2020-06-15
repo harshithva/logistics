@@ -25,8 +25,10 @@ class ShipmentController extends Controller
     public function index()
     {
        
-        $shipments = Shipment::all();
+        $shipments = Shipment::with('sender')->get();
         return ShipmentResource::collection($shipments);
+
+
     }
 
     /**
