@@ -66,17 +66,17 @@
                   </tr>
                 </thead>
                 <tr v-for="item in packages">
-                  <td>{{moment(item.shipment.date).format("DD/MM/YYYY")}}</td>
+                  <td>{{moment(item.shipment_date).format("DD/MM/YYYY")}}</td>
                   <td>{{item.description}}</td>
-                  <td>{{item.shipment.sender.address}}</td>
-                  <td>{{item.shipment.delivery_address}}</td>
-                  <td>{{item.shipment.docket_no}}</td>
-                  <td>{{item.shipment.freight_invoice_number}}</td>
-                  <td>{{item.shipment.charge_total}}</td>
-                  <td>{{item.shipment.sender.name}}</td>
-                  <td>{{item.shipment.receiver.name}}</td>
-                  <td>{{item.shipment.sender.gst}}</td>
-                  <td>{{item.shipment.receiver.gst}}</td>
+                  <td>{{item.shipment_sender_address}}</td>
+                  <td>{{item.shipment_delivery_address}}</td>
+                  <td>{{item.shipment_docket_no}}</td>
+                  <td>{{item.shipment_freight_invoice_number}}</td>
+                  <td>{{item.shipment_charge_total}}</td>
+                  <td>{{item.shipment_sender_name}}</td>
+                  <td>{{item.shipment_receiver_name}}</td>
+                  <td>{{item.shipment_sender_gst}}</td>
+                  <td>{{item.shipment_receiver_gst}}</td>
                 </tr>
                 <tfoot>
                   <tr>
@@ -104,6 +104,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   data() {
     return {
@@ -116,9 +117,9 @@ export default {
     this.$store.dispatch("retrievePackages");
   },
   computed: {
-    packages() {
-      return this.$store.getters.getAllPackages;
-    }
+    ...mapGetters({
+      packages: "getAllPackages"
+    })
   }
 };
 </script>

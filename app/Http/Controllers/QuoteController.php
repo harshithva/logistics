@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Quote;
 use App\QuoteList;
 use Illuminate\Http\Request;
+use App\Http\Resources\Quote as QuoteResource;
 
 use Snowfire\Beautymail\Beautymail;
 
@@ -18,7 +19,7 @@ class QuoteController extends Controller
     public function index()
     {
         $quotes = Quote::with('customer','list')->get();
-        return response()->json($quotes,200);
+        return QuoteResource::collection($quotes);
     }
 
     /**

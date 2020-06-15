@@ -1,7 +1,7 @@
 <template>
   <div class="card shadow mb-4">
     <div class="card-header py-3">
-      <h6 class="m-0 font-weight-bold text-primary">Quotation List</h6>
+      <h6 class="m-0 font-weight-bold text-primary">Staff List</h6>
     </div>
     <div class="card-body">
       <div class="table-responsive">
@@ -99,14 +99,14 @@
                 </tfoot>
                 <tbody>
                   <tr v-for="staff in staffs" :key="staff.id">
-                    <td v-if="staff.name">{{staff.name}}</td>
-                    <td v-else>---</td>
-                    <td v-if="staff.role">{{staff.role}}</td>
-                    <td v-else>---</td>
-                    <td v-if="staff.phone">{{staff.phone}}</td>
-                    <td v-else>---</td>
-                    <td v-if="staff.email">{{staff.email}}</td>
-                    <td v-else>---</td>
+                    <td>{{staff.name}}</td>
+
+                    <td>{{staff.role}}</td>
+
+                    <td>{{staff.phone}}</td>
+
+                    <td>{{staff.email}}</td>
+
                     <td align="center">
                       <router-link
                         :to="'/admin/staff/'+ staff.id +'/edit'"
@@ -137,6 +137,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   data() {
     return {
@@ -147,9 +148,9 @@ export default {
     this.$store.dispatch("retrieveStaffs");
   },
   computed: {
-    staffs() {
-      return new Form(this.$store.getters.getFilteredQuotes);
-    }
+    ...mapGetters({
+      staffs: "getFilteredStaffs"
+    })
   },
   methods: {
     deleteStaff(staff_id) {

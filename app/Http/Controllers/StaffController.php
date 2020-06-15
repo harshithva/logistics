@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\User;
 
 use Illuminate\Http\Request;
+use App\Http\Resources\Staff as StaffResource;
 
 class StaffController extends Controller
 {
@@ -15,7 +16,7 @@ class StaffController extends Controller
     public function index()
     {
         $staff = User::all();
-        return response()->json($staff,200);
+        return StaffResource::collection($staff);
     }
 
     /**

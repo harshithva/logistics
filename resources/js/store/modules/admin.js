@@ -64,7 +64,8 @@ export default ({
             return state.quotes;
         },
         getFilteredQuotes(state) {
-            return state.filteredStaffs;
+
+            return state.filteredQuotes;
         },
         getCustomerInvoices(state) {
             return state.customer_invoice;
@@ -134,7 +135,6 @@ export default ({
             state.quote = quote;
         },
         retrieveQuotations(state, quotes) {
-
             state.quotes = quotes;
             state.filteredQuotes = quotes;
         },
@@ -201,8 +201,7 @@ export default ({
             if (search) {
                 state.filteredShipments = state.shipments.filter(item => {
                     return item.docket_no.trim().toLowerCase().includes(search.trim().toLowerCase()) ||
-                        item.sender.name.trim().toLowerCase().includes(search.trim().toLowerCase()) ||
-                        item.sender.company_name.trim().toLowerCase().includes(search.trim().toLowerCase());
+                        item.sender_name.trim().toLowerCase().includes(search.trim().toLowerCase())
 
                 })
             }
@@ -216,7 +215,7 @@ export default ({
             if (search) {
                 state.filteredQuotes = state.quotes.filter(item => {
                     return item.quotation_no.trim().toLowerCase().includes(search.trim().toLowerCase()) ||
-                        item.customer.name.trim().toLowerCase().includes(search.trim().toLowerCase());
+                        item.customer_name.trim().toLowerCase().includes(search.trim().toLowerCase());
 
                 })
             }
@@ -250,8 +249,6 @@ export default ({
 
                     context.commit('catchErrors', error.response.data)
                 })
-
-
         },
         retrieveSingleCustomer(context, customer_id) {
 
@@ -326,7 +323,7 @@ export default ({
             context.commit('ToggleIsLoading');
             axios
                 .get('/api/quotations')
-                .then(response => (context.commit('retrieveQuotations', response.data)))
+                .then(response => (context.commit('retrieveQuotations', response.data.data)))
                 .catch(function (error) {
                     // handle error
 
@@ -370,7 +367,7 @@ export default ({
             context.commit('ToggleIsLoading');
             axios
                 .get(`/api/staffs`)
-                .then(response => (context.commit('retrieveStaffs', response.data)))
+                .then(response => (context.commit('retrieveStaffs', response.data.data)))
                 .catch(function (error) {
                     // handle error
 
@@ -403,7 +400,7 @@ export default ({
             context.commit('ToggleIsLoading');
             axios
                 .get(`/api/packages`)
-                .then(response => (context.commit('retrievePackages', response.data)))
+                .then(response => (context.commit('retrievePackages', response.data.data)))
                 .catch(function (error) {
                     // handle error
 

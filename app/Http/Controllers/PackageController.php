@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Package;
+use App\Http\Resources\Package as PackageResource;
 
 class PackageController extends Controller
 {
@@ -14,13 +15,8 @@ class PackageController extends Controller
      */
     public function index()
     {
-        $packages = Package::with('shipment')->get();
-        foreach($packages as $package)
-        {
-            $package->shipment->sender;
-            $package->shipment->receiver;
-        }
-        return response()->json($packages,200);
+        $packages = Package::all();
+        return PackageResource::collection($packages);
     }
 
     /**

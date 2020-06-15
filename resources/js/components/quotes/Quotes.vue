@@ -95,17 +95,15 @@
                   </tr>
                 </tfoot>
                 <tbody>
-                  <tr role="row" v-for="(item,index) in quotes">
+                  <tr role="row" v-for="item in quotes" :key="item.id">
                     <td>{{item.quotation_no}}</td>
-                    <td>{{item.customer.name}}</td>
-                    <td v-if="item.list[0]">{{item.list[0].from}}</td>
-                    <td v-else>---</td>
+                    <td>{{item.customer_name}}</td>
+                    <td>{{item.from}}</td>
 
-                    <td v-if="item.list[0]">{{item.list[0].to}}</td>
-                    <td v-else>---</td>
+                    <td>{{item.to}}</td>
                     <td align="center">
                       <router-link
-                        :to="'/admin/customers/'+ item.customer.id+ '/quotes/'+item.id +'/view'"
+                        :to="'/admin/customers/'+ item.customer_id+ '/quotes/'+item.id +'/view'"
                         data-toggle="tooltip"
                         data-placement="top"
                         title="View Customer"
@@ -137,6 +135,7 @@
 
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   data() {
     return {
@@ -144,11 +143,11 @@ export default {
     };
   },
   computed: {
-    quotes() {
-      return this.$store.getters.getFilteredQuotes;
-    }
+    ...mapGetters({
+      quotes: "getFilteredQuotes"
+    })
   },
-  mounted() {
+  created() {
     this.$store.dispatch("retrieveQuotations");
   },
   methods: {

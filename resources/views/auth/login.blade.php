@@ -11,7 +11,7 @@
                     <p class="signup-link">New Here? <a href="{{route('register')}}">Create an account</a></p>
                     <Login></Login>
                     <div class="container mt-4 text-center">
-                        <a href="/track" class="btn btn-outline-primary mt-4 text-center">Track Shipment</a>
+                        <a href="{{route('track')}}" class="btn btn-outline-primary mt-4 text-center">Track Shipment</a>
                     </div>
 
                     <p class="terms-conditions">© 2020 All Rights Reserved. <a href="{{url('/')}}">Gurukal</a><br>

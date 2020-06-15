@@ -106,36 +106,28 @@
                     </tr>
                   </tfoot>
                   <tbody>
-                    <tr role="row" v-for="(shipment,index) in shipments" :key="shipment.id">
-                      <td class="sorting_1" v-if="shipment.docket_no">{{shipment.docket_no}}</td>
-                      <td class="sorting_1" v-else>---</td>
+                    <tr role="row" v-for="shipment in shipments" :key="shipment.id">
+                      <td class="sorting_1">{{shipment.docket_no}}</td>
+
                       <td>{{moment(shipment.date).format('DD/MM/YYYY')}}</td>
-                 
-                      <td>{{shipment.sender.name}}</td>
-                 
-                      <td>{{shipment.sender.address}}</td>
-                 
+
+                      <td>{{shipment.sender_name}}</td>
+
+                      <td>{{shipment.sender_address}}</td>
+
                       <td>{{shipment.delivery_address}}</td>
-                 
+
                       <td align="center">
                         <router-link
-                          :to="'/admin/customers/'+ shipment.sender.id +'/invoices/'+ shipment.id + '/view'"
+                          :to="'/admin/customers/'+ shipment.sender_id +'/invoices/'+ shipment.id + '/view'"
                           data-toggle="tooltip"
                           data-placement="top"
                           title="View"
                         >
                           <i class="fas fa-eye text-secondary"></i>
                         </router-link>
-                        <!-- 
-                        <span
-                          class="badge badge-pill badge-primary"
-                          v-if="shipment.status.status == 'Awaiting pickup'"
-                        >{{shipment.status.status}}</span>
-                        <span
-                          class="badge badge-pill badge-success"
-                          v-else-if="shipment.status.status == 'Delivered'"
-                        >{{shipment.status.status}}</span>
-                        <span class="badge badge-pill badge-info" v-else-if="">{{shipment.status.status}}</span>-->
+
+                        <span class="badge badge-pill badge-success">{{shipment.current_status}}</span>
                       </td>
                     </tr>
                   </tbody>
