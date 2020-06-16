@@ -40,6 +40,7 @@ import CustomerDashboardQuoteView from '../components/customer-components/Custom
 import CustomerDashboardInvoiceView from '../components/customer-components/CustomerDashboardInvoiceView'
 import CustomerDashboardDocketView from '../components/customer-components/CustomerDashboardDocketView'
 import CustomerTrackShipment from '../components/customer-components/CustomerTrackShipment'
+import CustomerCreateQuote from '../components/customer-components/CustomerCreateQuote'
 
 
 
@@ -91,9 +92,8 @@ const routes = [
     { path: '/customer/quote/:quote_id/view', component: CustomerDashboardQuoteView },
     { path: '/customer/invoice/:invoice_id/view', component: CustomerDashboardInvoiceView },
     { path: '/customer/invoice/:invoice_id/docket/view', component: CustomerDashboardDocketView },
-    {
-        path: '/customer/track/shipment', component: CustomerTrackShipment,
-    },
+    { path: '/customer/track/shipment', component: CustomerTrackShipment },
+    { path: '/customer/quote/create', component: CustomerCreateQuote },
 ]
 
 

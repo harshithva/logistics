@@ -51,6 +51,6 @@
 
     <script src="{{asset('js/app.js')}}"></script>
     {{-- tidio --}}
-    <script src="//code.tidio.co/nl2lgenmpi46qpz4letz0zartf7wkfpb.js" async></script>
+    <script src="//code.tidio.co/ctz6trzsw27v38m6o4w6x2l0ytl7ff5l.js" async></script>
 
 </body>

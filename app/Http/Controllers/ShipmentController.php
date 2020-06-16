@@ -5,6 +5,7 @@ use App\Mail\ShipmentCreated;
 
 use Mail;
 use App\Shipment;
+use App\User;
 use App\Package;
 use App\Payment;
 use App\ShipmentStatus;
@@ -384,7 +385,7 @@ class ShipmentController extends Controller
 
     public function shipment_send_email($id) {
         $shipment = Shipment::findOrFail($id);
-        $sender =  $shipment->sender;
+        $sender =  User::findOrFail($shipment->bill_to_id);
         $docket = $shipment->docket_no;
         $status =  $shipment->status->status;
         
@@ -410,7 +411,8 @@ class ShipmentController extends Controller
 
     public function shipment_send_sms($id) {
         $shipment = Shipment::findOrFail($id); 
-        $phone = $shipment->sender->phone;
+        $sender =  User::findOrFail($shipment->bill_to_id);
+        $phone = $sender->phone;
         if($shipment->status == 'Awaiting Pickup')
         {
             $msg = 'SHIPMENT CREATED Your Consignment is ready for dispatch with docket number '.$shipment->docket_no.' Login at gurukal.co.in Or track your consignment at Gurukal.co.in Regards Gurukal Logistics.';

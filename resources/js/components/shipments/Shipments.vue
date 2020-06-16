@@ -129,6 +129,7 @@
 
                         <span
                           class="badge badge-pill badge-success"
+                          v-if="shipment.current_status.status"
                         >{{shipment.current_status.status}}</span>
                       </td>
                     </tr>

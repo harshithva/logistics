@@ -71,13 +71,6 @@
             >
               <i class="fas fa-scroll fa-sm"></i> Quotes
             </router-link>
-            <router-link
-              to="/customer/edit"
-              aria-current="page"
-              class="d-none d-sm-inline-block btn btn-sm btn-outline-primary shadow-sm"
-            >
-              <i class="fas fa-edit fa-sm"></i> Edit
-            </router-link>
 
             <router-link
               to="/customer/track/shipment"
@@ -85,6 +78,14 @@
               class="d-none d-sm-inline-block btn btn-sm btn-outline-primary shadow-sm ml-2 mr-2"
             >
               <i class="fas fa-truck fa-sm"></i> Track Shipment
+            </router-link>
+
+            <router-link
+              to="/customer/quote/create"
+              aria-current="page"
+              class="d-none d-sm-inline-block btn btn-sm btn-outline-primary shadow-sm"
+            >
+              <i class="fas fa-sticky-note fa-sm"></i> Create Quote
             </router-link>
           </div>
 
