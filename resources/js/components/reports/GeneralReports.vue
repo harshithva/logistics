@@ -21,10 +21,11 @@
           </router-link>
         </div>
         <div class="col"></div>
+        <div class="col"></div>
         <div class="col">
-          <!-- <a class="btn btn-primary text-white ml-2" onclick="javascript:window.print()">
-            <i class="fas fa-print"></i> Print Report
-          </a>-->
+          <button class="btn btn-outline-primary ml-2" @click="generatePdf">
+            <i class="fas fa-download"></i> Download PDF
+          </button>
         </div>
       </div>
     </div>
@@ -49,7 +50,21 @@
           </div>-->
           <div class="row">
             <div class="col-sm-12">
-              <table class="table table-bordered table-responsive">
+              <datatable
+                title="Reports"
+                :columns="tableColumns1"
+                :rows="packages"
+                :clickable="false"
+                :sortable="true"
+                :exactSearch="false"
+                :searchable="true"
+                :paginate="true"
+                :exportable="true"
+                :printable="false"
+                class="table-responsive p-4"
+              />
+
+              <!-- <table class="table table-bordered table-responsive" ref="content">
                 <thead>
                   <tr role="row">
                     <th>Date</th>
@@ -94,7 +109,7 @@
                   </tr>
                 </tfoot>
                 <tbody></tbody>
-              </table>
+              </table>-->
             </div>
           </div>
         </div>
@@ -105,14 +120,124 @@
 
 <script>
 import { mapGetters } from "vuex";
+import jsPDF from "jspdf";
+import "jspdf-autotable";
+
+import DataTable from "vue-materialize-datatable";
+
 export default {
+  components: {
+    datatable: DataTable
+  },
   data() {
     return {
       file: null,
-      status: "pickup"
+      status: "pickup",
+      tableColumns1: [
+        {
+          label: "Date",
+          field: "shipment_date",
+          numeric: false,
+          html: false
+        },
+        {
+          label: "Product",
+          field: "description",
+          numeric: false,
+          html: false
+        },
+        {
+          label: "From",
+          field: "shipment_sender_address",
+          numeric: false,
+          html: false
+        },
+        {
+          label: "To",
+          field: "shipment_delivery_address",
+          numeric: false,
+          html: false
+        },
+        {
+          label: "Docket",
+          field: "shipment_docket_no",
+          numeric: false,
+          html: false
+        },
+        {
+          label: "Freight Invoice Number",
+          field: "shipment_freight_invoice_number",
+          numeric: false,
+          html: false
+        },
+        {
+          label: "Charge Total",
+          field: "shipment_charge_total",
+          numeric: false,
+          html: false
+        },
+        {
+          label: "Charge Total",
+          field: "shipment_charge_total",
+          numeric: false,
+          html: false
+        },
+        {
+          label: "Sender Name",
+          field: "shipment_sender_name",
+          numeric: false,
+          html: false
+        },
+        {
+          label: "Receiver Name",
+          field: "shipment_receiver_name",
+          numeric: false,
+          html: false
+        },
+        {
+          label: "Sender GST",
+          field: "shipment_sender_gst",
+          numeric: false,
+          html: false
+        },
+        {
+          label: "Receiver GST",
+          field: "shipment_receiver_gst",
+          numeric: false,
+          html: false
+        }
+      ]
     };
   },
-  methods: {},
+  methods: {
+    generatePdf() {
+      const vm = this;
+      const columns = [
+        { title: "Date", dataKey: "shipment_date" },
+        { title: "Product", dataKey: "description" },
+        { title: "From", dataKey: "shipment_sender_address" },
+        { title: "To", dataKey: "shipment_delivery_address" },
+        { title: "Docket", dataKey: "shipment_docket_no" },
+        {
+          title: "Invoice Number",
+          dataKey: "shipment_freight_invoice_number"
+        },
+        { title: "Charge Total", dataKey: "shipment_charge_total" },
+        { title: "Sender Name", dataKey: "shipment_sender_name" },
+        { title: "Receiver Name", dataKey: "shipment_receiver_name" },
+        { title: "Sender GST", dataKey: "shipment_sender_gst" },
+        { title: "Receiver GST", dataKey: "shipment_receiver_gst" }
+      ];
+      const doc = new jsPDF("p", "pt");
+
+      doc.autoTable(columns, vm.packages, {
+        styles: {
+          fontSize: 6
+        }
+      });
+      doc.save("reports.pdf");
+    }
+  },
   created() {
     this.$store.dispatch("retrievePackages");
   },

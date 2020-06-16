@@ -190,7 +190,7 @@ class ShipmentController extends Controller
         }
 
         $shipment_status = new ShipmentStatus;
-        $shipment_status->status = 'Awaiting pickup';
+        $shipment_status->status = 'Awaiting Pickup';
         $shipment_status->shipment_id = $shipment->id;
         $shipment_status->customer_id= $request->sender_id;
         $shipment_status->save();
@@ -391,7 +391,26 @@ class ShipmentController extends Controller
         
         $beautymail = app()->make(\Snowfire\Beautymail\Beautymail::class);
    
-        $beautymail->send('emails.shipment.created', compact('docket','status'), function($message) use($sender)
+        $beautymail->send('emails.shipment.created', compact('docket','status','shipment'), function($message) use($sender)
+        {
+            $message
+                ->from('crm@gurukal.co.in', 'Gurukal Logistics')
+                ->to($sender->email,$sender->name)
+                ->subject('About Your Shipment');
+        });
+
+        return response()->json('sent',200);
+    }
+
+    public function shipment_send_docket($id) {
+        $shipment = Shipment::findOrFail($id);
+        $sender =  User::findOrFail($shipment->bill_to_id);
+        $docket = $shipment->docket_no;
+        $status =  $shipment->status->status;
+        
+        $beautymail = app()->make(\Snowfire\Beautymail\Beautymail::class);
+   
+        $beautymail->send('emails.shipment.docket', compact('shipment'), function($message) use($sender)
         {
             $message
                 ->from('crm@gurukal.co.in', 'Gurukal Logistics')
@@ -413,7 +432,7 @@ class ShipmentController extends Controller
         $shipment = Shipment::findOrFail($id); 
         $sender =  User::findOrFail($shipment->bill_to_id);
         $phone = $sender->phone;
-        if($shipment->status == 'Awaiting Pickup')
+        if($shipment->status == 'Awaiting Pickup' || $shipment->status == 'Awaiting pickup')
         {
             $msg = 'SHIPMENT CREATED Your Consignment is ready for dispatch with docket number '.$shipment->docket_no.' Login at gurukal.co.in Or track your consignment at Gurukal.co.in Regards Gurukal Logistics.';
         }else if($shipment->status->status == 'Dispatched') {
@@ -421,7 +440,7 @@ class ShipmentController extends Controller
         }else if($shipment->status->status == 'Delivered') {
             $msg =  'SHIPMENT DELIVERED Your Consignment with docket number '. $shipment->docket_no .' is DELIVERED Kindly let us know how was your experience by clicking the following link Gurukal.co.in/feedback Thank you. Regards Gurukal Logistics.';
         }
-        else if($shipment->status->status == 'Intrasit'){
+        else if($shipment->status->status == 'Intrasit' || $shipment->status->status == 'Intransit'){
            $msg = 'Hi, This Message is to inform you that your shipment with Docket number '. $shipment->docket_no . ' is Intransit. Regards Gurukal Logistics.';
         }
         else{
@@ -455,6 +474,34 @@ class ShipmentController extends Controller
         
         curl_close($curl);
 
+    }
+
+    public function view_invoice($request) {
+        $shipment = Shipment::find($request);
+        $shipment->sender;
+        $shipment->package;
+        $shipment->receiver;
+        $shipment->payment;
+
+        $total_paid = $shipment->payment->sum('amount');
+        if($total_paid > 0)
+        {
+            $balance_amount = ($shipment->charge_total - $total_paid) -  $shipment->charge_advance_paid;
+        }
+      else {
+        $balance_amount = ($shipment->charge_total -  $shipment->charge_advance_paid);
+      }
+
+        return view('invoice',compact('shipment', 'balance_amount'));
+    }
+
+    public function view_docket($request) {
+        $shipment = Shipment::find($request);
+        $shipment->sender;
+        $shipment->package;
+        $shipment->receiver;
+        $shipment->payment;
+        return view('docket',compact('shipment'));
     }
        
 }

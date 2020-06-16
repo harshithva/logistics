@@ -12,26 +12,26 @@
         <p>Balance Amount : {{balance_amount.balance_amount}}</p>
       </div>
       <div class="col-9">
-        <a class="btn btn-primary text-white" onclick="javascript:window.print()">
+        <a class="btn btn-primary text-white btn-sm" onclick="javascript:window.print()">
           <i class="fas fa-print"></i> Print Invoice
         </a>
 
         <router-link
           :to="'/admin/customers/'+ shipment.sender.id +'/invoices/'+ shipment.id +'/view/docket'"
-          class="btn btn-warning ml-2"
+          class="btn btn-warning ml-2 btn-sm"
         >
           <i class="fas fa-check"></i> Docket
         </router-link>
-        <button @click.prevent="sendMail" class="btn btn-info ml-2">
+        <button @click.prevent="sendMail" class="btn btn-info ml-2 btn-sm">
           <i class="fas fa-envelope"></i> Mail
         </button>
 
-        <button @click.prevent="sendSms" class="btn btn-danger ml-2">
+        <button @click.prevent="sendSms" class="btn btn-danger ml-2 btn-sm">
           <i class="fas fa-envelope"></i> Sms
         </button>
         <button
           type="button"
-          class="btn btn-outline-info"
+          class="btn btn-outline-info btn-sm ml-2"
           data-toggle="modal"
           data-target="#updatestatus"
         >
@@ -42,7 +42,7 @@
         </button>
         <button
           type="button"
-          class="btn btn-success"
+          class="btn btn-success btn-sm ml-2"
           data-toggle="modal"
           data-target="#paymentmodal"
           @click="payment.payment_date = moment(new Date).format('DD/MM/YYYY')"
@@ -54,7 +54,7 @@
         </button>
         <router-link
           :to="'/admin/shipments/' + shipment.id +'/edit'"
-          class="btn btn-dark ml-2"
+          class="btn btn-dark ml-2 btn-sm"
           v-if="this.$store.getters.getUserData.user.role == 'admin'"
         >
           <i class="fas fa-check"></i> Edit
@@ -440,7 +440,7 @@
                   <option disabled>Shipment Status</option>
                   <option value="Awaiting Pickup">Awaiting Pickup</option>
                   <option value="Dispatched">Dispatched</option>
-                  <option value="Intrasit">Intrasit</option>
+                  <option value="Intransit">Intransit</option>
                   <option value="Delivered">Delivered</option>
                 </select>
               </div>
@@ -522,6 +522,7 @@
     </div>
   </fragment>
 </template>
+
 
 <script>
 export default {

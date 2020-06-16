@@ -163,17 +163,23 @@ class CustomerController extends Controller
 
     public function dashboard()
     {
-        // $earnings = Payment::sum('amount');
-        // $customers = User::where('role','customer')->count();
-        // $quotations = Quote::count();
-        // $shipments = Shipment::count();
+        $pending = 0;
+        $shipments = Shipment::all();
+        foreach ($shipments as $key => $shipment) {
+            if($shipment->status->status != 'Delivered'){
+                $pending++;
+            }
+        }
+
+        $pending_payment = Shipment::sum('charge_total') - (Shipment::sum('charge_advance_paid') +  Payment::sum('amount'));
       
         $advance = Shipment::sum('charge_advance_paid') + Payment::sum('amount');
        $data =  (object) ['earnings' =>    $advance,
     'customers' => User::where('role','customer')->count(),
     'quotations' =>  Quote::count(),
     'shipments' =>  Shipment::count(),
-    'pending_delivery' => ShipmentStatus::where('status','!=','Delivered')->count()
+    'pending_delivery' => $pending,
+    'pending_payment' => $pending_payment
     ];
         return response()->json($data, 200);
     }

@@ -48,6 +48,7 @@ window.uuidv4 = uuidv4;
 import Form from './Helpers/Form'
 window.Form = Form
 
+import VueBarcode from "vue-barcode";
 // preloader
 // import Loading from 'vue-loading-overlay';
 // // Import stylesheet
@@ -78,6 +79,7 @@ Vue.component('TrackingComponent', require('./components/customer-components/Tra
 Vue.component('Login', require('./components/auth/Login').default);
 
 Vue.component(VueQrcode.name, VueQrcode);
+Vue.component('barcode', VueBarcode);
 Vue.use(BootstrapVue);
 Vue.component("vSelect", vSelect);
 Vue.component('pagination', require('laravel-vue-pagination'));

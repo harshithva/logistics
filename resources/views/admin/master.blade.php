@@ -47,7 +47,7 @@
 
 
     <!-- Page level custom scripts -->
-
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <script src="{{asset('js/app.js')}}"></script>
 

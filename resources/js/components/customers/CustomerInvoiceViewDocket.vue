@@ -6,6 +6,9 @@
         <a class="btn btn-primary text-white" onclick="javascript:window.print()">
           <i class="fas fa-print"></i> Print Docket
         </a>
+        <button class="btn btn-success text-white" @click="sendDocketLink">
+          <i class="fas fa-print"></i> Mail Docket
+        </button>
 
         <button @click="$router.go(-1)" class="btn btn-dark ml-2">
           <i class="fas fa-arrow-left"></i> Return
@@ -310,6 +313,40 @@
         </div>
       </div>
     </div>
+
+    <div class="row">
+      <div class="col">
+        <div class="card">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-3">
+                <p>Sender Details</p>
+                <p>Pickup Location : {{shipment.package_pickup_address}}</p>
+                <p>Sender name : {{shipment.sender.name}}</p>
+                <p>Contact : {{shipment.sender.phone}}</p>
+              </div>
+              <div class="col-3">
+                <p>Receiver Details</p>
+                <p>Dropoff Location : {{shipment.delivery_address}}</p>
+                <p>Receiver Name : {{shipment.receiver.name}}</p>
+                <p>Contact : {{shipment.receiver.phone}}</p>
+              </div>
+              <div class="col-3">
+                <p>Transport Details</p>
+                <p>Driver Name : {{shipment.transport_driver_name}}</p>
+                <p>Contact : {{shipment.transport_driver_phone}}</p>
+                <p>Vechile Details : {{shipment.transport_driver_vehicle}}</p>
+              </div>
+              <div class="col-3">
+                <p>Current Status</p>
+                <p v-if="shipment_status.location">Location : {{shipment_status.location}}</p>
+                <p v-else>Location: Not Updated</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </fragment>
 </template>
 
@@ -352,6 +389,29 @@ export default {
     },
     shipment_status() {
       return this.$store.getters.getShipmentStatus;
+    }
+  },
+  methods: {
+    sendDocketLink() {
+      axios
+        .post(`api/shipments/${this.shipment.id}/shipment_send_docket`)
+        .then(response => {
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Docket has sent through mail",
+            showConfirmButton: false,
+            timer: 1500
+          });
+        })
+        .catch(err => {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Something went wrong!",
+            footer: "Make sure email is valid."
+          });
+        });
     }
   },
   created() {

@@ -854,9 +854,8 @@ export default {
         parseInt(this.form.charge_handling) +
         parseInt(this.form.charge_halting) +
         parseInt(this.form.charge_Insurance) +
-        parseInt(this.form.charge_odc) +
-        parseInt(this.form.charge_tax_amount) +
         parseInt(this.form.charge_odc);
+
       this.form.charge_tax_amount =
         (total * parseInt(this.form.charge_tax_percent)) / 100;
       this.form.charge_total = this.form.charge_tax_amount + total;

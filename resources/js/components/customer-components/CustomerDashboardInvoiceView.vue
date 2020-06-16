@@ -243,6 +243,52 @@
       </div>
     </div>
 
+    <div class="pagebreak"></div>
+
+    <div class="row">
+      <div class="col">
+        <div class="card">
+          <div class="card-body">
+            <!-- errors -->
+            <b-alert
+              v-if="payment.errors.has('amount')"
+              dismissible
+              show
+              variant="danger"
+            >{{payment.errors.get('amount')}}</b-alert>
+            <div class="row">
+              <div class="col-4">
+                <p>Sender Details</p>
+                <p>
+                  Pickup Location :
+                  <br />
+                  {{shipment.package_pickup_address}}
+                </p>
+                <p>Sender name : {{shipment.sender.name}}</p>
+                <p>Contact : {{shipment.sender.phone}}</p>
+              </div>
+              <div class="col-4">
+                <p>Receiver Details</p>
+                <p>
+                  Dropoff Location :
+                  <br />
+                  {{shipment.delivery_address}}
+                </p>
+                <p>Receiver Name : {{shipment.receiver.name}}</p>
+                <p>Contact : {{shipment.receiver.phone}}</p>
+              </div>
+              <div class="col-4">
+                <p>Transport Details</p>
+                <p>Driver Name : {{shipment.transport_driver_name}}</p>
+                <p>Contact : {{shipment.transport_driver_phone}}</p>
+                <p>Vechile Details : {{shipment.transport_driver_vehicle}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Payment Modal-->
 
     <div

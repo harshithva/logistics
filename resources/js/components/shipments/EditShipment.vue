@@ -38,17 +38,20 @@
                 variant="danger"
               >{{shipment.errors.get('document')}}</b-alert>
               <!-- end errors -->
-                <form class="form" @keydown="shipment.errors.clear()" enctype="multipart/form-data">
-              <div class="row">
-                <div class="col-md-4">
-                  <div class="form-group">
-                    <label for="Date">Shipment Date</label>
-                    <b-form-datepicker id="example-datepicker" v-model="shipment.date" class="mb-2"></b-form-datepicker>
+              <form class="form" @keydown="shipment.errors.clear()" enctype="multipart/form-data">
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="Date">Shipment Date</label>
+                      <b-form-datepicker
+                        id="example-datepicker"
+                        v-model="shipment.date"
+                        class="mb-2"
+                      ></b-form-datepicker>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-            
                 <div class="row">
                   <div class="col-md-6">
                     <h6 class="mb-2">Sender Info</h6>
@@ -806,21 +809,21 @@ export default {
 
     calculateTotal() {
       const total =
-        parseInt(this.charge_transportation) +
-        parseInt(this.charge_handling) +
-        parseInt(this.charge_halting) +
-        parseInt(this.charge_Insurance) +
-        parseInt(this.charge_odc) +
-        parseInt(this.charge_tax_amount) +
-        parseInt(this.charge_odc);
-      this.charge_tax_amount =
-        (total * parseInt(this.charge_tax_percent)) / 100;
-      this.charge_total = this.charge_tax_amount + total;
-      if (this.charge_advance_paid > 0) {
-        this.charge_balance =
-          this.charge_total - parseInt(this.charge_advance_paid);
+        parseInt(this.form.charge_transportation) +
+        parseInt(this.form.charge_handling) +
+        parseInt(this.form.charge_halting) +
+        parseInt(this.form.charge_Insurance) +
+        parseInt(this.form.charge_odc);
+
+      this.form.charge_tax_amount =
+        (total * parseInt(this.form.charge_tax_percent)) / 100;
+      this.form.charge_total = this.form.charge_tax_amount + total;
+
+      if (this.form.charge_advance_paid > 0) {
+        this.form.charge_balance =
+          this.form.charge_total - parseInt(this.form.charge_advance_paid);
       } else {
-        this.charge_balance = this.charge_total;
+        this.form.charge_balance = this.form.charge_total;
       }
     },
     deletePackage(uid) {
