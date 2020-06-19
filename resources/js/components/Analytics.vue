@@ -178,9 +178,7 @@
           <!-- Card Body -->
           <div class="card-body">
             <div class="chart-area">
-              <column-chart
-                :data="[['Sun', 32], ['Mon', 46], ['Tue', 28],['Wed', 67],['Thu', 99],['Fri', 75],['Sat', 80]]"
-              ></column-chart>
+              <column-chart :data="dashboard.overview"></column-chart>
             </div>
           </div>
         </div>
@@ -219,8 +217,10 @@
           <!-- Card Body -->
           <div class="card-body">
             <div class="chart-pie pt-4 pb-2">
-              <area-chart :data="{'2020-06-06': 6, '2020-06-10': 11}"></area-chart>
+              <area-chart :data="dashboard.overview"></area-chart>
             </div>
+            <br />
+
             <div class="mt-4 text-center small">
               <span class="mr-2">
                 <i class="fas fa-circle text-primary"></i> Direct

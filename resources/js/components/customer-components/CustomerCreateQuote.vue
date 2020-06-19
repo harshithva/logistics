@@ -81,7 +81,7 @@
                 aria-current="page"
                 class="d-none d-sm-inline-block btn btn-sm btn-outline-primary shadow-sm"
               >
-                <i class="fas fa-sticky-note fa-sm"></i> Create Quote
+                <i class="fas fa-sticky-note fa-sm"></i> Request Quote
               </router-link>
             </div>
           </div>
@@ -249,24 +249,6 @@
                 <div class="form-group">
                   <label for="docket">Weight</label>
                   <input type="text" class="form-control" v-model="weight" />
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="form-group">
-                  <label for="Size">ETA</label>
-                  <input type="text" class="form-control" v-model="eta" />
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label for="docket">Rate</label>
-                  <input type="number" class="form-control" v-model="rate" />
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label for="advance">Advance</label>
-                  <input type="number" class="form-control" v-model="advance" />
                 </div>
               </div>
             </div>

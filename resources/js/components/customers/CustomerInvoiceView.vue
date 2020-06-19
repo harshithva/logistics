@@ -97,7 +97,7 @@
                 <p>Transport Details</p>
                 <p>Driver Name : {{shipment.transport_driver_name}}</p>
                 <p>Contact : {{shipment.transport_driver_phone}}</p>
-                <p>Vechile Details : {{shipment.transport_driver_vehicle}}</p>
+                <p>Vehicle Details : {{shipment.transport_driver_vehicle}}</p>
               </div>
             </div>
           </div>
@@ -303,11 +303,12 @@
               <br />IFSC: UTIB0002926
               <br />
             </p>
+            <p class="mt-4">This is a computer generated invoice.</p>
           </div>
           <div class="col-6"></div>
           <div class="col">
             <p>For and behalf of</p>
-            <img :src="sign" alt="Rohith" class="img-fluid ml-3" style="width:4rem;" />
+            <img :src="sign" alt="Rohith" class="img-fluid" style="width:8rem;" />
             <br />
             <br />
 
@@ -529,7 +530,7 @@ export default {
   data() {
     return {
       logo: "https://i.ibb.co/WFdrW4M/Logo-Color-Text-Below.jpg",
-      sign: "https://i.ibb.co/8BwTXcT/sign-rohith.png",
+      sign: "https://i.ibb.co/W6vkYqs/seal.png",
       status: new Form({
         status: "Awaiting Pickup",
         customer_id: "",

@@ -8,6 +8,7 @@ use App\Shipment;
 use App\Quote;
 use App\Payment;
 use App\ShipmentStatus;
+use Carbon\Carbon;
 use App\Http\Resources\Customer as CustomerResource;
 
 class CustomerController extends Controller
@@ -163,6 +164,16 @@ class CustomerController extends Controller
 
     public function dashboard()
     {
+
+        $overview = [
+          ['Sun', Shipment::whereDate('created_at',Carbon::parse('last sunday')->startOfDay())->sum('charge_total')],
+          ['Mon' ,Shipment::whereDate('created_at',Carbon::parse('last monday')->startOfDay())->sum('charge_total')],
+          ['Tue' , Shipment::whereDate('created_at',Carbon::parse('last tuesday')->startOfDay())->sum('charge_total')],
+          ['Wed' ,Shipment::whereDate('created_at',Carbon::parse('last wednesday')->startOfDay())->sum('charge_total')],
+          ['Thu' ,Shipment::whereDate('created_at',Carbon::parse('last thursday')->startOfDay())->sum('charge_total')],
+          ['Fri', Shipment::whereDate('created_at',Carbon::parse('last friday')->startOfDay())->sum('charge_total')],
+          ['Sat', Shipment::whereDate('created_at',Carbon::parse('last saturday')->startOfDay())->sum('charge_total')],
+        ];
         $pending = 0;
         $shipments = Shipment::all();
         foreach ($shipments as $key => $shipment) {
@@ -181,6 +192,8 @@ class CustomerController extends Controller
     'pending_delivery' => $pending,
     'pending_payment' => $pending_payment
     ];
+
+    $data->overview = $overview;
         return response()->json($data, 200);
     }
 }

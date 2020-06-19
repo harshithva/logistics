@@ -15,7 +15,7 @@
                     </div>
 
                     <p class="terms-conditions">© 2020 All Rights Reserved. <a href="{{url('/')}}">Gurukal</a><br>
-                        <a href="{{url('https://vawebsites.in')}}" target="_blank">Powered by VAwebsites</a></p>
+
 
                 </div>
             </div>

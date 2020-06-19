@@ -81,7 +81,7 @@
                 aria-current="page"
                 class="d-none d-sm-inline-block btn btn-sm btn-outline-primary shadow-sm"
               >
-                <i class="fas fa-sticky-note fa-sm"></i> Create Quote
+                <i class="fas fa-sticky-note fa-sm"></i> Request Quote
               </router-link>
             </div>
             <div class="row">

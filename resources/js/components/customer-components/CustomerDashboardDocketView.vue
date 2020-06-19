@@ -299,7 +299,7 @@
                 <p>Transport Details</p>
                 <p>Driver Name : {{shipment.transport_driver_name}}</p>
                 <p>Contact : {{shipment.transport_driver_phone}}</p>
-                <p>Vechile Details : {{shipment.transport_driver_vehicle}}</p>
+                <p>Vehicle Details : {{shipment.transport_driver_vehicle}}</p>
               </div>
               <div class="col-3">
                 <p>Current Status</p>

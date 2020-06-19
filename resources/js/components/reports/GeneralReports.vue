@@ -176,12 +176,7 @@ export default {
           numeric: false,
           html: false
         },
-        {
-          label: "Charge Total",
-          field: "shipment_charge_total",
-          numeric: false,
-          html: false
-        },
+
         {
           label: "Sender Name",
           field: "shipment_sender_name",

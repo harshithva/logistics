@@ -265,7 +265,10 @@ export default ({
             context.commit('ToggleIsLoading');
             axios
                 .get("/api/shipments")
-                .then(response => (context.commit('retrieveShipments', response.data.data)))
+                .then(response => {
+                    response.data.data.sort((a, b) => (a.docket_no > b.docket_no) ? 1 : ((b.docket_no > a.docket_no) ? -1 : 0));
+                    (context.commit('retrieveShipments', response.data.data));
+                })
                 .catch(function (error) {
                     // handle error
 
@@ -400,7 +403,13 @@ export default ({
             context.commit('ToggleIsLoading');
             axios
                 .get(`/api/packages`)
-                .then(response => (context.commit('retrievePackages', response.data.data)))
+                .then(response => {
+
+                    response.data.data.sort((a, b) => (a.shipment_freight_invoice_number > b.shipment_freight_invoice_number) ? 1 : ((b.shipment_freight_invoice_number > a.shipment_freight_invoice_number) ? -1 : 0));
+
+                    (context.commit('retrievePackages', response.data.data));
+
+                })
                 .catch(function (error) {
                     // handle error
 

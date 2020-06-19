@@ -12,7 +12,7 @@
       >
         <div class="sidebar-brand-icon">
           <img
-            src="https://i.ibb.co/9VxLb0M/logo-3.png"
+            src="https://i.ibb.co/vJrfRxt/gurukal.png"
             class="img-fluid mt-4 mr-4"
             style="width:10rem"
           />
