@@ -503,5 +503,16 @@ class ShipmentController extends Controller
         $shipment->payment;
         return view('docket',compact('shipment'));
     }
+
+    public function feedback($id){
+        $shipment = Shipment::find($id);
+
+        return view('feedback',compact('shipment'));
+    }
+
+    public function send_feedback($request){
+
+    dd($request);
+    }
        
 }

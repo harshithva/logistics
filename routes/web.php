@@ -34,6 +34,8 @@ Route::get('/customer', 'HomeController@customer')->name('customer');
 Route::get('/customer/quote/{quote_id}/view', 'QuoteController@view_quote');
 Route::get('/customer/invoice/{shipment_id}/view', 'ShipmentController@view_invoice');
 Route::get('/customer/docket/{shipment_id}/view', 'ShipmentController@view_docket');
+Route::get('/customer/feedback/{shipment_id}', 'ShipmentController@feedback');
+Route::post('/customer/feedback', 'ShipmentController@send_feedback');
 
 // Route::view('/admin/{any}', 'admin.master');
 
