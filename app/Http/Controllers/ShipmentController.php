@@ -385,6 +385,8 @@ class ShipmentController extends Controller
 
     public function shipment_send_email($id) {
         $shipment = Shipment::findOrFail($id);
+
+ 
         $sender =  User::findOrFail($shipment->bill_to_id);
         $docket = $shipment->docket_no;
         $status =  $shipment->status->status;
@@ -394,8 +396,9 @@ class ShipmentController extends Controller
         $beautymail->send('emails.shipment.created', compact('docket','status','shipment'), function($message) use($sender)
         {
             $message
-                ->from('crm@gurukal.co.in', 'Gurukal Logistics')
+                ->from('admin@gurukal.co.in', 'Gurukal Logistics')
                 ->to($sender->email,$sender->name)
+                // ->cc('gurukallogistics@gmail.com')
                 ->subject('About Your Shipment');
         });
 
@@ -413,8 +416,9 @@ class ShipmentController extends Controller
         $beautymail->send('emails.shipment.docket', compact('shipment'), function($message) use($sender)
         {
             $message
-                ->from('crm@gurukal.co.in', 'Gurukal Logistics')
+                ->from('admin@gurukal.co.in', 'Gurukal Logistics')
                 ->to($sender->email,$sender->name)
+                // ->cc('gurukallogistics@gmail.com')
                 ->subject('About Your Shipment');
         });
 
@@ -510,9 +514,26 @@ class ShipmentController extends Controller
         return view('feedback',compact('shipment'));
     }
 
-    public function send_feedback($request){
+      /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function send_feedback(Request $request){
+    
+        $beautymail = app()->make(\Snowfire\Beautymail\Beautymail::class);
+   
+        $beautymail->send('emails.shipment.feedback',compact('request'), function($message)
+        {
+            $message
+                ->from('admin@gurukal.co.in', 'Gurukal Logistics')
+                ->to('gurukallogistics@gmail.com','Gurukal Logistics')
+                // ->cc('gurukallogistics@gmail.com')
+                ->subject('Feeback');
+        });
 
-    dd($request);
+        return response()->json('sent',200);
     }
        
 }

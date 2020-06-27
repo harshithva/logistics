@@ -76,6 +76,7 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 Vue.component('Dashboard', require('./components/Dashboard.vue').default);
 Vue.component('CustomerDashboard', require('./components/CustomerDashboard.vue').default);
 Vue.component('TrackingComponent', require('./components/customer-components/TrackingComponent.vue').default);
+Vue.component('FeedBackComponent', require('./components/customer-components/FeedBackComponent.vue').default);
 Vue.component('Login', require('./components/auth/Login').default);
 
 Vue.component(VueQrcode.name, VueQrcode);

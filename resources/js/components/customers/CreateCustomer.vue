@@ -232,10 +232,32 @@ export default {
   },
   methods: {
     onSubmit() {
-      this.form
-        .submit("post", "/api/customers")
-        .then(response => (this.dismissCountDown = 10))
-        .catch(error);
+      let timerInterval;
+      Swal.fire({
+        title: "Your shipment being created!",
+        html: "I will close in <b></b> milliseconds.",
+        timer: 4000,
+        timerProgressBar: true,
+        onBeforeOpen: () => {
+          Swal.showLoading();
+
+          this.form
+            .submit("post", "/api/customers")
+            .then(response => {
+              clearInterval(timerInterval);
+              this.dismissCountDown = 10;
+            })
+            .catch(clearInterval(timerInterval));
+        },
+        onClose: () => {
+          clearInterval(timerInterval);
+        }
+      });
+
+      // this.form
+      //   .submit("post", "/api/customers")
+      //   .then(response => (this.dismissCountDown = 10))
+      //   .catch(error);
     },
     countDownChanged(dismissCountDown) {
       this.dismissCountDown = dismissCountDown;

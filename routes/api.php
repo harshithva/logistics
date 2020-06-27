@@ -70,6 +70,9 @@ Route::get("shipments/{tracking_no}/shipment_track", 'ShipmentController@shipmen
 Route::apiResource("payments", 'PaymentController');
 Route::apiResource("packages", 'PackageController');
 
+// feedback
+Route::post('/customer/feedback', 'ShipmentController@send_feedback');
+
 Route::apiResource("customers", 'CustomerController');
 Route::get("customers/{id}/invoices", 'CustomerController@get_customer_invoices');
 Route::get("customers/{id}/quotes", 'CustomerController@get_customer_quotes');

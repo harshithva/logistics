@@ -29,22 +29,8 @@
     <div id="wrapper">
         <div class="container mt-4">
             <h1>Feedback Form</h1>
-            <form action="/customer/feedback" method="POST">
-                @csrf
-                <div class="form-group">
-                    <label for="exampleFormControlInput1">Freight Invoice number</label>
-                    <input type="text" class="form-control" id="exampleFormControlInput1"
-                        value="{{$shipment->freight_invoice_number}}" disabled>
-                </div>
+            <feed-back-component freight-invoice-prop="{{$shipment->freight_invoice_number}}" />
 
-                <div class="form-group">
-                    <label for="delivery_address">Feedback</label>
-                    <textarea class="form-control" id="delivery_address" rows="6" name="feedback"></textarea>
-                </div>
-                <input type="hidden" name="shipment_id" value="{{$shipment->id}}">
-                <button class="btn btn-primary" type="submit">Submit</button>
-
-            </form>
         </div>
 
     </div>

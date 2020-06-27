@@ -10,6 +10,7 @@ use App\Payment;
 use App\ShipmentStatus;
 use Carbon\Carbon;
 use App\Http\Resources\Customer as CustomerResource;
+use Snowfire\Beautymail\Beautymail;
 
 class CustomerController extends Controller
 {
@@ -53,6 +54,19 @@ class CustomerController extends Controller
         ]);
        
         $customer = User::create($request->all());
+
+
+        $beautymail = app()->make(\Snowfire\Beautymail\Beautymail::class);
+   
+        $beautymail->send('emails.customer.created', compact('request'), function($message) use($request)
+        {
+            $message
+                ->from('admin@gurukal.co.in', 'Gurukal Logistics')
+                ->to($request->email,$request->name)
+                // ->cc('gurukallogistics@gmail.com')
+                ->subject('Account created');
+        });
+
         return new CustomerResource($customer);
     }
 

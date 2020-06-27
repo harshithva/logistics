@@ -1,24 +1,11 @@
-{{-- @component('mail::message')
-# Shipment Created<br>
-<img src="https://i.ibb.co/HrrpY2C/Logo-Color-Text-Below.jpg" style="width:150px;"><br>
-<hr>
-Hi, This Message is to inform you that your shipment with Docket number {{$docket}} has been successfully
-created.<br>
-
-<hr>
-Thanks,<br>
-{{ config('app.name') }}
-@endcomponent --}}
-
-
 @extends('beautymail::templates.ark')
 
 @section('content')
 
-@include('beautymail::templates.widgets.articleStart', [
-'heading' => 'Gurukal Logistics',
-'level' => 'h1'
-])
+@include('beautymail::templates.minty.contentStart')
+
+<h1>Gurukal Logistics</h1>
+<br>
 
 <p>Click on the link to view your Docket.</p><br>
 <a
@@ -28,6 +15,6 @@ Thanks,<br>
 
 
 
-@include('beautymail::templates.widgets.newfeatureEnd')
+@include('beautymail::templates.minty.contentEnd')
 
 @stop

@@ -183,8 +183,9 @@ class QuoteController extends Controller
         $beautymail->send('emails.quotes.quote', compact('quote'), function($message) use($customer)
         {
             $message
-                ->from('crm@gurukal.co.in','Gurukal Logistics')
+                ->from('admin@gurukal.co.in','Gurukal Logistics')
                 ->to($customer->email, $customer->name)
+                // ->cc('gurukallogistics@gmail.com')
                 ->subject('Quote');
         });
     }
