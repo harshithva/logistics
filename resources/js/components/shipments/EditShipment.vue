@@ -809,21 +809,21 @@ export default {
 
     calculateTotal() {
       const total =
-        parseInt(this.form.charge_transportation) +
-        parseInt(this.form.charge_handling) +
-        parseInt(this.form.charge_halting) +
-        parseInt(this.form.charge_Insurance) +
-        parseInt(this.form.charge_odc);
+        parseInt(this.charge_transportation) +
+        parseInt(this.charge_handling) +
+        parseInt(this.charge_halting) +
+        parseInt(this.charge_Insurance) +
+        parseInt(this.charge_odc);
 
-      this.form.charge_tax_amount =
-        (total * parseInt(this.form.charge_tax_percent)) / 100;
-      this.form.charge_total = this.form.charge_tax_amount + total;
+      this.charge_tax_amount =
+        (total * parseInt(this.charge_tax_percent)) / 100;
+      this.charge_total = this.charge_tax_amount + total;
 
-      if (this.form.charge_advance_paid > 0) {
-        this.form.charge_balance =
-          this.form.charge_total - parseInt(this.form.charge_advance_paid);
+      if (this.charge_advance_paid > 0) {
+        this.charge_balance =
+          this.charge_total - parseInt(this.charge_advance_paid);
       } else {
-        this.form.charge_balance = this.form.charge_total;
+        this.charge_balance = this.charge_total;
       }
     },
     deletePackage(uid) {
