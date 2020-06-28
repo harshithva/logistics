@@ -252,17 +252,11 @@
 
     <div class="pagebreak"></div>
 
-    <div class="row">
+    <!-- <div class="row">
       <div class="col">
         <div class="card">
           <div class="card-body">
-            <!-- errors -->
-            <b-alert
-              v-if="payment.errors.has('amount')"
-              dismissible
-              show
-              variant="danger"
-            >{{payment.errors.get('amount')}}</b-alert>
+          
             <div class="row">
               <div class="col-4">
                 <p>Sender Details</p>
@@ -294,7 +288,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div>-->
 
     <!-- Payment Modal-->
 

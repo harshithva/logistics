@@ -62,7 +62,7 @@
                 :exportable="true"
                 :printable="false"
                 class="table-responsive p-4"
-              />
+              ></datatable>
 
               <!-- <table class="table table-bordered table-responsive" ref="content">
                 <thead>

@@ -239,7 +239,7 @@
               </tr>
             </table>
 
-            <h6 class="mt-4">Remarks</h6>
+            <h6 class="mt-3">Remarks</h6>
             <p>{{shipment.remarks}}</p>
           </div>
           <div class="col">
@@ -282,7 +282,7 @@
           </div>
         </div>
 
-        <div class="row mt-2">
+        <div class="row">
           <div class="col">
             <h6>Terms & Conditions</h6>
             <ol>
@@ -293,7 +293,7 @@
           </div>
         </div>
 
-        <div class="row mt-2">
+        <div class="row">
           <div class="col">
             <p>
               Bank Details
@@ -321,7 +321,7 @@
     <!-- Payment Modal-->
 
     <div
-      class="modal fade"
+      class="modal fade d-print-none"
       id="paymentmodal"
       tabindex="-1"
       role="dialog"
@@ -413,7 +413,7 @@
     <!-- update status modal  -->
 
     <div
-      class="modal fade"
+      class="modal fade d-print-none"
       id="updatestatus"
       tabindex="-1"
       role="dialog"
@@ -481,7 +481,7 @@
                   </div>
                 </div>
 
-                <div class="row m-1">
+                <div class="row m-1 d-print-none">
                   <div class="col">
                     <b-form-file v-model="status.document" ref="file-input" class="mb-2"></b-form-file>
                   </div>
@@ -491,14 +491,14 @@
                 </div>
               </div>
 
-              <div v-else-if="status.status == 'Awaiting Pickup'"></div>
+              <div v-else-if="status.status == 'Awaiting Pickup'" class="d-print-none"></div>
               <div v-else>
                 <div class="row m-2">
                   <div class="col">
                     <div class="form-group">
                       <input
                         type="text"
-                        class="form-control"
+                        class="form-control d-print-none"
                         placeholder="Location"
                         v-model="status.location"
                       />
@@ -510,7 +510,7 @@
           </div>
 
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-secondary d-print-none" data-dismiss="modal">Close</button>
             <button
               type="button"
               class="btn btn-primary"

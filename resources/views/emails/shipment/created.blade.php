@@ -11,9 +11,7 @@
 <br>
 <p>Your Consignment is ready for dispatch with docket number {{$docket}}.<br> Login at gurukal.in Or
     track your consignment at https://crm.gurukal.in/track <br>
-    <p>Click on the link to view invoice.</p><br>
-    <a href="{{ENV('APP_URL')}}/customer/invoice/{{$shipment->id}}/view">{{ENV('APP_URL')}}/customer/invoice/{{$shipment->id}}/view
-    </a>
+
     <p>Regards<br>Gurukal</p>
 
 
@@ -29,7 +27,11 @@
     <h4 class="secondary"><strong>Shipment Delivered</strong></h4>
     <br>
     <p>Your Consignment with docket number {{$docket}} is DELIVERED. <br>Kindly let us know how was your
-        experience by clicking the following link https://gurukal.in/feedback Thank you.<br> Regards Gurukal Logistics.
+        experience by clicking the following link https://crm.gurukal.in/customer/feedback/{{$shipment->id}}<br>
+        <p>Click on the link to view invoice.</p><br>
+        <a href="{{ENV('APP_URL')}}/customer/invoice/{{$shipment->id}}/view">{{ENV('APP_URL')}}/customer/invoice/{{$shipment->id}}/view
+        </a>
+        Thank you.<br> Regards Gurukal Logistics.
     </p>
 
 

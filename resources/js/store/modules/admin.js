@@ -89,6 +89,8 @@ export default ({
             return state.payments;
         },
         getAllPackages(state) {
+            // let allPackages = state.packages;
+            // allPackages.map(el => el.shipment_date = moment(el.shipment_date).format('DD/MM/YYYY'));
             return state.packages;
         },
         getTrackingDetails(state) {
