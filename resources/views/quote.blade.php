@@ -182,8 +182,8 @@
                         <div class="col-10"></div>
                         <div class="col">
                             <p>For and behalf of</p>
-                            <img src="https://i.ibb.co/8BwTXcT/sign-rohith.png" alt="Rohith" class="img-fluid ml-3"
-                                style="width:4rem;" />
+                            <img src="https://i.ibb.co/W6vkYqs/seal.png" alt="Rohith" class="img-fluid ml-3"
+                                style="width:6rem;" />
                             <br />
                             <br />
 

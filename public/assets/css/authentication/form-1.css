@@ -59,7 +59,7 @@ body {
       color: #3b3f5c;
       margin-bottom: 0; }
   .form-form .form-form-wrap h1 .brand-name {
-    color: #1b55e2;
+    color: #fd8c40;
     font-weight: 600; }
   .form-form .form-form-wrap p.signup-link {
     font-size: 14px;
@@ -180,7 +180,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: #1b55e2;
+    background-color: #fd8c40 ;
     background-position: center center;
     background-repeat: no-repeat;
     background-size: 75%;

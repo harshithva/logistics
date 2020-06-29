@@ -99,7 +99,7 @@
 
                     <div class="row mt-2">
                         <div class="col-3">
-                            <img :src="logo" style="max-width:20rem" />
+                            <img src="https://i.ibb.co/WFdrW4M/Logo-Color-Text-Below.jpg" style="max-width:20rem" />
                         </div>
                         <div class="col-6 caution-border text-center">
                             <h1 class="text-danger" style="font-family:'Times New Roman';margin-bottom:-1rem;">
@@ -391,7 +391,7 @@
 
     </div>
 
-
+    {{-- 
 
     <div class="container-fluid">
         <div class="row">
@@ -406,44 +406,44 @@
                                     Pickup Location :
                                     <br />
                                     {{$shipment->package_pickup_address}}
-                                </p>
-                                <p>Sender name : {{$shipment->sender->name}}</p>
-                                <p>Contact : {{$shipment->sender->phone}}</p>
-                            </div>
-                            <div class="col-3">
-                                <p>Receiver Details</p>
-                                <p>
-                                    Dropoff Location :
-                                    <br />
-                                    {{$shipment->delivery_address}}
-                                </p>
-                                <p>Receiver Name : {{$shipment->receiver->name}}</p>
-                                <p>Contact : {{$shipment->receiver->phone}}</p>
-                            </div>
-                            <div class="col-3">
-                                <p>Transport Details</p>
-                                <p>Driver Name : {{$shipment->transport_driver_name}}</p>
-                                <p>Contact : {{$shipment->transport_driver_phone}}</p>
-                                <p>Vechile Details : {{$shipment->transport_driver_vehicle}}</p>
-                            </div>
+    </p>
+    <p>Sender name : {{$shipment->sender->name}}</p>
+    <p>Contact : {{$shipment->sender->phone}}</p>
+    </div>
+    <div class="col-3">
+        <p>Receiver Details</p>
+        <p>
+            Dropoff Location :
+            <br />
+            {{$shipment->delivery_address}}
+        </p>
+        <p>Receiver Name : {{$shipment->receiver->name}}</p>
+        <p>Contact : {{$shipment->receiver->phone}}</p>
+    </div>
+    <div class="col-3">
+        <p>Transport Details</p>
+        <p>Driver Name : {{$shipment->transport_driver_name}}</p>
+        <p>Contact : {{$shipment->transport_driver_phone}}</p>
+        <p>Vechile Details : {{$shipment->transport_driver_vehicle}}</p>
+    </div>
 
-                            <div class="col-3">
-                                <p>Current Status</p>
-                                @if ($shipment->status->location)
-                                <p>Location : {{$shipment->status->location}}</p>
-                                @else
-                                <p>Location: Not Updated</p>
-                                @endif
+    <div class="col-3">
+        <p>Current Status</p>
+        @if ($shipment->status->location)
+        <p>Location : {{$shipment->status->location}}</p>
+        @else
+        <p>Location: Not Updated</p>
+        @endif
 
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
 
     </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+
+    </div> --}}
 
     <!-- Bootstrap core JavaScript-->
     <script src="{{asset('dashboard/vendor/jquery/jquery.min.js')}}"></script>

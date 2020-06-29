@@ -9,7 +9,8 @@
 
 <p>Click on the link to view your Docket.</p><br>
 <a
-    href="{{ENV('APP_URL')}}/customer/docket/{{$shipment->id}}/view">{{ENV('APP_URL')}}/customer/docket/{{$shipment->id}}/view</a>
+    href="{{ENV('APP_URL')}}/customer/docket/8jZSqbGNmzk25EcBgMsWYyDP4LDEAS7amrVevmqcTE67ByuajGaks8UqmLmJ/{{$shipment->id}}/urMrnM6JNuGPCnEdnmDqzfWfDYAUSYb8rkveHF9mWGPgD2XxH4SYRXjRCnmx/view">View
+    Docket</a>
 <p>Regards<br>Gurukal</p>
 <p>Visit: <a>https://gurukal.in</a></p>
 

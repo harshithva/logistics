@@ -500,11 +500,13 @@ class ShipmentController extends Controller
     }
 
     public function view_docket($request) {
+  
         $shipment = Shipment::find($request);
-        $shipment->sender;
-        $shipment->package;
-        $shipment->receiver;
-        $shipment->payment;
+        // $shipment->sender;
+        // $shipment->package;
+        // $shipment->receiver;
+        // $shipment->payment;
+   
         return view('docket',compact('shipment'));
     }
 

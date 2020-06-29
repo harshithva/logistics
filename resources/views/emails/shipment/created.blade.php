@@ -29,7 +29,9 @@
     <p>Your Consignment with docket number {{$docket}} is DELIVERED. <br>Kindly let us know how was your
         experience by clicking the following link https://crm.gurukal.in/customer/feedback/{{$shipment->id}}<br>
         <p>Click on the link to view invoice.</p><br>
-        <a href="{{ENV('APP_URL')}}/customer/invoice/{{$shipment->id}}/view">{{ENV('APP_URL')}}/customer/invoice/{{$shipment->id}}/view
+        <a
+            href="https://crm.gurukal.in//customer/invoice/XSFQqLeeNrRTQjK95ea7mnkGbU74eLUEets272Lq2nnSXkEfLkYtAxtgfz2B/{{$shipment->id}}/y8NRkCN4X9pHh6RM327hZTRd9ErSgmWd4P6zB52mZJLT9rqry7pVU6tzf6L8/view">View
+            Invoice
         </a>
         Thank you.<br> Regards Gurukal Logistics.
     </p>

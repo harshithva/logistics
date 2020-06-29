@@ -158,7 +158,7 @@
           <div class="col-10"></div>
           <div class="col">
             <p>For and behalf of</p>
-            <img :src="sign" alt="Rohith" class="img-fluid ml-3" style="width:4rem;" />
+            <img :src="sign" alt="Rohith" class="img-fluid ml-3" style="width:6rem;" />
             <br />
             <br />
 
@@ -176,7 +176,7 @@ export default {
     return {
       showUpdation: true,
       logo: "https://i.ibb.co/WFdrW4M/Logo-Color-Text-Below.jpg",
-      sign: "https://i.ibb.co/8BwTXcT/sign-rohith.png"
+      sign: "https://i.ibb.co/W6vkYqs/seal.png"
     };
   },
   methods: {

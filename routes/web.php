@@ -31,9 +31,9 @@ Route::get('/admin', 'HomeController@index')->name('admin');
 Route::get('/track', 'HomeController@track')->name('track');
 Route::get('/staff', 'HomeController@staff')->name('staff');
 Route::get('/customer', 'HomeController@customer')->name('customer');
-Route::get('/customer/quote/{quote_id}/view', 'QuoteController@view_quote');
-Route::get('/customer/invoice/{shipment_id}/view', 'ShipmentController@view_invoice');
-Route::get('/customer/docket/{shipment_id}/view', 'ShipmentController@view_docket');
+Route::get('/customer/quote/Td66URYw3EUnKUEz4xQYDKFDDBJAWhSEafjL8kLYnvJMuWVV8bgYrN2pAEGR/{quote_id}/SvJAax3Avtf3u8JmnQGjBKTYSY7gfkRybzLRng53Lh3hqPtLtMt76L8udNPB/view', 'QuoteController@view_quote');
+Route::get('/customer/invoice/XSFQqLeeNrRTQjK95ea7mnkGbU74eLUEets272Lq2nnSXkEfLkYtAxtgfz2B/{shipment_id}/y8NRkCN4X9pHh6RM327hZTRd9ErSgmWd4P6zB52mZJLT9rqry7pVU6tzf6L8/view', 'ShipmentController@view_invoice');
+Route::get('/customer/docket/8jZSqbGNmzk25EcBgMsWYyDP4LDEAS7amrVevmqcTE67ByuajGaks8UqmLmJ/{shipment_id}/urMrnM6JNuGPCnEdnmDqzfWfDYAUSYb8rkveHF9mWGPgD2XxH4SYRXjRCnmx/view', 'ShipmentController@view_docket');
 Route::get('/customer/feedback/{shipment_id}', 'ShipmentController@feedback');
 
 
