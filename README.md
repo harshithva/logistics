@@ -3,6 +3,7 @@
 This powerful CRM was developed using Vuejs and Laravel API.
 
 ### Features
+
 + SPA
 + Customizable
 + Create Shipment
@@ -10,3 +11,8 @@ This powerful CRM was developed using Vuejs and Laravel API.
 + Send quotes
 + Download Reports
 + Customer login
++ Staff Login
++ Send SMS
++ Send Email
++ Receive quotes
++ Send Invoices
