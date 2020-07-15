@@ -261,6 +261,15 @@ export default ({
                         ;
 
                 })
+            } else if (month === 3) {
+
+                let thisYear = moment().format('YYYY');
+
+                state.filteredPackages = state.packages.filter(item => {
+                    return item.shipment_date.includes(thisYear)
+                        ;
+
+                })
             } else {
                 state.filteredPackages = state.packages;
             }

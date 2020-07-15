@@ -113,7 +113,8 @@ export default {
       options: [
         { value: 0, text: "All" },
         { value: 1, text: "This month" },
-        { value: 2, text: "Last month" }
+        { value: 2, text: "Last month" },
+        { value: 3, text: "This year" }
       ],
       file: null,
       status: "pickup",
