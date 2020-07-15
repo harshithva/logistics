@@ -24,7 +24,8 @@ export default ({
         filteredCustomers: {},
         filteredQuotes: {},
         filteredShipments: {},
-        filteredStaffs: {}
+        filteredStaffs: {},
+        filteredPackages: []
 
     },
     getters: {
@@ -91,7 +92,7 @@ export default ({
         getAllPackages(state) {
             // let allPackages = state.packages;
             // allPackages.map(el => el.shipment_date = moment(el.shipment_date).format('DD/MM/YYYY'));
-            return state.packages;
+            return state.filteredPackages;
         },
         getTrackingDetails(state) {
             return state.tracking_details;
@@ -172,6 +173,7 @@ export default ({
         retrievePackages(state, packages) {
 
             state.packages = packages;
+            state.filteredPackages = packages;
         },
         TrackShipment(state, tracking_details) {
 
@@ -240,7 +242,31 @@ export default ({
         },
 
         selectMonth(state, month) {
-            console.log(month);
+
+            if (month === 1) {
+
+                let thisMonth = moment().format('YYYY-MM');
+
+                state.filteredPackages = state.packages.filter(item => {
+                    return item.shipment_date.includes(thisMonth)
+                        ;
+
+                })
+
+            } else if (month === 2) {
+
+                let lastMonth = moment().subtract(1, 'months').endOf('month').format('YYYY-MM');
+                state.filteredPackages = state.packages.filter(item => {
+                    return item.shipment_date.includes(lastMonth)
+                        ;
+
+                })
+            } else {
+                state.filteredPackages = state.packages;
+            }
+
+
+
         }
 
     },

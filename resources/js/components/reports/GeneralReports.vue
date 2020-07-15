@@ -80,7 +80,7 @@
               >
                 <div slot="table-actions">
                   <b-form-select
-                    v-model="selected"
+                    v-model="selectedMonth"
                     :options="options"
                     size="sm"
                     class="mb-1"
@@ -109,7 +109,7 @@ export default {
   },
   data() {
     return {
-      selected: 0,
+      selectedMonth: 0,
       options: [
         { value: 0, text: "All" },
         { value: 1, text: "This month" },
@@ -121,10 +121,10 @@ export default {
         {
           label: "Date",
           field: "shipment_date",
+          firstSortType: "desc",
           type: "date",
           dateInputFormat: "yyyy-mm-dd",
-          dateOutputFormat: "dd/mm/yyyy",
-          firstSortType: "desc"
+          dateOutputFormat: "dd/mm/yyyy"
         },
         {
           label: "Product",
@@ -182,7 +182,7 @@ export default {
   },
   methods: {
     selectMonth() {
-      this.$store.commit("selectMonth", this.selected);
+      this.$store.commit("selectMonth", this.selectedMonth);
     },
     generatePdf() {
       const vm = this;
