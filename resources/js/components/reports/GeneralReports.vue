@@ -22,10 +22,12 @@
         </div>
         <div class="col-6"></div>
         <div class="col">
-          <button class="btn btn-primary ml-2 btn-sm" @click="generatePdf">
-            <i class="fas fa-download"></i> Download PDF
+          <button class="btn btn-danger ml-2 btn-sm" @click="generatePdf">
+            <i class="fas fa-download"></i> PDF
           </button>
-          <export-excel :data="packages" class="btn btn-success btn-sm">Download Excel</export-excel>
+          <export-excel :data="packages" class="btn btn-success btn-sm">
+            <i class="fas fa-download"></i> Excel
+          </export-excel>
         </div>
       </div>
     </div>
@@ -118,11 +120,12 @@ export default {
       ],
       file: null,
       status: "pickup",
+      // initialSortBy: [{ field: "shipment_date", type: "desc" }],
       tableColumns1: [
         {
           label: "Date",
           field: "shipment_date",
-          firstSortType: "desc",
+
           type: "date",
           dateInputFormat: "yyyy-mm-dd",
           dateOutputFormat: "dd/mm/yyyy"

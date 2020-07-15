@@ -3,32 +3,16 @@
     <div class="card-header py-3">
       <h6 class="m-0 font-weight-bold text-primary">Staff List</h6>
     </div>
-    <div class="card-body">
-      <div class="table-responsive">
-        <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
-          <div class="row">
-            <div class="col-sm-12 col-md-6">
-              <div class="dataTables_length" id="dataTable_length"></div>
-            </div>
-            <div class="col-sm-12 col-md-6 text-right">
-              <div id="dataTable_filter" class="dataTables_filter">
-                <label>
-                  Search: &nbsp;
-                  <input
-                    type="search"
-                    class="form-control form-control-sm"
-                    placeholder
-                    aria-controls="dataTable"
-                    v-model="search"
-                    @input="searchStaff"
-                  />
-                </label>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-12">
-              <table
+
+    <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+      <div class="row">
+        <div class="col-sm-12 col-md-6">
+          <div class="dataTables_length" id="dataTable_length"></div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <!-- <table
                 class="table table-bordered dataTable"
                 id="dataTable"
                 width="100%"
@@ -127,9 +111,44 @@
                     </td>
                   </tr>
                 </tbody>
-              </table>
-            </div>
-          </div>
+          </table>-->
+
+          <vue-good-table
+            :columns="tableColumns1"
+            :rows="staffs"
+            :line-numbers="true"
+            :search-options="{
+    enabled: true,
+       placeholder: 'Type to search',
+  }"
+            :pagination-options="{
+    enabled: true,
+     mode: 'pages',
+     
+  }"
+          >
+            <template slot="table-row" slot-scope="props">
+              <span v-if="props.column.field == 'action'">
+                <router-link
+                  :to="'/admin/staff/'+ props.row.id +'/edit'"
+                  data-toggle="tooltip"
+                  data-placement="top"
+                  title="Edit Staff"
+                >
+                  <i class="fas fa-edit text-secondary"></i>
+                </router-link>
+                <a
+                  data-toggle="tooltip"
+                  data-placement="top"
+                  title="Delete Staff"
+                  @click="deleteStaff(props.row.id)"
+                >
+                  <i class="fas fa-trash text-danger"></i>
+                </a>
+              </span>
+              <span v-else>{{props.formattedRow[props.column.field]}}</span>
+            </template>
+          </vue-good-table>
         </div>
       </div>
     </div>
@@ -141,7 +160,29 @@ import { mapGetters } from "vuex";
 export default {
   data() {
     return {
-      search: ""
+      search: "",
+      tableColumns1: [
+        {
+          label: "Name",
+          field: "name"
+        },
+        {
+          label: "Role",
+          field: "role"
+        },
+        {
+          label: "Phone",
+          field: "phone"
+        },
+        {
+          label: "Email",
+          field: "email"
+        },
+        {
+          label: "Action",
+          field: "action"
+        }
+      ]
     };
   },
   created() {
