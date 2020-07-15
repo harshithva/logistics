@@ -385,7 +385,12 @@ class ShipmentController extends Controller
 
     public function shipment_send_email($id) {
         $shipment = Shipment::findOrFail($id);
-
+        if($shipment->bill_to == 'consignor')
+        {
+            $sender2 =  $shipment->receiver;
+        }else {
+            $sender2 =  $shipment->sender;
+        }
  
         $sender =  User::findOrFail($shipment->bill_to_id);
         $docket = $shipment->docket_no;
@@ -398,27 +403,51 @@ class ShipmentController extends Controller
             $message
                 ->from('admin@gurukal.co.in', 'Gurukal Logistics')
                 ->to($sender->email,$sender->name)
-                ->cc('gurukallogistics@gmail.com')
+                // ->cc('gurukallogistics@gmail.com')
                 ->subject('About Your Shipment');
         });
+
+        if($status != "Delivered")
+        {
+            $beautymail->send('emails.shipment.created', compact('docket','status','shipment'), function($message) use($sender2)
+            {
+                $message
+                    ->from('admin@gurukal.co.in', 'Gurukal Logistics')
+                    ->to($sender2->email,$sender2->name)
+                    ->subject('About Your Shipment');
+            });
+        }else {
+            $beautymail->send('emails.shipment.delivered', compact('docket','status','shipment'), function($message) use($sender2)
+            {
+                $message
+                    ->from('admin@gurukal.co.in', 'Gurukal Logistics')
+                    ->to($sender2->email,$sender2->name)
+                    ->subject('About Your Shipment');
+            });
+        }
+       
 
         return response()->json('sent',200);
     }
 
     public function shipment_send_docket($id) {
         $shipment = Shipment::findOrFail($id);
-        $sender =  User::findOrFail($shipment->bill_to_id);
+        $sender =  $shipment->sender;
+        $receiver =  $shipment->receiver;
+ 
+
         $docket = $shipment->docket_no;
         $status =  $shipment->status->status;
         
         $beautymail = app()->make(\Snowfire\Beautymail\Beautymail::class);
    
-        $beautymail->send('emails.shipment.docket', compact('shipment'), function($message) use($sender)
+        $beautymail->send('emails.shipment.docket', compact('shipment'), function($message) use($sender,$receiver)
         {
             $message
                 ->from('admin@gurukal.co.in', 'Gurukal Logistics')
                 ->to($sender->email,$sender->name)
                 ->cc('gurukallogistics@gmail.com')
+                ->cc($receiver->email)
                 ->subject('About Your Shipment');
         });
 
@@ -435,7 +464,8 @@ class ShipmentController extends Controller
     public function shipment_send_sms($id) {
         $shipment = Shipment::findOrFail($id); 
         $sender =  User::findOrFail($shipment->bill_to_id);
-        $phone = $sender->phone;
+        $receiver =  $shipment->receiver;
+     
         if($shipment->status == 'Awaiting Pickup' || $shipment->status == 'Awaiting pickup')
         {
             $msg = 'SHIPMENT CREATED Your Consignment is ready for dispatch with docket number '.$shipment->docket_no.' Login at gurukal.co.in Or track your consignment at Gurukal.co.in Regards Gurukal Logistics.';
@@ -464,7 +494,7 @@ class ShipmentController extends Controller
           CURLOPT_TIMEOUT => 30,
           CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
           CURLOPT_CUSTOMREQUEST => "POST",
-          CURLOPT_POSTFIELDS => "{ \"sender\": \"GURUKL\", \"route\": \"4\", \"country\": \"91\", \"sms\": [ { \"message\": \"$msg\", \"to\": [ \"$phone\" ] }] }",
+          CURLOPT_POSTFIELDS => "{ \"sender\": \"GURUKL\", \"route\": \"4\", \"country\": \"91\", \"sms\": [ { \"message\": \"$msg\", \"to\": [ \"$sender->phone\",\"$receiver->phone\" ] }] }",
           CURLOPT_SSL_VERIFYHOST => 0,
           CURLOPT_SSL_VERIFYPEER => 0,
           CURLOPT_HTTPHEADER => array(

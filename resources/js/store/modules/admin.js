@@ -237,6 +237,10 @@ export default ({
             else {
                 state.filteredStaffs = state.staffs;
             }
+        },
+
+        selectMonth(state, month) {
+            console.log(month);
         }
 
     },

@@ -237,23 +237,7 @@ track your consignment at https://crm.gurukal.in/track <br>
                                                 <div
                                                     style="font-size: 14px; line-height: 1.2; color: #ffffff; font-family: Nunito, Arial, Helvetica Neue, Helvetica, sans-serif; mso-line-height-alt: 17px;">
 
-                                                    @if ($status == 'Awaiting pickup' || $status == 'Awaiting Pickup')
-                                                    <p
-                                                        style="font-size: 42px; line-height: 1.2; word-break: break-word; text-align: center; mso-line-height-alt: 50px; margin: 0;">
-                                                        <span
-                                                            style="font-size: 30px;"><strong>SHIPMENT&nbsp;</strong></span><span
-                                                            style="background-color: transparent; font-size: 30px;"><strong>CREATED</strong></span>
-                                                    </p>
-                                                    @elseif ($status == 'Dispatched')
-                                                    <p
-                                                        style="font-size: 42px; line-height: 1.2; word-break: break-word; text-align: center; mso-line-height-alt: 50px; margin: 0;">
-                                                        <span
-                                                            style="font-size: 30px;"><strong>SHIPMENT&nbsp;</strong></span><span
-                                                            style="background-color: transparent; font-size: 30px;"><strong>DISPATCHED</strong></span>
-                                                    </p>
 
-
-                                                    @elseif ($status == 'Delivered')
                                                     <p
                                                         style="font-size: 42px; line-height: 1.2; word-break: break-word; text-align: center; mso-line-height-alt: 50px; margin: 0;">
                                                         <span
@@ -261,15 +245,7 @@ track your consignment at https://crm.gurukal.in/track <br>
                                                             style="background-color: transparent; font-size: 30px;"><strong>DELIVERED</strong></span>
                                                     </p>
 
-                                                    @elseif ($status == 'Intransit' || $status == 'Intrasit')
 
-                                                    <p
-                                                        style="font-size: 42px; line-height: 1.2; word-break: break-word; text-align: center; mso-line-height-alt: 50px; margin: 0;">
-                                                        <span
-                                                            style="font-size: 30px;"><strong>SHIPMENT&nbsp;</strong></span><span
-                                                            style="background-color: transparent; font-size: 30px;"><strong>INTRANSIT</strong></span>
-                                                    </p>
-                                                    @endif
                                                 </div>
                                             </div>
 
@@ -282,21 +258,6 @@ track your consignment at https://crm.gurukal.in/track <br>
                                                     style="font-size: 14px; line-height: 1.5; color: #ffffff; font-family: Nunito, Arial, Helvetica Neue, Helvetica, sans-serif; mso-line-height-alt: 21px;">
 
 
-                                                    @if ($status == 'Awaiting pickup' || $status == 'Awaiting Pickup')
-                                                    <p
-                                                        style="font-size: 16px; line-height: 1.5; word-break: break-word; text-align: center; mso-line-height-alt: 24px; margin: 0;">
-                                                        <span style="font-size: 16px;">Your Consignment is ready for
-                                                            dispatch with docket number {{$docket}}.</span></p>
-
-
-                                                    @elseif ($status == 'Dispatched')
-                                                    <p
-                                                        style="font-size: 16px; line-height: 1.5; word-break: break-word; text-align: center; mso-line-height-alt: 24px; margin: 0;">
-                                                        <span style="font-size: 16px;">Your Consignment with docket
-                                                            number {{$docket}} is Dispatched.</span></p>
-
-                                                    @elseif ($status == 'Delivered')
-
                                                     <p
                                                         style="font-size: 16px; line-height: 1.5; word-break: break-word; text-align: center; mso-line-height-alt: 24px; margin: 0;">
                                                         <span style="font-size: 16px;">Your Consignment with docket
@@ -307,23 +268,11 @@ track your consignment at https://crm.gurukal.in/track <br>
                                                             <a
                                                                 href="https://crm.gurukal.in/customer/feedback/{{$shipment->id}}">Feedback</a>
                                                             &nbsp; &nbsp; &nbsp;
-                                                            <a
-                                                                href="https://crm.gurukal.in/customer/invoice/XSFQqLeeNrRTQjK95ea7mnkGbU74eLUEets272Lq2nnSXkEfLkYtAxtgfz2B/{{$shipment->id}}/y8NRkCN4X9pHh6RM327hZTRd9ErSgmWd4P6zB52mZJLT9rqry7pVU6tzf6L8/view">View
-                                                                Invoice
-                                                            </a>
 
                                                         </span></p>
 
-                                                    @elseif ($status == 'Intransit' || $status == 'Intrasit')
-                                                    <p
-                                                        style="font-size: 16px; line-height: 1.5; word-break: break-word; text-align: center; mso-line-height-alt: 24px; margin: 0;">
-                                                        <span style="font-size: 16px;">Your Consignment with docket
-                                                            number {{$docket}} is Intransit.</span></p>
 
 
-
-
-                                                    @endif
                                                 </div>
                                             </div>
                                             <!--[if mso]></td></tr></table><![endif]-->

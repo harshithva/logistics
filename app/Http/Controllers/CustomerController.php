@@ -191,7 +191,7 @@ class CustomerController extends Controller
         $pending = 0;
         $shipments = Shipment::all();
         foreach ($shipments as $key => $shipment) {
-            if($shipment->status->status != 'Delivered'){
+            if(isset($shipment->status->status) != 'Delivered'){
                 $pending++;
             }
         }

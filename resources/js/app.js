@@ -49,6 +49,15 @@ import Form from './Helpers/Form'
 window.Form = Form
 
 import VueBarcode from "vue-barcode";
+
+
+import excel from 'vue-excel-export'
+Vue.use(excel)
+
+import VueGoodTablePlugin from 'vue-good-table';
+// import the styles
+import 'vue-good-table/dist/vue-good-table.css'
+Vue.use(VueGoodTablePlugin);
 // preloader
 // import Loading from 'vue-loading-overlay';
 // // Import stylesheet
@@ -85,6 +94,7 @@ Vue.use(BootstrapVue);
 Vue.component("vSelect", vSelect);
 Vue.component('pagination', require('laravel-vue-pagination'));
 Vue.use(Chartkick.use(Chart))
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

@@ -140,8 +140,10 @@
               </tr>
             </table>
 
-            <h6 class="mt-1">Consignment Note</h6>
-            <p></p>
+            <!-- <h6 class="mt-1">Consignment Note</h6>
+            <p></p>-->
+            <h6 class="mt-3">Remarks</h6>
+            <p>{{shipment.remarks}}</p>
           </div>
         </div>
 

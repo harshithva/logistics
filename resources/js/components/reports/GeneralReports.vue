@@ -20,12 +20,12 @@
             <i class="fas fa-rupee-sign fa-sm"></i> Payment Log
           </router-link>
         </div>
-        <div class="col"></div>
-        <div class="col"></div>
+        <div class="col-6"></div>
         <div class="col">
-          <button class="btn btn-outline-primary ml-2" @click="generatePdf">
+          <button class="btn btn-primary ml-2 btn-sm" @click="generatePdf">
             <i class="fas fa-download"></i> Download PDF
           </button>
+          <export-excel :data="packages" class="btn btn-success btn-sm">Download Excel</export-excel>
         </div>
       </div>
     </div>
@@ -50,7 +50,7 @@
           </div>-->
           <div class="row">
             <div class="col-sm-12">
-              <datatable
+              <!-- <datatable
                 title="Reports"
                 :columns="tableColumns1"
                 :rows="packages"
@@ -62,54 +62,32 @@
                 :exportable="true"
                 :printable="false"
                 class="table-responsive p-4"
-              ></datatable>
+              ></datatable>-->
 
-              <!-- <table class="table table-bordered table-responsive" ref="content">
-                <thead>
-                  <tr role="row">
-                    <th>Date</th>
-                    <th>Product</th>
-                    <th>From</th>
-                    <th>To</th>
-                    <th>Docket No</th>
-                    <th>Invoice No</th>
-                    <th>Amount</th>
-                    <th>Consignor</th>
-                    <th>Consignee</th>
-                    <th>Consignor GST</th>
-                    <th>Consignee GST</th>
-                  </tr>
-                </thead>
-                <tr v-for="item in packages">
-                  <td>{{moment(item.shipment_date).format("DD/MM/YYYY")}}</td>
-                  <td>{{item.description}}</td>
-                  <td>{{item.shipment_sender_address}}</td>
-                  <td>{{item.shipment_delivery_address}}</td>
-                  <td>{{item.shipment_docket_no}}</td>
-                  <td>{{item.shipment_freight_invoice_number}}</td>
-                  <td>{{item.shipment_charge_total}}</td>
-                  <td>{{item.shipment_sender_name}}</td>
-                  <td>{{item.shipment_receiver_name}}</td>
-                  <td>{{item.shipment_sender_gst}}</td>
-                  <td>{{item.shipment_receiver_gst}}</td>
-                </tr>
-                <tfoot>
-                  <tr>
-                    <th>Date</th>
-                    <th>Product</th>
-                    <th>From</th>
-                    <th>To</th>
-                    <th>Docket No</th>
-                    <th>Invoice No</th>
-                    <th>Amount</th>
-                    <th>Consignor</th>
-                    <th>Consignee</th>
-                    <th>Consignor GST</th>
-                    <th>Consignee GST</th>
-                  </tr>
-                </tfoot>
-                <tbody></tbody>
-              </table>-->
+              <vue-good-table
+                :columns="tableColumns1"
+                :rows="packages"
+                :line-numbers="true"
+                :search-options="{
+    enabled: true,
+       placeholder: 'Type to search',
+  }"
+                :pagination-options="{
+    enabled: true,
+     mode: 'pages',
+     
+  }"
+              >
+                <div slot="table-actions">
+                  <b-form-select
+                    v-model="selected"
+                    :options="options"
+                    size="sm"
+                    class="mb-1"
+                    @change="selectMonth"
+                  ></b-form-select>
+                </div>
+              </vue-good-table>
             </div>
           </div>
         </div>
@@ -131,80 +109,81 @@ export default {
   },
   data() {
     return {
+      selected: 0,
+      options: [
+        { value: 0, text: "All" },
+        { value: 1, text: "This month" },
+        { value: 2, text: "Last month" }
+      ],
       file: null,
       status: "pickup",
       tableColumns1: [
         {
           label: "Date",
           field: "shipment_date",
-          numeric: false,
-          html: false
+          type: "date",
+          dateInputFormat: "yyyy-mm-dd",
+          dateOutputFormat: "dd/mm/yyyy",
+          firstSortType: "desc"
         },
         {
           label: "Product",
           field: "description",
-          numeric: false,
-          html: false
+          numeric: false
         },
         {
           label: "From",
           field: "shipment_sender_address",
-          numeric: false,
-          html: false
+          numeric: false
         },
         {
           label: "To",
           field: "shipment_delivery_address",
-          numeric: false,
-          html: false
+          numeric: false
         },
         {
           label: "Docket",
           field: "shipment_docket_no",
-          numeric: false,
-          html: false
+          numeric: false
         },
         {
           label: "Freight Invoice Number",
           field: "shipment_freight_invoice_number",
-          numeric: false,
-          html: false
+          numeric: false
         },
         {
           label: "Charge Total",
           field: "shipment_charge_total",
-          numeric: false,
-          html: false
+          numeric: false
         },
 
         {
           label: "Sender Name",
           field: "shipment_sender_name",
-          numeric: false,
-          html: false
+          numeric: false
         },
         {
           label: "Receiver Name",
           field: "shipment_receiver_name",
-          numeric: false,
-          html: false
+          numeric: false
         },
         {
           label: "Sender GST",
           field: "shipment_sender_gst",
-          numeric: false,
-          html: false
+          numeric: false
         },
         {
           label: "Receiver GST",
           field: "shipment_receiver_gst",
-          numeric: false,
-          html: false
+          numeric: false
         }
       ]
     };
   },
   methods: {
+    selectMonth() {
+      this.$store.commit("selectMonth", this.selected);
+    },
     generatePdf() {
       const vm = this;
       const columns = [
