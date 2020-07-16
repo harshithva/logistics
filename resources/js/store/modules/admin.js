@@ -25,7 +25,8 @@ export default ({
         filteredQuotes: {},
         filteredShipments: {},
         filteredStaffs: {},
-        filteredPackages: []
+        filteredPackages: [],
+        isToggled: false
 
     },
     getters: {
@@ -99,6 +100,9 @@ export default ({
         },
         getIsLoading(state) {
             return state.isLoading;
+        },
+        getIsToggled(state) {
+            return state.isToggled;
         },
     },
     mutations: {
@@ -276,7 +280,11 @@ export default ({
 
 
 
-        }
+        },
+        toggleSidebar(state) {
+            state.isToggled = !state.isToggled;
+
+        },
 
     },
     actions: {

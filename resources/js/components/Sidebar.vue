@@ -3,6 +3,7 @@
     <!-- Sidebar -->
     <ul
       class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion d-print-none"
+      :class="isToggled ? 'toggled' : ''"
       id="accordionSidebar"
     >
       <!-- Sidebar - Brand -->
@@ -23,7 +24,7 @@
       <hr class="sidebar-divider my-0 mt-3" />
 
       <li class="nav-item ml-2 mt-3 mr-1">
-        <router-link to="/admin/shipments/create" class="btn bg-white text-primary">
+        <router-link to="/admin/shipments/create" class="btn bg-white text-primary mr-2">
           <i class="fas fa-box"></i> &nbsp;Create Shipment
         </router-link>
       </li>
@@ -140,7 +141,7 @@
 
       <!-- Sidebar Toggler (Sidebar) -->
       <div class="text-center d-none d-md-inline">
-        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+        <button class="rounded-circle border-0" id="sidebarToggle" @click="toggleSidebar"></button>
       </div>
     </ul>
     <!-- End of Sidebar -->
@@ -153,6 +154,16 @@ export default {
     return {
       logo_src: "../dashboard/img/gurukal.png"
     };
+  },
+  methods: {
+    toggleSidebar() {
+      this.$store.commit("toggleSidebar");
+    }
+  },
+  computed: {
+    isToggled() {
+      return this.$store.getters.getIsToggled;
+    }
   },
   name: "Sidebar"
 };
