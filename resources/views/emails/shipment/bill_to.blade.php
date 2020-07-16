@@ -180,15 +180,40 @@
                                                 <div
                                                     style="font-size: 14px; line-height: 1.2; color: #ffffff; font-family: Nunito, Arial, Helvetica Neue, Helvetica, sans-serif; mso-line-height-alt: 17px;">
 
-
+                                                    @if ($status == 'Awaiting pickup' || $status == 'Awaiting Pickup')
                                                     <p
                                                         style="font-size: 24px; line-height: 1.2; word-break: break-word; text-align: center; mso-line-height-alt: 29px; margin: 0;">
                                                         <span style="font-size: 24px;"><span
                                                                 style><strong>SHIPMENT&nbsp;</strong></span><span
-                                                                style="background-color: transparent;"><strong>DOCKET</strong></span></span>
+                                                                style="background-color: transparent;"><strong>CREATED</strong></span></span>
                                                     </p>
 
 
+                                                    @elseif ($status == 'Dispatched')
+                                                    <p
+                                                        style="font-size: 24px; line-height: 1.2; word-break: break-word; text-align: center; mso-line-height-alt: 29px; margin: 0;">
+                                                        <span style="font-size: 24px;"><span
+                                                                style><strong>SHIPMENT&nbsp;</strong></span><span
+                                                                style="background-color: transparent;"><strong>DISPATCHED</strong></span></span>
+                                                    </p>
+
+                                                    @elseif ($status == 'Delivered')
+                                                    <p
+                                                        style="font-size: 24px; line-height: 1.2; word-break: break-word; text-align: center; mso-line-height-alt: 29px; margin: 0;">
+                                                        <span style="font-size: 24px;"><span
+                                                                style><strong>SHIPMENT&nbsp;</strong></span><span
+                                                                style="background-color: transparent;"><strong>DELIVERED</strong></span></span>
+                                                    </p>
+
+                                                    @elseif ($status == 'Intransit' || $status == 'Intrasit')
+                                                    <p
+                                                        style="font-size: 24px; line-height: 1.2; word-break: break-word; text-align: center; mso-line-height-alt: 29px; margin: 0;">
+                                                        <span style="font-size: 24px;"><span
+                                                                style><strong>SHIPMENT&nbsp;</strong></span><span
+                                                                style="background-color: transparent;"><strong>INTRANSIT</strong></span></span>
+                                                    </p>
+
+                                                    @endif
                                                 </div>
                                             </div>
                                             <!--[if mso]></td></tr></table><![endif]-->
@@ -197,13 +222,39 @@
                                                 style="color:#ffffff;font-family:Nunito, Arial, Helvetica Neue, Helvetica, sans-serif;line-height:1.5;padding-top:5px;padding-right:40px;padding-bottom:10px;padding-left:40px;">
                                                 <div
                                                     style="font-size: 14px; line-height: 1.5; color: #ffffff; font-family: Nunito, Arial, Helvetica Neue, Helvetica, sans-serif; mso-line-height-alt: 21px;">
+                                                    @if ($status == 'Awaiting pickup' || $status == 'Awaiting Pickup')
+                                                    <p
+                                                        style="font-size: 16px; line-height: 1.5; word-break: break-word; text-align: center; mso-line-height-alt: 24px; margin: 0;">
+                                                        <span style="font-size: 16px;">Your Consignment is ready for
+                                                            dispatch with docket number {{$docket}}.</span></p>
+
+
+                                                    @elseif ($status == 'Dispatched')
+                                                    <p
+                                                        style="font-size: 16px; line-height: 1.5; word-break: break-word; text-align: center; mso-line-height-alt: 24px; margin: 0;">
+                                                        <span style="font-size: 16px;">Your Consignment with docket
+                                                            number {{$docket}} is Dispatched.</span></p>
+
+                                                    @elseif ($status == 'Delivered')
 
                                                     <p
                                                         style="font-size: 16px; line-height: 1.5; word-break: break-word; text-align: center; mso-line-height-alt: 24px; margin: 0;">
-                                                        <span style="font-size: 16px;">Click on the link to view your
-                                                            Docket.</span></p>
+                                                        <span style="font-size: 16px;">Your Consignment with docket
+                                                            number {{$docket}} is Delivered.
+                                                            <br>Kindly
+                                                            let us know how was your
+                                                            experience by clicking the following link.<br>
 
 
+                                                        </span></p>
+
+                                                    @elseif ($status == 'Intransit' || $status == 'Intrasit')
+                                                    <p
+                                                        style="font-size: 16px; line-height: 1.5; word-break: break-word; text-align: center; mso-line-height-alt: 24px; margin: 0;">
+                                                        <span style="font-size: 16px;">Your Consignment with docket
+                                                            number {{$docket}} is Intransit.</span></p>
+
+                                                    @endif
                                                 </div>
                                             </div>
                                             <!--[if mso]></td></tr></table><![endif]-->
@@ -233,13 +284,89 @@
                                             <div class="button-container" align="center"
                                                 style="padding-top:10px;padding-right:10px;padding-bottom:10px;padding-left:10px;">
                                                 <!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-spacing: 0; border-collapse: collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;"><tr><td style="padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px" align="center"><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="https://crm.gurukal.in/track" style="height:31.5pt; width:143.25pt; v-text-anchor:middle;" arcsize="10%" stroke="false" fillcolor="#ffffff"><w:anchorlock/><v:textbox inset="0,0,0,0"><center style="color:#de6b2b; font-family:Arial, sans-serif; font-size:16px"><![endif]--><a
+                                                    href="{{ENV('APP_URL')}}/track" target="_blank"
+                                                    style="-webkit-text-size-adjust: none; text-decoration: none; display: inline-block; color: #de6b2b; background-color: #ffffff; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; width: auto; width: auto; border-top: 1px solid #ffffff; border-right: 1px solid #ffffff; border-bottom: 1px solid #ffffff; border-left: 1px solid #ffffff; padding-top: 5px; padding-bottom: 5px; font-family: Nunito, Arial, Helvetica Neue, Helvetica, sans-serif; text-align: center; mso-border-alt: none; word-break: keep-all;"><span
+                                                        style="padding-left:20px;padding-right:20px;font-size:16px;display:inline-block;"><span
+                                                            style="font-size: 16px; margin: 0; line-height: 2; word-break: break-word; mso-line-height-alt: 32px;">Track
+                                                            Shipment</span></span></a>
+                                                <!--[if mso]></center></v:textbox></v:roundrect></td></tr></table><![endif]-->
+                                            </div>
+                                            <!--[if (!mso)&(!IE)]><!-->
+                                        </div>
+                                        <!--<![endif]-->
+                                    </div>
+                                </div>
+                                <!--[if (mso)|(IE)]></td></tr></table><![endif]-->
+                                <!--[if (mso)|(IE)]></td><td align="center" width="213" style=";width:213px; border-top: 0px solid transparent; border-left: 0px solid transparent; border-bottom: 0px solid transparent; border-right: 0px solid transparent;" valign="top"><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding-right: 0px; padding-left: 0px; padding-top:5px; padding-bottom:5px;"><![endif]-->
+
+                                @if ($status == 'Awaiting Pickup')
+                                <div class="col num4"
+                                    style="max-width: 320px; min-width: 213px; display: table-cell; vertical-align: top; width: 213px;">
+                                    <div style="width:100% !important;">
+                                        <!--[if (!mso)&(!IE)]><!-->
+                                        <div
+                                            style="border-top:0px solid transparent; border-left:0px solid transparent; border-bottom:0px solid transparent; border-right:0px solid transparent; padding-top:5px; padding-bottom:5px; padding-right: 0px; padding-left: 0px;">
+                                            <!--<![endif]-->
+                                            <div class="button-container" align="center"
+                                                style="padding-top:10px;padding-right:10px;padding-bottom:10px;padding-left:10px;">
+                                                <!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-spacing: 0; border-collapse: collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;"><tr><td style="padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px" align="center"><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="https://crm.gurukal.in/track" style="height:31.5pt; width:126.75pt; v-text-anchor:middle;" arcsize="12%" stroke="false" fillcolor="#2c2c9c"><w:anchorlock/><v:textbox inset="0,0,0,0"><center style="color:#f3f3f3; font-family:Arial, sans-serif; font-size:16px"><![endif]--><a
+                                                    href="{{ENV('APP_URL')}}/customer/invoice/XSFQqLeeNrRTQjK95ea7mnkGbU74eLUEets272Lq2nnSXkEfLkYtAxtgfz2B/{{$shipment->id}}/y8NRkCN4X9pHh6RM327hZTRd9ErSgmWd4P6zB52mZJLT9rqry7pVU6tzf6L8/view"
+                                                    target="_blank"
+                                                    style="-webkit-text-size-adjust: none; text-decoration: none; display: inline-block; color: #f3f3f3; background-color: #212121; border-radius: 5px; -webkit-border-radius: 5px; -moz-border-radius: 5px; width: auto; width: auto; border-top: 0px solid #FFFFFF; border-right: 0px solid #FFFFFF; border-bottom: 0px solid #FFFFFF; border-left: 0px solid #FFFFFF; padding-top: 5px; padding-bottom: 5px; font-family: Nunito, Arial, Helvetica Neue, Helvetica, sans-serif; text-align: center; mso-border-alt: none; word-break: keep-all;"><span
+                                                        style="padding-left:20px;padding-right:20px;font-size:16px;display:inline-block;"><span
+                                                            style="font-size: 16px; margin: 0; line-height: 2; word-break: break-word; mso-line-height-alt: 32px;">View
+                                                            Invoice</span></span></a>
+                                                <!--[if mso]></center></v:textbox></v:roundrect></td></tr></table><![endif]-->
+                                            </div>
+                                            <!--[if (!mso)&(!IE)]><!-->
+                                        </div>
+                                        <!--<![endif]-->
+                                    </div>
+                                </div>
+                                <!--[if (mso)|(IE)]></td></tr></table><![endif]-->
+                                <!--[if (mso)|(IE)]></td><td align="center" width="213" style=";width:213px; border-top: 0px solid transparent; border-left: 0px solid transparent; border-bottom: 0px solid transparent; border-right: 0px solid transparent;" valign="top"><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding-right: 0px; padding-left: 0px; padding-top:5px; padding-bottom:5px;"><![endif]-->
+                                <div class="col num4"
+                                    style="max-width: 320px; min-width: 213px; display: table-cell; vertical-align: top; width: 213px;">
+                                    <div style="width:100% !important;">
+                                        <!--[if (!mso)&(!IE)]><!-->
+                                        <div
+                                            style="border-top:0px solid transparent; border-left:0px solid transparent; border-bottom:0px solid transparent; border-right:0px solid transparent; padding-top:5px; padding-bottom:5px; padding-right: 0px; padding-left: 0px;">
+                                            <!--<![endif]-->
+                                            <div class="button-container" align="center"
+                                                style="padding-top:10px;padding-right:10px;padding-bottom:10px;padding-left:10px;">
+                                                <!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-spacing: 0; border-collapse: collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;"><tr><td style="padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px" align="center"><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="https://crm.gurukal.in/track" style="height:31.5pt; width:126pt; v-text-anchor:middle;" arcsize="10%" stroke="false" fillcolor="#ffffff"><w:anchorlock/><v:textbox inset="0,0,0,0"><center style="color:#de6b2b; font-family:Arial, sans-serif; font-size:16px"><![endif]--><a
                                                     href="{{ENV('APP_URL')}}/customer/docket/8jZSqbGNmzk25EcBgMsWYyDP4LDEAS7amrVevmqcTE67ByuajGaks8UqmLmJ/{{$shipment->id}}/urMrnM6JNuGPCnEdnmDqzfWfDYAUSYb8rkveHF9mWGPgD2XxH4SYRXjRCnmx/view"
                                                     target="_blank"
                                                     style="-webkit-text-size-adjust: none; text-decoration: none; display: inline-block; color: #de6b2b; background-color: #ffffff; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; width: auto; width: auto; border-top: 1px solid #ffffff; border-right: 1px solid #ffffff; border-bottom: 1px solid #ffffff; border-left: 1px solid #ffffff; padding-top: 5px; padding-bottom: 5px; font-family: Nunito, Arial, Helvetica Neue, Helvetica, sans-serif; text-align: center; mso-border-alt: none; word-break: keep-all;"><span
                                                         style="padding-left:20px;padding-right:20px;font-size:16px;display:inline-block;"><span
                                                             style="font-size: 16px; margin: 0; line-height: 2; word-break: break-word; mso-line-height-alt: 32px;">View
-                                                            Docket
-                                                        </span></span></a>
+                                                            Docket</span></span></a>
+                                                <!--[if mso]></center></v:textbox></v:roundrect></td></tr></table><![endif]-->
+                                            </div>
+                                            <!--[if (!mso)&(!IE)]><!-->
+                                        </div>
+                                        <!--<![endif]-->
+                                    </div>
+                                </div>
+                                @elseif ($status == 'Delivered')
+
+
+
+                                <div class="col num4"
+                                    style="max-width: 320px; min-width: 213px; display: table-cell; vertical-align: top; width: 213px;">
+                                    <div style="width:100% !important;">
+                                        <!--[if (!mso)&(!IE)]><!-->
+                                        <div
+                                            style="border-top:0px solid transparent; border-left:0px solid transparent; border-bottom:0px solid transparent; border-right:0px solid transparent; padding-top:5px; padding-bottom:5px; padding-right: 0px; padding-left: 0px;">
+                                            <!--<![endif]-->
+                                            <div class="button-container" align="center"
+                                                style="padding-top:10px;padding-right:10px;padding-bottom:10px;padding-left:10px;">
+                                                <!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-spacing: 0; border-collapse: collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;"><tr><td style="padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px" align="center"><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="https://crm.gurukal.in/track" style="height:31.5pt; width:126.75pt; v-text-anchor:middle;" arcsize="12%" stroke="false" fillcolor="#2c2c9c"><w:anchorlock/><v:textbox inset="0,0,0,0"><center style="color:#f3f3f3; font-family:Arial, sans-serif; font-size:16px"><![endif]--><a
+                                                    href="{{ENV('APP_URL')}}/customer/feedback/{{$shipment->id}}"
+                                                    target="_blank"
+                                                    style="-webkit-text-size-adjust: none; text-decoration: none; display: inline-block; color: #f3f3f3; background-color: #212121; border-radius: 5px; -webkit-border-radius: 5px; -moz-border-radius: 5px; width: auto; width: auto; border-top: 0px solid #FFFFFF; border-right: 0px solid #FFFFFF; border-bottom: 0px solid #FFFFFF; border-left: 0px solid #FFFFFF; padding-top: 5px; padding-bottom: 5px; font-family: Nunito, Arial, Helvetica Neue, Helvetica, sans-serif; text-align: center; mso-border-alt: none; word-break: keep-all;"><span
+                                                        style="padding-left:20px;padding-right:20px;font-size:16px;display:inline-block;"><span
+                                                            style="font-size: 16px; margin: 0; line-height: 2; word-break: break-word; mso-line-height-alt: 32px;">Feedback</span></span></a>
                                                 <!--[if mso]></center></v:textbox></v:roundrect></td></tr></table><![endif]-->
                                             </div>
                                             <!--[if (!mso)&(!IE)]><!-->
@@ -248,6 +375,12 @@
                                     </div>
                                 </div>
 
+                                @else
+
+                                @endif
+
+                                <!--[if (mso)|(IE)]></td></tr></table><![endif]-->
+                                <!--[if (mso)|(IE)]></td></tr></table></td></tr></table><![endif]-->
                             </div>
                         </div>
                     </div>
@@ -294,7 +427,7 @@
                                 style="border-collapse: collapse;display: table;width: 100%;background-color:transparent;">
                                 <!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:transparent;"><tr><td align="center"><table cellpadding="0" cellspacing="0" border="0" style="width:640px"><tr class="layout-full-width" style="background-color:transparent"><![endif]-->
                                 <!--[if (mso)|(IE)]><td align="center" width="213" style=";width:213px; border-top: 0px solid transparent; border-left: 0px solid transparent; border-bottom: 0px solid transparent; border-right: 0px solid transparent;" valign="top"><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding-right: 0px; padding-left: 0px; padding-top:5px; padding-bottom:5px;"><![endif]-->
-                                <div class="col num6"
+                                <div class="col num4"
                                     style="max-width: 320px; min-width: 213px; display: table-cell; vertical-align: top; width: 213px;">
                                     <div style="width:100% !important;">
                                         <!--[if (!mso)&(!IE)]><!-->
@@ -513,7 +646,7 @@
                                                         style="font-size: 24px; line-height: 1.2; word-break: break-word; text-align: center; mso-line-height-alt: 29px; margin: 0;">
                                                         <span style="font-size: 24px;"><a
                                                                 style="text-decoration: none; color: #404040;"
-                                                                href="https://www.crm.gurukal.in" target="_blank"
+                                                                href="http://www.example.com/" target="_blank"
                                                                 rel="noopener"><span style><strong>CUSTOMER
                                                                         DASHBOARD</strong></span></a></span></p>
                                                 </div>

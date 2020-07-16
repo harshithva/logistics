@@ -30,6 +30,7 @@ class ShipmentCreated extends Mailable
      */
     public function build()
     {
+    
         return $this->markdown('emails.shipment.created');
     }
 }

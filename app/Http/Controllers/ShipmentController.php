@@ -401,6 +401,7 @@ class ShipmentController extends Controller
     }
 
     public function shipment_send_email($id) {
+
         $shipment = Shipment::findOrFail($id);
         if($shipment->bill_to == 'consignor')
         {
@@ -415,7 +416,7 @@ class ShipmentController extends Controller
         
         $beautymail = app()->make(\Snowfire\Beautymail\Beautymail::class);
    
-        $beautymail->send('emails.shipment.created', compact('docket','status','shipment'), function($message) use($sender)
+        $beautymail->send('emails.shipment.bill_to', compact('docket','status','shipment'), function($message) use($sender)
         {
             $message
                 ->from('admin@gurukal.co.in', 'Gurukal Logistics')
@@ -424,24 +425,15 @@ class ShipmentController extends Controller
                 ->subject('About Your Shipment');
         });
 
-        if($status != "Delivered")
-        {
-            $beautymail->send('emails.shipment.created', compact('docket','status','shipment'), function($message) use($sender2)
+       
+            $beautymail->send('emails.shipment.sender_2', compact('docket','status','shipment'), function($message) use($sender2)
             {
                 $message
                     ->from('admin@gurukal.co.in', 'Gurukal Logistics')
                     ->to($sender2->email,$sender2->name)
                     ->subject('About Your Shipment');
             });
-        }else {
-            $beautymail->send('emails.shipment.delivered', compact('docket','status','shipment'), function($message) use($sender2)
-            {
-                $message
-                    ->from('admin@gurukal.co.in', 'Gurukal Logistics')
-                    ->to($sender2->email,$sender2->name)
-                    ->subject('About Your Shipment');
-            });
-        }
+     
        
 
         return response()->json('sent',200);

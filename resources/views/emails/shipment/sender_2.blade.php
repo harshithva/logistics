@@ -1,60 +1,3 @@
-{{-- @extends('beautymail::templates.ark')
-
-@section('content')
-
-@include('beautymail::templates.minty.contentStart')
-
-@if ($status == 'Awaiting pickup' || $status == 'Awaiting Pickup')
-<h1>Gurukal Logistics</h1>
-<br>
-<h4 class="secondary"><strong>Shipment Created</strong></h4>
-<br>
-<p>Your Consignment is ready for dispatch with docket number {{$docket}}.<br> Login at gurukal.in Or
-track your consignment at https://crm.gurukal.in/track <br>
-
-<p>Regards<br>Gurukal</p>
-
-
-
-@elseif ($status == 'Dispatched')
-<h4 class="secondary"><strong>Shipment Dispatched</strong></h4>
-<br>
-<p>Your Consignment with docket number {{$docket}} is Dispatched.<br> Login at gurukal.in Or track
-    your consignment at https://crm.gurukal.in/track<br>Gurukal Logistics.</p>
-
-
-@elseif ($status == 'Delivered')
-<h4 class="secondary"><strong>Shipment Delivered</strong></h4>
-<br>
-<p>Your Consignment with docket number {{$docket}} is DELIVERED. <br>Kindly let us know how was your
-    experience by clicking the following link https://crm.gurukal.in/customer/feedback/{{$shipment->id}}<br>
-    <p>Click on the link to view invoice.</p><br>
-    <a
-        href="https://crm.gurukal.in/customer/invoice/XSFQqLeeNrRTQjK95ea7mnkGbU74eLUEets272Lq2nnSXkEfLkYtAxtgfz2B/{{$shipment->id}}/y8NRkCN4X9pHh6RM327hZTRd9ErSgmWd4P6zB52mZJLT9rqry7pVU6tzf6L8/view">View
-        Invoice
-    </a>
-    Thank you.<br> Regards Gurukal Logistics.
-</p>
-
-
-@elseif ($status == 'Intransit' || $status == 'Intrasit')
-<h4 class="secondary"><strong>Shipment Intransit</strong></h4>
-<br>
-<p>Your Consignment with docket number {{$docket}} is Intransit.<br>Regards Gurukal
-    Logistics.</p>
-
-@else
-<h4 class="secondary"><strong>Shipment Created</strong></h4>
-<br>
-<p>Your Consignment is ready for dispatch with docket number {{$docket}}.<br> Login at gurukal.in Or
-    track your consignment at https://crm.gurukal.in/track <br>Regards Gurukal Logistics.</p>
-@endif
-
-@include('beautymail::templates.minty.contentEnd')
-
-@stop --}}
-
-
 <!DOCTYPE html
     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml"
@@ -237,26 +180,62 @@ track your consignment at https://crm.gurukal.in/track <br>
                                                 <div
                                                     style="font-size: 14px; line-height: 1.2; color: #ffffff; font-family: Nunito, Arial, Helvetica Neue, Helvetica, sans-serif; mso-line-height-alt: 17px;">
 
-
+                                                    @if ($status == 'Awaiting pickup' || $status == 'Awaiting Pickup')
                                                     <p
-                                                        style="font-size: 42px; line-height: 1.2; word-break: break-word; text-align: center; mso-line-height-alt: 50px; margin: 0;">
-                                                        <span
-                                                            style="font-size: 30px;"><strong>SHIPMENT&nbsp;</strong></span><span
-                                                            style="background-color: transparent; font-size: 30px;"><strong>DELIVERED</strong></span>
+                                                        style="font-size: 24px; line-height: 1.2; word-break: break-word; text-align: center; mso-line-height-alt: 29px; margin: 0;">
+                                                        <span style="font-size: 24px;"><span
+                                                                style><strong>SHIPMENT&nbsp;</strong></span><span
+                                                                style="background-color: transparent;"><strong>CREATED</strong></span></span>
                                                     </p>
 
 
+                                                    @elseif ($status == 'Dispatched')
+                                                    <p
+                                                        style="font-size: 24px; line-height: 1.2; word-break: break-word; text-align: center; mso-line-height-alt: 29px; margin: 0;">
+                                                        <span style="font-size: 24px;"><span
+                                                                style><strong>SHIPMENT&nbsp;</strong></span><span
+                                                                style="background-color: transparent;"><strong>DISPATCHED</strong></span></span>
+                                                    </p>
+
+                                                    @elseif ($status == 'Delivered')
+                                                    <p
+                                                        style="font-size: 24px; line-height: 1.2; word-break: break-word; text-align: center; mso-line-height-alt: 29px; margin: 0;">
+                                                        <span style="font-size: 24px;"><span
+                                                                style><strong>SHIPMENT&nbsp;</strong></span><span
+                                                                style="background-color: transparent;"><strong>DELIVERED</strong></span></span>
+                                                    </p>
+
+                                                    @elseif ($status == 'Intransit' || $status == 'Intrasit')
+                                                    <p
+                                                        style="font-size: 24px; line-height: 1.2; word-break: break-word; text-align: center; mso-line-height-alt: 29px; margin: 0;">
+                                                        <span style="font-size: 24px;"><span
+                                                                style><strong>SHIPMENT&nbsp;</strong></span><span
+                                                                style="background-color: transparent;"><strong>INTRANSIT</strong></span></span>
+                                                    </p>
+
+                                                    @endif
                                                 </div>
                                             </div>
-
-
                                             <!--[if mso]></td></tr></table><![endif]-->
                                             <!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding-right: 40px; padding-left: 40px; padding-top: 5px; padding-bottom: 10px; font-family: Arial, sans-serif"><![endif]-->
                                             <div
                                                 style="color:#ffffff;font-family:Nunito, Arial, Helvetica Neue, Helvetica, sans-serif;line-height:1.5;padding-top:5px;padding-right:40px;padding-bottom:10px;padding-left:40px;">
                                                 <div
                                                     style="font-size: 14px; line-height: 1.5; color: #ffffff; font-family: Nunito, Arial, Helvetica Neue, Helvetica, sans-serif; mso-line-height-alt: 21px;">
+                                                    @if ($status == 'Awaiting pickup' || $status == 'Awaiting Pickup')
+                                                    <p
+                                                        style="font-size: 16px; line-height: 1.5; word-break: break-word; text-align: center; mso-line-height-alt: 24px; margin: 0;">
+                                                        <span style="font-size: 16px;">Your Consignment is ready for
+                                                            dispatch with docket number {{$docket}}.</span></p>
 
+
+                                                    @elseif ($status == 'Dispatched')
+                                                    <p
+                                                        style="font-size: 16px; line-height: 1.5; word-break: break-word; text-align: center; mso-line-height-alt: 24px; margin: 0;">
+                                                        <span style="font-size: 16px;">Your Consignment with docket
+                                                            number {{$docket}} is Dispatched.</span></p>
+
+                                                    @elseif ($status == 'Delivered')
 
                                                     <p
                                                         style="font-size: 16px; line-height: 1.5; word-break: break-word; text-align: center; mso-line-height-alt: 24px; margin: 0;">
@@ -264,29 +243,50 @@ track your consignment at https://crm.gurukal.in/track <br>
                                                             number {{$docket}} is Delivered.
                                                             <br>Kindly
                                                             let us know how was your
-                                                            experience by clicking the following link.<br>
-                                                            <a
-                                                                href="https://crm.gurukal.in/customer/feedback/{{$shipment->id}}">Feedback</a>
-                                                            &nbsp; &nbsp; &nbsp;
-
-                                                        </span></p>
+                                                            experience by clicking the following link. </span></p>
 
 
+                                                    @elseif ($status == 'Intransit' || $status == 'Intrasit')
+                                                    <p
+                                                        style="font-size: 16px; line-height: 1.5; word-break: break-word; text-align: center; mso-line-height-alt: 24px; margin: 0;">
+                                                        <span style="font-size: 16px;">Your Consignment with docket
+                                                            number {{$docket}} is Intransit.</span></p>
 
+                                                    @endif
                                                 </div>
                                             </div>
                                             <!--[if mso]></td></tr></table><![endif]-->
+                                            <!--[if (!mso)&(!IE)]><!-->
+                                        </div>
+                                        <!--<![endif]-->
+                                    </div>
+                                </div>
+                                <!--[if (mso)|(IE)]></td></tr></table><![endif]-->
+                                <!--[if (mso)|(IE)]></td></tr></table></td></tr></table><![endif]-->
+                            </div>
+                        </div>
+                    </div>
+                    <div style="background-color:transparent;">
+                        <div class="block-grid three-up"
+                            style="Margin: 0 auto; min-width: 320px; max-width: 640px; overflow-wrap: break-word; word-wrap: break-word; word-break: break-word; background-color: #fd8c40;">
+                            <div style="border-collapse: collapse;display: table;width: 100%;background-color:#fd8c40;">
+                                <!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:transparent;"><tr><td align="center"><table cellpadding="0" cellspacing="0" border="0" style="width:640px"><tr class="layout-full-width" style="background-color:#fd8c40"><![endif]-->
+                                <!--[if (mso)|(IE)]><td align="center" width="213" style=";width:213px; border-top: 0px solid transparent; border-left: 0px solid transparent; border-bottom: 0px solid transparent; border-right: 0px solid transparent;" valign="top"><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding-right: 0px; padding-left: 0px; padding-top:5px; padding-bottom:5px;"><![endif]-->
+                                <div class="col num4"
+                                    style="max-width: 320px; min-width: 213px; display: table-cell; vertical-align: top; width: 213px;">
+                                    <div style="width:100% !important;">
+                                        <!--[if (!mso)&(!IE)]><!-->
+                                        <div
+                                            style="border-top:0px solid transparent; border-left:0px solid transparent; border-bottom:0px solid transparent; border-right:0px solid transparent; padding-top:5px; padding-bottom:5px; padding-right: 0px; padding-left: 0px;">
+                                            <!--<![endif]-->
                                             <div class="button-container" align="center"
                                                 style="padding-top:10px;padding-right:10px;padding-bottom:10px;padding-left:10px;">
-                                                <!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-spacing: 0; border-collapse: collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;"><tr><td style="padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px" align="center"><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="https://crm.gurukal.in/track" style="height:39pt; width:198pt; v-text-anchor:middle;" arcsize="8%" stroke="false" fillcolor="#ffffff"><w:anchorlock/><v:textbox inset="0,0,0,0"><center style="color:#de6b2b; font-family:Arial, sans-serif; font-size:14px"><![endif]--><a
-                                                    href="https://crm.gurukal.in/track" target="_blank"
-                                                    style="-webkit-text-size-adjust: none; text-decoration: none; display: inline-block; color: #de6b2b; background-color: #ffffff; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; width: auto; width: auto; border-top: 1px solid #ffffff; border-right: 1px solid #ffffff; border-bottom: 1px solid #ffffff; border-left: 1px solid #ffffff; padding-top: 10px; padding-bottom: 10px; font-family: Nunito, Arial, Helvetica Neue, Helvetica, sans-serif; text-align: center; mso-border-alt: none; word-break: keep-all;"><span
-                                                        style="padding-left:40px;padding-right:40px;font-size:14px;display:inline-block;"><span
-                                                            style="font-size: 16px; line-height: 2; word-break: break-word; mso-line-height-alt: 32px;"><span
-                                                                style="font-size: 14px; line-height: 28px;"
-                                                                data-mce-style="font-size: 14px; line-height: 28px;"><strong>Track </strong></span><span
-                                                                style="font-size: 14px; line-height: 28px;"
-                                                                data-mce-style="font-size: 14px; line-height: 28px;"><strong>Shipment</strong></span></span></span></a>
+                                                <!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-spacing: 0; border-collapse: collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;"><tr><td style="padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px" align="center"><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="https://crm.gurukal.in/track" style="height:31.5pt; width:143.25pt; v-text-anchor:middle;" arcsize="10%" stroke="false" fillcolor="#ffffff"><w:anchorlock/><v:textbox inset="0,0,0,0"><center style="color:#de6b2b; font-family:Arial, sans-serif; font-size:16px"><![endif]--><a
+                                                    href="{{ENV('APP_URL')}}/track" target="_blank"
+                                                    style="-webkit-text-size-adjust: none; text-decoration: none; display: inline-block; color: #de6b2b; background-color: #ffffff; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; width: auto; width: auto; border-top: 1px solid #ffffff; border-right: 1px solid #ffffff; border-bottom: 1px solid #ffffff; border-left: 1px solid #ffffff; padding-top: 5px; padding-bottom: 5px; font-family: Nunito, Arial, Helvetica Neue, Helvetica, sans-serif; text-align: center; mso-border-alt: none; word-break: keep-all;"><span
+                                                        style="padding-left:20px;padding-right:20px;font-size:16px;display:inline-block;"><span
+                                                            style="font-size: 16px; margin: 0; line-height: 2; word-break: break-word; mso-line-height-alt: 32px;">Track
+                                                            Shipment</span></span></a>
                                                 <!--[if mso]></center></v:textbox></v:roundrect></td></tr></table><![endif]-->
                                             </div>
                                             <!--[if (!mso)&(!IE)]><!-->
@@ -294,6 +294,68 @@ track your consignment at https://crm.gurukal.in/track <br>
                                         <!--<![endif]-->
                                     </div>
                                 </div>
+                                <!--[if (mso)|(IE)]></td></tr></table><![endif]-->
+                                <!--[if (mso)|(IE)]></td><td align="center" width="213" style=";width:213px; border-top: 0px solid transparent; border-left: 0px solid transparent; border-bottom: 0px solid transparent; border-right: 0px solid transparent;" valign="top"><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding-right: 0px; padding-left: 0px; padding-top:5px; padding-bottom:5px;"><![endif]-->
+
+                                <!--[if (mso)|(IE)]></td></tr></table><![endif]-->
+                                <!--[if (mso)|(IE)]></td><td align="center" width="213" style=";width:213px; border-top: 0px solid transparent; border-left: 0px solid transparent; border-bottom: 0px solid transparent; border-right: 0px solid transparent;" valign="top"><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding-right: 0px; padding-left: 0px; padding-top:5px; padding-bottom:5px;"><![endif]-->
+                                @if ($status == 'Awaiting Pickup')
+
+                                <div class="col num4"
+                                    style="max-width: 320px; min-width: 213px; display: table-cell; vertical-align: top; width: 213px;">
+                                    <div style="width:100% !important;">
+                                        <!--[if (!mso)&(!IE)]><!-->
+                                        <div
+                                            style="border-top:0px solid transparent; border-left:0px solid transparent; border-bottom:0px solid transparent; border-right:0px solid transparent; padding-top:5px; padding-bottom:5px; padding-right: 0px; padding-left: 0px;">
+                                            <!--<![endif]-->
+                                            <div class="button-container" align="center"
+                                                style="padding-top:10px;padding-right:10px;padding-bottom:10px;padding-left:10px;">
+                                                <!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-spacing: 0; border-collapse: collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;"><tr><td style="padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px" align="center"><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="https://crm.gurukal.in/track" style="height:31.5pt; width:143.25pt; v-text-anchor:middle;" arcsize="10%" stroke="false" fillcolor="#ffffff"><w:anchorlock/><v:textbox inset="0,0,0,0"><center style="color:#de6b2b; font-family:Arial, sans-serif; font-size:16px"><![endif]--><a
+                                                    href="{{ENV('APP_URL')}}/customer/docket/8jZSqbGNmzk25EcBgMsWYyDP4LDEAS7amrVevmqcTE67ByuajGaks8UqmLmJ/{{$shipment->id}}/urMrnM6JNuGPCnEdnmDqzfWfDYAUSYb8rkveHF9mWGPgD2XxH4SYRXjRCnmx/view"
+                                                    target="_blank"
+                                                    style="-webkit-text-size-adjust: none; text-decoration: none; display: inline-block; color: #de6b2b; background-color: #ffffff; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; width: auto; width: auto; border-top: 1px solid #ffffff; border-right: 1px solid #ffffff; border-bottom: 1px solid #ffffff; border-left: 1px solid #ffffff; padding-top: 5px; padding-bottom: 5px; font-family: Nunito, Arial, Helvetica Neue, Helvetica, sans-serif; text-align: center; mso-border-alt: none; word-break: keep-all;"><span
+                                                        style="padding-left:20px;padding-right:20px;font-size:16px;display:inline-block;"><span
+                                                            style="font-size: 16px; margin: 0; line-height: 2; word-break: break-word; mso-line-height-alt: 32px;">View
+                                                            Docket</span></span></a>
+                                                <!--[if mso]></center></v:textbox></v:roundrect></td></tr></table><![endif]-->
+                                            </div>
+                                            <!--[if (!mso)&(!IE)]><!-->
+                                        </div>
+                                        <!--<![endif]-->
+                                    </div>
+                                </div>
+
+
+                                @elseif($status == 'Delivered')
+
+
+                                <div class="col num4"
+                                    style="max-width: 320px; min-width: 213px; display: table-cell; vertical-align: top; width: 213px;">
+                                    <div style="width:100% !important;">
+                                        <!--[if (!mso)&(!IE)]><!-->
+                                        <div
+                                            style="border-top:0px solid transparent; border-left:0px solid transparent; border-bottom:0px solid transparent; border-right:0px solid transparent; padding-top:5px; padding-bottom:5px; padding-right: 0px; padding-left: 0px;">
+                                            <!--<![endif]-->
+                                            <div class="button-container" align="center"
+                                                style="padding-top:10px;padding-right:10px;padding-bottom:10px;padding-left:10px;">
+                                                <!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-spacing: 0; border-collapse: collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;"><tr><td style="padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px" align="center"><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="https://crm.gurukal.in/track" style="height:31.5pt; width:143.25pt; v-text-anchor:middle;" arcsize="10%" stroke="false" fillcolor="#ffffff"><w:anchorlock/><v:textbox inset="0,0,0,0"><center style="color:#de6b2b; font-family:Arial, sans-serif; font-size:16px"><![endif]--><a
+                                                    href="{{ENV('APP_URL')}}/customer/feedback/{{$shipment->id}}"
+                                                    target="_blank"
+                                                    style="-webkit-text-size-adjust: none; text-decoration: none; display: inline-block; color: #de6b2b; background-color: #ffffff; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; width: auto; width: auto; border-top: 1px solid #ffffff; border-right: 1px solid #ffffff; border-bottom: 1px solid #ffffff; border-left: 1px solid #ffffff; padding-top: 5px; padding-bottom: 5px; font-family: Nunito, Arial, Helvetica Neue, Helvetica, sans-serif; text-align: center; mso-border-alt: none; word-break: keep-all;"><span
+                                                        style="padding-left:20px;padding-right:20px;font-size:16px;display:inline-block;"><span
+                                                            style="font-size: 16px; margin: 0; line-height: 2; word-break: break-word; mso-line-height-alt: 32px;">Feedback</span></span></a>
+                                                <!--[if mso]></center></v:textbox></v:roundrect></td></tr></table><![endif]-->
+                                            </div>
+                                            <!--[if (!mso)&(!IE)]><!-->
+                                        </div>
+                                        <!--<![endif]-->
+                                    </div>
+                                </div>
+
+
+                                @endif
+
+
                                 <!--[if (mso)|(IE)]></td></tr></table><![endif]-->
                                 <!--[if (mso)|(IE)]></td></tr></table></td></tr></table><![endif]-->
                             </div>
@@ -319,9 +381,9 @@ track your consignment at https://crm.gurukal.in/track <br>
                                                 <div
                                                     style="font-size: 14px; line-height: 1.2; color: #404040; font-family: Nunito, Arial, Helvetica Neue, Helvetica, sans-serif; mso-line-height-alt: 17px;">
                                                     <p
-                                                        style="font-size: 14px; line-height: 1.2; word-break: break-word; text-align: center; mso-line-height-alt: 17px; margin: 0;">
-                                                        <strong><span style="font-size: 34px;">SERVICES</span></strong>
-                                                    </p>
+                                                        style="font-size: 24px; line-height: 1.2; word-break: break-word; text-align: center; mso-line-height-alt: 29px; margin: 0;">
+                                                        <span style="font-size: 24px;"><strong><span
+                                                                    style>SERVICES</span></strong></span></p>
                                                 </div>
                                             </div>
                                             <!--[if mso]></td></tr></table><![endif]-->
@@ -342,7 +404,7 @@ track your consignment at https://crm.gurukal.in/track <br>
                                 style="border-collapse: collapse;display: table;width: 100%;background-color:transparent;">
                                 <!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:transparent;"><tr><td align="center"><table cellpadding="0" cellspacing="0" border="0" style="width:640px"><tr class="layout-full-width" style="background-color:transparent"><![endif]-->
                                 <!--[if (mso)|(IE)]><td align="center" width="213" style=";width:213px; border-top: 0px solid transparent; border-left: 0px solid transparent; border-bottom: 0px solid transparent; border-right: 0px solid transparent;" valign="top"><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding-right: 0px; padding-left: 0px; padding-top:5px; padding-bottom:5px;"><![endif]-->
-                                <div class="col num4"
+                                <div class="col num6"
                                     style="max-width: 320px; min-width: 213px; display: table-cell; vertical-align: top; width: 213px;">
                                     <div style="width:100% !important;">
                                         <!--[if (!mso)&(!IE)]><!-->
@@ -558,12 +620,12 @@ track your consignment at https://crm.gurukal.in/track <br>
                                                 <div
                                                     style="font-size: 14px; line-height: 1.2; color: #404040; font-family: Nunito, Arial, Helvetica Neue, Helvetica, sans-serif; mso-line-height-alt: 17px;">
                                                     <p
-                                                        style="font-size: 14px; line-height: 1.2; word-break: break-word; text-align: center; mso-line-height-alt: 17px; margin: 0;">
-                                                        <a style="text-decoration: none; color: #404040;"
-                                                            href="http://www.example.com/" target="_blank"
-                                                            rel="noopener"><span
-                                                                style="font-size: 30px;"><strong>CUSTOMER
-                                                                    DASHBOARD</strong></span></a></p>
+                                                        style="font-size: 24px; line-height: 1.2; word-break: break-word; text-align: center; mso-line-height-alt: 29px; margin: 0;">
+                                                        <span style="font-size: 24px;"><a
+                                                                style="text-decoration: none; color: #404040;"
+                                                                href="https://www.crm.gurukal.in" target="_blank"
+                                                                rel="noopener"><span style><strong>CUSTOMER
+                                                                        DASHBOARD</strong></span></a></span></p>
                                                 </div>
                                             </div>
                                             <!--[if mso]></td></tr></table><![endif]-->
@@ -680,9 +742,9 @@ track your consignment at https://crm.gurukal.in/track <br>
                                                 <div
                                                     style="font-size: 14px; line-height: 1.2; color: #404040; font-family: Nunito, Arial, Helvetica Neue, Helvetica, sans-serif; mso-line-height-alt: 17px;">
                                                     <p
-                                                        style="font-size: 14px; line-height: 1.2; word-break: break-word; text-align: center; mso-line-height-alt: 17px; margin: 0;">
-                                                        <strong><span style="font-size: 34px;">BEST LOGISTICS
-                                                                SERVICE</span></strong></p>
+                                                        style="font-size: 24px; line-height: 1.2; word-break: break-word; text-align: center; mso-line-height-alt: 29px; margin: 0;">
+                                                        <span style="font-size: 24px;"><strong><span style>BEST
+                                                                    LOGISTICS SERVICE</span></strong></span></p>
                                                 </div>
                                             </div>
                                             <!--[if mso]></td></tr></table><![endif]-->
@@ -754,6 +816,64 @@ track your consignment at https://crm.gurukal.in/track <br>
                                         <div
                                             style="border-top:0px solid transparent; border-left:0px solid transparent; border-bottom:0px solid transparent; border-right:0px solid transparent; padding-top:10px; padding-bottom:20px; padding-right: 0px; padding-left: 0px;">
                                             <!--<![endif]-->
+                                            <table class="social_icons" cellpadding="0" cellspacing="0" width="100%"
+                                                role="presentation"
+                                                style="table-layout: fixed; vertical-align: top; border-spacing: 0; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt;"
+                                                valign="top">
+                                                <tbody>
+                                                    <tr style="vertical-align: top;" valign="top">
+                                                        <td style="word-break: break-word; vertical-align: top; padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px;"
+                                                            valign="top">
+                                                            <table class="social_table" align="center" cellpadding="0"
+                                                                cellspacing="0" role="presentation"
+                                                                style="table-layout: fixed; vertical-align: top; border-spacing: 0; border-collapse: collapse; mso-table-tspace: 0; mso-table-rspace: 0; mso-table-bspace: 0; mso-table-lspace: 0;"
+                                                                valign="top">
+                                                                <tbody>
+                                                                    <tr style="vertical-align: top; display: inline-block; text-align: center;"
+                                                                        align="center" valign="top">
+                                                                        <td style="word-break: break-word; vertical-align: top; padding-bottom: 0; padding-right: 1px; padding-left: 1px;"
+                                                                            valign="top"><a
+                                                                                href="https://www.facebook.com/gurukalindia/"
+                                                                                target="_blank"><img width="32"
+                                                                                    height="32"
+                                                                                    src="https://d2fi4ri5dhpqd1.cloudfront.net/public/resources/social-networks-icon-sets/circle-color/facebook@2x.png"
+                                                                                    alt="Facebook" title="Facebook"
+                                                                                    style="text-decoration: none; -ms-interpolation-mode: bicubic; height: auto; border: 0; display: block;"></a>
+                                                                        </td>
+                                                                        <td style="word-break: break-word; vertical-align: top; padding-bottom: 0; padding-right: 1px; padding-left: 1px;"
+                                                                            valign="top"><a
+                                                                                href="https://twitter.com/GURUKALINDIA"
+                                                                                target="_blank"><img width="32"
+                                                                                    height="32"
+                                                                                    src="https://d2fi4ri5dhpqd1.cloudfront.net/public/resources/social-networks-icon-sets/circle-color/twitter@2x.png"
+                                                                                    alt="Twitter" title="Twitter"
+                                                                                    style="text-decoration: none; -ms-interpolation-mode: bicubic; height: auto; border: 0; display: block;"></a>
+                                                                        </td>
+                                                                        <td style="word-break: break-word; vertical-align: top; padding-bottom: 0; padding-right: 1px; padding-left: 1px;"
+                                                                            valign="top"><a
+                                                                                href="https://www.instagram.com/gurukal_india/"
+                                                                                target="_blank"><img width="32"
+                                                                                    height="32"
+                                                                                    src="https://d2fi4ri5dhpqd1.cloudfront.net/public/resources/social-networks-icon-sets/circle-color/instagram@2x.png"
+                                                                                    alt="Instagram" title="Instagram"
+                                                                                    style="text-decoration: none; -ms-interpolation-mode: bicubic; height: auto; border: 0; display: block;"></a>
+                                                                        </td>
+                                                                        <td style="word-break: break-word; vertical-align: top; padding-bottom: 0; padding-right: 1px; padding-left: 1px;"
+                                                                            valign="top"><a
+                                                                                href="https://www.linkedin.com/company/gurukal/about/"
+                                                                                target="_blank"><img width="32"
+                                                                                    height="32"
+                                                                                    src="https://d2fi4ri5dhpqd1.cloudfront.net/public/resources/social-networks-icon-sets/circle-color/linkedin@2x.png"
+                                                                                    alt="LinkedIn" title="LinkedIn"
+                                                                                    style="text-decoration: none; -ms-interpolation-mode: bicubic; height: auto; border: 0; display: block;"></a>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
                                             <!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding-right: 40px; padding-left: 40px; padding-top: 25px; padding-bottom: 25px; font-family: Arial, sans-serif"><![endif]-->
                                             <div
                                                 style="color:#ffffff;font-family:Nunito, Arial, Helvetica Neue, Helvetica, sans-serif;line-height:1.5;padding-top:25px;padding-right:40px;padding-bottom:25px;padding-left:40px;">
