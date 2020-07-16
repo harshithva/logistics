@@ -16,9 +16,8 @@ class PaymentController extends Controller
      */
     public function index()
     {
-        $payments = Payment::with('shipment','customer')->get();
-        
-        return response()->json($payments,200);
+        $payments = Payment::all();
+        return PaymentResource::collection($payments);
     }
 
     /**

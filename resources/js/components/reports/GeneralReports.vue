@@ -9,13 +9,13 @@
         <div class="col">
           <router-link
             to="/admin/reports"
-            class="d-none d-sm-inline-block btn btn-sm btn-outline-primary shadow-sm ml-2 mr-2"
+            class="d-sm-inline-block btn btn-sm btn-outline-primary shadow-sm ml-2 mr-2 active"
           >
             <i class="fas fa-scroll fa-sm"></i> Reports
           </router-link>
           <router-link
             to="/admin/payment_log"
-            class="d-none d-sm-inline-block btn btn-sm btn-outline-primary shadow-sm"
+            class="d-sm-inline-block btn btn-sm btn-outline-primary shadow-sm"
           >
             <i class="fas fa-rupee-sign fa-sm"></i> Payment Log
           </router-link>
@@ -23,76 +23,40 @@
         <div class="col-6"></div>
         <div class="col">
           <button class="btn btn-danger ml-2 btn-sm" @click="generatePdf">
-            <i class="fas fa-download"></i> PDF
+            <i class="fas fa-file-download"></i> &nbsp;PDF
           </button>
           <export-excel :data="packages" class="btn btn-success btn-sm">
-            <i class="fas fa-download"></i> Excel
+            <i class="fas fa-cloud-download-alt"></i> &nbsp;Excel
           </export-excel>
         </div>
       </div>
     </div>
     <div class="card-body">
-      <div>
-        <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
-          <!-- <div class="row">
-            <div class="col-sm-12 col-md-6"></div>
-            <div class="col-sm-12 col-md-6 text-right">
-              <div id="dataTable_filter" class="dataTables_filter">
-                <label>
-                  Search: &nbsp;
-                  <input
-                    type="search"
-                    class="form-control form-control-sm"
-                    placeholder
-                    aria-controls="dataTable"
-                  />
-                </label>
-              </div>
-            </div>
-          </div>-->
-          <div class="row">
-            <div class="col-sm-12">
-              <!-- <datatable
-                title="Reports"
-                :columns="tableColumns1"
-                :rows="packages"
-                :clickable="false"
-                :sortable="true"
-                :exactSearch="false"
-                :searchable="true"
-                :paginate="true"
-                :exportable="true"
-                :printable="false"
-                class="table-responsive p-4"
-              ></datatable>-->
-
-              <vue-good-table
-                :columns="tableColumns1"
-                :rows="packages"
-                :line-numbers="true"
-                :search-options="{
+      <div class="col-sm-12">
+        <vue-good-table
+          :columns="tableColumns1"
+          :rows="packages"
+          :line-numbers="true"
+          :search-options="{
     enabled: true,
        placeholder: 'Type to search',
   }"
-                :pagination-options="{
+          :pagination-options="{
     enabled: true,
      mode: 'pages',
      
   }"
-              >
-                <div slot="table-actions">
-                  <b-form-select
-                    v-model="selectedMonth"
-                    :options="options"
-                    size="sm"
-                    class="mb-1"
-                    @change="selectMonth"
-                  ></b-form-select>
-                </div>
-              </vue-good-table>
-            </div>
+        >
+          <div slot="table-actions">
+            <b-form-select
+              v-model="selectedMonth"
+              :options="options"
+              size="sm"
+              class="mb-1"
+              @change="selectMonth"
+            ></b-form-select>
           </div>
-        </div>
+        </vue-good-table>
       </div>
     </div>
   </div>
@@ -210,7 +174,7 @@ export default {
 
       doc.autoTable(columns, vm.packages, {
         styles: {
-          fontSize: 6
+          fontSize: 4
         }
       });
       doc.save("reports.pdf");

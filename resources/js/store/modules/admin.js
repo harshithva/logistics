@@ -441,7 +441,7 @@ export default ({
             context.commit('ToggleIsLoading');
             axios
                 .get(`/api/payments`)
-                .then(response => (context.commit('retrieveAllPayments', response.data)))
+                .then(response => (context.commit('retrieveAllPayments', response.data.data)))
                 .catch(function (error) {
                     // handle error
 
