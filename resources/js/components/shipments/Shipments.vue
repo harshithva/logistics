@@ -20,6 +20,13 @@
      mode: 'pages',
      
   }"
+              :sort-options="{
+    enabled: true,
+    initialSortBy: [
+  
+      {field: 'docket_no', type: 'desc'}
+    ],
+  }"
             >
               <template slot="table-row" slot-scope="props">
                 <span v-if="props.column.field == 'action'">
@@ -79,7 +86,10 @@ export default {
         },
         {
           label: "Date",
-          field: "date"
+          field: "date",
+          type: "date",
+          dateInputFormat: "yyyy-mm-dd",
+          dateOutputFormat: "dd/mm/yyyy"
         },
         {
           label: "Name",
