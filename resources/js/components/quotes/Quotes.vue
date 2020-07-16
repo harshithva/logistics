@@ -6,127 +6,49 @@
     <div class="card-body">
       <div class="table-responsive">
         <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
-          <div class="row">
-            <div class="col-sm-12 col-md-6"></div>
-            <div class="col-sm-12 col-md-6 text-right">
-              <div id="dataTable_filter" class="dataTables_filter">
-                <label>
-                  Search: &nbsp;
-                  <input
-                    type="search"
-                    class="form-control form-control-sm"
-                    placeholder
-                    aria-controls="dataTable"
-                    v-model="search"
-                    @input="searchQuote"
-                  />
-                </label>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-12">
-              <table
-                class="table table-bordered dataTable"
-                id="dataTable"
-                width="100%"
-                cellspacing="0"
-                role="grid"
-                aria-describedby="dataTable_info"
-                style="width: 100%;"
-              >
-                <thead>
-                  <tr role="row">
-                    <th
-                      class="sorting_asc"
-                      tabindex="0"
-                      aria-controls="dataTable"
-                      rowspan="1"
-                      colspan="1"
-                      aria-sort="ascending"
-                      aria-label="Name: activate to sort column descending"
-                      style="width: 58px;"
-                    >Quotation No</th>
-                    <th
-                      class="sorting"
-                      tabindex="0"
-                      aria-controls="dataTable"
-                      rowspan="1"
-                      colspan="1"
-                      aria-label="Position: activate to sort column ascending"
-                      style="width: 40px;"
-                    >Name</th>
-                    <th
-                      class="sorting"
-                      tabindex="0"
-                      aria-controls="dataTable"
-                      rowspan="1"
-                      colspan="1"
-                      aria-label="Office: activate to sort column ascending"
-                      style="width: 50px;"
-                    >From</th>
-                    <th
-                      class="sorting"
-                      tabindex="0"
-                      aria-controls="dataTable"
-                      rowspan="1"
-                      colspan="0.2"
-                      aria-label="Age: activate to sort column ascending"
-                      style="width: 31px;"
-                    >To</th>
-                    <th
-                      class="sorting"
-                      tabindex="0"
-                      aria-controls="dataTable"
-                      rowspan="1"
-                      colspan="1"
-                      aria-label="Start date: activate to sort column ascending"
-                      style="width: 69px;"
-                    >Action</th>
-                  </tr>
-                </thead>
-                <tfoot>
-                  <tr>
-                    <th rowspan="1" colspan="1">Quotation No</th>
-                    <th rowspan="1" colspan="1">Name</th>
-                    <th rowspan="1" colspan="1">From</th>
-                    <th rowspan="1" colspan="1">To</th>
-                    <th rowspan="1" colspan="1" class="text-center">Action</th>
-                  </tr>
-                </tfoot>
-                <tbody>
-                  <tr role="row" v-for="item in quotes" :key="item.id">
-                    <td>{{item.quotation_no}}</td>
-                    <td>{{item.customer_name}}</td>
-                    <td>{{item.from}}</td>
+          <vue-good-table
+            :columns="tableColumns1"
+            :rows="quotes"
+            :line-numbers="true"
+            :search-options="{
+    enabled: true,
+       placeholder: 'Type to search',
+  }"
+            :pagination-options="{
+    enabled: true,
+     mode: 'pages',
+     
+  }"
+          >
+            <template slot="table-row" slot-scope="props">
+              <span v-if="props.column.field == 'action'">
+                <router-link
+                  :to="'/admin/customers/'+ props.row.customer_id+ '/quotes/'+props.row.id +'/view'"
+                  data-toggle="tooltip"
+                  data-placement="top"
+                  title="View Customer"
+                >
+                  <i class="fas fa-eye text-secondary"></i>
+                </router-link>
+              </span>
 
-                    <td>{{item.to}}</td>
-                    <td align="center">
-                      <router-link
-                        :to="'/admin/customers/'+ item.customer_id+ '/quotes/'+item.id +'/view'"
-                        data-toggle="tooltip"
-                        data-placement="top"
-                        title="View Customer"
-                      >
-                        <i class="fas fa-eye text-secondary"></i>
-                      </router-link>
-                      <span
-                        class="badge badge-pill badge-success"
-                        v-if="item.status == 'approved'"
-                      >Approved</span>
+              <span v-if="props.column.field == 'status'">
+                <span
+                  class="badge badge-pill badge-success"
+                  v-if="props.row.status == 'approved'"
+                >Approved</span>
 
-                      <span
-                        class="badge badge-pill badge-danger"
-                        v-else-if="item.status == 'declined'"
-                      >Declined</span>
+                <span
+                  class="badge badge-pill badge-danger"
+                  v-else-if="props.row.status == 'declined'"
+                >Declined</span>
 
-                      <span class="badge badge-pill badge-warning" v-else>Pending</span>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
+                <span class="badge badge-pill badge-warning" v-else>Pending</span>
+              </span>
+
+              <span v-else>{{props.formattedRow[props.column.field]}}</span>
+            </template>
+          </vue-good-table>
         </div>
       </div>
     </div>
@@ -139,7 +61,35 @@ import { mapGetters } from "vuex";
 export default {
   data() {
     return {
-      search: ""
+      search: "",
+      tableColumns1: [
+        {
+          label: "Quotation Number",
+          field: "quotation_no",
+          sortable: true
+        },
+        {
+          label: "Name",
+          field: "customer_name"
+        },
+        {
+          label: "From",
+          field: "from"
+        },
+        {
+          label: "To",
+          field: "to"
+        },
+        {
+          label: "Status",
+          field: "status"
+        },
+
+        {
+          label: "Action",
+          field: "action"
+        }
+      ]
     };
   },
   computed: {

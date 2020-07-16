@@ -20,13 +20,6 @@
      mode: 'pages',
      
   }"
-              :sort-options="{
-    enabled: true,
-    initialSortBy: [
-  
-      {field: 'docket_no', type: 'desc'}
-    ],
-  }"
             >
               <template slot="table-row" slot-scope="props">
                 <span v-if="props.column.field == 'action'">
@@ -82,7 +75,8 @@ export default {
       tableColumns1: [
         {
           label: "Tracking Number",
-          field: "docket_no"
+          field: "docket_no",
+          sortable: true
         },
         {
           label: "Date",
