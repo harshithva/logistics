@@ -3,13 +3,7 @@
     <div class="card-header py-3">
       <h6 class="m-0 font-weight-bold text-primary">Staff List</h6>
     </div>
-
-    <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
-      <div class="row">
-        <div class="col-sm-12 col-md-6">
-          <div class="dataTables_length" id="dataTable_length"></div>
-        </div>
-      </div>
+    <div class="card-body">
       <div class="row">
         <div class="col-sm-12">
           <!-- <table

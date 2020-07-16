@@ -5,59 +5,52 @@
         <h6 class="m-0 font-weight-bold text-primary">Shipment List</h6>
       </div>
       <div class="card-body">
-        <div class="table-responsive">
-          <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
-            <vue-good-table
-              :columns="tableColumns1"
-              :rows="shipments"
-              :line-numbers="true"
-              :search-options="{
+        <vue-good-table
+          :columns="tableColumns1"
+          :rows="shipments"
+          :line-numbers="true"
+          :search-options="{
     enabled: true,
        placeholder: 'Type to search',
   }"
-              :pagination-options="{
+          :pagination-options="{
     enabled: true,
      mode: 'pages',
      
   }"
-            >
-              <template slot="table-row" slot-scope="props">
-                <span v-if="props.column.field == 'action'">
-                  <router-link
-                    :to="'/admin/customers/'+ props.row.sender_id +'/invoices/'+ props.row.id + '/view'"
-                    data-toggle="tooltip"
-                    data-placement="top"
-                    title="View"
-                  >
-                    <i class="fas fa-eye text-secondary"></i>
-                  </router-link>
-                </span>
+        >
+          <template slot="table-row" slot-scope="props">
+            <span v-if="props.column.field == 'action'">
+              <router-link
+                :to="'/admin/customers/'+ props.row.sender_id +'/invoices/'+ props.row.id + '/view'"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="View"
+              >
+                <i class="fas fa-eye text-secondary"></i>
+              </router-link>
+            </span>
 
-                <span v-if="props.column.field == 'status'">
-                  <span
-                    class="badge badge-pill badge-success"
-                    v-if="props.row.current_status.status"
-                  >{{props.row.current_status.status}}</span>
-                </span>
+            <span v-if="props.column.field == 'status'">
+              <span
+                class="badge badge-pill badge-success"
+                v-if="props.row.current_status.status"
+              >{{props.row.current_status.status}}</span>
+            </span>
 
-                <span v-if="props.column.field == 'payment'">
-                  <span
-                    class="badge badge-pill badge-success"
-                    v-if="props.row.balance_amount <= 0"
-                  >Paid</span>
-                  <span
-                    class="badge badge-pill badge-danger"
-                    v-else-if="props.row.balance_amount == props.row.charge_total"
-                  >Pending</span>
+            <span v-if="props.column.field == 'payment'">
+              <span class="badge badge-pill badge-success" v-if="props.row.balance_amount <= 0">Paid</span>
+              <span
+                class="badge badge-pill badge-danger"
+                v-else-if="props.row.balance_amount == props.row.charge_total"
+              >Pending</span>
 
-                  <span class="badge badge-pill badge-warning" v-else>Partial</span>
-                </span>
+              <span class="badge badge-pill badge-warning" v-else>Partial</span>
+            </span>
 
-                <span v-else>{{props.formattedRow[props.column.field]}}</span>
-              </template>
-            </vue-good-table>
-          </div>
-        </div>
+            <span v-else>{{props.formattedRow[props.column.field]}}</span>
+          </template>
+        </vue-good-table>
       </div>
     </div>
   </fragment>
