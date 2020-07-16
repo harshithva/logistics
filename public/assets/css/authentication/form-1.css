@@ -67,7 +67,7 @@ body {
     font-weight: 700;
     margin-bottom: 50px; }
     .form-form .form-form-wrap p.signup-link a {
-      color: #1b55e2;
+      color: #fd8c40;
       border-bottom: 1px solid; }
   .form-form .form-form-wrap form .field-wrapper.input {
     position: relative;
@@ -85,7 +85,7 @@ body {
   .form-form .form-form-wrap form .field-wrapper svg {
     position: absolute;
     top: 16px;
-    color: #1b55e2;
+    color: #fd8c40;
     fill: rgba(27, 85, 226, 0.239216); }
   .form-form .form-form-wrap form .field-wrapper.terms_condition {
     margin-bottom: 20px; }
@@ -95,7 +95,7 @@ body {
       padding-left: 31px;
       font-weight: 100; }
     .form-form .form-form-wrap form .field-wrapper.terms_condition a {
-      color: #1b55e2; }
+      color: #fd8c40; }
   .form-form .form-form-wrap form .field-wrapper input {
     display: inline-block;
     vertical-align: middle;
@@ -117,7 +117,7 @@ body {
       color: #d3d3d3;
       font-size: 14px; }
     .form-form .form-form-wrap form .field-wrapper input:focus {
-      border-bottom: 1px solid #1b55e2;
+      border-bottom: 1px solid #fd8c40;
       box-shadow: none; }
   .form-form .form-form-wrap form .field-wrapper.toggle-pass {
     align-self: center;
@@ -131,7 +131,7 @@ body {
   .form-form .form-form-wrap form .field-wrapper a.forgot-pass-link {
     width: 100%;
     font-weight: 700;
-    color: #1b55e2;
+    color: #fd8c40;
     text-align: center;
     display: block;
     letter-spacing: 2px;
@@ -157,7 +157,7 @@ body {
     font-weight: 600;
     margin-top: 90px; }
     .form-form .terms-conditions a {
-      color: #1b55e2;
+      color: #fd8c40;
       font-weight: 700; }
 
 .form-image {
