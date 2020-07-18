@@ -329,6 +329,7 @@
                                     </div>
                                 </div>
                                 @else
+                                {{-- view docket --}}
                                 <div class="col num4"
                                     style="max-width: 320px; min-width: 213px; display: table-cell; vertical-align: top; width: 213px;">
                                     <div style="width:100% !important;">
