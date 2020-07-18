@@ -6,6 +6,7 @@
       </div>
       <div class="card-body">
         <vue-good-table
+          v-if="shipments && shipments.length"
           :columns="tableColumns1"
           :rows="shipments"
           :line-numbers="true"
@@ -17,6 +18,10 @@
     enabled: true,
      mode: 'pages',
      
+  }"
+          :sort-options="{
+    enabled: true,
+    initialSortBy: {field: 'docket_no', type: 'desc'}
   }"
         >
           <template slot="table-row" slot-scope="props">

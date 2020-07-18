@@ -24,6 +24,7 @@
     </div>
     <div class="card-body">
       <vue-good-table
+        v-if="payments && payments.length"
         :columns="tableColumns1"
         :rows="payments"
         :line-numbers="true"
@@ -35,6 +36,10 @@
     enabled: true,
      mode: 'pages',
      
+  }"
+        :sort-options="{
+    enabled: true,
+    initialSortBy: {field: 'date', type: 'desc'}
   }"
       >
         <!-- <template slot="table-row" slot-scope="props">

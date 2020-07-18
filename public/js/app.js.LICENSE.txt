@@ -260,6 +260,8 @@
  * SOFTWARE.
  */
 
+//! invalid number
+
 //! moment.js
 
 //! moment.js language configuration

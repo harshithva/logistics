@@ -5,6 +5,7 @@
     </div>
     <div class="card-body">
       <vue-good-table
+        v-if="quotes && quotes.length"
         :columns="tableColumns1"
         :rows="quotes"
         :line-numbers="true"
@@ -16,6 +17,10 @@
     enabled: true,
      mode: 'pages',
      
+  }"
+        :sort-options="{
+    enabled: true,
+    initialSortBy: {field: 'quotation_no', type: 'desc'}
   }"
       >
         <template slot="table-row" slot-scope="props">
@@ -61,8 +66,7 @@ export default {
       tableColumns1: [
         {
           label: "Quotation Number",
-          field: "quotation_no",
-          sortable: true
+          field: "quotation_no"
         },
         {
           label: "Name",

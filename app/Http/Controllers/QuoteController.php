@@ -185,7 +185,7 @@ class QuoteController extends Controller
             $message
                 ->from('admin@gurukal.co.in','Gurukal Logistics')
                 ->to($customer->email, $customer->name)
-                ->cc('gurukallogistics@gmail.com')
+                // ->cc('gurukallogistics@gmail.com')
                 ->subject('Quote');
         });
     }

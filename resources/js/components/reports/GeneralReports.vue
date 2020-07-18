@@ -34,6 +34,7 @@
     <div class="card-body">
       <div class="col-sm-12">
         <vue-good-table
+          v-if="packages && packages.length"
           :columns="tableColumns1"
           :rows="packages"
           :line-numbers="true"
@@ -45,6 +46,10 @@
     enabled: true,
      mode: 'pages',
      
+  }"
+          :sort-options="{
+    enabled: true,
+    initialSortBy: {field: 'shipment_date', type: 'desc'}
   }"
         >
           <div slot="table-actions">
@@ -67,12 +72,7 @@ import { mapGetters } from "vuex";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
 
-import DataTable from "vue-materialize-datatable";
-
 export default {
-  components: {
-    datatable: DataTable
-  },
   data() {
     return {
       selectedMonth: 0,
@@ -84,7 +84,7 @@ export default {
       ],
       file: null,
       status: "pickup",
-      // initialSortBy: [{ field: "shipment_date", type: "desc" }],
+
       tableColumns1: [
         {
           label: "Date",
