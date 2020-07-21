@@ -15,7 +15,12 @@ class CreateDocumentsTable extends Migration
     {
         Schema::create('documents', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
+            $table->string('document');
+            $table->unsignedBigInteger('shipment_id');
             $table->timestamps();
+
+            $table->foreign('shipment_id')->references('id')->on('shipments')->onDelete('cascade');
         });
     }
 

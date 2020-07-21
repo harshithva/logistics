@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Package;
+use App\Shipment;
 use App\Http\Resources\Package as PackageResource;
 
 class PackageController extends Controller
@@ -15,8 +16,8 @@ class PackageController extends Controller
      */
     public function index()
     {
-        $packages = Package::all();
-        return PackageResource::collection($packages);
+        $shipments = Shipment::all();
+        return PackageResource::collection($shipments);
     }
 
     /**

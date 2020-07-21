@@ -538,7 +538,7 @@ export default {
         location: "",
         receiver_name: "",
         phone: "",
-        document: ""
+        document: null
       }),
       payment: new Form({
         payment_type: "cash",

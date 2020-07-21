@@ -14,19 +14,26 @@ class Package extends JsonResource
      */
     public function toArray($request)
     {
+        $packages_description = [];
+        foreach ($this->package as $key => $value) {
+            array_push($packages_description,$value->description);
+        }
+
+        $packages_description = implode (", ",   $packages_description);
         return [
             'id' => $this->id,
-            'shipment_date'=> $this->shipment->date,
-            'description'=> $this->description,
-            'shipment_sender_address' => $this->shipment->sender->address,
-            'shipment_delivery_address' => $this->shipment->delivery_address,
-            'shipment_docket_no' => $this->shipment->docket_no,
-            'shipment_freight_invoice_number' => $this->shipment->freight_invoice_number,
-            'shipment_charge_total' => $this->shipment->charge_total,
-            'shipment_sender_name' => $this->shipment->sender->name,
-            'shipment_receiver_name' => $this->shipment->receiver->name,
-            'shipment_sender_gst' => $this->shipment->sender->gst,
-            'shipment_receiver_gst' => $this->shipment->receiver->gst,
+            'shipment_date'=> $this->date,
+            'packages'=> $this->package,
+            'shipment_sender_address' => $this->sender->address,
+            'shipment_delivery_address' => $this->delivery_address,
+            'shipment_docket_no' => $this->docket_no,
+            'shipment_freight_invoice_number' => $this->freight_invoice_number,
+            'shipment_charge_total' => $this->charge_total,
+            'shipment_sender_name' => $this->sender->name,
+            'shipment_receiver_name' => $this->receiver->name,
+            'shipment_sender_gst' => $this->sender->gst,
+            'shipment_receiver_gst' => $this->receiver->gst,
+            'packages_description' =>    $packages_description
           ];
     }
 

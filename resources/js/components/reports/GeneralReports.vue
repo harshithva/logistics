@@ -25,7 +25,7 @@
           <button class="btn btn-danger ml-2 btn-sm" @click="generatePdf">
             <i class="fas fa-file-download"></i> &nbsp;PDF
           </button>
-          <export-excel :data="packages" class="btn btn-success btn-sm">
+          <export-excel :data="packages" :fields="json_fields" class="btn btn-success btn-sm">
             <i class="fas fa-cloud-download-alt"></i> &nbsp;Excel
           </export-excel>
         </div>
@@ -61,6 +61,14 @@
               @change="selectMonth"
             ></b-form-select>
           </div>
+
+          <template slot="table-row" slot-scope="props">
+            <span v-if="props.column.field == 'packages'">
+              <p v-for="p in props.row.packages">{{p.description}}</p>
+            </span>
+
+            <span v-else>{{props.formattedRow[props.column.field]}}</span>
+          </template>
         </vue-good-table>
       </div>
     </div>
@@ -76,6 +84,19 @@ export default {
   data() {
     return {
       selectedMonth: 0,
+      json_fields: {
+        Date: "shipment_date",
+        Product: "packages_description",
+        From: "shipment_sender_address",
+        To: "shipment_delivery_address",
+        Docket: "shipment_docket_no",
+        "Freight Invoice Number": "shipment_freight_invoice_number",
+        "Charge Total": "shipment_charge_total",
+        "Sender Name": "shipment_sender_name",
+        "Receiver Name": "shipment_receiver_name",
+        "Sender GST": "shipment_sender_gst",
+        "Receiver GST": "shipment_receiver_gst"
+      },
       options: [
         { value: 0, text: "All" },
         { value: 1, text: "This month" },
@@ -96,7 +117,7 @@ export default {
         },
         {
           label: "Product",
-          field: "description",
+          field: "packages",
           numeric: false
         },
         {
@@ -156,7 +177,7 @@ export default {
       const vm = this;
       const columns = [
         { title: "Date", dataKey: "shipment_date" },
-        { title: "Product", dataKey: "description" },
+        { title: "Product", dataKey: "packages_description" },
         { title: "From", dataKey: "shipment_sender_address" },
         { title: "To", dataKey: "shipment_delivery_address" },
         { title: "Docket", dataKey: "shipment_docket_no" },
@@ -177,6 +198,7 @@ export default {
           fontSize: 4
         }
       });
+
       doc.save("reports.pdf");
     }
   },
