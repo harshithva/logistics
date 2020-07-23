@@ -5,6 +5,7 @@ use App\User;
 use App\Package;
 use App\Document;
 use App\ShipmentStatus;
+use App\ShipmentInsurance;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -14,6 +15,9 @@ class Shipment extends Model
 
 public function package(){
     return $this->hasMany(Package::class,'shipment_id');
+}
+public function insurance(){
+    return $this->hasMany(ShipmentInsurance::class,'shipment_id');
 }
 
 public function document(){

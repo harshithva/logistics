@@ -9,6 +9,7 @@ use App\User;
 use App\Package;
 use App\Payment;
 use App\ShipmentStatus;
+use App\ShipmentInsurance;
 use App\Http\Resources\Shipment as ShipmentResource;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -205,6 +206,21 @@ class ShipmentController extends Controller
             }
           
         }
+        $request->insurance = json_encode($request->insurance);
+        $request->insurance = json_decode($request->insurance);
+        if($request->insurance){
+            foreach($request->insurance as $data)
+            {
+                $insurance = new ShipmentInsurance;
+           
+                $insurance->eway_bill = $data->eway_bill;
+                $insurance->insurance_no = $data->insurance_no;
+                $insurance->insurance_agent = $data->insurance_agent;
+                $insurance->shipment_id = $shipment->id;
+                $insurance->save();
+            }
+          
+        }
 
         $shipment_status = new ShipmentStatus;
         $shipment_status->status = 'Awaiting Pickup';
@@ -311,6 +327,7 @@ class ShipmentController extends Controller
         $shipment->package;
         $shipment->receiver;
         $shipment->payment;
+        $shipment->insurance;
         return response()->json($shipment,200);
     }
 

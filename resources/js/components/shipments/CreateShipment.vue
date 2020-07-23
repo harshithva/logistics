@@ -208,7 +208,7 @@
                   </div>
                 </div>
 
-                <h6 class="mb-4">Add Package Details</h6>
+                <h6 class="mb-4">Package Details</h6>
 
                 <table class="table table-responsive-sm">
                   <thead>
@@ -243,6 +243,42 @@
                           class="btn btn-primary"
                           data-toggle="modal"
                           data-target="#exampleModal"
+                        >Add</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <!-- Insurance Details -->
+
+                <h6 class="mb-4">Insurance Details</h6>
+
+                <table class="table table-responsive-sm">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Eway Bill</th>
+                      <th scope="col">Insurance No</th>
+                      <th scope="col">Insurance Agent</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr v-for="(item, index) in form.insurance" :key="index">
+                      <td>{{index+1}}</td>
+                      <td>{{item.eway_bill}}</td>
+                      <td>{{item.insurance_no}}</td>
+                      <td>{{item.insurance_agent}}</td>
+
+                      <td @click="deleteInsurance(item.uid)">
+                        <i class="fas fa-times text-danger"></i>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <button
+                          type="button"
+                          class="btn btn-primary"
+                          data-toggle="modal"
+                          data-target="#insurance_modal"
                         >Add</button>
                       </td>
                     </tr>
@@ -524,11 +560,11 @@
         </div>
       </div>
 
-      <!-- Payment Modal-->
+      <!-- Insurance modal  -->
 
       <div
         class="modal fade"
-        id="paymentmodal"
+        id="insurance_modal"
         tabindex="-1"
         role="dialog"
         aria-labelledby="exampleModalLabel"
@@ -537,173 +573,60 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Payment Details</h5>
+              <h5 class="modal-title" id="exampleModalLabel">Insurance Info</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
+
             <div class="modal-body">
               <div class="row">
-                <div class="input-group m-2">
-                  <select
-                    class="custom-select"
-                    id="inputGroupSelect04"
-                    aria-label="Example select with button addon"
-                  >
-                    <option selected disabled>Received From</option>
-                    <option value="1">Consignor</option>
-                    <option value="2">Consignee</option>
-                    <option value="3">Others</option>
-                  </select>
-                </div>
-                <div class="col-md-4">
+                <div class="col">
                   <div class="form-group">
-                    <label for="Serial Number">Payment Date</label>
-
-                    <input type="text" class="form-control" value="31/05/2020" />
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                    <label for="Size">Payment Type</label>
-                    <select
-                      class="custom-select"
-                      id="inputGroupSelect04"
-                      aria-label="Example select with button addon"
-                      v-model="paymentType"
-                    >
-                      <option selected disabled>Choose</option>
-                      <option value="cash">Cash</option>
-                      <option value="bank">Bank</option>
-                      <option value="upi">UPI</option>
-                      <option value="cheque">Cheque</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                    <label for="Size">Amount</label>
-                    <input type="text" class="form-control" />
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Eway Bill"
+                      v-model="insuranceDetails.eway_bill"
+                    />
                   </div>
                 </div>
               </div>
-
-              <div class="row" v-if="paymentType === 'bank'">
+              <div class="row">
                 <div class="col">
                   <div class="form-group">
-                    <label for="Size">Bank Name</label>
-                    <input type="text" class="form-control" />
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Insurance No"
+                      v-model="insuranceDetails.insurance_no"
+                    />
                   </div>
                 </div>
               </div>
-              <div class="row" v-if="paymentType === 'upi'">
+              <div class="row">
                 <div class="col">
                   <div class="form-group">
-                    <label for="Size">UPI Ref ID</label>
-                    <input type="text" class="form-control" />
-                  </div>
-                </div>
-              </div>
-              <div class="row" v-if="paymentType === 'cheque'">
-                <div class="col">
-                  <div class="form-group">
-                    <label for="Size">Cheque No</label>
-                    <input type="text" class="form-control" />
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Insurance Agent"
+                      v-model="insuranceDetails.insurance_agent"
+                    />
                   </div>
                 </div>
               </div>
             </div>
+
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Add</button>
+              <button
+                type="button"
+                class="btn btn-primary"
+                @click="addInsurance"
+                :disabled="!insuranceDetails.eway_bill"
+              >Add</button>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- update status modal  -->
-
-    <div
-      class="modal fade"
-      id="updatestatus"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Update Status</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-
-          <div class="modal-body">
-            <div class="row">
-              <div class="input-group m-2">
-                <select
-                  class="custom-select"
-                  id="inputGroupSelect04"
-                  aria-label="Example select with button addon"
-                  v-model="status"
-                >
-                  <option disabled>Shipment Status</option>
-                  <option value="pickup">Awaiting Pickup</option>
-                  <option value="dispatched">Dispatched</option>
-                  <option value="intrasit">Intrasit</option>
-                  <option value="delivered">Delivered</option>
-                </select>
-              </div>
-
-              <div v-if="status === 'delivered'">
-                <div class="col">
-                  <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Location" />
-                  </div>
-                </div>
-
-                <div class="row m-1">
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <input type="text" class="form-control" placeholder="Receiver Name" />
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <input type="text" class="form-control" placeholder="Phone" />
-                    </div>
-                  </div>
-                </div>
-
-                <div class="row m-1">
-                  <div class="col">
-                    <b-form-file v-model="file" ref="file-input" class="mb-2"></b-form-file>
-                  </div>
-                  <div class="col">
-                    <b-button @click="clearFiles" class="mr-2">Reset</b-button>
-                  </div>
-                </div>
-              </div>
-
-              <div v-else-if="status == 'pickup'"></div>
-              <div v-else>
-                <div class="row m-2">
-                  <div class="col">
-                    <div class="form-group">
-                      <input type="text" class="form-control" placeholder="Location" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Update</button>
           </div>
         </div>
       </div>
@@ -745,7 +668,8 @@ export default {
         document: "",
         remarks: "",
         date: "",
-        package: []
+        package: [],
+        insurance: [],
       }),
       file: null,
       paymentType: null,
@@ -756,8 +680,13 @@ export default {
         invoice_no: "",
         size: "",
         weight: "",
-        cost: 0
-      }
+        cost: 0,
+      },
+      insuranceDetails: {
+        eway_bill: "",
+        insurance_no: "",
+        insurance_agent: "",
+      },
     };
   },
   methods: {
@@ -765,10 +694,7 @@ export default {
       this.$refs["file-input"].reset();
     },
     onSubmit() {
-      this.form
-        .submit("post", "/api/shipments")
-        .then(response)
-        .catch(error);
+      this.form.submit("post", "/api/shipments").then(response).catch(error);
     },
     selectCustomer(e) {
       this.form.sender_id = e.id;
@@ -785,7 +711,7 @@ export default {
         invoice_no: this.packagedetails.invoice_no,
         size: this.packagedetails.size,
         weight: this.packagedetails.weight,
-        cost: this.packagedetails.cost
+        cost: this.packagedetails.cost,
       });
 
       // reset
@@ -795,6 +721,18 @@ export default {
         (this.packagedetails.size = ""),
         (this.packagedetails.weight = ""),
         (this.packagedetails.cost = 0);
+    },
+    addInsurance() {
+      this.form.insurance.push({
+        uid: uuidv4(),
+        eway_bill: this.insuranceDetails.eway_bill,
+        insurance_no: this.insuranceDetails.insurance_no,
+        insurance_agent: this.insuranceDetails.insurance_agent,
+      });
+
+      // reset
+      this.insuranceDetails.eway_bill = this.insuranceDetails.insurance_no = this.insuranceDetails.insurance_agent =
+        "";
     },
     onSubmit() {
       let timerInterval;
@@ -817,8 +755,8 @@ export default {
         },
         onClose: () => {
           clearInterval(timerInterval);
-        }
-      }).then(result => {
+        },
+      }).then((result) => {
         /* Read more about handling dismissals below */
         if (result.dismiss === Swal.DismissReason.timer) {
           console.log("I was closed by the timer");
@@ -828,23 +766,23 @@ export default {
       const sender_id = this.form.sender_id;
       this.form
         .submitBinary("post", "/api/shipments")
-        .then(response => {
+        .then((response) => {
           Swal.fire({
             position: "top-end",
             icon: "success",
             title: "Well done! Shipment has been created",
             showConfirmButton: false,
-            timer: 1500
+            timer: 1500,
           });
           this.$router.push(
             `/admin/customers/${sender_id}/invoices/${response.id}/view`
           );
         })
-        .catch(error =>
+        .catch((error) =>
           Swal.fire({
             icon: "error",
             title: "Oops...",
-            text: "Something went wrong!"
+            text: "Something went wrong!",
           })
         );
     },
@@ -868,9 +806,13 @@ export default {
       }
     },
     deletePackage(uid) {
-      let i = this.form.package.map(item => item.uid).indexOf(uid); // find index of your object
+      let i = this.form.package.map((item) => item.uid).indexOf(uid); // find index of your object
       this.form.package.splice(i, 1); // remove it from array
-    }
+    },
+    deleteInsurance(uid) {
+      let i = this.form.insurance.map((item) => item.uid).indexOf(uid); // find index of your object
+      this.form.insurance.splice(i, 1); // remove it from array
+    },
   },
   mounted() {
     this.$store.dispatch("retrieveCustomers");
@@ -878,10 +820,10 @@ export default {
   computed: {
     customers() {
       return this.$store.getters.getAllCustomers;
-    }
+    },
   },
   created() {
     this.form.date = moment(new Date()).format("YYYY-MM-DD");
-  }
+  },
 };
 </script>

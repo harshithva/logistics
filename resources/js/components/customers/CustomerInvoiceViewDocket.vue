@@ -157,10 +157,11 @@
 
         <div class="row mt-1">
           <div class="col">
-            <table class="table-bordered table">
+            <table class="table-bordered table table-responsive-sm">
               <thead>
                 <th scope="col">SL No.</th>
                 <th scope="col" style="width:20rem">Description</th>
+                <th scope="col">Invoice No.</th>
                 <th scope="col">Serial No.</th>
                 <!-- <th scope="col">Docket No.</th> -->
                 <th scope="col">Weight</th>
@@ -169,18 +170,51 @@
               <tr v-for="(item,index) in shipment.package">
                 <th scope="row">{{index+1}}</th>
                 <td>{{item.description}}</td>
+                <td>{{item.invoice_no}}</td>
                 <td>{{item.serial_no}}</td>
                 <td v-if="item.weight">{{item.weight}} Kg</td>
                 <td v-else>--</td>
                 <td>&#8377; {{item.cost}}</td>
               </tr>
             </table>
+          </div>
+        </div>
 
-            <!-- <h6 class="mt-1">Consignment Note</h6>
-            <p></p>-->
+        <div class="row mt-1">
+          <div class="col-6">
+            <table class="table-bordered table table-responsive-sm">
+              <thead>
+                <th scope="col">SL No.</th>
+                <th scope="col">Eway Bill</th>
+                <th scope="col">Insurance No</th>
+                <th scope="col">Insurance Agent</th>
+              </thead>
+              <tr v-for="(item,index) in shipment.insurance">
+                <th scope="row">{{index+1}}</th>
+                <td>{{item.eway_bill}}</td>
+                <td>{{item.insurance_no}}</td>
+                <td>{{item.insurance_agent}}</td>
+              </tr>
+            </table>
+          </div>
+        </div>
 
+        <div class="row">
+          <div class="col">
             <h6 class="mt-3">Remarks</h6>
             <p>{{shipment.remarks}}</p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <p>Eway Bill</p>
+          </div>
+          <div class="col">
+            <p>insurance Number</p>
+          </div>
+          <div class="col">
+            <p>insurance Agent</p>
           </div>
         </div>
 
@@ -380,11 +414,11 @@ export default {
   data() {
     return {
       logo: "https://i.ibb.co/WFdrW4M/Logo-Color-Text-Below.jpg",
-      status: "pickup"
+      status: "pickup",
     };
   },
   components: {
-    barcode: VueBarcode
+    barcode: VueBarcode,
   },
   computed: {
     shipment() {
@@ -392,30 +426,30 @@ export default {
     },
     shipment_status() {
       return this.$store.getters.getShipmentStatus;
-    }
+    },
   },
   methods: {
     sendDocketLink() {
       axios
         .post(`api/shipments/${this.shipment.id}/shipment_send_docket`)
-        .then(response => {
+        .then((response) => {
           Swal.fire({
             position: "top-end",
             icon: "success",
             title: "Docket has sent through mail",
             showConfirmButton: false,
-            timer: 1500
+            timer: 1500,
           });
         })
-        .catch(err => {
+        .catch((err) => {
           Swal.fire({
             icon: "error",
             title: "Oops...",
             text: "Something went wrong!",
-            footer: "Make sure email is valid."
+            footer: "Make sure email is valid.",
           });
         });
-    }
+    },
   },
   created() {
     this.$store.dispatch(
@@ -426,6 +460,6 @@ export default {
       "retrieveShipmentStatus",
       this.$route.params.invoice_id
     );
-  }
+  },
 };
 </script>
