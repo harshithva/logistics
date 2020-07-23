@@ -461,6 +461,25 @@ class ShipmentController extends Controller
         }
 
 
+        $request->insurance = json_encode($request->insurance);
+        $request->insurance = json_decode($request->insurance);
+
+        ShipmentInsurance::where('shipment_id', $shipment->id)->delete();
+        if($request->insurance){
+            foreach($request->insurance as $data)
+            {
+                
+                $insurance= new ShipmentInsurance;
+                $insurance->eway_bill = $data->eway_bill;
+                $insurance->insurance_no = $data->insurance_no;
+                $insurance->insurance_agent = $data->insurance_agent;
+                $insurance->shipment_id = $shipment->id;
+                $insurance->save();
+         
+            }
+          
+        }
+
         return response()->json($shipment,200);
     }
 

@@ -283,6 +283,43 @@
                   </tbody>
                 </table>
 
+                <!-- Insurance Details -->
+
+                <h6 class="mb-4">Insurance Details</h6>
+
+                <table class="table table-responsive-sm">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Eway Bill</th>
+                      <th scope="col">Insurance No</th>
+                      <th scope="col">Insurance Agent</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr v-for="(item, index) in shipment.insurance" :key="index">
+                      <td>{{index+1}}</td>
+                      <td>{{item.eway_bill}}</td>
+                      <td>{{item.insurance_no}}</td>
+                      <td>{{item.insurance_agent}}</td>
+
+                      <td @click="deleteInsurance(item.uid)">
+                        <i class="fas fa-times text-danger"></i>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <button
+                          type="button"
+                          class="btn btn-primary"
+                          data-toggle="modal"
+                          data-target="#insurance_modal"
+                        >Add</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+
                 <hr />
                 <div class="row">
                   <div class="col">
@@ -714,6 +751,77 @@
         </div>
       </div>
     </div>
+
+    <!-- Insurance modal  -->
+
+    <div
+      class="modal fade"
+      id="insurance_modal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Insurance Info</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+          <div class="modal-body">
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Eway Bill"
+                    v-model="insuranceDetails.eway_bill"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Insurance No"
+                    v-model="insuranceDetails.insurance_no"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Insurance Agent"
+                    v-model="insuranceDetails.insurance_agent"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              @click="addInsurance"
+              :disabled="!insuranceDetails.eway_bill"
+            >Add</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </fragment>
 </template>
 
@@ -744,8 +852,13 @@ export default {
         invoice_no: "",
         size: "",
         weight: "",
-        cost: 0
-      }
+        cost: 0,
+      },
+      insuranceDetails: {
+        eway_bill: "",
+        insurance_no: "",
+        insurance_agent: "",
+      },
     };
   },
   methods: {
@@ -759,21 +872,21 @@ export default {
 
       this.shipment
         .submit("patch", `/api/shipments/${this.shipment.id}`)
-        .then(response => {
+        .then((response) => {
           Swal.fire({
             position: "top-end",
             icon: "success",
             title: "Shipment Updated",
             showConfirmButton: false,
-            timer: 1500
+            timer: 1500,
           });
         })
-        .catch(error => {
+        .catch((error) => {
           Swal.fire({
             icon: "error",
             title: "Oops...",
             text: "Something went wrong!",
-            footer: "Sender, Receiver and Total field is required."
+            footer: "Sender, Receiver and Total field is required.",
           });
         });
     },
@@ -795,7 +908,7 @@ export default {
         invoice_no: this.packagedetails.invoice_no,
         size: this.packagedetails.size,
         weight: this.packagedetails.weight,
-        cost: this.packagedetails.cost
+        cost: this.packagedetails.cost,
       });
 
       // reset
@@ -805,6 +918,19 @@ export default {
         (this.packagedetails.size = ""),
         (this.packagedetails.weight = ""),
         (this.packagedetails.cost = 0);
+    },
+
+    addInsurance() {
+      this.shipment.insurance.push({
+        uid: uuidv4(),
+        eway_bill: this.insuranceDetails.eway_bill,
+        insurance_no: this.insuranceDetails.insurance_no,
+        insurance_agent: this.insuranceDetails.insurance_agent,
+      });
+
+      // reset
+      this.insuranceDetails.eway_bill = this.insuranceDetails.insurance_no = this.insuranceDetails.insurance_agent =
+        "";
     },
 
     calculateTotal() {
@@ -827,8 +953,12 @@ export default {
       }
     },
     deletePackage(uid) {
-      let i = this.shipment.package.map(item => item.uid).indexOf(uid); // find index of your object
+      let i = this.shipment.package.map((item) => item.uid).indexOf(uid); // find index of your object
       this.shipment.package.splice(i, 1); // remove it from array
+    },
+    deleteInsurance(uid) {
+      let i = this.shipment.insurance.map((item) => item.uid).indexOf(uid); // find index of your object
+      this.shipment.insurance.splice(i, 1); // remove it from array
     },
     changeEditingExpense() {
       this.editExpenses = !this.editExpenses;
@@ -855,7 +985,7 @@ export default {
       this.shipment.charge_tax_percent = this.charge_tax_percent;
       this.shipment.charge_advance_paid = this.charge_advance_paid;
       this.shipment.charge_balance = this.charge_balance;
-    }
+    },
   },
 
   computed: {
@@ -867,7 +997,7 @@ export default {
     },
     shipment() {
       return new Form(this.data);
-    }
+    },
   },
   created() {
     this.$store.dispatch(
@@ -876,6 +1006,6 @@ export default {
     );
 
     this.$store.dispatch("retrieveCustomers");
-  }
+  },
 };
 </script>

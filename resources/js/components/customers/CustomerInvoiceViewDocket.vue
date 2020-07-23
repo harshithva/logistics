@@ -350,40 +350,6 @@
         </div>
       </div>
     </div>
-
-    <!-- <div class="row">
-      <div class="col">
-        <div class="card">
-          <div class="card-body">
-            <div class="row">
-              <div class="col-3">
-                <p>Sender Details</p>
-                <p>Pickup Location : {{shipment.package_pickup_address}}</p>
-                <p>Sender name : {{shipment.sender.name}}</p>
-                <p>Contact : {{shipment.sender.phone}}</p>
-              </div>
-              <div class="col-3">
-                <p>Receiver Details</p>
-                <p>Dropoff Location : {{shipment.delivery_address}}</p>
-                <p>Receiver Name : {{shipment.receiver.name}}</p>
-                <p>Contact : {{shipment.receiver.phone}}</p>
-              </div>
-              <div class="col-3">
-                <p>Transport Details</p>
-                <p>Driver Name : {{shipment.transport_driver_name}}</p>
-                <p>Contact : {{shipment.transport_driver_phone}}</p>
-                <p>Vehicle Details : {{shipment.transport_driver_vehicle}}</p>
-              </div>
-              <div class="col-3">
-                <p>Current Status</p>
-                <p v-if="shipment_status.location">Location : {{shipment_status.location}}</p>
-                <p v-else>Location: Not Updated</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>-->
   </fragment>
 </template>
 
