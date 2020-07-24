@@ -1,7 +1,7 @@
 <template>
   <fragment>
     <div class="row mt-3 mb-3 ml-3 d-print-none">
-      <div class="col"></div>
+      <div class="col-4"></div>
       <div class="col">
         <a class="btn btn-primary text-white" onclick="javascript:window.print()">
           <i class="fas fa-print"></i> Print Docket
@@ -54,10 +54,12 @@
             <p>
               <b>Docket No: {{shipment.docket_no}}</b>
             </p>
-            <br />
-            <p>Transaction Type</p>
+
+            <p>Vehicle no: {{shipment.transport_driver_vehicle}}</p>
+
             <p>
-              <span class="badge badge-pill badge-success">{{shipment.package_transaction_type}}</span>
+              Transaction Type: {{shipment.package_transaction_type}}
+              <!-- <span class="badge badge-pill badge-success">{{shipment.package_transaction_type}}</span> -->
             </p>
           </div>
         </div>
@@ -68,7 +70,6 @@
             <h6 class="text-danger text-center">CAUTION</h6>
             <p
               class="text-danger"
-              style="font-size:0.8rem;"
             >This Consignment will not be detained delivered re-routed or re booked without consignee Banks written permission will be delivered at the destination</p>
           </div>
           <div class="col border border-success p-4 m-2">
@@ -92,27 +93,32 @@
         <hr />
         <div class="row mt-1">
           <div class="col">
-            <p>Consignor:</p>
-            {{shipment.sender.company_name}}
-            <br />
-            {{shipment.sender.address}}
-            <p>Consignor GST: {{shipment.sender.gst}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+            <p>
+              Consignor:
+              {{shipment.sender.company_name}}
+              <br />
+              {{shipment.sender.address}}
+              <br />
+              Consignor GST: {{shipment.sender.gst}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </p>
           </div>
 
           <div class="col mb-2">
-            <h6>
-              <p>Consignee</p>
+            <p>
+              Consignee:
               {{shipment.receiver.company_name}}
               <br />
               {{shipment.receiver.address}}
-              <p>Consignee GST: {{shipment.receiver.gst}}</p>
-            </h6>
-            <p style="font-size:0.8rem;"></p>
+              <br />
+              Consignee GST: {{shipment.receiver.gst}}
+            </p>
+          </div>
 
-            <h6>
+          <div class="col">
+            <h6 class="font-md">
               <b>
-                Payment By:&nbsp;
-                <span class="badge badge-pill badge-success">{{shipment.bill_to}}</span>
+                Payment By:&nbsp;{{shipment.bill_to}}
+                <!-- <span class="badge badge-pill badge-success">{{shipment.bill_to}}</span> -->
               </b>
               <br />
             </h6>
@@ -121,7 +127,7 @@
 
         <div class="row mt-1">
           <div class="col">
-            <table class="table-bordered table">
+            <table class="table-bordered table table-responsive-sm font-dark">
               <thead>
                 <th scope="col">SL No.</th>
                 <th scope="col" style="width:20rem">Description</th>
@@ -142,8 +148,32 @@
 
             <!-- <h6 class="mt-1">Consignment Note</h6>
             <p></p>-->
-            <h6 class="mt-3">Remarks</h6>
-            <p>{{shipment.remarks}}</p>
+          </div>
+        </div>
+
+        <div class="row mt-1">
+          <div class="col-6">
+            <table class="table-bordered table table-responsive-sm font-dark">
+              <thead>
+                <th scope="col">Eway Bill</th>
+                <th scope="col">Insurance No</th>
+                <th scope="col">Insurance Agent</th>
+              </thead>
+              <tr
+                v-for="(item,index) in shipment.insurance"
+                v-if="shipment.insurance && shipment.insurance.length"
+              >
+                <td>{{item.eway_bill}}</td>
+                <td>{{item.insurance_no}}</td>
+                <td>{{item.insurance_agent}}</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col font-dark">
+            <h6 class="mt-3">Remarks: {{shipment.remarks}}</h6>
           </div>
         </div>
 
@@ -166,20 +196,23 @@
         <hr />
         <div class="row mt-2">
           <div class="col d-flex d-inline-block">
-            <qrcode :value="shipment.freight_invoice_number" :options="{ width: 100 }"></qrcode>
+            <qrcode :value="shipment.freight_invoice_number" :options="{ width: 80 }"></qrcode>
 
             <barcode
               :value="shipment.freight_invoice_number"
               class="mt-2"
               id="barcode"
               :width="2"
-              :height="50"
+              :height="40"
             >Show this if the rendering fails.</barcode>
           </div>
         </div>
 
         <div class="row mt-4">
           <div class="col-8"></div>
+          <div class="col">
+            <p>Consignor Sign with Seal</p>
+          </div>
 
           <div class="col">
             <p>Receiver Sign with Seal</p>
@@ -190,12 +223,12 @@
 
     <div class="pagebreak"></div>
 
-    <div class="card">
+    <div class="card font-s">
       <div class="card-body">
         <h6 class="text-center m-2 border border-secondary p-2">
           <b>Terms & Conditions of Carriage At Owner's Risk</b>
         </h6>
-        <div class="row font-xs">
+        <div class="row">
           <div class="col">
             <ul class="list-group">
               <li
@@ -343,11 +376,11 @@ export default {
   data() {
     return {
       logo: "https://i.ibb.co/WFdrW4M/Logo-Color-Text-Below.jpg",
-      status: "pickup"
+      status: "pickup",
     };
   },
   components: {
-    barcode: VueBarcode
+    barcode: VueBarcode,
   },
   computed: {
     shipment() {
@@ -355,7 +388,7 @@ export default {
     },
     shipment_status() {
       return this.$store.getters.getShipmentStatus;
-    }
+    },
   },
   created() {
     this.$store.dispatch(
@@ -366,6 +399,6 @@ export default {
       "retrieveShipmentStatus",
       this.$route.params.invoice_id
     );
-  }
+  },
 };
 </script>

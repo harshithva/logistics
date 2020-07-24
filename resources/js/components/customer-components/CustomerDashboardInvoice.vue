@@ -382,18 +382,18 @@
 export default {
   data() {
     return {
-      search: ""
+      search: "",
     };
   },
   computed: {
     customer() {
       if (this.search) {
         return new Form(
-          this.$store.getters.getCustomerInvoices.filter(item => {
+          this.$store.getters.getCustomerInvoices.filter((item) => {
             return this.search
               .toLowerCase()
               .split(" ")
-              .every(v =>
+              .every((v) =>
                 item.shipment.freight_invoice_number.toLowerCase().includes(v)
               );
           })
@@ -401,7 +401,7 @@ export default {
       } else {
         return new Form(this.$store.getters.getCustomerInvoices);
       }
-    }
+    },
   },
   created() {},
   mounted() {
@@ -410,6 +410,6 @@ export default {
       this.$store.getters.getUserData.user.id
     );
   },
-  methods: {}
+  methods: {},
 };
 </script>

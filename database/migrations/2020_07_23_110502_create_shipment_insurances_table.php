@@ -16,8 +16,8 @@ class CreateShipmentInsurancesTable extends Migration
         Schema::create('shipment_insurances', function (Blueprint $table) {
                 $table->id();
                 $table->string('eway_bill');
-                $table->string('insurance_no');
-                $table->string('insurance_agent');
+                $table->string('insurance_no')->nullable();
+                $table->string('insurance_agent')->nullable();
                 $table->unsignedBigInteger('shipment_id');
                 $table->timestamps(); 
 

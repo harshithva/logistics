@@ -20,10 +20,10 @@ class AdminCustomerUserSeeder extends Seeder
         ]);
         
         User::create([
-            'name' => 'gurukal',
+            'name' => 'customer 1',
             'email' => 'user@gurukal.co.in',
             'password' => 'password',
-            'role' => 'admin'
+            'role' => 'customer'
         ]);
 
         User::create([

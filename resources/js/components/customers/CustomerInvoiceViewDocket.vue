@@ -20,9 +20,7 @@
         <a class="btn btn-primary text-white" onclick="javascript:window.print()">
           <i class="fas fa-print"></i> Print Docket
         </a>
-        <!-- <a class="btn btn-primary text-white" data-toggle="modal" data-target="#docket_modal">
-          <i class="fas fa-print"></i> Print Docket
-        </a>-->
+
         <button class="btn btn-success text-white" @click="sendDocketLink">
           <i class="fas fa-print"></i> Mail Docket
         </button>
