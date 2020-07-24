@@ -303,12 +303,12 @@
               <br />IFSC: UTIB0002926
               <br />
             </p>
-            <p class="mt-4">This is a computer generated invoice.</p>
+            <!-- <p class="mt-4">This is a computer generated invoice.</p> -->
           </div>
           <div class="col-6"></div>
           <div class="col">
             <p>For and behalf of</p>
-            <img :src="sign" alt="Rohith" class="img-fluid" style="width:8rem;" />
+            <!-- <img :src="sign" alt="Rohith" class="img-fluid" style="width:8rem;" /> -->
             <br />
             <br />
 
@@ -538,7 +538,7 @@ export default {
         location: "",
         receiver_name: "",
         phone: "",
-        document: null
+        document: null,
       }),
       payment: new Form({
         payment_type: "cash",
@@ -548,8 +548,8 @@ export default {
         upi_ref_id: "",
         cheque_no: "",
         shipment_id: "",
-        customer_id: ""
-      })
+        customer_id: "",
+      }),
     };
   },
   computed: {
@@ -561,7 +561,7 @@ export default {
     },
     shipment_status() {
       return this.$store.getters.getShipmentStatus;
-    }
+    },
   },
   methods: {
     addPayment() {
@@ -579,18 +579,18 @@ export default {
         Swal.fire({
           icon: "error",
           title: "Oops...",
-          text: "Amount cannot be 0"
+          text: "Amount cannot be 0",
         });
         return;
       }
       this.payment
         .submit("post", "api/shipments/" + this.shipment.id + "/payments")
-        .then(response => {
+        .then((response) => {
           Swal.fire({
             icon: "success",
             title: "Well done! Payment added",
             showConfirmButton: false,
-            timer: 1500
+            timer: 1500,
           });
 
           this.$store.dispatch(
@@ -604,12 +604,12 @@ export default {
           this.payment.amount = 0;
           this.payment.payment_type = "cash";
         })
-        .catch(error => {
+        .catch((error) => {
           Swal.fire({
             icon: "error",
             title: "Oops...",
             text: "Something went wrong!",
-            footer: "Amount and Payment Date field is required"
+            footer: "Amount and Payment Date field is required",
           });
         });
     },
@@ -619,12 +619,12 @@ export default {
       const last_status = this.shipment.status;
       this.status
         .submit("post", "api/shipments/" + this.shipment.id + "/status")
-        .then(response => {
+        .then((response) => {
           Swal.fire({
             icon: "success",
             title: "Shipment Status Updated",
             showConfirmButton: false,
-            timer: 1500
+            timer: 1500,
           });
 
           this.$store.dispatch(
@@ -636,44 +636,44 @@ export default {
 
           this.status.status = last_status;
         })
-        .catch(error => {
+        .catch((error) => {
           Swal.fire({
             icon: "error",
             title: "Oops...",
-            text: "Something went wrong!"
+            text: "Something went wrong!",
           });
         });
     },
     sendMail() {
       axios
         .post(`/api/shipments/${this.shipment.id}/shipment_send_email`)
-        .then(function(response) {
+        .then(function (response) {
           Swal.fire("Good job!", "Email Sent Successfully", "success");
         })
-        .catch(function(error) {
+        .catch(function (error) {
           Swal.fire({
             icon: "error",
             title: "Oops...",
             text: "Something went wrong!",
-            footer: "Check Whether Sender email is valid"
+            footer: "Check Whether Sender email is valid",
           });
         });
     },
     sendSms() {
       axios
         .post(`/api/shipments/${this.shipment.id}/shipment_send_sms`)
-        .then(function(response) {
+        .then(function (response) {
           Swal.fire("Good job!", "Sms Sent Successfully", "success");
         })
-        .catch(function(error) {
+        .catch(function (error) {
           Swal.fire({
             icon: "error",
             title: "Oops...",
             text: "Something went wrong!",
-            footer: "Check Whether Sender phone number is valid"
+            footer: "Check Whether Sender phone number is valid",
           });
         });
-    }
+    },
   },
   created() {
     this.$store.dispatch(
@@ -688,6 +688,6 @@ export default {
       "retrieveShipmentStatus",
       this.$route.params.invoice_id
     );
-  }
+  },
 };
 </script>
