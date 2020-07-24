@@ -118,7 +118,7 @@
 
                         </div>
 
-                        <div class="col">
+                        <div class="col font-dark">
                             Consignor Name:
                             <br />
                             {{$shipment->sender->company_name}}
@@ -129,7 +129,7 @@
                         </div>
                     </div>
 
-                    <div class="row mt-2">
+                    <div class="row mt-2 font-dark">
                         <div class="col"></div>
                         <div class="col">
                             <p>
@@ -146,7 +146,7 @@
 
                     <div class="row mt-2">
                         <div class="col-8">
-                            <table class="table-bordered table">
+                            <table class="table-bordered table font-dark">
                                 <thead>
                                     <th scope="col">SL No.</th>
                                     <th scope="col" style="width:20rem">Description</th>
@@ -166,7 +166,7 @@
                                 @endforeach
                             </table>
 
-                            <table class="table-bordered table" style>
+                            <table class="table-bordered table font-dark" style>
                                 <tr>
                                     <th scope="row">Advance Paid</th>
                                     <td>{{$shipment->charge_advance_paid}}</td>
@@ -181,7 +181,7 @@
                             <p>{{$shipment->remarks}}</p>
                         </div>
                         <div class="col">
-                            <table class="table-bordered table">
+                            <table class="table-bordered table font-dark">
                                 <!-- <thead>
                           <th scope="col" colspan="4" class="text-center">Amount</th>
                         </thead>-->
@@ -221,7 +221,7 @@
                     </div>
 
                     <div class="row mt-2">
-                        <div class="col">
+                        <div class="col font-dark">
                             <h6>Terms & Conditions</h6>
                             <ol>
                                 <li>Remittance of payment within 7 days of invoice receipt.</li>
@@ -245,8 +245,8 @@
                         <div class="col-6"></div>
                         <div class="col">
                             <p>For and behalf of</p>
-                            <img src="https://i.ibb.co/W6vkYqs/seal.png" alt="Rohith" class="img-fluid ml-3"
-                                style="width:6rem;" />
+                            {{-- <img src="https://i.ibb.co/W6vkYqs/seal.png" alt="Rohith" class="img-fluid ml-3"
+                                style="width:6rem;" /> --}}
                             <br />
                             <br />
 

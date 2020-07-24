@@ -183,7 +183,7 @@
             </p>
           </div>
 
-          <div class="col">
+          <div class="col font-dark">
             Consignor Name:
             <br />
             {{shipment.sender.company_name}}
@@ -211,7 +211,7 @@
 
         <div class="row mt-2">
           <div class="col-8">
-            <table class="table-bordered table">
+            <table class="table-bordered table font-dark">
               <thead>
                 <th scope="col">SL No.</th>
                 <th scope="col" style="width:20rem">Description</th>
@@ -228,7 +228,7 @@
               </tr>
             </table>
 
-            <table class="table-bordered table" style>
+            <table class="table-bordered table font-dark" style>
               <tr>
                 <th scope="row">Advance Paid</th>
                 <td>{{shipment.charge_advance_paid}}</td>
@@ -239,11 +239,11 @@
               </tr>
             </table>
 
-            <h6 class="mt-3">Remarks</h6>
+            <h6 class="mt-3 font-dark">Remarks</h6>
             <p>{{shipment.remarks}}</p>
           </div>
           <div class="col">
-            <table class="table-bordered table">
+            <table class="table-bordered table font-dark">
               <!-- <thead>
                 <th scope="col" colspan="4" class="text-center">Amount</th>
               </thead>-->
@@ -283,7 +283,7 @@
         </div>
 
         <div class="row">
-          <div class="col">
+          <div class="col font-dark">
             <h6>Terms & Conditions</h6>
             <ol>
               <li>Remittance of payment within 7 days of invoice receipt.</li>

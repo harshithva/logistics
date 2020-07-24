@@ -166,9 +166,9 @@
                 <br />
                 Consignee GST: {{shipment.receiver.gst}}
               </p>
+            </div>
 
-              <p></p>
-
+            <div class="col">
               <h6 class="font-md">
                 <b>
                   Payment By:&nbsp;{{shipment.bill_to}}
@@ -228,9 +228,8 @@
           </div>
 
           <div class="row">
-            <div class="col">
-              <h6 class="mt-3">Remarks</h6>
-              <p>{{shipment.remarks}}</p>
+            <div class="col font-dark">
+              <h6 class="mt-3">Remarks: {{shipment.remarks}}</h6>
             </div>
           </div>
 

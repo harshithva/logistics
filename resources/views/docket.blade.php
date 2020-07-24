@@ -22,6 +22,12 @@
     <link href="{{asset('dashboard/css/sb-admin-2.min.css')}}" rel="stylesheet">
 
     <script src="{{asset('css/app.css')}}"></script>
+
+    <style>
+        p {
+            color: black !important;
+        }
+    </style>
 </head>
 
 <body id="page-top">
@@ -122,10 +128,11 @@
                     <p>
                         <b>Docket No: {{$shipment->docket_no}}</b>
                     </p>
-                    <br />
-                    <p>Transaction Type</p>
-                    <p>
-                        <span class="badge badge-pill badge-success">{{$shipment->package_transaction_type}}</span>
+                    <p>Vehicle no: {{$shipment->transport_driver_vehicle}}</p>
+                    <p>Transaction Type:
+                        {{$shipment->package_transaction_type}}
+                        {{-- <span class="badge badge-pill badge-success">{{$shipment->package_transaction_type}}</span>
+                        --}}
                     </p>
                 </div>
             </div>
@@ -162,29 +169,33 @@
             <hr />
             <div class="row mt-1">
                 <div class="col">
-                    <p>Consignor:</p>
-                    {{$shipment->sender->company_name}}
-                    <br />
-                    {{$shipment->sender->address}}
-                    <p>Consignor GST:
+                    <p>
+                        Consignor:
+                        {{$shipment->sender->company_name}}
+                        <br />
+                        {{$shipment->sender->address}}
+                        <br />
+                        Consignor GST:
                         {{$shipment->sender->gst}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     </p>
                 </div>
 
                 <div class="col mb-2">
-                    <h6>
-                        <p>Consignee</p>
+                    <p>
+                        Consignee:
                         {{$shipment->receiver->company_name}}
                         <br />
                         {{$shipment->receiver->address}}
-                        <p>Consignee GST: {{$shipment->receiver->gst}}</p>
-                    </h6>
-                    <p style="font-size:0.8rem;"></p>
+                        <br />
+                        Consignee GST: {{$shipment->receiver->gst}}
+                    </p>
 
-                    <h6>
+                </div>
+                <div class="col">
+                    <h6 class="font-md">
                         <b>
-                            Payment By:&nbsp;
-                            <span class="badge badge-pill badge-success">{{$shipment->bill_to}}</span>
+                            Payment By:&nbsp;{{$shipment->bill_to}}
+                            <!-- <span class="badge badge-pill badge-success">{{$shipment->bill_to}}</span> -->
                         </b>
                         <br />
                     </h6>
@@ -193,7 +204,7 @@
 
             <div class="row mt-1">
                 <div class="col">
-                    <table class="table-bordered table">
+                    <table class="table-bordered table  table-responsive-sm font-dark">
                         <thead>
                             <th scope="col">SL No.</th>
                             <th scope="col" style="width:20rem">Description</th>
@@ -215,9 +226,32 @@
                         </tr>
                         @endforeach
                     </table>
+                </div>
+            </div>
 
-                    <h6 class="mt-1">Consignment Note</h6>
-                    <p></p>
+            <div class="row mt-1">
+                <div class="col-6">
+                    <table class="table-bordered table table-responsive-sm font-dark">
+                        <thead>
+                            <th scope="col">Eway Bill</th>
+                            <th scope="col">Insurance No</th>
+                            <th scope="col">Insurance Agent</th>
+                        </thead>
+                        @foreach ($shipment->insurance as $key=>$item)
+                        <tr>
+                            <td>{{$item->eway_bill}}</td>
+                            <td>{{$item->insurance_no}}</td>
+                            <td>{{$item->insurance_agent}}</td>
+                        </tr>
+                        @endforeach
+                    </table>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col font-dark">
+                    <h6 class="mt-3">Remarks: {{$shipment->remarks}}</h6>
+
                 </div>
             </div>
 
@@ -250,12 +284,15 @@
                     <qrcode value="{{$shipment->freight_invoice_number}}"></qrcode>
 
                     <barcode value="{{$shipment->freight_invoice_number}}" class="mt-2" id="barcode" width="2"
-                        height="50">Show this if the rendering fails.</barcode>
+                        height="40">Show this if the rendering fails.</barcode>
                 </div>
             </div>
 
-            <div class="row mt-4 mb-4">
+            <div class="row mt-4">
                 <div class="col-8"></div>
+                <div class="col">
+                    <p>Consignor Sign with Seal</p>
+                </div>
 
                 <div class="col">
                     <p>Receiver Sign with Seal</p>
@@ -271,7 +308,7 @@
             <h6 class="text-center m-2 border border-secondary p-2">
                 <b>Terms & Conditions of Carriage At Owner's Risk</b>
             </h6>
-            <div class="row font-xs">
+            <div class="row font-s">
                 <div class="col">
                     <ul class="list-group">
                         <li class="list-group-item">The transport operator shall carry the goods at owner's risk
