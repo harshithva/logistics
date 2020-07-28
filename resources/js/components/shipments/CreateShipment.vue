@@ -219,6 +219,7 @@
                       <th scope="col">Invoice No</th>
                       <th scope="col">Size</th>
                       <th scope="col">Weight</th>
+                      <th scope="col">Quantity</th>
                       <th scope="col">Cost</th>
                       <th scope="col">Action</th>
                     </tr>
@@ -231,6 +232,7 @@
                       <td>{{item.invoice_no}}</td>
                       <td>{{item.size}}</td>
                       <td>{{item.weight}}</td>
+                      <td>{{item.quantity}}</td>
                       <td>{{item.cost}}</td>
                       <td @click="deletePackage(item.uid)">
                         <i class="fas fa-times text-danger"></i>
@@ -538,13 +540,19 @@
                     <input type="text" class="form-control" v-model="packagedetails.size" />
                   </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
                   <div class="form-group">
                     <label for="docket">Weight</label>
                     <input type="text" class="form-control" v-model="packagedetails.weight" />
                   </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="docket">Quantity</label>
+                    <input type="text" class="form-control" v-model="packagedetails.quantity" />
+                  </div>
+                </div>
+                <div class="col-md-4">
                   <div class="form-group">
                     <label for="Size">Declared value</label>
                     <input type="number" class="form-control" v-model="packagedetails.cost" />
@@ -681,6 +689,7 @@ export default {
         size: "",
         weight: "",
         cost: 0,
+        quantity: "",
       },
       insuranceDetails: {
         eway_bill: "",
@@ -711,6 +720,7 @@ export default {
         invoice_no: this.packagedetails.invoice_no,
         size: this.packagedetails.size,
         weight: this.packagedetails.weight,
+        quantity: this.packagedetails.quantity,
         cost: this.packagedetails.cost,
       });
 
@@ -720,6 +730,7 @@ export default {
         (this.packagedetails.invoice_no = ""),
         (this.packagedetails.size = ""),
         (this.packagedetails.weight = ""),
+        (this.packagedetails.quantity = ""),
         (this.packagedetails.cost = 0);
     },
     addInsurance() {

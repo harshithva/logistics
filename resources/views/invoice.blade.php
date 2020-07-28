@@ -151,6 +151,7 @@
                                     <th scope="col">SL No.</th>
                                     <th scope="col" style="width:20rem">Description</th>
                                     <th scope="col">Weight</th>
+                                    <th scope="col">Quantity</th>
                                     <th scope="col">Serial No.</th>
                                     <th scope="col">Docket No.</th>
                                 </thead>
@@ -160,6 +161,7 @@
                                     <th scope="row">{{$key+1}}</th>
                                     <td>{{$item->description}}</td>
                                     <td>{{$item->weight}} kg</td>
+                                    <td>{{$item->quantity}}</td>
                                     <td>{{$item->serial_no}}</td>
                                     <td>{{$shipment->docket_no}}</td>
                                 </tr>
@@ -245,13 +247,18 @@
                         <div class="col-6"></div>
                         <div class="col">
                             <p>For and behalf of</p>
-                            {{-- <img src="https://i.ibb.co/W6vkYqs/seal.png" alt="Rohith" class="img-fluid ml-3"
-                                style="width:6rem;" /> --}}
+                            <img src="https://i.ibb.co/gySNn0G/sign-rohith.png" alt="Rohith" class="img-fluid"
+                                style="width:5.5rem;" />
                             <br />
                             <br />
 
                             <u>Gurukal Logistics</u>
                         </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col text-center">This is a computer generated document No seal and signature
+                            required.</div>
                     </div>
                 </div>
 

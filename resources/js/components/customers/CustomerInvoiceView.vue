@@ -216,6 +216,7 @@
                 <th scope="col">SL No.</th>
                 <th scope="col" style="width:20rem">Description</th>
                 <th scope="col">Weight</th>
+                <th scope="col">Quantity</th>
                 <th scope="col">Serial No.</th>
                 <th scope="col">Docket No.</th>
               </thead>
@@ -223,6 +224,7 @@
                 <th scope="row">{{index+1}}</th>
                 <td>{{item.description}}</td>
                 <td>{{item.weight}} kg</td>
+                <td>{{item.quantity}}</td>
                 <td>{{item.serial_no}}</td>
                 <td>{{shipment.docket_no}}</td>
               </tr>
@@ -308,12 +310,17 @@
           <div class="col-6"></div>
           <div class="col">
             <p>For and behalf of</p>
-            <!-- <img :src="sign" alt="Rohith" class="img-fluid" style="width:8rem;" /> -->
+            <img :src="sign" alt="Rohith" class="img-fluid" style="width:5.5rem;" />
             <br />
             <br />
 
             <u>Gurukal Logistics</u>
           </div>
+        </div>
+        <div class="row">
+          <div
+            class="col text-center"
+          >This is a computer generated document No seal and signature required.</div>
         </div>
       </div>
     </div>
@@ -530,7 +537,7 @@ export default {
   data() {
     return {
       logo: "https://i.ibb.co/WFdrW4M/Logo-Color-Text-Below.jpg",
-      sign: "https://i.ibb.co/W6vkYqs/seal.png",
+      sign: "https://i.ibb.co/gySNn0G/sign-rohith.png",
       status: new Form({
         status: "Awaiting Pickup",
         customer_id: "",

@@ -131,8 +131,10 @@
                     <p>Vehicle no: {{$shipment->transport_driver_vehicle}}</p>
                     <p>Transaction Type:
                         {{$shipment->package_transaction_type}}
-                        {{-- <span class="badge badge-pill badge-success">{{$shipment->package_transaction_type}}</span>
-                        --}}
+
+                    </p>
+                    <p class="font-md">
+                        <b>Payment By:&nbsp;{{$shipment->bill_to}}</b>
                     </p>
                 </div>
             </div>
@@ -191,114 +193,126 @@
                     </p>
 
                 </div>
-                <div class="col">
+                {{-- <div class="col">
                     <h6 class="font-md">
                         <b>
                             Payment By:&nbsp;{{$shipment->bill_to}}
-                            <!-- <span class="badge badge-pill badge-success">{{$shipment->bill_to}}</span> -->
-                        </b>
-                        <br />
-                    </h6>
-                </div>
-            </div>
 
-            <div class="row mt-1">
-                <div class="col">
-                    <table class="table-bordered table  table-responsive-sm font-dark">
-                        <thead>
-                            <th scope="col">SL No.</th>
-                            <th scope="col" style="width:20rem">Description</th>
-                            <th scope="col">Serial No.</th>
-                            <!-- <th scope="col">Docket No.</th> -->
-                            <th scope="col">Weight</th>
-                            <th scope="col">Declared value</th>
-                        </thead>
-                        @foreach ($shipment->package as $key=>$item)
+                </b>
+                <br />
+                </h6>
+            </div> --}}
+        </div>
 
-
-                        <tr>
-                            <th scope="row">{{$key+1}}</th>
-                            <td>{{$item->description}}</td>
-                            <td>{{$item->serial_no}}</td>
-                            <td>{{$item->weight}} Kg</td>
-
-                            <td>&#8377; {{$item->cost}}</td>
-                        </tr>
-                        @endforeach
-                    </table>
-                </div>
-            </div>
-
-            <div class="row mt-1">
-                <div class="col-6">
-                    <table class="table-bordered table table-responsive-sm font-dark">
-                        <thead>
-                            <th scope="col">Eway Bill</th>
-                            <th scope="col">Insurance No</th>
-                            <th scope="col">Insurance Agent</th>
-                        </thead>
-                        @foreach ($shipment->insurance as $key=>$item)
-                        <tr>
-                            <td>{{$item->eway_bill}}</td>
-                            <td>{{$item->insurance_no}}</td>
-                            <td>{{$item->insurance_agent}}</td>
-                        </tr>
-                        @endforeach
-                    </table>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col font-dark">
-                    <h6 class="mt-3">Remarks: {{$shipment->remarks}}</h6>
-
-                </div>
-            </div>
-
-            <div class="row mt-2">
-                <div class="col">
-                    <h6 class="text-danger text-center">
-                        <b>Payment Conditions</b>
-                    </h6>
-                    <p>
-                        Delivery of goods against freight & other charges only Payment by A/c payee in favour of
-                        M/s GURUKAL LOGISTICS only.
-                    </p>
-                    <hr />
-                    <p>
-                        IN CASE OF LOSS OR DAMAGE TO GOOOS THE LIABILITY OF THE CARRIER SHALL NOT EXCEED A SUM
-                        OF Rs 500). (FIVE HUNDRED ONLY)
-                        The company is not responsible for leakage, Breakage & Accident Damage Subject to Terms
-                        & Conditions of carriage printed overleaf.
-                    </p>
-                </div>
-            </div>
-            <hr />
+        <div class="row mt-1">
+            <div class="col">
+                <table class="table-bordered table  table-responsive-sm font-dark">
+                    <thead>
+                        <th scope="col">SL No.</th>
+                        <th scope="col" style="width:20rem">Description</th>
+                        <th scope="col">Serial No.</th>
+                        <!-- <th scope="col">Docket No.</th> -->
+                        <th scope="col">Weight</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Declared value</th>
+                    </thead>
+                    @foreach ($shipment->package as $key=>$item)
 
 
-
-
-            <div class="row mt-2">
-                <div class="col d-flex d-inline-block">
-                    {{-- <qrcode :value="$shipment->freight_invoice_number" :options="{ width: 100 }"></qrcode> --}}
-                    <qrcode value="{{$shipment->freight_invoice_number}}"></qrcode>
-
-                    <barcode value="{{$shipment->freight_invoice_number}}" class="mt-2" id="barcode" width="2"
-                        height="40">Show this if the rendering fails.</barcode>
-                </div>
-            </div>
-
-            <div class="row mt-4">
-                <div class="col-8"></div>
-                <div class="col">
-                    <p>Consignor Sign with Seal</p>
-                </div>
-
-                <div class="col">
-                    <p>Receiver Sign with Seal</p>
-                </div>
+                    <tr>
+                        <th scope="row">{{$key+1}}</th>
+                        <td>{{$item->description}}</td>
+                        <td>{{$item->serial_no}}</td>
+                        <td>{{$item->weight}} Kg</td>
+                        <td>{{$item->quantity}}</td>
+                        <td>&#8377; {{$item->cost}}</td>
+                    </tr>
+                    @endforeach
+                </table>
             </div>
         </div>
+
+        <div class="row mt-1">
+            <div class="col-6">
+                <table class="table-bordered table table-responsive-sm font-dark">
+                    <thead>
+                        <th scope="col">Eway Bill</th>
+                        <th scope="col">Insurance No</th>
+                        <th scope="col">Insurance Agent</th>
+                    </thead>
+                    @foreach ($shipment->insurance as $key=>$item)
+                    <tr>
+                        <td>{{$item->eway_bill}}</td>
+                        <td>{{$item->insurance_no}}</td>
+                        <td>{{$item->insurance_agent}}</td>
+                    </tr>
+                    @endforeach
+                </table>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col font-dark">
+                <h6 class="mt-3">Remarks: {{$shipment->remarks}}</h6>
+
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col">
+                <h6 class="text-danger text-center">
+                    <b>Payment Conditions</b>
+                </h6>
+                <p>
+                    Delivery of goods against freight & other charges only Payment by A/c payee in favour of
+                    M/s GURUKAL LOGISTICS only.
+                </p>
+                <hr />
+                <p>
+                    IN CASE OF LOSS OR DAMAGE TO GOOOS THE LIABILITY OF THE CARRIER SHALL NOT EXCEED A SUM
+                    OF Rs 500). (FIVE HUNDRED ONLY)
+                    The company is not responsible for leakage, Breakage & Accident Damage Subject to Terms
+                    & Conditions of carriage printed overleaf.
+                </p>
+            </div>
+        </div>
+        <hr />
+
+
+
+
+        <div class="row mt-2">
+            <div class="col d-flex d-inline-block">
+                {{-- <qrcode :value="$shipment->freight_invoice_number" :options="{ width: 100 }"></qrcode> --}}
+                <qrcode value="{{$shipment->freight_invoice_number}}"></qrcode>
+
+                <barcode value="{{$shipment->freight_invoice_number}}" class="mt-2" id="barcode" width="2" height="40">
+                    Show this if the rendering fails.</barcode>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-8"></div>
+            <div class="col font-xs">
+                <p>
+                    Consignor Sign
+                    <br /><span class="font-xs">(GOODS RECEIVED IN GOOD CONDITION)</span>
+                </p>
+            </div>
+
+            <div class="col">
+                <p>
+                    Receiver Sign
+                    <br /><span class="font-xs">(GOODS RECEIVED IN GOOD CONDITION)</span>
+                </p>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col text-center">This is a computer generated document No seal and signature required.</div>
+        </div>
+    </div>
     </div>
 
     <div class="pagebreak"></div>

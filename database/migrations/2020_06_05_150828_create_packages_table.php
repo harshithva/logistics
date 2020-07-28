@@ -21,6 +21,7 @@ class CreatePackagesTable extends Migration
             $table->string('invoice_no')->nullable();
             $table->string('size')->nullable();
             $table->string('weight')->nullable();
+            $table->string('quantity')->nullable();
             $table->decimal('cost',10,2)->default(0);
             $table->unsignedBigInteger('shipment_id');
             $table->timestamps();

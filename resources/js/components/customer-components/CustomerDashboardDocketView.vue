@@ -61,6 +61,9 @@
               Transaction Type: {{shipment.package_transaction_type}}
               <!-- <span class="badge badge-pill badge-success">{{shipment.package_transaction_type}}</span> -->
             </p>
+            <p class="font-md">
+              <b>Payment By:&nbsp;{{shipment.bill_to}}</b>
+            </p>
           </div>
         </div>
         <hr />
@@ -113,16 +116,16 @@
               Consignee GST: {{shipment.receiver.gst}}
             </p>
           </div>
-
+          <!-- 
           <div class="col">
             <h6 class="font-md">
               <b>
                 Payment By:&nbsp;{{shipment.bill_to}}
-                <!-- <span class="badge badge-pill badge-success">{{shipment.bill_to}}</span> -->
+                <span class="badge badge-pill badge-success">{{shipment.bill_to}}</span>
               </b>
               <br />
             </h6>
-          </div>
+          </div>-->
         </div>
 
         <div class="row mt-1">
@@ -134,14 +137,15 @@
                 <th scope="col">Serial No.</th>
                 <!-- <th scope="col">Docket No.</th> -->
                 <th scope="col">Weight</th>
+                <th scope="col">Quantity</th>
                 <th scope="col">Declared value</th>
               </thead>
               <tr v-for="(item,index) in shipment.package">
                 <th scope="row">{{index+1}}</th>
                 <td>{{item.description}}</td>
                 <td>{{item.serial_no}}</td>
-                <td v-if="item.weight">{{item.weight}} Kg</td>
-                <td v-else>--</td>
+                <td>{{item.weight}} Kg</td>
+                <td>{{item.quantity}}</td>
                 <td>&#8377; {{item.cost}}</td>
               </tr>
             </table>
@@ -210,13 +214,26 @@
 
         <div class="row mt-4">
           <div class="col-8"></div>
-          <div class="col">
-            <p>Consignor Sign with Seal</p>
+          <div class="col font-xs">
+            <p>
+              Consignor Sign
+              <br />
+              <span class="font-xs">(GOODS RECEIVED IN GOOD CONDITION)</span>
+            </p>
           </div>
 
           <div class="col">
-            <p>Receiver Sign with Seal</p>
+            <p>
+              Receiver Sign
+              <br />
+              <span class="font-xs">(GOODS RECEIVED IN GOOD CONDITION)</span>
+            </p>
           </div>
+        </div>
+        <div class="row">
+          <div
+            class="col text-center"
+          >This is a computer generated document No seal and signature required.</div>
         </div>
       </div>
     </div>

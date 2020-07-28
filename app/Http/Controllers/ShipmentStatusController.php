@@ -126,36 +126,36 @@ class ShipmentStatusController extends Controller
         curl_close($curl);
 
         // send mail
-        if($shipment->bill_to == 'consignor')
-        {
-            $sender2 =  $shipment->receiver;
-        }else {
-            $sender2 =  $shipment->sender;
-        }
+        // if($shipment->bill_to == 'consignor')
+        // {
+        //     $sender2 =  $shipment->receiver;
+        // }else {
+        //     $sender2 =  $shipment->sender;
+        // }
  
-        $sender =  User::findOrFail($shipment->bill_to_id);
-        $docket = $shipment->docket_no;
-        $status =  $shipment->status->status;
+        // $sender =  User::findOrFail($shipment->bill_to_id);
+        // $docket = $shipment->docket_no;
+        // $status =  $shipment->status->status;
         
-        $beautymail = app()->make(\Snowfire\Beautymail\Beautymail::class);
+        // $beautymail = app()->make(\Snowfire\Beautymail\Beautymail::class);
    
-        $beautymail->send('emails.shipment.bill_to', compact('docket','status','shipment'), function($message) use($sender)
-        {
-            $message
-                ->from('admin@gurukal.co.in', 'Gurukal Logistics')
-                ->to($sender->email,$sender->name)
-                // ->cc('gurukallogistics@gmail.com')
-                ->subject('About Your Shipment');
-        });
+        // $beautymail->send('emails.shipment.bill_to', compact('docket','status','shipment'), function($message) use($sender)
+        // {
+        //     $message
+        //         ->from('admin@gurukal.co.in', 'Gurukal Logistics')
+        //         ->to($sender->email,$sender->name)
+        //         // ->cc('gurukallogistics@gmail.com')
+        //         ->subject('About Your Shipment');
+        // });
 
        
-            $beautymail->send('emails.shipment.sender_2', compact('docket','status','shipment'), function($message) use($sender2)
-            {
-                $message
-                    ->from('admin@gurukal.co.in', 'Gurukal Logistics')
-                    ->to($sender2->email,$sender2->name)
-                    ->subject('About Your Shipment');
-            });
+        //     $beautymail->send('emails.shipment.sender_2', compact('docket','status','shipment'), function($message) use($sender2)
+        //     {
+        //         $message
+        //             ->from('admin@gurukal.co.in', 'Gurukal Logistics')
+        //             ->to($sender2->email,$sender2->name)
+        //             ->subject('About Your Shipment');
+        //     });
      
 
             return response()->json( $status,200);
