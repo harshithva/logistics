@@ -661,6 +661,7 @@ class ShipmentController extends Controller
     public function view_docket($request) {
   
         $shipment = Shipment::find($request);
+        // qrcode link
         $shipment->qrcode = "https://crm.gurukal.in/customer/docket/8jZSqbGNmzk25EcBgMsWYyDP4LDEAS7amrVevmqcTE67ByuajGaks8UqmLmJ/$shipment->id/urMrnM6JNuGPCnEdnmDqzfWfDYAUSYb8rkveHF9mWGPgD2XxH4SYRXjRCnmx/view";
         return view('docket',compact('shipment'));
     }
