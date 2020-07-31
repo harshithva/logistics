@@ -27,6 +27,11 @@
         p {
             color: black !important;
         }
+
+        #qrcode {
+            height: 120px !important;
+            width: 120px !important;
+        }
     </style>
 </head>
 
@@ -284,7 +289,8 @@
         <div class="row mt-2">
             <div class="col d-flex d-inline-block">
                 {{-- <qrcode :value="$shipment->freight_invoice_number" :options="{ width: 100 }"></qrcode> --}}
-                <qrcode value="{{$shipment->freight_invoice_number}}"></qrcode>
+
+                <qrcode value="{{$shipment->qrcode}}" id="qrcode"></qrcode>
 
                 <barcode value="{{$shipment->freight_invoice_number}}" class="mt-2" id="barcode" width="2" height="40">
                     Show this if the rendering fails.</barcode>
@@ -293,10 +299,11 @@
 
         <div class="row mt-4">
             <div class="col-8"></div>
-            <div class="col font-xs">
+
+            <div class="col">
                 <p>
                     Consignor Sign
-                    <br /><span class="font-xs">(GOODS RECEIVED IN GOOD CONDITION)</span>
+                    <br /><span class="font-xs">( Consignor Sign)</span>
                 </p>
             </div>
 

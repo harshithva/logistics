@@ -252,9 +252,10 @@
             </div>
           </div>
           <hr />
-          <div class="row mt-2">
+          <div class="row">
             <div class="col d-flex d-inline-block">
-              <qrcode :value="shipment.freight_invoice_number" :options="{ width: 80 }"></qrcode>
+              <!-- <qrcode :value="shipment.freight_invoice_number" :options="{ width: 80 }"></qrcode> -->
+              <qrcode :value="qrcode" :options="{ width: 120 }"></qrcode>
 
               <barcode
                 :value="shipment.freight_invoice_number"
@@ -272,7 +273,7 @@
               <p>
                 Consignor Sign
                 <br />
-                <span class="font-s">(GOODS RECEIVED IN GOOD CONDITION)</span>
+                <span class="font-s">(GOODS SENT)</span>
               </p>
             </div>
 
@@ -483,6 +484,9 @@ export default {
     },
     shipment_status() {
       return this.$store.getters.getShipmentStatus;
+    },
+    qrcode() {
+      return `https://crm.gurukal.in/customer/docket/8jZSqbGNmzk25EcBgMsWYyDP4LDEAS7amrVevmqcTE67ByuajGaks8UqmLmJ/${this.shipment.id}/urMrnM6JNuGPCnEdnmDqzfWfDYAUSYb8rkveHF9mWGPgD2XxH4SYRXjRCnmx/view`;
     },
   },
   methods: {
