@@ -32,6 +32,160 @@
               >{{form.errors.get('charge_total')}}</b-alert>
 
               <b-alert
+                v-if="form.errors.has('delivery_address')"
+                dismissible
+                show
+                variant="danger"
+              >{{form.errors.get('delivery_address')}}</b-alert>
+
+              <b-alert
+                v-if="form.errors.has('package_contact_person')"
+                dismissible
+                show
+                variant="danger"
+              >{{form.errors.get('package_contact_person')}}</b-alert>
+
+              <b-alert
+                v-if="form.errors.has('package_contact_person_phone')"
+                dismissible
+                show
+                variant="danger"
+              >{{form.errors.get('package_contact_person_phone')}}</b-alert>
+
+              <b-alert
+                v-if="form.errors.has('package_contact_person_phone')"
+                dismissible
+                show
+                variant="danger"
+              >{{form.errors.get('package_contact_person_phone')}}</b-alert>
+
+              <b-alert
+                v-if="form.errors.has('package_transaction_type')"
+                dismissible
+                show
+                variant="danger"
+              >{{form.errors.get('package_transaction_type')}}</b-alert>
+
+              <b-alert
+                v-if="form.errors.has('package_pickup_address')"
+                dismissible
+                show
+                variant="danger"
+              >{{form.errors.get('package_pickup_address')}}</b-alert>
+
+              <b-alert
+                v-if="form.errors.has('transport_company_name')"
+                dismissible
+                show
+                variant="danger"
+              >{{form.errors.get('transport_company_name')}}</b-alert>
+
+              <b-alert
+                v-if="form.errors.has('transport_company_phone')"
+                dismissible
+                show
+                variant="danger"
+              >{{form.errors.get('transport_company_phone')}}</b-alert>
+
+              <b-alert
+                v-if="form.errors.has('transport_driver_name')"
+                dismissible
+                show
+                variant="danger"
+              >{{form.errors.get('transport_driver_name')}}</b-alert>
+
+              <b-alert
+                v-if="form.errors.has('transport_driver_phone')"
+                dismissible
+                show
+                variant="danger"
+              >{{form.errors.get('transport_driver_phone')}}</b-alert>
+
+              <b-alert
+                v-if="form.errors.has('transport_driver_name')"
+                dismissible
+                show
+                variant="danger"
+              >{{form.errors.get('transport_driver_name')}}</b-alert>
+
+              <b-alert
+                v-if="form.errors.has('transport_driver_vehicle')"
+                dismissible
+                show
+                variant="danger"
+              >{{form.errors.get('transport_driver_vehicle')}}</b-alert>
+
+              <b-alert
+                v-if="form.errors.has('user_notes')"
+                dismissible
+                show
+                variant="danger"
+              >{{form.errors.get('user_notes')}}</b-alert>
+
+              <b-alert
+                v-if="form.errors.has('freight_invoice_number')"
+                dismissible
+                show
+                variant="danger"
+              >{{form.errors.get('freight_invoice_number')}}</b-alert>
+
+              <b-alert
+                v-if="form.errors.has('charge_transportation')"
+                dismissible
+                show
+                variant="danger"
+              >{{form.errors.get('charge_transportation')}}</b-alert>
+
+              <b-alert
+                v-if="form.errors.has('charge_handling')"
+                dismissible
+                show
+                variant="danger"
+              >{{form.errors.get('charge_handling')}}</b-alert>
+
+              <b-alert
+                v-if="form.errors.has('charge_halting')"
+                dismissible
+                show
+                variant="danger"
+              >{{form.errors.get('charge_halting')}}</b-alert>
+
+              <b-alert
+                v-if="form.errors.has('charge_Insurance')"
+                dismissible
+                show
+                variant="danger"
+              >{{form.errors.get('charge_Insurance')}}</b-alert>
+
+              <b-alert
+                v-if="form.errors.has('charge_odc')"
+                dismissible
+                show
+                variant="danger"
+              >{{form.errors.get('charge_odc')}}</b-alert>
+
+              <b-alert
+                v-if="form.errors.has('charge_tax_percent')"
+                dismissible
+                show
+                variant="danger"
+              >{{form.errors.get('charge_tax_percent')}}</b-alert>
+
+              <b-alert
+                v-if="form.errors.has('charge_tax_amount')"
+                dismissible
+                show
+                variant="danger"
+              >{{form.errors.get('charge_tax_amount')}}</b-alert>
+
+              <b-alert
+                v-if="form.errors.has('remarks')"
+                dismissible
+                show
+                variant="danger"
+              >{{form.errors.get('remarks')}}</b-alert>
+
+              <b-alert
                 v-if="form.errors.has('document')"
                 dismissible
                 show

@@ -29,7 +29,7 @@ class CreateShipmentsTable extends Migration
             $table->string('transport_driver_name')->nullable();
             $table->string('transport_driver_phone')->nullable();
             $table->string('transport_driver_vehicle')->nullable();
-            $table->string('user_notes')->nullable();
+            $table->longText('user_notes')->nullable();
             $table->string('freight_invoice_number')->nullable();
             // Additional Expenses
             $table->decimal('charge_transportation',10,2)->nullable();

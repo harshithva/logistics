@@ -47,9 +47,10 @@
             <h5 style="font-size:2rem">
               <b>FREIGHT INVOICE</b>
             </h5>
+            <qrcode :value="qrcode" :options="{ width: 120 }"></qrcode>
           </div>
         </div>
-        <div class="row mt-4">
+        <div class="row">
           <div class="col">
             <p>
               GURUKAL LOGISTICS
@@ -62,7 +63,7 @@
           </div>
           <div class="col"></div>
           <div class="col">
-            <p style="font-size:1.3rem">
+            <p style="font-size:1.1rem">
               <b>Invoice No: {{shipment.freight_invoice_number}}</b>
             </p>
             <p>Date of Invoice: {{moment(shipment.date).format('DD/MM/YYYY')}}</p>
@@ -87,7 +88,7 @@
           </div>
         </div>
         <hr />
-        <div class="row mt-2 font-dark">
+        <div class="row font-dark">
           <div class="col">
             <p>BILL TO</p>
 
@@ -118,10 +119,7 @@
             <br />
             GST: {{shipment.sender.gst}}
           </div>
-        </div>
 
-        <div class="row mt-2">
-          <div class="col"></div>
           <div class="col">
             <p>
               Consignee Name:
@@ -145,6 +143,7 @@
                 <th scope="col">Quantity</th>
                 <th scope="col">Serial No.</th>
                 <th scope="col">Docket No.</th>
+                <th scope="col">Invoice No.</th>
               </thead>
               <tr v-for="(item,index) in shipment.package">
                 <th scope="row">{{index+1}}</th>
@@ -153,6 +152,7 @@
                 <td>{{item.quantity}}</td>
                 <td>{{item.serial_no}}</td>
                 <td>{{shipment.docket_no}}</td>
+                <td>{{item.invoice_no}}</td>
               </tr>
             </table>
 
@@ -534,6 +534,9 @@ export default {
     },
     shipment_status() {
       return this.$store.getters.getShipmentStatus;
+    },
+    qrcode() {
+      return `https://crm.gurukal.in/customer/docket/8jZSqbGNmzk25EcBgMsWYyDP4LDEAS7amrVevmqcTE67ByuajGaks8UqmLmJ/${this.shipment.id}/urMrnM6JNuGPCnEdnmDqzfWfDYAUSYb8rkveHF9mWGPgD2XxH4SYRXjRCnmx/view`;
     },
   },
   methods: {

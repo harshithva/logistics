@@ -91,10 +91,10 @@ class ShipmentController extends Controller
             "charge_odc"=> "max:255",
             "charge_tax_percent"=> "max:255",
             "charge_tax_amount" => "max:255",
-            "charge_total" => "max:255",
+            "charge_total" => "max:255|required",
             "sender_id"=>"required|max:255",
             "remarks" => 'max:500',
-            "bill_to" => 'max:500',
+            "bill_to" => 'max:500|required',
            
         ]);
  
@@ -620,6 +620,8 @@ class ShipmentController extends Controller
       else {
         $balance_amount = ($shipment->charge_total -  $shipment->charge_advance_paid);
       }
+
+      $shipment->qrcode = "https://crm.gurukal.in/customer/docket/8jZSqbGNmzk25EcBgMsWYyDP4LDEAS7amrVevmqcTE67ByuajGaks8UqmLmJ/$shipment->id/urMrnM6JNuGPCnEdnmDqzfWfDYAUSYb8rkveHF9mWGPgD2XxH4SYRXjRCnmx/view";
 
         return view('invoice',compact('shipment', 'balance_amount'));
     }

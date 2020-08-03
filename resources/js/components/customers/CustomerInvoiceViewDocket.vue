@@ -168,16 +168,6 @@
                 Consignee GST: {{shipment.receiver.gst}}
               </p>
             </div>
-
-            <!-- <div class="col">
-              <h6 class="font-md">
-                <b>
-                  Payment By:&nbsp;{{shipment.bill_to}}
-                  <span class="badge badge-pill badge-success">{{shipment.bill_to}}</span>
-                </b>
-                <br />
-              </h6>
-            </div>-->
           </div>
 
           <div class="row mt-1">

@@ -22,6 +22,12 @@
     <link href="{{asset('dashboard/css/sb-admin-2.min.css')}}" rel="stylesheet">
 
     <script src="{{asset('css/app.css')}}"></script>
+    <style>
+        #qrcode {
+            height: 120px !important;
+            width: 120px !important;
+        }
+    </style>
 </head>
 
 <body id="page-top">
@@ -56,9 +62,10 @@
                             <h5 style="font-size:2rem">
                                 <b>FREIGHT INVOICE</b>
                             </h5>
+                            <qrcode value="{{$shipment->qrcode}}" id="qrcode"></qrcode>
                         </div>
                     </div>
-                    <div class="row mt-4">
+                    <div class="row">
                         <div class="col">
                             <p>
                                 GURUKAL LOGISTICS
@@ -71,7 +78,7 @@
                         </div>
                         <div class="col"></div>
                         <div class="col">
-                            <p style="font-size:1.3rem">
+                            <p style="font-size:1.1rem">
                                 <b>Invoice No: {{$shipment->freight_invoice_number}}</b>
                             </p>
                             <p>Date of Invoice: {{ $shipment->date}}</p>
@@ -86,7 +93,7 @@
                     </div>
                     <hr />
 
-                    <div class="row mt-2">
+                    <div class="row">
                         <div class="col">
                             <p>BILL TO</p>
 
@@ -127,10 +134,6 @@
                             <br />
                             GST: {{$shipment->sender->gst}}
                         </div>
-                    </div>
-
-                    <div class="row mt-2 font-dark">
-                        <div class="col"></div>
                         <div class="col">
                             <p>
                                 Consignee Name:
@@ -144,6 +147,8 @@
                         </div>
                     </div>
 
+
+
                     <div class="row mt-2">
                         <div class="col-8">
                             <table class="table-bordered table font-dark">
@@ -154,6 +159,7 @@
                                     <th scope="col">Quantity</th>
                                     <th scope="col">Serial No.</th>
                                     <th scope="col">Docket No.</th>
+                                    <th scope="col">Invoice No.</th>
                                 </thead>
 
                                 @foreach ($shipment->package as $key => $item)
@@ -164,6 +170,7 @@
                                     <td>{{$item->quantity}}</td>
                                     <td>{{$item->serial_no}}</td>
                                     <td>{{$shipment->docket_no}}</td>
+                                    <td>{{$item->invoice_no}}</td>
                                 </tr>
                                 @endforeach
                             </table>
