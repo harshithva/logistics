@@ -159,6 +159,12 @@
                   </div>
                 </div>
               </div>
+              <div class="row mb-3">
+                <div class="col">
+                  <span>Show Rates</span>
+                  <b-form-checkbox switch size="lg" v-model="form.show_rates"></b-form-checkbox>
+                </div>
+              </div>
             </section>
             <div class="form-group">
               <div class="col-sm-12">
@@ -210,25 +216,29 @@
 
 
 <script>
+import Switches from "vue-switches";
 export default {
+  components: {
+    Switches,
+  },
   data() {
     return {
       customer: {},
       dismissSecs: 5,
       dismissCountDown: 0,
-      showDismissibleAlert: false
+      showDismissibleAlert: false,
     };
   },
   methods: {
     onSubmit() {
       this.form
         .submit("patch", "/api/customers/" + this.form.id)
-        .then(response => (this.dismissCountDown = 10))
-        .catch(error =>
+        .then((response) => (this.dismissCountDown = 10))
+        .catch((error) =>
           Swal.fire({
             icon: "error",
             title: "Oops...",
-            text: "Something went wrong!"
+            text: "Something went wrong!",
           })
         );
     },
@@ -240,17 +250,17 @@ export default {
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it!"
-      }).then(result => {
+        confirmButtonText: "Yes, delete it!",
+      }).then((result) => {
         if (result.value) {
           this.form
             .submit("delete", "/api/customers/" + this.form.id)
-            .then(response => this.$router.push("/admin/customers"))
-            .catch(error =>
+            .then((response) => this.$router.push("/admin/customers"))
+            .catch((error) =>
               Swal.fire({
                 icon: "error",
                 title: "Oops...",
-                text: "Something went wrong!"
+                text: "Something went wrong!",
               })
             );
           Swal.fire("Deleted!", "Your file has been deleted.", "success");
@@ -262,15 +272,15 @@ export default {
     },
     showAlert() {
       this.dismissCountDown = this.dismissSecs;
-    }
+    },
   },
   computed: {
     form() {
       return new Form(this.$store.getters.getSingleCustomer);
-    }
+    },
   },
   created() {
     this.$store.dispatch("retrieveSingleCustomer", this.$route.params.id);
-  }
+  },
 };
 </script>

@@ -54,6 +54,8 @@ import VueBarcode from "vue-barcode";
 import excel from 'vue-excel-export'
 Vue.use(excel)
 
+
+
 import VueGoodTablePlugin from 'vue-good-table';
 // import the styles
 import 'vue-good-table/dist/vue-good-table.css'

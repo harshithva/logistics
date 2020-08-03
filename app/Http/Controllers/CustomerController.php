@@ -43,6 +43,7 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
+     
         $request->validate([
             'name'=>'required|max:255',
             'email'=>'required|email|unique:users|max:255',
@@ -51,9 +52,13 @@ class CustomerController extends Controller
             'address'=>'max:500',
             'phone'=>'max:255',
             'company_name'=>'max:255',
+            'show_rates' => 'required|boolean'
         ]);
        
         $customer = User::create($request->all());
+        $customer->show_rates = $request->show_rates;
+        $customer->save();
+        
 
 
         $beautymail = app()->make(\Snowfire\Beautymail\Beautymail::class);
@@ -80,6 +85,7 @@ class CustomerController extends Controller
     public function show($id)
     {
        $customer = User::findOrFail($id);
+       $customer->show_rates = $customer->show_rates ? true:false;
        return new CustomerResource($customer);
     }
 
@@ -124,6 +130,7 @@ class CustomerController extends Controller
         $customer->phone = $request->phone;
         $customer->address = $request->address;
         $customer->user_notes = $request->user_notes;
+        $customer->show_rates = $request->show_rates;
         $customer->save();
         return new CustomerResource($customer);
     }

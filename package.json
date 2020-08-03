@@ -50,6 +50,7 @@
         "vue-materialize-datatable": "^1.0.3",
         "vue-router": "^3.3.2",
         "vue-select": "^3.10.3",
+        "vue-switches": "^2.0.1",
         "vuex": "^3.4.0"
     }
 }

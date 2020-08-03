@@ -160,25 +160,6 @@
           <div class="card-body">
             <div class="table-responsive">
               <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                <!-- <div class="row">
-                  <div class="col-sm-12 col-md-6">
-                    <div class="dataTables_length" id="dataTable_length"></div>
-                  </div>
-                  <div class="col-sm-12 col-md-6 text-right">
-                    <div id="dataTable_filter" class="dataTables_filter">
-                      <label>
-                        Search: &nbsp;
-                        <input
-                          type="search"
-                          class="form-control form-control-sm"
-                          placeholder
-                          aria-controls="dataTable"
-                          v-model="search"
-                        />
-                      </label>
-                    </div>
-                  </div>
-                </div>-->
                 <div class="row">
                   <div class="col-sm-12">
                     <table
@@ -374,18 +355,18 @@
 export default {
   data() {
     return {
-      search: ""
+      search: "",
     };
   },
   computed: {
     customer() {
       if (this.search) {
         return new Form(
-          this.$store.getters.getCustomerInvoices.filter(item => {
+          this.$store.getters.getCustomerInvoices.filter((item) => {
             return this.search
               .toLowerCase()
               .split(" ")
-              .every(v =>
+              .every((v) =>
                 item.shipment.freight_invoice_number.toLowerCase().includes(v)
               );
           })
@@ -393,12 +374,12 @@ export default {
       } else {
         return new Form(this.$store.getters.getCustomerInvoices);
       }
-    }
+    },
   },
   created() {},
   mounted() {
     this.$store.dispatch("retrieveCustomerInvoice", this.$route.params.id);
   },
-  methods: {}
+  methods: {},
 };
 </script>

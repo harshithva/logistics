@@ -81,6 +81,13 @@
                   show
                   variant="danger"
                 >{{ form.errors.get('user_notes')}}</b-alert>
+
+                <b-alert
+                  v-if="form.errors.has('show_rates')"
+                  dismissible
+                  show
+                  variant="danger"
+                >{{ form.errors.get('show_rates')}}</b-alert>
                 <!-- end errors -->
                 <section>
                   <div class="row">
@@ -184,6 +191,12 @@
                       </div>
                     </div>
                   </div>
+                  <div class="row mb-3">
+                    <div class="col">
+                      <span>Show Rates</span>
+                      <b-form-checkbox switch size="lg" v-model="form.show_rates"></b-form-checkbox>
+                    </div>
+                  </div>
                 </section>
                 <div class="form-group">
                   <div class="col-sm-12">
@@ -222,12 +235,13 @@ export default {
         gst: "",
         phone: "",
         address: "",
-        user_notes: ""
+        user_notes: "",
+        show_rates: false,
       }),
 
       dismissSecs: 5,
       dismissCountDown: 0,
-      showDismissibleAlert: false
+      showDismissibleAlert: false,
     };
   },
   methods: {
@@ -243,7 +257,7 @@ export default {
 
           this.form
             .submit("post", "/api/customers")
-            .then(response => {
+            .then((response) => {
               clearInterval(timerInterval);
               this.dismissCountDown = 10;
             })
@@ -251,7 +265,7 @@ export default {
         },
         onClose: () => {
           clearInterval(timerInterval);
-        }
+        },
       });
 
       // this.form
@@ -264,7 +278,7 @@ export default {
     },
     showAlert() {
       this.dismissCountDown = this.dismissSecs;
-    }
-  }
+    },
+  },
 };
 </script>
