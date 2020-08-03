@@ -555,7 +555,7 @@
                 <div class="col-md-4">
                   <div class="form-group">
                     <label for="Size">Declared value</label>
-                    <input type="number" class="form-control" v-model="packagedetails.cost" />
+                    <input type="text" class="form-control" v-model="packagedetails.cost" />
                   </div>
                 </div>
               </div>
@@ -688,7 +688,7 @@ export default {
         invoice_no: "",
         size: "",
         weight: "",
-        cost: 0,
+        cost: "",
         quantity: "",
       },
       insuranceDetails: {

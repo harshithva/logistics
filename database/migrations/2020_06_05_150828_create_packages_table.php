@@ -16,13 +16,13 @@ class CreatePackagesTable extends Migration
         Schema::create('packages', function (Blueprint $table) {
             $table->id();
     
-            $table->string('description')->nullable();
+            $table->longText('description')->nullable();
             $table->string('serial_no')->nullable();
             $table->string('invoice_no')->nullable();
             $table->string('size')->nullable();
             $table->string('weight')->nullable();
             $table->string('quantity')->nullable();
-            $table->decimal('cost',10,2)->default(0);
+            $table->string('cost')->default(0);
             $table->unsignedBigInteger('shipment_id');
             $table->timestamps();
 
