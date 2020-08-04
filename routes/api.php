@@ -52,8 +52,11 @@ Route::post('/login', function (Request $request) {
 });
 
 Route::apiResource("shipments", 'ShipmentController');
+Route::apiResource("price_lists", 'ShipmentRateController');
+
 Route::apiResource("shipments/{id}/payments", 'PaymentController');
 Route::apiResource("shipments/{id}/status", 'ShipmentStatusController');
+
 Route::apiResource("quotations", 'QuoteController');
 Route::post("quotations/{quotation}/status/approve", 'QuoteController@approve_status');
 Route::post("quotations/{quotation}/status/decline", 'QuoteController@decline_status');

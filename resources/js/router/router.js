@@ -19,6 +19,7 @@ import EditQuote from "../components/quotes/EditQuote";
 import CreateShipment from "../components/shipments/CreateShipment";
 import Shipments from "../components/shipments/Shipments";
 import EditShipment from "../components/shipments/EditShipment";
+import PriceList from "../components/shipments/PriceList";
 
 
 import CreateStaff from "../components/staff/CreateStaff";
@@ -41,6 +42,7 @@ import CustomerDashboardInvoiceView from '../components/customer-components/Cust
 import CustomerDashboardDocketView from '../components/customer-components/CustomerDashboardDocketView'
 import CustomerTrackShipment from '../components/customer-components/CustomerTrackShipment'
 import CustomerCreateQuote from '../components/customer-components/CustomerCreateQuote'
+import Estimate from '../components/customer-components/Estimate'
 
 
 
@@ -73,6 +75,7 @@ const routes = [
     { path: '/admin/shipments', component: Shipments },
     { path: '/admin/shipments/create', component: CreateShipment },
     { path: '/admin/shipments/:shipment_id/edit', component: EditShipment },
+    { path: '/admin/price_list', component: PriceList },
 
     { path: '/admin/staff/create', component: CreateStaff },
     { path: '/admin/staff', component: Staff },
@@ -94,6 +97,7 @@ const routes = [
     { path: '/customer/invoice/:invoice_id/docket/view', component: CustomerDashboardDocketView },
     { path: '/customer/track/shipment', component: CustomerTrackShipment },
     { path: '/customer/quote/create', component: CustomerCreateQuote },
+    { path: '/customer/price_list', component: Estimate },
 ]
 
 

@@ -55,34 +55,7 @@
             <div id="loader" style="display:none"></div>
             <div id="msgholder"></div>
             <div class="row mb-4">
-              <router-link
-                to="/customer"
-                class="d-none d-sm-inline-block btn btn-sm btn-outline-primary shadow-sm ml-2"
-              >
-                <i class="fas fa-rupee-sign fa-sm"></i> Invoices
-              </router-link>
-              <router-link
-                to="/customer/quote"
-                class="d-none d-sm-inline-block btn btn-sm btn-outline-primary shadow-sm ml-2 mr-2"
-              >
-                <i class="fas fa-scroll fa-sm"></i> Quotes
-              </router-link>
-
-              <router-link
-                to="/customer/track/shipment"
-                aria-current="page"
-                class="d-none d-sm-inline-block btn btn-sm btn-outline-primary shadow-sm mr-2"
-              >
-                <i class="fas fa-truck fa-sm"></i> Track Shipment
-              </router-link>
-
-              <router-link
-                to="/customer/quote/create"
-                aria-current="page"
-                class="d-none d-sm-inline-block btn btn-sm btn-outline-primary shadow-sm"
-              >
-                <i class="fas fa-sticky-note fa-sm"></i> Request Quote
-              </router-link>
+              <Navigation></Navigation>
             </div>
             <div class="row">
               <div class="col-xl-4 col-md-6 mb-4">
@@ -315,22 +288,26 @@
 </style>
 
 <script>
+import Navigation from "./Navigation";
 export default {
   data() {
     return {
-      search: ""
+      search: "",
     };
+  },
+  components: {
+    Navigation,
   },
   computed: {
     customer() {
       return new Form(this.$store.getters.getCustomerQuotes);
-    }
+    },
   },
   created() {
     this.$store.dispatch(
       "retrieveCustomerQuotes",
       this.$store.getters.getUserData.user.id
     );
-  }
+  },
 };
 </script>

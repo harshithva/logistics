@@ -59,34 +59,7 @@
           <div id="loader" style="display:none"></div>
           <div id="msgholder"></div>
           <div class="row mb-4">
-            <router-link
-              to="/customer"
-              class="d-none d-sm-inline-block btn btn-sm btn-outline-primary shadow-sm ml-2"
-            >
-              <i class="fas fa-rupee-sign fa-sm"></i> Invoices
-            </router-link>
-            <router-link
-              to="/customer/quote"
-              class="d-none d-sm-inline-block btn btn-sm btn-outline-primary shadow-sm ml-2 mr-2"
-            >
-              <i class="fas fa-scroll fa-sm"></i> Quotes
-            </router-link>
-
-            <router-link
-              to="/customer/track/shipment"
-              aria-current="page"
-              class="d-none d-sm-inline-block btn btn-sm btn-outline-primary shadow-sm ml-2 mr-2"
-            >
-              <i class="fas fa-truck fa-sm"></i> Track Shipment
-            </router-link>
-
-            <router-link
-              to="/customer/quote/create"
-              aria-current="page"
-              class="d-none d-sm-inline-block btn btn-sm btn-outline-primary shadow-sm"
-            >
-              <i class="fas fa-sticky-note fa-sm"></i> Request Quote
-            </router-link>
+            <Navigation></Navigation>
           </div>
 
           <tracking-component></tracking-component>
@@ -105,26 +78,30 @@
 
 
 <script>
+import Navigation from "./Navigation";
 export default {
+  components: {
+    Navigation,
+  },
   data() {
     return {
       customer: {},
       dismissSecs: 5,
       dismissCountDown: 0,
       showDismissibleAlert: false,
-      tracking_no: ""
+      tracking_no: "",
     };
   },
   methods: {
     onSubmit() {
       this.form
         .submit("patch", "/api/customers/" + this.form.id)
-        .then(response => (this.dismissCountDown = 10))
-        .catch(error =>
+        .then((response) => (this.dismissCountDown = 10))
+        .catch((error) =>
           Swal.fire({
             icon: "error",
             title: "Oops...",
-            text: "Something went wrong!"
+            text: "Something went wrong!",
           })
         );
     },
@@ -139,7 +116,7 @@ export default {
     },
     showAlert() {
       this.dismissCountDown = this.dismissSecs;
-    }
+    },
   },
   computed: {
     form() {
@@ -147,13 +124,13 @@ export default {
     },
     tracking_details() {
       return this.$store.getters.getTrackingDetails;
-    }
+    },
   },
   created() {
     this.$store.dispatch(
       "retrieveSingleCustomer",
       this.$store.getters.getUserData.user.id
     );
-  }
+  },
 };
 </script>

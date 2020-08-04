@@ -74,40 +74,40 @@ export default {
         {
           label: "Tracking Number",
           field: "docket_no",
-          sortable: true
+          sortable: true,
         },
         {
           label: "Date",
           field: "date",
           type: "date",
           dateInputFormat: "yyyy-mm-dd",
-          dateOutputFormat: "dd/mm/yyyy"
+          dateOutputFormat: "dd/mm/yyyy",
         },
         {
           label: "Name",
-          field: "sender_name"
+          field: "sender_name",
         },
         {
           label: "From",
-          field: "sender_address"
+          field: "sender_address",
         },
         {
           label: "To",
-          field: "delivery_address"
+          field: "delivery_address",
         },
         {
           label: "Status",
-          field: "status"
+          field: "status",
         },
         {
           label: "Payment",
-          field: "payment"
+          field: "payment",
         },
         {
           label: "Action",
-          field: "action"
-        }
-      ]
+          field: "action",
+        },
+      ],
     };
   },
   methods: {
@@ -116,15 +116,15 @@ export default {
     },
     clearFiles() {
       this.$refs["file-input"].reset();
-    }
+    },
   },
   created() {
     this.$store.dispatch("retrieveShipments");
   },
   computed: {
     ...mapGetters({
-      shipments: "getFilteredShipments"
-    })
-  }
+      shipments: "getFilteredShipments",
+    }),
+  },
 };
 </script>

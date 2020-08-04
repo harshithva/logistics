@@ -91,6 +91,13 @@
         </router-link>
       </li>
 
+      <li class="nav-item">
+        <router-link class="nav-link collapsed" to="/admin/price_list">
+          <i class="fas fa-scroll"></i>
+          <span>Price List</span>
+        </router-link>
+      </li>
+
       <!-- customer -->
 
       <!-- staff -->
@@ -152,19 +159,19 @@
 export default {
   data() {
     return {
-      logo_src: "../dashboard/img/gurukal.png"
+      logo_src: "../dashboard/img/gurukal.png",
     };
   },
   methods: {
     toggleSidebar() {
       this.$store.commit("toggleSidebar");
-    }
+    },
   },
   computed: {
     isToggled() {
       return this.$store.getters.getIsToggled;
-    }
+    },
   },
-  name: "Sidebar"
+  name: "Sidebar",
 };
 </script>

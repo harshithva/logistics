@@ -26,7 +26,8 @@ export default ({
         filteredShipments: {},
         filteredStaffs: {},
         filteredPackages: [],
-        isToggled: false
+        isToggled: false,
+        price_lists: []
 
     },
     getters: {
@@ -103,6 +104,9 @@ export default ({
         },
         getIsToggled(state) {
             return state.isToggled;
+        },
+        getFilteredPriceLists(state) {
+            return state.price_lists;
         },
     },
     mutations: {
@@ -285,6 +289,9 @@ export default ({
             state.isToggled = !state.isToggled;
 
         },
+        retrievePriceLists(state, price_lists) {
+            state.price_lists = price_lists;
+        }
 
     },
     actions: {
@@ -470,6 +477,19 @@ export default ({
             axios
                 .get(`/api/shipments/${tracking_no}/shipment_track`)
                 .then(response => (context.commit('TrackShipment', response.data)))
+                .catch(function (error) {
+                    // handle error
+
+                    context.commit('catchErrors', error.response.data)
+                })
+        },
+
+        retrievePriceLists(context) {
+
+            context.commit('ToggleIsLoading');
+            axios
+                .get(`/api/price_lists`)
+                .then(response => (context.commit('retrievePriceLists', response.data)))
                 .catch(function (error) {
                     // handle error
 
