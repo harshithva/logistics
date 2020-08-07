@@ -118,21 +118,32 @@
                       colspan="1"
                       aria-label="Office: activate to sort column ascending"
                       style="width: 50px;"
-                    >Rate</th>
+                    >LCV</th>
+                    <th
+                      class="sorting"
+                      tabindex="0"
+                      aria-controls="dataTable"
+                      rowspan="1"
+                      colspan="1"
+                      aria-label="Office: activate to sort column ascending"
+                      style="width: 50px;"
+                    >28Ft Open truck</th>
                   </tr>
                 </thead>
                 <tfoot>
                   <tr>
                     <th rowspan="1" colspan="1">From</th>
                     <th rowspan="1" colspan="1">To</th>
-                    <th rowspan="1" colspan="1">Rate</th>
+                    <th rowspan="1" colspan="1">LCV</th>
+                    <th rowspan="1" colspan="1">28Ft Open truck</th>
                   </tr>
                 </tfoot>
                 <tbody>
                   <tr v-if="shipmentRate">
                     <td>{{shipmentRate.from}}</td>
                     <td>{{shipmentRate.to}}</td>
-                    <td>{{shipmentRate.rate}}</td>
+                    <td>{{shipmentRate.rate_1}}</td>
+                    <td>{{shipmentRate.rate_2}}</td>
                   </tr>
                 </tbody>
               </table>

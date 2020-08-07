@@ -17,7 +17,8 @@ class CreateShipmentRatesTable extends Migration
             $table->id();
             $table->string('from')->default('bangalore');
             $table->string('to');
-            $table->string('rate');
+            $table->string('rate_1');
+            $table->string('rate_2');
             $table->timestamps();
         });
     }

@@ -52,11 +52,16 @@ class CustomerController extends Controller
             'address'=>'max:500',
             'phone'=>'max:255',
             'company_name'=>'max:255',
-            'show_rates' => 'required|boolean'
         ]);
        
         $customer = User::create($request->all());
-        $customer->show_rates = $request->show_rates;
+        if($request->show_rates) {
+            $customer->show_rates = $request->show_rates;
+        }else {
+             $customer->show_rates = 0; 
+        }
+      
+     
         $customer->save();
         
 

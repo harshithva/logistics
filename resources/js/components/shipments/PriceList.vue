@@ -55,8 +55,11 @@
         <b-form-group id="input-group-1" label="To:">
           <b-form-input id="input-1" v-model="form.to" type="text" required></b-form-input>
         </b-form-group>
-        <b-form-group id="input-group-1" label="Rate">
-          <b-form-input id="input-1" v-model="form.rate" type="text" required placeholder="0.0"></b-form-input>
+        <b-form-group id="input-group-1" label="LCV">
+          <b-form-input id="input-1" v-model="form.rate_1" type="text" required placeholder="0.0"></b-form-input>
+        </b-form-group>
+        <b-form-group id="input-group-1" label="28Ft Open Truck">
+          <b-form-input id="input-1" v-model="form.rate_2" type="text" required placeholder="0.0"></b-form-input>
         </b-form-group>
       </b-form>
       <template v-slot:modal-footer>
@@ -84,7 +87,8 @@ export default {
       form: new Form({
         from: "bangalore",
         to: "",
-        rate: "",
+        rate_1: "",
+        rate_2: "",
       }),
       tableColumns1: [
         {
@@ -97,7 +101,11 @@ export default {
         },
         {
           label: "Rate",
-          field: "rate",
+          field: "rate_1",
+        },
+        {
+          label: "Rate",
+          field: "rate_1",
         },
         // {
         //   label: "Created At",
@@ -115,9 +123,12 @@ export default {
     };
   },
   methods: {
-    deleteItem(id) {
+    deleteItem(item_id) {
+      const data = {
+        id: item_id,
+      };
       axios
-        .delete(`/api/price_lists/${id}`)
+        .post(`/api/price_lists/${item_id}/delete`, data)
         .then((response) => {
           this.$store.dispatch("retrievePriceLists");
           Swal.fire({
@@ -163,7 +174,8 @@ export default {
       evt.preventDefault();
       // Reset our form values
       this.form.to = "";
-      this.form.rate = "";
+      this.form.rate_1 = "";
+      this.form.rate_2 = "";
     },
   },
   created() {

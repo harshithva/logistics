@@ -39,7 +39,8 @@ class ShipmentRateController extends Controller
         $shipmentRate = new ShipmentRate;
         $shipmentRate->from = 'bangalore';
         $shipmentRate->to = $request->to;
-        $shipmentRate->rate = $request->rate;
+        $shipmentRate->rate_1 = $request->rate_1;
+        $shipmentRate->rate_2 = $request->rate_2;
         $shipmentRate->save();
 
         return $shipmentRate;
@@ -78,7 +79,8 @@ class ShipmentRateController extends Controller
     {
         $shipmentRate->from = 'Bangalore';
         $shipmentRate->to = $request->to;
-        $shipmentRate->rate = $request->rate;
+        $shipmentRate->rate_1 = $request->rate_1;
+        $shipmentRate->rate_2 = $request->rate_2;
         $shipmentRate->save();
 
         return $shipmentRate;
@@ -89,11 +91,27 @@ class ShipmentRateController extends Controller
      *
      * @param  \App\ShipmentRate  $shipmentRate
      * @return \Illuminate\Http\Response
+     *      * @param  \Illuminate\Http\Request  $request
  
      */
-    public function destroy(ShipmentRate $shipmentRate)
+    public function destroy(ShipmentRate $shipmentRate, Request $request)
     {
-        $shipmentRate->delete();
+
+        $rate = ShipmentRate::findOrFail($request->id);
+        $rate->delete();
+        return response()->json(null,204);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function delete(Request $request)
+    {
+        $rate = ShipmentRate::findOrFail($request->id);
+        $rate->delete();
         return response()->json(null,204);
     }
 }
