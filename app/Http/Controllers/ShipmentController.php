@@ -506,9 +506,9 @@ class ShipmentController extends Controller
         {
             $message
                 ->from('admin@gurukal.co.in', 'Gurukal Logistics')
-                // ->to($sender->email,$sender->name)
-                ->to('bennykgallagher@outlook.com')
-                // ->cc('gurukallogistics@gmail.com')
+                ->to($sender->email,$sender->name)
+                // ->to('bennykgallagher@outlook.com')
+                ->cc('gurukallogistics@gmail.com')
                 ->subject('About Your Shipment');
         });
 
@@ -517,8 +517,8 @@ class ShipmentController extends Controller
             {
                 $message
                     ->from('admin@gurukal.co.in', 'Gurukal Logistics')
-                    // ->to($sender2->email,$sender2->name)
-                    ->to('bennykgallagher@outlook.com')
+                    ->to($sender2->email,$sender2->name)
+           
                     ->subject('About Your Shipment');
             });
      
@@ -542,10 +542,10 @@ class ShipmentController extends Controller
         {
             $message
                 ->from('admin@gurukal.co.in', 'Gurukal Logistics')
-                // ->to($sender->email,$sender->name)
-                // ->cc('gurukallogistics@gmail.com')
-                ->to('bennykgallagher@outlook.com')
-                // ->cc($receiver->email)
+                ->to($sender->email,$sender->name)
+                ->cc('gurukallogistics@gmail.com')
+            
+                ->cc($receiver->email)
                 ->subject('About Your Shipment');
         });
 

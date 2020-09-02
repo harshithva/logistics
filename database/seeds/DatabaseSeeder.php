@@ -18,5 +18,6 @@ class DatabaseSeeder extends Seeder
     //    factory(Shipment::class,15)->create();
       
        $this->call(AdminCustomerUserSeeder::class);
+       $this->call(ShipmentRateSeeder::class);
     }
 }

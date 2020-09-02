@@ -100,11 +100,11 @@ export default {
           field: "to",
         },
         {
-          label: "Rate",
+          label: "LCV",
           field: "rate_1",
         },
         {
-          label: "Rate",
+          label: "28Ft Open Truck",
           field: "rate_1",
         },
         // {

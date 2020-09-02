@@ -220,7 +220,7 @@
             <table class="table-bordered table font-dark">
               <thead>
                 <th scope="col">SL No.</th>
-                <th scope="col" style="width:20rem">Description</th>
+                <th scope="col">Description</th>
                 <th scope="col">Weight</th>
                 <th scope="col">Quantity</th>
                 <th scope="col">Serial No.</th>
