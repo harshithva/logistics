@@ -48,6 +48,7 @@
         "vue-js-form-helper": "^2.1.3",
         "vue-loading-overlay": "^3.3.2",
         "vue-materialize-datatable": "^1.0.3",
+        "vue-print-nb": "^1.5.0",
         "vue-router": "^3.3.4",
         "vue-select": "^3.10.7",
         "vue-switches": "^2.0.1",

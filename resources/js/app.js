@@ -60,25 +60,11 @@ import VueGoodTablePlugin from 'vue-good-table';
 // import the styles
 import 'vue-good-table/dist/vue-good-table.css'
 Vue.use(VueGoodTablePlugin);
-// preloader
-// import Loading from 'vue-loading-overlay';
-// // Import stylesheet
-// import 'vue-loading-overlay/dist/vue-loading.css';
-// // Init plugin
-// Vue.use(Loading);
 
 
+import Print from 'vue-print-nb'
+Vue.use(Print);
 
-// import Form from 'vue-js-form-helper';
-// window.Form = Form;
-
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
 
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
@@ -89,6 +75,7 @@ Vue.component('CustomerDashboard', require('./components/CustomerDashboard.vue')
 Vue.component('TrackingComponent', require('./components/customer-components/TrackingComponent.vue').default);
 Vue.component('FeedBackComponent', require('./components/customer-components/FeedBackComponent.vue').default);
 Vue.component('Login', require('./components/auth/Login').default);
+Vue.component('Docket', require('./components/globals/Docket.vue').default);
 
 Vue.component(VueQrcode.name, VueQrcode);
 Vue.component('barcode', VueBarcode);
