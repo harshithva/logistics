@@ -1,5 +1,5 @@
 <template>
-  <fragment>
+  <div>
     <div class="row mt-3 mb-3 ml-3 d-print-none">
       <div class="col-3">
         <p>
@@ -105,233 +105,11 @@
       </div>
     </div>
 
-    <div class="card" ref="content">
-      <div class="card-body">
-        <div class="row">
-          <div class="col">
-            <p>GST No: 29AYGPS3509N2ZQ</p>
-          </div>
-        </div>
-        <div class="row mt-2">
-          <div class="col">
-            <img :src="logo" style="max-width:10rem" />
-          </div>
-          <div class="col"></div>
-          <div class="col">
-            <h5 style="font-size:2rem">
-              <b>FREIGHT INVOICE</b>
-            </h5>
-
-            <qrcode :value="qrcode" :options="{ width: 120 }"></qrcode>
-            <!-- 
-                <barcode
-                  :value="shipment.freight_invoice_number"
-                  class="mt-2"
-                  id="barcode"
-                  :width="2"
-                  :height="40"
-            >Show this if the rendering fails.</barcode>-->
-          </div>
-        </div>
-        <div class="row">
-          <div class="col">
-            <p>
-              GURUKAL LOGISTICS
-              <br />Anchepalya, Bangalore - 560073
-              <br />Mob: +91 9620202001
-              <br />E-mail : logistics@gurukal.co.in
-              <br />Website: www.gurukal.co.in
-              <br />
-            </p>
-          </div>
-          <div class="col"></div>
-          <div class="col">
-            <p style="font-size:1.1rem">
-              <b>Invoice No: {{shipment.freight_invoice_number}}</b>
-            </p>
-            <p>Date of Invoice: {{moment(shipment.date).format('DD/MM/YYYY')}}</p>
-
-            <p>Transaction Type</p>
-            <p>
-              <span class="badge badge-pill badge-success">{{shipment.package_transaction_type}}</span>
-            </p>
-            <p>
-              Payment Status :
-              <span
-                class="badge badge-pill badge-success"
-                v-if="balance_amount.balance_amount <= 0"
-              >Paid</span>
-              <span
-                class="badge badge-pill badge-danger"
-                v-else-if="balance_amount.balance_amount == shipment.charge_total"
-              >Pending</span>
-
-              <span class="badge badge-pill badge-warning" v-else>Partial</span>
-            </p>
-          </div>
-        </div>
-        <hr />
-        <div class="row">
-          <div class="col">
-            <p>BILL TO</p>
-
-            <p v-if="shipment.bill_to == 'consignor'">
-              {{shipment.sender.company_name}}
-              <br />
-              {{shipment.sender.address}}
-            </p>
-            <p v-else-if="shipment.bill_to == 'consignee'">
-              {{shipment.receiver.company_name}}
-              <br />
-              {{shipment.receiver.address}}
-            </p>
-
-            <p v-else>
-              {{shipment.sender.company_name}}
-              <br />
-              {{shipment.sender.address}}
-            </p>
-          </div>
-
-          <div class="col font-dark">
-            Consignor Name:
-            <br />
-            {{shipment.sender.company_name}}
-            <br />
-            {{shipment.sender.address}}
-            <br />
-            GST: {{shipment.sender.gst}}
-          </div>
-          <div class="col">
-            <p>
-              Consignee Name:
-              <br />
-              {{shipment.receiver.company_name}}
-              <br />
-              {{shipment.receiver.address}}
-              <br />
-              GST: {{shipment.receiver.gst}}
-            </p>
-          </div>
-        </div>
-
-        <div class="row mt-2">
-          <div class="col-8">
-            <table class="table-bordered table font-dark">
-              <thead>
-                <th scope="col">SL No.</th>
-                <th scope="col">Description</th>
-                <th scope="col">Weight</th>
-                <th scope="col">Quantity</th>
-                <th scope="col">Serial No.</th>
-                <th scope="col">Docket No.</th>
-                <th scope="col">Invoice No.</th>
-              </thead>
-              <tr v-for="(item,index) in shipment.package">
-                <th scope="row">{{index+1}}</th>
-                <td>{{item.description}}</td>
-                <td>{{item.weight}} kg</td>
-                <td>{{item.quantity}}</td>
-                <td>{{item.serial_no}}</td>
-                <td>{{shipment.docket_no}}</td>
-                <td>{{item.invoice_no}}</td>
-              </tr>
-            </table>
-
-            <table class="table-bordered table font-dark" style>
-              <tr>
-                <th scope="row">Advance Paid</th>
-                <td>{{shipment.charge_advance_paid}}</td>
-              </tr>
-              <tr>
-                <th scope="row">Balance Amount</th>
-                <td>{{balance_amount.balance_amount}}</td>
-              </tr>
-            </table>
-
-            <h6 class="mt-3 font-dark">Remarks</h6>
-            <p>{{shipment.remarks}}</p>
-          </div>
-          <div class="col">
-            <table class="table-bordered table font-dark">
-              <!-- <thead>
-                <th scope="col" colspan="4" class="text-center">Amount</th>
-              </thead>-->
-              <tr>
-                <th scope="row">Transportation</th>
-                <td>{{shipment.charge_transportation}}</td>
-              </tr>
-
-              <tr>
-                <th scope="row">Handling</th>
-                <td>{{shipment.charge_handling}}</td>
-              </tr>
-              <tr>
-                <th scope="row">ODC Charges</th>
-                <td>{{shipment.charge_odc}}</td>
-              </tr>
-
-              <tr>
-                <th scope="row">Halting</th>
-                <td>{{shipment.charge_halting}}</td>
-              </tr>
-
-              <tr>
-                <th scope="row">Insurance</th>
-                <td>{{shipment.charge_Insurance}}</td>
-              </tr>
-              <tr>
-                <th scope="row">GST</th>
-                <td>{{shipment.charge_tax_amount}}</td>
-              </tr>
-              <tr>
-                <th>Total</th>
-                <td>{{shipment.charge_total}}</td>
-              </tr>
-            </table>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col font-dark">
-            <h6>Terms & Conditions</h6>
-            <ol>
-              <li>Remittance of payment within 7 days of invoice receipt.</li>
-              <li>A 10 % charge will be applied for every month of late payment.</li>
-              <li>GST Payable by Freight Bearer</li>
-            </ol>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col">
-            <p>
-              Bank Details
-              <br />Name : Axis Bank
-              <br />8th Mile Branch
-              <br />A/c No.: 918020030455515
-              <br />IFSC: UTIB0002926
-              <br />
-            </p>
-            <!-- <p class="mt-4">This is a computer generated invoice.</p> -->
-          </div>
-          <div class="col-6"></div>
-          <div class="col">
-            <p>For and behalf of</p>
-            <img :src="sign" alt="Rohith" class="img-fluid" style="width:5.5rem;" />
-            <br />
-            <br />
-
-            <u>Gurukal Logistics</u>
-          </div>
-        </div>
-        <div class="row">
-          <div
-            class="col text-center"
-          >This is a computer generated document No seal and signature required.</div>
-        </div>
-      </div>
-    </div>
+    <Invoice
+      :shipment="shipment"
+      :shipment_status="shipment_status"
+      :balance_amount="balance_amount"
+    ></Invoice>
 
     <!-- Payment Modal-->
 
@@ -536,9 +314,14 @@
         </div>
       </div>
     </div>
-  </fragment>
+  </div>
 </template>
 
+<style  scoped>
+.bg-white {
+  background-color: white !important;
+}
+</style>
 
 <script>
 export default {

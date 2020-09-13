@@ -84,3 +84,8 @@ Route::get("dashboard", 'CustomerController@dashboard');
 
 
 Route::apiResource("staffs", 'StaffController');
+
+// expense_categories
+Route::apiResource("expense_categories", 'ExpenseCategoryController');
+// expenses
+Route::apiResource("expenses", 'ExpenseController');

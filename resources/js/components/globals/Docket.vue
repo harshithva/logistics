@@ -106,7 +106,7 @@
               <td>{{data.invoice_no}}</td>
               <td>{{data.serial_no}}</td>
               <td>{{data.weight}} Kg</td>
-              <td>{{data.quantity}}NOS</td>
+              <td>{{data.quantity}}</td>
               <td>₹ {{data.cost}}</td>
             </tr>
           </tbody>
@@ -118,9 +118,9 @@
       <div class="col-6">
         <table class="table-print table-bordered table-responsive-sm font-dark">
           <thead>
-            <th class="bg-red">Eway Bill</th>
-            <th class="bg-red">Insurance No</th>
-            <th class="bg-red">Insurance Agent</th>
+            <th class="bg-red" style="width:13rem">Eway Bill</th>
+            <th class="bg-red" style="width:13rem">Insurance No</th>
+            <th class="bg-red" style="width:13rem">Insurance Agent</th>
           </thead>
           <tr v-for="data in shipment.insurance">
             <td>{{data.eway_bill}}</td>
@@ -129,9 +129,9 @@
           </tr>
         </table>
       </div>
-      <div class="col"></div>
+      <div class="col-4"></div>
       <div class="col">
-        <img :src="qrcode" alt class="border ml-3" style="width: 8rem;" />
+        <qrcode :value="qrcode" :options="{ width: 120 }"></qrcode>
       </div>
     </div>
 
@@ -350,7 +350,7 @@ export default {
   data() {
     return {
       logo: require("./assets/logo-png-2.png"),
-      qrcode: require("./assets/qr-code.png"),
+
       logo_text: "https://i.ibb.co/WFdrW4M/Logo-Color-Text-Below.jpg",
     };
   },

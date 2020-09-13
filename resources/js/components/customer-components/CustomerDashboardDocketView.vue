@@ -1,5 +1,5 @@
 <template>
-  <fragment>
+  <div>
     <div class="row mt-3 mb-3 ml-3 d-print-none">
       <div class="col-4"></div>
       <div class="col">
@@ -363,7 +363,7 @@
         </div>
       </div>
     </div>-->
-  </fragment>
+  </div>
 </template>
 
 

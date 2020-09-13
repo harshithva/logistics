@@ -76,6 +76,7 @@ Vue.component('TrackingComponent', require('./components/customer-components/Tra
 Vue.component('FeedBackComponent', require('./components/customer-components/FeedBackComponent.vue').default);
 Vue.component('Login', require('./components/auth/Login').default);
 Vue.component('Docket', require('./components/globals/Docket.vue').default);
+Vue.component('Invoice', require('./components/globals/Invoice.vue').default);
 
 Vue.component(VueQrcode.name, VueQrcode);
 Vue.component('barcode', VueBarcode);
