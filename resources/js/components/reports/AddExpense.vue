@@ -1,5 +1,6 @@
 <template>
-  <b-form @submit="onSubmit" @reset="onReset">
+  <b-form @submit.prevent="onSubmit" @reset="onReset" @keydown="form.errors.clear()">
+    <DisplayError :form="form"></DisplayError>
     <b-form-group id="input-group-1" label="Select Expense Category">
       <v-select :options="expense_categories" label="name" @input="selectCategory($event)"></v-select>
     </b-form-group>
@@ -49,13 +50,7 @@ export default {
           });
           this.$store.dispatch("RETRIEVE_EXPENSES");
         })
-        .catch((error) =>
-          Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "Something went wrong!",
-          })
-        );
+        .catch();
     },
     onReset(evt) {
       evt.preventDefault();

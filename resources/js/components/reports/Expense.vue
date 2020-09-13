@@ -48,11 +48,11 @@
 
     <!-- add expense -->
     <b-modal id="modal-1" title="Create">
-      <b-tabs content-class="mt-3" fill>
+      <b-tabs content-class="mt-3" fill active>
         <b-tab title="Expense" active>
           <AddExpense></AddExpense>
         </b-tab>
-        <b-tab title="Expense Category" active>
+        <b-tab title="Expense Category">
           <AddExpenseCategory></AddExpenseCategory>
         </b-tab>
       </b-tabs>

@@ -66,6 +66,8 @@ import Print from 'vue-print-nb'
 Vue.use(Print);
 
 
+
+
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
@@ -77,7 +79,8 @@ Vue.component('FeedBackComponent', require('./components/customer-components/Fee
 Vue.component('Login', require('./components/auth/Login').default);
 Vue.component('Docket', require('./components/globals/Docket.vue').default);
 Vue.component('Invoice', require('./components/globals/Invoice.vue').default);
-Vue.component('Invoice', require('./components/globals/DisplayError.vue').default);
+Vue.component('DisplayError', require('./components/globals/DisplayError.vue').default);
+
 
 Vue.component(VueQrcode.name, VueQrcode);
 Vue.component('barcode', VueBarcode);

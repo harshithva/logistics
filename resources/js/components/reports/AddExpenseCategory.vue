@@ -1,5 +1,6 @@
 <template>
-  <b-form @submit.prevent="onSubmit" @reset="onReset">
+  <b-form @submit.prevent="onSubmit" @reset="onReset" @keydown="form.errors.clear()">
+    <DisplayError :form="form"></DisplayError>
     <b-form-group id="input-group-2">
       <b-form-input v-model="form.name" placeholder="Name"></b-form-input>
     </b-form-group>
@@ -13,6 +14,8 @@
         max-rows="6"
       ></b-form-textarea>
     </b-form-group>
+    <b-button type="submit" variant="primary">Submit</b-button>
+    <b-button type="reset" variant="danger">Reset</b-button>
   </b-form>
 </template>
 

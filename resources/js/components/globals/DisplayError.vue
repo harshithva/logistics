@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-alert
-      color="danger"
+      variant="success"
       class="mt-4"
       v-for="(value, propertyName) in form.originalData"
       :active.sync="form.errors.has(propertyName)"
