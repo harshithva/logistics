@@ -50,7 +50,7 @@ class ExpenseController extends Controller
        $expense->name = $request->name;
        $expense->note = $request->note;
        $expense->category_id = $request->category_id;
-       $expense->date = Carbon::createFromFormat('d-m-Y',$request->date)->format('Y-m-d');
+       $expense->date =Carbon::parse( $request->date)->format('Y-m-d');
        $expense->amount = $request->amount;
        $expense->save();
 

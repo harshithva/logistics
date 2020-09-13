@@ -126,6 +126,12 @@
         v-if="this.$store.getters.getUserData.user.role == 'admin'"
       >Reports</div>
       <li class="nav-item" v-if="this.$store.getters.getUserData.user.role == 'admin'">
+        <router-link class="nav-link collapsed" to="/admin/expenses">
+          <i class="fas fa-file-invoice"></i>
+          <span>Expenses</span>
+        </router-link>
+      </li>
+      <li class="nav-item" v-if="this.$store.getters.getUserData.user.role == 'admin'">
         <router-link class="nav-link collapsed" to="/admin/reports">
           <i class="fas fa-file-invoice"></i>
           <span>General Reports</span>

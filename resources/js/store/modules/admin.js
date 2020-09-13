@@ -27,7 +27,10 @@ export default ({
         filteredStaffs: {},
         filteredPackages: [],
         isToggled: false,
-        price_lists: []
+        price_lists: [],
+        expenses: [],
+        expense_categories: [],
+
 
     },
     getters: {
@@ -107,6 +110,12 @@ export default ({
         },
         getFilteredPriceLists(state) {
             return state.price_lists;
+        },
+        getExpenses(state) {
+            return state.expenses;
+        },
+        getExpenseCategories(state) {
+            return state.expense_categories;
         },
     },
     mutations: {
@@ -291,7 +300,13 @@ export default ({
         },
         retrievePriceLists(state, price_lists) {
             state.price_lists = price_lists;
-        }
+        },
+        RETRIEVE_EXPENSES(state, expenses) {
+            state.expenses = expenses;
+        },
+        RETRIEVE_EXPENSE_CATEGORIES(state, expense_categories) {
+            state.expense_categories = expense_categories;
+        },
 
     },
     actions: {
@@ -490,6 +505,26 @@ export default ({
             axios
                 .get(`/api/price_lists`)
                 .then(response => (context.commit('retrievePriceLists', response.data)))
+                .catch(function (error) {
+                    // handle error
+
+                    context.commit('catchErrors', error.response.data)
+                })
+        },
+        RETRIEVE_EXPENSES(context) {
+            axios
+                .get(`/api/expenses`)
+                .then(response => (context.commit('RETRIEVE_EXPENSES', response.data.data)))
+                .catch(function (error) {
+                    // handle error
+
+                    context.commit('catchErrors', error.response.data)
+                })
+        },
+        RETRIEVE_EXPENSE_CATEGORIES(context) {
+            axios
+                .get(`/api/expense_categories`)
+                .then(response => (context.commit('RETRIEVE_EXPENSE_CATEGORIES', response.data.data)))
                 .catch(function (error) {
                     // handle error
 
