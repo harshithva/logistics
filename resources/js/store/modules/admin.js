@@ -521,6 +521,26 @@ export default ({
                     context.commit('catchErrors', error.response.data)
                 })
         },
+        RETRIEVE_THIS_MONTH_EXPENSES(context) {
+            axios
+                .get(`/api/expenses/this_month/get`)
+                .then(response => (context.commit('RETRIEVE_EXPENSES', response.data.data)))
+                .catch(function (error) {
+                    // handle error
+
+                    context.commit('catchErrors', error.response.data)
+                })
+        },
+        RETRIEVE_LAST_MONTH_EXPENSES(context) {
+            axios
+                .get(`/api/expenses/last_month/get`)
+                .then(response => (context.commit('RETRIEVE_EXPENSES', response.data.data)))
+                .catch(function (error) {
+                    // handle error
+
+                    context.commit('catchErrors', error.response.data)
+                })
+        },
         RETRIEVE_EXPENSE_CATEGORIES(context) {
             axios
                 .get(`/api/expense_categories`)

@@ -190,6 +190,13 @@ export default {
     },
     selectMonth() {
       console.log(this.selectedMonth);
+      if (this.selectedMonth === "this_month") {
+        this.$store.dispatch("RETRIEVE_THIS_MONTH_EXPENSES");
+      } else if (this.selectedMonth === "last_month") {
+        this.$store.dispatch("RETRIEVE_LAST_MONTH_EXPENSES");
+      } else {
+        this.$store.dispatch("RETRIEVE_EXPENSES");
+      }
     },
   },
   created() {
