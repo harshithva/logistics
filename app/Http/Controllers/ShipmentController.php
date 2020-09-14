@@ -133,6 +133,7 @@ class ShipmentController extends Controller
         $shipment->charge_advance_paid = $request->charge_advance_paid;
         $shipment->charge_balance = $request->charge_balance;
 
+        $shipment->vendor = $request->vendor;
         $shipment->sender_id = $request->sender_id;
         $shipment->remarks = $request->remarks;
         $shipment->bill_to = $request->bill_to;
@@ -381,9 +382,11 @@ class ShipmentController extends Controller
         $shipment->charge_advance_paid = $request->charge_advance_paid;
         $shipment->charge_balance = $request->charge_balance;
 
+        $shipment->vendor = $request->vendor;
         $shipment->sender_id = $request->sender_id;
         $shipment->remarks = $request->remarks;
         $shipment->bill_to = $request->bill_to;
+       
         if($request->bill_to == 'consignor')
         {
             $shipment->bill_to_id = $request->sender_id;

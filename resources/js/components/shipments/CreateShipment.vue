@@ -362,6 +362,18 @@
                   </div>
                 </div>
 
+                <div class="row mb-2">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <input
+                        type="text"
+                        class="form-control"
+                        v-model="form.vendor"
+                        placeholder="Vendor"
+                      />
+                    </div>
+                  </div>
+                </div>
                 <h6 class="mb-4">Package Details</h6>
 
                 <table class="table table-responsive-sm">
@@ -826,6 +838,7 @@ export default {
         charge_total: 0,
         charge_advance_paid: 0,
         charge_balance: 0,
+        vendor: "",
         bill_to: "",
         document: "",
         remarks: "",

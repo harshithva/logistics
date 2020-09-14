@@ -43,6 +43,7 @@ class CreateShipmentsTable extends Migration
             $table->decimal('charge_advance_paid',10,2)->nullable();
             $table->decimal('charge_balance',10,2)->nullable();
         //    extra
+            $table->string('vendor')->nullable();
             $table->text('remarks')->nullable();
             $table->string('document')->nullable();
             $table->string('bill_to')->nullable();
