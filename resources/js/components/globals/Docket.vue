@@ -47,17 +47,13 @@
         <h3 class="sub-title-red pt-2">
           <b>DOCKET NO: {{shipment.docket_no}}</b>
         </h3>
-        <h5 class="border-top-dark pt-1">PAYMENT BY: {{shipment.bill_to.toUpperCase() }}</h5>
+        <h5 class="border-top-dark pt-1">PAYMENT BY: {{shipment.bill_to }}</h5>
       </div>
       <div class="col">
         <h6 class="sub-title-red pt-1">DATE: {{shipment.date}}</h6>
-        <h6
-          class="border-top-dark pt-1"
-        >VEHICLE NO: {{shipment.transport_driver_vehicle.toUpperCase()}}</h6>
+        <h6 class="border-top-dark pt-1">VEHICLE NO: {{shipment.transport_driver_vehicle}}</h6>
 
-        <h6
-          class="border-top-dark pt-1"
-        >TRANSACTION TYPE: {{shipment.package_transaction_type.toUpperCase()}}</h6>
+        <h6 class="border-top-dark pt-1">TRANSACTION TYPE: {{shipment.package_transaction_type}}</h6>
       </div>
     </div>
     <div class="row mt-2">

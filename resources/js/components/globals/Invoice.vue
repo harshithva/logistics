@@ -46,12 +46,8 @@
       </div>
       <div class="col">
         <h6 class="sub-title-red pt-1">DATE: {{moment(shipment.date).format('DD/MM/YYYY')}}</h6>
-        <h6
-          class="border-top-dark pt-1"
-        >VEHICLE NO: {{shipment.transport_driver_vehicle.toUpperCase()}}</h6>
-        <h6
-          class="border-top-dark pt-1"
-        >TRANSACTION TYPE: {{shipment.package_transaction_type.toUpperCase()}}</h6>
+        <h6 class="border-top-dark pt-1">VEHICLE NO: {{shipment.transport_driver_vehicle}}</h6>
+        <h6 class="border-top-dark pt-1">TRANSACTION TYPE: {{shipment.package_transaction_type}}</h6>
         <h6 class="border-top-dark pt-1">
           PAYMENT STATUS:
           <span v-if="balance_amount.balance_amount <= 0">PAID</span>

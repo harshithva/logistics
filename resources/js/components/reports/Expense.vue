@@ -6,9 +6,22 @@
           <div class="col">
             <h6 class="m-0 font-weight-bold text-primary">Expenses</h6>
           </div>
-          <div class="col-8"></div>
+          <div class="col-4"></div>
           <div class="col">
-            <b-button v-b-modal.modal-1 variant="primary">Add Expense</b-button>
+            <b-button v-b-modal.modal-1 variant="primary" class="btn btn-sm">Add Expense</b-button>
+            <button class="btn btn-danger btn-sm" @click="generatePdf">
+              <i class="fas fa-file-download"></i> &nbsp;PDF
+            </button>
+            <export-excel :data="expenses" :fields="json_fields" class="btn btn-success btn-sm">
+              <i class="fas fa-cloud-download-alt"></i> &nbsp;Excel
+            </export-excel>
+            <b-form-select
+              v-model="selectedMonth"
+              :options="options"
+              size="sm"
+              @change="selectMonth"
+              style="max-width:8rem"
+            ></b-form-select>
           </div>
         </div>
       </div>
@@ -23,10 +36,10 @@
        placeholder: 'Type to search',
   }"
           :pagination-options="{
-    enabled: true,
-     mode: 'pages',
-     
-  }"
+        enabled: true,
+        mode: 'pages',
+        
+      }"
         >
           <template slot="table-row" slot-scope="props">
             <span v-if="props.column.field == 'action'">
@@ -72,6 +85,7 @@
 </template>
 
 <script>
+import jsPDF from "jspdf";
 import { mapGetters } from "vuex";
 import AddExpense from "./AddExpense";
 import AddExpenseCategory from "./AddExpenseCategory";
@@ -87,6 +101,19 @@ export default {
         note: "",
         amount: 0,
       }),
+      selectedMonth: "all",
+      options: [
+        { value: "all", text: "All" },
+        { value: "this_month", text: "This month" },
+        { value: "last_month", text: "Last month" },
+      ],
+      json_fields: {
+        Name: "name",
+        Amount: "amount",
+        Note: "note",
+        "Category Name": "category_name",
+        Date: "date",
+      },
       tableColumns1: [
         {
           label: "Name",
@@ -121,6 +148,25 @@ export default {
     AddExpenseCategory,
   },
   methods: {
+    generatePdf() {
+      const vm = this;
+      const columns = [
+        { title: "Name", dataKey: "name" },
+        { title: "Amount", dataKey: "amount" },
+        { title: "Note", dataKey: "note" },
+        { title: "Category name", dataKey: "category_name" },
+        { title: "Date", dataKey: "date" },
+      ];
+      const doc = new jsPDF("p", "pt");
+
+      doc.autoTable(columns, vm.expenses, {
+        styles: {
+          fontSize: 10,
+        },
+      });
+
+      doc.save("expense.pdf");
+    },
     deleteItem(item_id) {
       axios
         .delete(`/api/expenses/${item_id}`)
@@ -141,6 +187,9 @@ export default {
             text: "Something went wrong!",
           })
         );
+    },
+    selectMonth() {
+      console.log(this.selectedMonth);
     },
   },
   created() {

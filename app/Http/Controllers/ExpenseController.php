@@ -6,6 +6,7 @@ use App\Expense;
 use Illuminate\Http\Request;
 use App\Http\Resources\Expense as ExpenseResource;
 use Carbon\Carbon;
+use Helpers;
 
 class ExpenseController extends Controller
 {
@@ -17,6 +18,23 @@ class ExpenseController extends Controller
     public function index()
     {
         $expenses = Expense::latest()->get();
+        return ExpenseResource::collection($expenses);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function this_month()
+    {
+        $expenses = Helpers::getThisMonth(Expense::class);
+        return ExpenseResource::collection($expenses);
+    }
+
+    public function last_month()
+    {
+        $expenses = Helpers::getLastMonth(Expense::class);
         return ExpenseResource::collection($expenses);
     }
 
