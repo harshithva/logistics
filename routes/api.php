@@ -91,3 +91,6 @@ Route::apiResource("expense_categories", 'ExpenseCategoryController');
 Route::apiResource("expenses", 'ExpenseController');
 Route::get("/expenses/this_month/get", 'ExpenseController@this_month');
 Route::get("/expenses/last_month/get", 'ExpenseController@last_month');
+
+// call log
+Route::apiResource("call_logs", 'CallLogController');

@@ -34,7 +34,7 @@ class Package extends JsonResource
             'shipment_sender_gst' => $this->sender->gst,
             'shipment_receiver_gst' => $this->receiver->gst,
             'packages_description' =>    $packages_description,
-            'payment_type' => $this->payment_type,
+            'shipment_payment_type' => $this->payment_type,
           ];
     }
 

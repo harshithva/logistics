@@ -28,6 +28,13 @@
           <export-excel :data="packages" :fields="json_fields" class="btn btn-success btn-sm">
             <i class="fas fa-cloud-download-alt"></i> &nbsp;Excel
           </export-excel>
+          <b-form-select
+            v-model="selectedMonth"
+            :options="options"
+            size="sm"
+            @change="selectMonth"
+            style="width:8rem"
+          ></b-form-select>
         </div>
       </div>
     </div>
@@ -52,16 +59,6 @@
     initialSortBy: {field: 'shipment_date', type: 'desc'}
   }"
         >
-          <div slot="table-actions">
-            <b-form-select
-              v-model="selectedMonth"
-              :options="options"
-              size="sm"
-              class="mb-1"
-              @change="selectMonth"
-            ></b-form-select>
-          </div>
-
           <template slot="table-row" slot-scope="props">
             <span v-if="props.column.field == 'packages'">
               <p v-for="p in props.row.packages">{{p.description}}</p>
@@ -168,7 +165,7 @@ export default {
         },
         {
           label: "Payment Type",
-          field: "payment_type",
+          field: "shipment_payment_type",
           numeric: false,
         },
       ],
