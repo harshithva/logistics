@@ -2,7 +2,7 @@
   <div>
     <div class="row mt-3 mb-3 ml-3 d-print-none">
       <div class="col-2">
-        <!-- <select
+        <select
           class="custom-select"
           id="inputGroupSelect04"
           aria-label="Example select with button addon"
@@ -13,16 +13,16 @@
           <option value="CONSIGNOR">CONSIGNOR</option>
           <option value="CONSIGNEE">CONSIGNEE</option>
           <option value="CARGO COPY">CARGO COPY</option>
-        </select>-->
+        </select>
       </div>
       <div class="col-4"></div>
       <div class="col">
-        <!-- <a class="btn btn-primary text-white" onclick="javascript:window.print()">
-          <i class="fas fa-print"></i> Print Docket
-        </a>-->
-        <a class="btn btn-primary text-white" v-print="'#docket'">
+        <a class="btn btn-primary text-white" onclick="javascript:window.print()">
           <i class="fas fa-print"></i> Print Docket
         </a>
+        <!-- <a class="btn btn-primary text-white" v-print="'#docket'">
+          <i class="fas fa-print"></i> Print Docket
+        </a>-->
 
         <button class="btn btn-success text-white" @click="sendDocketLink">
           <i class="fas fa-print"></i> Mail Docket
@@ -67,10 +67,10 @@
       </div>
     </div>
     <div>
-      <Docket :shipment="shipment" copy="ORIGINAL"></Docket>
-      <div>
+      <Docket :shipment="shipment" :copy="docket_copy_text"></Docket>
+      <!-- <div>
         <Docket :shipment="shipment" :copy="copy" v-for="(copy,index) in copies" :key="index"></Docket>
-      </div>
+      </div>-->
     </div>
   </div>
 </template>

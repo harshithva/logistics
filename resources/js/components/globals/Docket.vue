@@ -1,6 +1,6 @@
 <template>
   <fragment>
-    <div>
+    <div class="only-print">
       <img :src="logo" alt srcset class="bg-logo" />
     </div>
 
@@ -347,7 +347,7 @@ export default {
     return {
       logo: require("./assets/logo-png-2.png"),
 
-      logo_text: "https://i.ibb.co/WFdrW4M/Logo-Color-Text-Below.jpg",
+      logo_text: require("./assets/logo-png.png"),
     };
   },
   computed: {
@@ -376,7 +376,7 @@ body {
 }
 
 .bg-logo {
-  top: 20%;
+  top: 10%;
   left: 8%;
   position: absolute;
   width: 60rem;
@@ -462,7 +462,7 @@ body {
 @media print {
   .logo {
     position: absolute;
-    top: 1%;
+    top: 0.5%;
     right: 16%;
   }
 }
