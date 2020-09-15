@@ -79,6 +79,7 @@ Vue.component('FeedBackComponent', require('./components/customer-components/Fee
 Vue.component('Login', require('./components/auth/Login').default);
 Vue.component('Docket', require('./components/globals/Docket.vue').default);
 Vue.component('Invoice', require('./components/globals/Invoice.vue').default);
+Vue.component('UpdateStatus', require('./components/globals/UpdateStatus.vue').default);
 Vue.component('DisplayError', require('./components/globals/DisplayError.vue').default);
 
 

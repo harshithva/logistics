@@ -34,6 +34,14 @@
               >
                 <i class="fas fa-eye text-secondary"></i>
               </router-link>
+              <a
+                v-b-modal.modal-1
+                variant="primary"
+                class="btn btn-sm"
+                @click="openUpdateStatus(props.row)"
+              >
+                <i class="fas fa-car text-secondary"></i>
+              </a>
             </span>
 
             <span v-if="props.column.field == 'status'">
@@ -58,6 +66,22 @@
         </vue-good-table>
       </div>
     </div>
+
+    <!-- update status -->
+    <b-modal id="modal-1" title="Update Status">
+      <UpdateStatus :shipment_id="shipment.id" :sender_id="shipment.sender_id"></UpdateStatus>
+      <template v-slot:modal-footer>
+        <div class="w-100">
+          <!-- <b-button
+            type="submit"
+            @click="onSubmit"
+            variant="primary"
+            size="sm"
+            class="float-right"
+          >Add</b-button>-->
+        </div>
+      </template>
+    </b-modal>
   </fragment>
 </template>
 
@@ -69,6 +93,7 @@ export default {
     return {
       file: null,
       status: "pickup",
+      shipment: {},
 
       tableColumns1: [
         {
@@ -111,6 +136,10 @@ export default {
     };
   },
   methods: {
+    openUpdateStatus(e) {
+      console.log(e);
+      this.shipment = e;
+    },
     searchShipment() {
       this.$store.commit("searchShipment", this.search);
     },

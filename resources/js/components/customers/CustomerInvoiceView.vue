@@ -223,94 +223,10 @@
           </div>
 
           <div class="modal-body">
-            <div class="row">
-              <div class="input-group m-2">
-                <select
-                  class="custom-select"
-                  id="inputGroupSelect04"
-                  aria-label="Example select with button addon"
-                  v-model="status.status"
-                >
-                  <option disabled>Shipment Status</option>
-                  <option value="Awaiting Pickup">Awaiting Pickup</option>
-                  <option value="Dispatched">Dispatched</option>
-                  <option value="Intransit">Intransit</option>
-                  <option value="Delivered">Delivered</option>
-                </select>
-              </div>
-
-              <div v-if="status.status == 'Delivered'">
-                <div class="col">
-                  <div class="form-group">
-                    <input
-                      type="text"
-                      class="form-control"
-                      v-model="status.location"
-                      placeholder="Location"
-                    />
-                  </div>
-                </div>
-
-                <div class="row m-1">
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <input
-                        type="text"
-                        class="form-control"
-                        placeholder="Receiver Name"
-                        v-model="status.receiver_name"
-                      />
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <input
-                        type="text"
-                        class="form-control"
-                        placeholder="Phone"
-                        v-model="status.phone"
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                <div class="row m-1 d-print-none">
-                  <div class="col">
-                    <b-form-file v-model="status.document" ref="file-input" class="mb-2"></b-form-file>
-                  </div>
-                  <div class="col">
-                    <b-button @click="clearFiles" class="mr-2">Reset</b-button>
-                  </div>
-                </div>
-              </div>
-
-              <div v-else-if="status.status == 'Awaiting Pickup'" class="d-print-none"></div>
-              <div v-else>
-                <div class="row m-2">
-                  <div class="col">
-                    <div class="form-group">
-                      <input
-                        type="text"
-                        class="form-control d-print-none"
-                        placeholder="Location"
-                        v-model="status.location"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <UpdateStatus :shipment_id="shipment.id" :sender_id="shipment.sender.id"></UpdateStatus>
           </div>
 
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary d-print-none" data-dismiss="modal">Close</button>
-            <button
-              type="button"
-              class="btn btn-primary"
-              @click.prevent="updateStatus"
-              data-dismiss="modal"
-            >Update</button>
-          </div>
+          <div class="modal-footer"></div>
         </div>
       </div>
     </div>
@@ -331,15 +247,7 @@ export default {
     return {
       logo: "https://i.ibb.co/WFdrW4M/Logo-Color-Text-Below.jpg",
       sign: "https://i.ibb.co/gySNn0G/sign-rohith.png",
-      status: new Form({
-        status: "Awaiting Pickup",
-        customer_id: "",
-        shipment_id: "",
-        location: "",
-        receiver_name: "",
-        phone: "",
-        document: null,
-      }),
+
       payment: new Form({
         payment_type: "cash",
         amount: "0",
@@ -416,37 +324,7 @@ export default {
           });
         });
     },
-    updateStatus() {
-      this.status.shipment_id = this.shipment.id;
-      this.status.customer_id = this.shipment.sender.id;
-      const last_status = this.shipment.status;
-      this.status
-        .submit("post", "api/shipments/" + this.shipment.id + "/status")
-        .then((response) => {
-          Swal.fire({
-            icon: "success",
-            title: "Shipment Status Updated",
-            showConfirmButton: false,
-            timer: 1500,
-          });
 
-          this.$store.dispatch(
-            "retrieveShipmentStatus",
-            this.$route.params.invoice_id
-          );
-
-          this.shipment_status = this.$store.getters.getShipmentStatus;
-
-          this.status.status = last_status;
-        })
-        .catch((error) => {
-          Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "Something went wrong!",
-          });
-        });
-    },
     sendMail() {
       axios
         .post(`/api/shipments/${this.shipment.id}/shipment_send_email`)
