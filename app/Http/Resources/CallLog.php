@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Carbon\Carbon;
 
 class CallLog extends JsonResource
 {
@@ -14,6 +15,12 @@ class CallLog extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            'id' => $this->id,
+            'name' => $this->customer->name,
+            'company_name' => $this->customer->company_name,
+            'duration' => $this->duration,
+            'date' => Carbon::parse($this->created_at)->format('d-m-Y'),
+        ];
     }
 }

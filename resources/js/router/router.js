@@ -30,6 +30,7 @@ import GeneralReports from "../components/reports/GeneralReports";
 import PaymentLog from "../components/reports/PaymentLog";
 import DeliveryReports from "../components/reports/DeliveryReports";
 import Expense from "../components/reports/Expense";
+import CallLog from "../components/reports/CallLog";
 
 import Settings from "../components/settings/Settings";
 import { LayoutPlugin } from 'bootstrap-vue';
@@ -86,6 +87,7 @@ const routes = [
     { path: '/admin/payment_log', component: PaymentLog },
     { path: '/admin/delivery_reports', component: DeliveryReports },
     { path: '/admin/expenses', component: Expense },
+    { path: '/admin/call_logs', component: CallLog },
 
     { path: '/admin/settings', component: Settings },
 

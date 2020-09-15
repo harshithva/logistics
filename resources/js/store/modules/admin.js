@@ -30,6 +30,7 @@ export default ({
         price_lists: [],
         expenses: [],
         expense_categories: [],
+        call_logs: [],
 
 
     },
@@ -116,6 +117,9 @@ export default ({
         },
         getExpenseCategories(state) {
             return state.expense_categories;
+        },
+        getCallLogs(state) {
+            return state.call_logs;
         },
     },
     mutations: {
@@ -306,6 +310,9 @@ export default ({
         },
         RETRIEVE_EXPENSE_CATEGORIES(state, expense_categories) {
             state.expense_categories = expense_categories;
+        },
+        RETRIEVE_CALL_LOGS(state, call_logs) {
+            state.call_logs = call_logs;
         },
 
     },
@@ -545,6 +552,16 @@ export default ({
             axios
                 .get(`/api/expense_categories`)
                 .then(response => (context.commit('RETRIEVE_EXPENSE_CATEGORIES', response.data.data)))
+                .catch(function (error) {
+                    // handle error
+
+                    context.commit('catchErrors', error.response.data)
+                })
+        },
+        RETRIEVE_CALL_LOGS(context) {
+            axios
+                .get(`/api/call_logs`)
+                .then(response => (context.commit('RETRIEVE_CALL_LOGS', response.data.data)))
                 .catch(function (error) {
                     // handle error
 
