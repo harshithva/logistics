@@ -42,19 +42,19 @@
       <div class="col">
         <h3 class="sub-title-red pt-2">
           <b>INVOICE NO: {{shipment.freight_invoice_number}}</b>
+          <h6 class="border-top-dark pt-1">
+            PAYMENT STATUS:
+            <span v-if="balance_amount.balance_amount <= 0">PAID</span>
+            <span v-else-if="balance_amount.balance_amount == shipment.charge_total">PENDING</span>
+
+            <span v-else>PARTIAL</span>
+          </h6>
         </h3>
       </div>
       <div class="col">
         <h6 class="sub-title-red pt-1">DATE: {{moment(shipment.date).format('DD/MM/YYYY')}}</h6>
         <h6 class="border-top-dark pt-1">VEHICLE NO: {{shipment.transport_driver_vehicle}}</h6>
         <h6 class="border-top-dark pt-1">TRANSACTION TYPE: {{shipment.package_transaction_type}}</h6>
-        <h6 class="border-top-dark pt-1">
-          PAYMENT STATUS:
-          <span v-if="balance_amount.balance_amount <= 0">PAID</span>
-          <span v-else-if="balance_amount.balance_amount == shipment.charge_total">PENDING</span>
-
-          <span v-else>PARTIAL</span>
-        </h6>
       </div>
     </div>
     <div class="row">

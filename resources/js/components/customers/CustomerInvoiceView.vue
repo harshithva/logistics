@@ -317,9 +317,11 @@
   </div>
 </template>
 
-<style  scoped>
-.bg-white {
-  background-color: white !important;
+<style>
+@media print {
+  #wrapper #content-wrapper {
+    background-color: white !important;
+  }
 }
 </style>
 
