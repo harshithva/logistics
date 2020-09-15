@@ -38,7 +38,7 @@
         </h5>
       </div>
       <div class="col"></div>
-      <div class="col-3 logo">
+      <div class="col-3 logo only-print">
         <img :src="logo_text" style="max-width: 20rem;" />
       </div>
     </div>
