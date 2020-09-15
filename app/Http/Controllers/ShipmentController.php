@@ -134,6 +134,7 @@ class ShipmentController extends Controller
         $shipment->charge_balance = $request->charge_balance;
 
         $shipment->vendor = $request->vendor;
+        $shipment->payment_type = $request->payment_type;
         $shipment->sender_id = $request->sender_id;
         $shipment->remarks = $request->remarks;
         $shipment->bill_to = $request->bill_to;
@@ -383,6 +384,7 @@ class ShipmentController extends Controller
         $shipment->charge_balance = $request->charge_balance;
 
         $shipment->vendor = $request->vendor;
+        $shipment->payment_type = $request->payment_type;
         $shipment->sender_id = $request->sender_id;
         $shipment->remarks = $request->remarks;
         $shipment->bill_to = $request->bill_to;

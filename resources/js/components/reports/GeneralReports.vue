@@ -95,13 +95,13 @@ export default {
         "Sender Name": "shipment_sender_name",
         "Receiver Name": "shipment_receiver_name",
         "Sender GST": "shipment_sender_gst",
-        "Receiver GST": "shipment_receiver_gst"
+        "Receiver GST": "shipment_receiver_gst",
       },
       options: [
         { value: 0, text: "All" },
         { value: 1, text: "This month" },
         { value: 2, text: "Last month" },
-        { value: 3, text: "This year" }
+        { value: 3, text: "This year" },
       ],
       file: null,
       status: "pickup",
@@ -113,60 +113,65 @@ export default {
 
           type: "date",
           dateInputFormat: "yyyy-mm-dd",
-          dateOutputFormat: "dd/mm/yyyy"
+          dateOutputFormat: "dd/mm/yyyy",
         },
         {
           label: "Product",
           field: "packages",
-          numeric: false
+          numeric: false,
         },
         {
           label: "From",
           field: "shipment_sender_address",
-          numeric: false
+          numeric: false,
         },
         {
           label: "To",
           field: "shipment_delivery_address",
-          numeric: false
+          numeric: false,
         },
         {
           label: "Docket",
           field: "shipment_docket_no",
-          numeric: false
+          numeric: false,
         },
         {
           label: "Freight Invoice Number",
           field: "shipment_freight_invoice_number",
-          numeric: false
+          numeric: false,
         },
         {
           label: "Charge Total",
           field: "shipment_charge_total",
-          numeric: false
+          numeric: false,
         },
 
         {
           label: "Sender Name",
           field: "shipment_sender_name",
-          numeric: false
+          numeric: false,
         },
         {
           label: "Receiver Name",
           field: "shipment_receiver_name",
-          numeric: false
+          numeric: false,
         },
         {
           label: "Sender GST",
           field: "shipment_sender_gst",
-          numeric: false
+          numeric: false,
         },
         {
           label: "Receiver GST",
           field: "shipment_receiver_gst",
-          numeric: false
-        }
-      ]
+          numeric: false,
+        },
+        {
+          label: "Payment Type",
+          field: "payment_type",
+          numeric: false,
+        },
+      ],
     };
   },
   methods: {
@@ -183,32 +188,32 @@ export default {
         { title: "Docket", dataKey: "shipment_docket_no" },
         {
           title: "Invoice Number",
-          dataKey: "shipment_freight_invoice_number"
+          dataKey: "shipment_freight_invoice_number",
         },
         { title: "Charge Total", dataKey: "shipment_charge_total" },
         { title: "Sender Name", dataKey: "shipment_sender_name" },
         { title: "Receiver Name", dataKey: "shipment_receiver_name" },
         { title: "Sender GST", dataKey: "shipment_sender_gst" },
-        { title: "Receiver GST", dataKey: "shipment_receiver_gst" }
+        { title: "Receiver GST", dataKey: "shipment_receiver_gst" },
       ];
       const doc = new jsPDF("p", "pt");
 
       doc.autoTable(columns, vm.packages, {
         styles: {
-          fontSize: 4
-        }
+          fontSize: 4,
+        },
       });
 
       doc.save("reports.pdf");
-    }
+    },
   },
   created() {
     this.$store.dispatch("retrievePackages");
   },
   computed: {
     ...mapGetters({
-      packages: "getAllPackages"
-    })
-  }
+      packages: "getAllPackages",
+    }),
+  },
 };
 </script>

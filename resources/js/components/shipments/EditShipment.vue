@@ -242,14 +242,26 @@
                   </div>
                 </div>
                 <div class="row mb-2">
-                  <div class="col-md-12">
+                  <div class="col-md-6">
                     <div class="form-group">
+                      <label for>Vendor</label>
                       <input
                         type="text"
                         class="form-control"
                         v-model="shipment.vendor"
                         placeholder="Vendor"
                       />
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for>Payment Type</label>
+                      <v-select
+                        :options="payment_types"
+                        :value="shipment.payment_type"
+                        label="name"
+                        @input="selectPaymentType($event)"
+                      ></v-select>
                     </div>
                   </div>
                 </div>
@@ -839,6 +851,10 @@
 export default {
   data() {
     return {
+      payment_types: [
+        { id: "1", name: "TDS" },
+        { id: "2", name: "TCS" },
+      ],
       file: null,
       paymentType: null,
       status: "pickup",
@@ -854,6 +870,7 @@ export default {
       charge_advance_paid: 0,
       charge_balance: 0,
       vendor: "",
+      payment_type: "",
       packagedetails: {
         description: "",
         serial_no: "",
@@ -907,6 +924,9 @@ export default {
     selectReceiver(e) {
       this.shipment.receiver_id = e.id;
       this.shipment.receiver.name = e.name;
+    },
+    selectPaymentType(e) {
+      this.shipment.payment_type = e.name;
     },
 
     addPackage() {

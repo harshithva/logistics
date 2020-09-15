@@ -363,14 +363,25 @@
                 </div>
 
                 <div class="row mb-2">
-                  <div class="col-md-12">
+                  <div class="col-md-6">
                     <div class="form-group">
+                      <label for>Vendor</label>
                       <input
                         type="text"
                         class="form-control"
                         v-model="form.vendor"
                         placeholder="Vendor"
                       />
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for>Payment Type</label>
+                      <v-select
+                        :options="payment_types"
+                        label="name"
+                        @input="selectPaymentType($event)"
+                      ></v-select>
                     </div>
                   </div>
                 </div>
@@ -813,6 +824,7 @@
 export default {
   data() {
     return {
+      payment_types: [{ name: "TDS" }, { name: "TCS" }],
       form: new Form({
         receiver_id: "",
         sender_id: "",
@@ -845,6 +857,7 @@ export default {
         date: "",
         package: [],
         insurance: [],
+        payment_type: "",
       }),
       file: null,
       paymentType: null,
@@ -878,6 +891,12 @@ export default {
 
     selectReceiver(e) {
       this.form.receiver_id = e.id;
+    },
+    selectReceiver(e) {
+      this.form.receiver_id = e.id;
+    },
+    selectPaymentType(e) {
+      this.form.payment_type = e.name;
     },
     addPackage() {
       this.form.package.push({
