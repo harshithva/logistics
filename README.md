@@ -17,3 +17,4 @@ This powerful Laravel CRM was developed using Vuejs and Laravel API.
 + Receive quotes
 + Send Invoices
 + Beautiful mail templates
++ Expense Manager
