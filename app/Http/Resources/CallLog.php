@@ -20,6 +20,7 @@ class CallLog extends JsonResource
             'name' => $this->customer->name,
             'company_name' => $this->customer->company_name,
             'duration' => $this->duration,
+            'feedback' => $this->feedback,
             'date' => Carbon::parse($this->created_at)->format('d-m-Y'),
         ];
     }

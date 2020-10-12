@@ -4,15 +4,21 @@
       <div class="card-header py-3">
         <div class="row">
           <div class="col">
-            <h6 class="m-0 font-weight-bold text-primary">call_logs</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Call logs</h6>
           </div>
           <div class="col-6"></div>
           <div class="col">
-            <b-button v-b-modal.modal-1 variant="primary" class="btn btn-sm">Add Call Log</b-button>
+            <b-button v-b-modal.modal-1 variant="primary" class="btn btn-sm"
+              >Add Call Log</b-button
+            >
             <button class="btn btn-danger btn-sm" @click="generatePdf">
               <i class="fas fa-file-download"></i> &nbsp;PDF
             </button>
-            <export-excel :data="call_logs" :fields="json_fields" class="btn btn-success btn-sm">
+            <export-excel
+              :data="call_logs"
+              :fields="json_fields"
+              class="btn btn-success btn-sm"
+            >
               <i class="fas fa-cloud-download-alt"></i> &nbsp;Excel
             </export-excel>
           </div>
@@ -25,14 +31,13 @@
           :rows="call_logs"
           :line-numbers="true"
           :search-options="{
-    enabled: true,
-       placeholder: 'Type to search',
-  }"
+            enabled: true,
+            placeholder: 'Type to search',
+          }"
           :pagination-options="{
-        enabled: true,
-        mode: 'pages',
-        
-      }"
+            enabled: true,
+            mode: 'pages',
+          }"
         >
           <template slot="table-row" slot-scope="props">
             <span v-if="props.column.field == 'action'">
@@ -46,7 +51,7 @@
               </a>
             </span>
 
-            <span v-else>{{props.formattedRow[props.column.field]}}</span>
+            <span v-else>{{ props.formattedRow[props.column.field] }}</span>
           </template>
         </vue-good-table>
       </div>
@@ -99,6 +104,11 @@ export default {
         {
           label: "Duration",
           field: "duration",
+        },
+
+        {
+          label: "Feedback",
+          field: "feedback",
         },
         {
           label: "Date",

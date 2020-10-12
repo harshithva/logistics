@@ -623,7 +623,7 @@ class ShipmentController extends Controller
         $total_paid = $shipment->payment->sum('amount');
         if($total_paid > 0)
         {
-            $balance_ = ($shipment->charge_total - $total_paid) -  $shipment->charge_advance_paid;
+            $balance = ($shipment->charge_total - $total_paid) -  $shipment->charge_advance_paid;
         }
       else {
         $balance = ($shipment->charge_total -  $shipment->charge_advance_paid);

@@ -45,6 +45,7 @@ class CallLogController extends Controller
         $callLog = new CallLog;
         $callLog->customer_id = $request->customer_id;
         $callLog->duration = $request->duration;
+        $callLog->feedback = $request->feedback;
         $callLog->save();
 
         return new CallLogResource($callLog);

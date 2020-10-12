@@ -17,6 +17,7 @@ class CreateCallLogsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('customer_id');
             $table->string('duration');
+            $table->text('feedback')->nullable();
             $table->timestamps();
             $table->foreign('customer_id')->references('id')->on('users')->onDelete('cascade');
         });
