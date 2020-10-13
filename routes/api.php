@@ -94,3 +94,6 @@ Route::get("/expenses/last_month/get", 'ExpenseController@last_month');
 
 // call log
 Route::apiResource("call_logs", 'CallLogController');
+
+// vendors
+Route::apiResource("vendors", 'VendorController');

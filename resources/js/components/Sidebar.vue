@@ -108,13 +108,6 @@
         </router-link>
       </li>
 
-      <li class="nav-item">
-        <router-link class="nav-link collapsed" to="/admin/vendors_lists">
-          <i class="fas fa-clipboard-list"></i>
-          <span>Vendors List</span>
-        </router-link>
-      </li>
-
       <!-- customer -->
 
       <!-- staff -->
