@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Vendor;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Resources\Vendor as VendorResource;
+use App\Http\Resources\VendorShipment as VendorShipmentResource;
+use App\Http\Resources\Customer as CustomerResource;
 
 class VendorController extends Controller
 {
@@ -15,8 +18,13 @@ class VendorController extends Controller
      */
     public function index()
     {
-        $vendors = Vendor::all();
-        return VendorResource::collection($vendors);
+       
+    }
+
+    public function all_vendors()
+    {
+        $vendors = User::where('role','vendor')->get();
+        return CustomerResource::collection($vendors);
     }
 
     /**
@@ -47,6 +55,20 @@ class VendorController extends Controller
             $vendor->vendor_id = $request->vendor_id;
             $vendor->save();
             return new VendorResource($vendor);
+    }
+
+   
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * 
+     * @return \Illuminate\Http\Response
+     */
+    public function vendor_shipments($id)
+    {
+        $vendor = User::findOrFail($id);
+        return new VendorShipmentResource($vendor);
     }
 
     /**

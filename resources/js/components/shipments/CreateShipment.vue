@@ -5,7 +5,7 @@
         <div class="col">
           <div class="card">
             <div class="card-body">
-              <div id="loader" style="display:none"></div>
+              <div id="loader" style="display: none"></div>
               <div id="msgholder"></div>
               <h4 class="mb-4">Shipment Info</h4>
               <!-- show errors -->
@@ -15,182 +15,208 @@
                 dismissible
                 show
                 variant="danger"
-              >{{form.errors.get('sender_id')}}</b-alert>
+                >{{ form.errors.get("sender_id") }}</b-alert
+              >
 
               <b-alert
                 v-if="form.errors.has('receiver_id')"
                 dismissible
                 show
                 variant="danger"
-              >{{form.errors.get('receiver_id')}}</b-alert>
+                >{{ form.errors.get("receiver_id") }}</b-alert
+              >
 
               <b-alert
                 v-if="form.errors.has('charge_total')"
                 dismissible
                 show
                 variant="danger"
-              >{{form.errors.get('charge_total')}}</b-alert>
+                >{{ form.errors.get("charge_total") }}</b-alert
+              >
 
               <b-alert
                 v-if="form.errors.has('delivery_address')"
                 dismissible
                 show
                 variant="danger"
-              >{{form.errors.get('delivery_address')}}</b-alert>
+                >{{ form.errors.get("delivery_address") }}</b-alert
+              >
 
               <b-alert
                 v-if="form.errors.has('package_contact_person')"
                 dismissible
                 show
                 variant="danger"
-              >{{form.errors.get('package_contact_person')}}</b-alert>
+                >{{ form.errors.get("package_contact_person") }}</b-alert
+              >
 
               <b-alert
                 v-if="form.errors.has('package_contact_person_phone')"
                 dismissible
                 show
                 variant="danger"
-              >{{form.errors.get('package_contact_person_phone')}}</b-alert>
+                >{{ form.errors.get("package_contact_person_phone") }}</b-alert
+              >
 
               <b-alert
                 v-if="form.errors.has('package_contact_person_phone')"
                 dismissible
                 show
                 variant="danger"
-              >{{form.errors.get('package_contact_person_phone')}}</b-alert>
+                >{{ form.errors.get("package_contact_person_phone") }}</b-alert
+              >
 
               <b-alert
                 v-if="form.errors.has('package_transaction_type')"
                 dismissible
                 show
                 variant="danger"
-              >{{form.errors.get('package_transaction_type')}}</b-alert>
+                >{{ form.errors.get("package_transaction_type") }}</b-alert
+              >
 
               <b-alert
                 v-if="form.errors.has('package_pickup_address')"
                 dismissible
                 show
                 variant="danger"
-              >{{form.errors.get('package_pickup_address')}}</b-alert>
+                >{{ form.errors.get("package_pickup_address") }}</b-alert
+              >
 
               <b-alert
                 v-if="form.errors.has('transport_company_name')"
                 dismissible
                 show
                 variant="danger"
-              >{{form.errors.get('transport_company_name')}}</b-alert>
+                >{{ form.errors.get("transport_company_name") }}</b-alert
+              >
 
               <b-alert
                 v-if="form.errors.has('transport_company_phone')"
                 dismissible
                 show
                 variant="danger"
-              >{{form.errors.get('transport_company_phone')}}</b-alert>
+                >{{ form.errors.get("transport_company_phone") }}</b-alert
+              >
 
               <b-alert
                 v-if="form.errors.has('transport_driver_name')"
                 dismissible
                 show
                 variant="danger"
-              >{{form.errors.get('transport_driver_name')}}</b-alert>
+                >{{ form.errors.get("transport_driver_name") }}</b-alert
+              >
 
               <b-alert
                 v-if="form.errors.has('transport_driver_phone')"
                 dismissible
                 show
                 variant="danger"
-              >{{form.errors.get('transport_driver_phone')}}</b-alert>
+                >{{ form.errors.get("transport_driver_phone") }}</b-alert
+              >
 
               <b-alert
                 v-if="form.errors.has('transport_driver_name')"
                 dismissible
                 show
                 variant="danger"
-              >{{form.errors.get('transport_driver_name')}}</b-alert>
+                >{{ form.errors.get("transport_driver_name") }}</b-alert
+              >
 
               <b-alert
                 v-if="form.errors.has('transport_driver_vehicle')"
                 dismissible
                 show
                 variant="danger"
-              >{{form.errors.get('transport_driver_vehicle')}}</b-alert>
+                >{{ form.errors.get("transport_driver_vehicle") }}</b-alert
+              >
 
               <b-alert
                 v-if="form.errors.has('user_notes')"
                 dismissible
                 show
                 variant="danger"
-              >{{form.errors.get('user_notes')}}</b-alert>
+                >{{ form.errors.get("user_notes") }}</b-alert
+              >
 
               <b-alert
                 v-if="form.errors.has('freight_invoice_number')"
                 dismissible
                 show
                 variant="danger"
-              >{{form.errors.get('freight_invoice_number')}}</b-alert>
+                >{{ form.errors.get("freight_invoice_number") }}</b-alert
+              >
 
               <b-alert
                 v-if="form.errors.has('charge_transportation')"
                 dismissible
                 show
                 variant="danger"
-              >{{form.errors.get('charge_transportation')}}</b-alert>
+                >{{ form.errors.get("charge_transportation") }}</b-alert
+              >
 
               <b-alert
                 v-if="form.errors.has('charge_handling')"
                 dismissible
                 show
                 variant="danger"
-              >{{form.errors.get('charge_handling')}}</b-alert>
+                >{{ form.errors.get("charge_handling") }}</b-alert
+              >
 
               <b-alert
                 v-if="form.errors.has('charge_halting')"
                 dismissible
                 show
                 variant="danger"
-              >{{form.errors.get('charge_halting')}}</b-alert>
+                >{{ form.errors.get("charge_halting") }}</b-alert
+              >
 
               <b-alert
                 v-if="form.errors.has('charge_Insurance')"
                 dismissible
                 show
                 variant="danger"
-              >{{form.errors.get('charge_Insurance')}}</b-alert>
+                >{{ form.errors.get("charge_Insurance") }}</b-alert
+              >
 
               <b-alert
                 v-if="form.errors.has('charge_odc')"
                 dismissible
                 show
                 variant="danger"
-              >{{form.errors.get('charge_odc')}}</b-alert>
+                >{{ form.errors.get("charge_odc") }}</b-alert
+              >
 
               <b-alert
                 v-if="form.errors.has('charge_tax_percent')"
                 dismissible
                 show
                 variant="danger"
-              >{{form.errors.get('charge_tax_percent')}}</b-alert>
+                >{{ form.errors.get("charge_tax_percent") }}</b-alert
+              >
 
               <b-alert
                 v-if="form.errors.has('charge_tax_amount')"
                 dismissible
                 show
                 variant="danger"
-              >{{form.errors.get('charge_tax_amount')}}</b-alert>
+                >{{ form.errors.get("charge_tax_amount") }}</b-alert
+              >
 
               <b-alert
                 v-if="form.errors.has('remarks')"
                 dismissible
                 show
                 variant="danger"
-              >{{form.errors.get('remarks')}}</b-alert>
+                >{{ form.errors.get("remarks") }}</b-alert
+              >
 
               <b-alert
                 v-if="form.errors.has('document')"
                 dismissible
                 show
                 variant="danger"
-              >{{form.errors.get('document')}}</b-alert>
+                >{{ form.errors.get("document") }}</b-alert
+              >
               <!-- end errors -->
               <form
                 class="form-horizontal form-material"
@@ -202,7 +228,11 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label for="Date">Shipment Date</label>
-                      <b-form-datepicker id="example-datepicker" v-model="form.date" class="mb-2"></b-form-datepicker>
+                      <b-form-datepicker
+                        id="example-datepicker"
+                        v-model="form.date"
+                        class="mb-2"
+                      ></b-form-datepicker>
                     </div>
                   </div>
                 </div>
@@ -211,18 +241,30 @@
                   <div class="col-md-6">
                     <h6 class="mb-2">Sender Info</h6>
                     <div class="form-group">
-                      <v-select :options="customers" label="name" @input="selectCustomer($event)"></v-select>
+                      <v-select
+                        :options="customers"
+                        label="name"
+                        @input="selectCustomer($event)"
+                      ></v-select>
                       <div class="mt-2">
-                        <router-link to="/admin/customers/create">Add new</router-link>
+                        <router-link to="/admin/customers/create"
+                          >Add new</router-link
+                        >
                       </div>
                     </div>
                   </div>
                   <div class="col-md-6">
                     <h6 class="mb-2">Receiver Info</h6>
                     <div class="form-group">
-                      <v-select :options="customers" label="name" @input="selectReceiver($event)"></v-select>
+                      <v-select
+                        :options="customers"
+                        label="name"
+                        @input="selectReceiver($event)"
+                      ></v-select>
                       <div class="mt-2">
-                        <router-link to="/admin/customers/create">Add new</router-link>
+                        <router-link to="/admin/customers/create"
+                          >Add new</router-link
+                        >
                       </div>
                     </div>
                   </div>
@@ -284,7 +326,9 @@
                 <div class="row">
                   <div class="col-md-12">
                     <div class="form-group">
-                      <label for="exampleFormControlTextarea1">Pickup Address</label>
+                      <label for="exampleFormControlTextarea1"
+                        >Pickup Address</label
+                      >
                       <textarea
                         class="form-control"
                         id="pickup_address"
@@ -403,14 +447,14 @@
                   </thead>
                   <tbody>
                     <tr v-for="(item, index) in form.package" :key="index">
-                      <td>{{index+1}}</td>
-                      <td>{{item.description}}</td>
-                      <td>{{item.serial_no}}</td>
-                      <td>{{item.invoice_no}}</td>
-                      <td>{{item.size}}</td>
-                      <td>{{item.weight}}</td>
-                      <td>{{item.quantity}}</td>
-                      <td>{{item.cost}}</td>
+                      <td>{{ index + 1 }}</td>
+                      <td>{{ item.description }}</td>
+                      <td>{{ item.serial_no }}</td>
+                      <td>{{ item.invoice_no }}</td>
+                      <td>{{ item.size }}</td>
+                      <td>{{ item.weight }}</td>
+                      <td>{{ item.quantity }}</td>
+                      <td>{{ item.cost }}</td>
                       <td @click="deletePackage(item.uid)">
                         <i class="fas fa-times text-danger"></i>
                       </td>
@@ -422,7 +466,9 @@
                           class="btn btn-primary"
                           data-toggle="modal"
                           data-target="#exampleModal"
-                        >Add</button>
+                        >
+                          Add
+                        </button>
                       </td>
                     </tr>
                   </tbody>
@@ -442,10 +488,10 @@
                   </thead>
                   <tbody>
                     <tr v-for="(item, index) in form.insurance" :key="index">
-                      <td>{{index+1}}</td>
-                      <td>{{item.eway_bill}}</td>
-                      <td>{{item.insurance_no}}</td>
-                      <td>{{item.insurance_agent}}</td>
+                      <td>{{ index + 1 }}</td>
+                      <td>{{ item.eway_bill }}</td>
+                      <td>{{ item.insurance_no }}</td>
+                      <td>{{ item.insurance_agent }}</td>
 
                       <td @click="deleteInsurance(item.uid)">
                         <i class="fas fa-times text-danger"></i>
@@ -458,7 +504,9 @@
                           class="btn btn-primary"
                           data-toggle="modal"
                           data-target="#insurance_modal"
-                        >Add</button>
+                        >
+                          Add
+                        </button>
                       </td>
                     </tr>
                   </tbody>
@@ -559,7 +607,7 @@
                       class="form-control float-right"
                       @change="calculateTotal"
                       v-model="form.charge_tax_amount"
-                      style="width:8rem;"
+                      style="width: 8rem"
                     />
                   </div>
                 </div>
@@ -575,7 +623,7 @@
                       class="form-control float-right"
                       v-model="form.charge_total"
                       placeholder="Total"
-                      style="width:8rem;"
+                      style="width: 8rem"
                     />
                   </div>
                 </div>
@@ -590,7 +638,7 @@
                       @change="calculateTotal"
                       class="form-control float-right"
                       v-model="form.charge_balance"
-                      style="width:8rem;"
+                      style="width: 8rem"
                     />
                   </div>
                 </div>
@@ -614,12 +662,14 @@
                         v-model="form.bill_to"
                         name="some-radios"
                         value="consignor"
-                      >Consignor</b-form-radio>
+                        >Consignor</b-form-radio
+                      >
                       <b-form-radio
                         v-model="form.bill_to"
                         name="some-radios"
                         value="consignee"
-                      >Consignee</b-form-radio>
+                        >Consignee</b-form-radio
+                      >
                     </b-form-group>
                   </div>
                 </div>
@@ -680,8 +730,15 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Package Details</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <h5 class="modal-title" id="exampleModalLabel">
+                Package Details
+              </h5>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
@@ -702,44 +759,76 @@
                 <div class="col-md-4">
                   <div class="form-group">
                     <label for="Serial Number">Serial Number</label>
-                    <input type="text" class="form-control" v-model="packagedetails.serial_no" />
+                    <input
+                      type="text"
+                      class="form-control"
+                      v-model="packagedetails.serial_no"
+                    />
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
                     <label for="Invoice">Invoice Number</label>
-                    <input type="text" class="form-control" v-model="packagedetails.invoice_no" />
+                    <input
+                      type="text"
+                      class="form-control"
+                      v-model="packagedetails.invoice_no"
+                    />
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
                     <label for="Size">Size</label>
-                    <input type="text" class="form-control" v-model="packagedetails.size" />
+                    <input
+                      type="text"
+                      class="form-control"
+                      v-model="packagedetails.size"
+                    />
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
                     <label for="docket">Weight</label>
-                    <input type="text" class="form-control" v-model="packagedetails.weight" />
+                    <input
+                      type="text"
+                      class="form-control"
+                      v-model="packagedetails.weight"
+                    />
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
                     <label for="docket">Quantity</label>
-                    <input type="text" class="form-control" v-model="packagedetails.quantity" />
+                    <input
+                      type="text"
+                      class="form-control"
+                      v-model="packagedetails.quantity"
+                    />
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
                     <label for="Size">Declared value</label>
-                    <input type="text" class="form-control" v-model="packagedetails.cost" />
+                    <input
+                      type="text"
+                      class="form-control"
+                      v-model="packagedetails.cost"
+                    />
                   </div>
                 </div>
               </div>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary" @click="addPackage">Add</button>
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                Close
+              </button>
+              <button type="button" class="btn btn-primary" @click="addPackage">
+                Add
+              </button>
             </div>
           </div>
         </div>
@@ -759,7 +848,12 @@
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="exampleModalLabel">Insurance Info</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
@@ -804,13 +898,21 @@
             </div>
 
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                Close
+              </button>
               <button
                 type="button"
                 class="btn btn-primary"
                 @click="addInsurance"
                 :disabled="!insuranceDetails.eway_bill"
-              >Add</button>
+              >
+                Add
+              </button>
             </div>
           </div>
         </div>
@@ -821,6 +923,7 @@
 
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   data() {
     return {
@@ -1013,8 +1116,12 @@ export default {
   },
   mounted() {
     this.$store.dispatch("retrieveCustomers");
+    this.$store.dispatch("RETRIEVE_ALL_VENDORS");
   },
   computed: {
+    ...mapGetters({
+      vendors: "getAllVendors",
+    }),
     customers() {
       return this.$store.getters.getAllCustomers;
     },

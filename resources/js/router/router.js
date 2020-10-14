@@ -33,7 +33,7 @@ import Expense from "../components/reports/Expense";
 import CallLog from "../components/reports/CallLog";
 
 import Vendor from "../components/vendors/Vendor";
-import VendorList from "../components/vendors/VendorList";
+
 
 import Settings from "../components/settings/Settings";
 import { LayoutPlugin } from 'bootstrap-vue';
@@ -93,7 +93,7 @@ const routes = [
     { path: '/admin/call_logs', component: CallLog },
     // vendors
     { path: '/admin/vendors', component: Vendor },
-    { path: '/admin/vendors_lists', component: VendorList },
+
 
     { path: '/admin/settings', component: Settings },
 

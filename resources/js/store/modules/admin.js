@@ -31,6 +31,7 @@ export default ({
         expenses: [],
         expense_categories: [],
         call_logs: [],
+        vendors: []
 
 
     },
@@ -120,6 +121,9 @@ export default ({
         },
         getCallLogs(state) {
             return state.call_logs;
+        },
+        getAllVendors(state) {
+            return state.vendors;
         },
     },
     mutations: {
@@ -313,6 +317,9 @@ export default ({
         },
         RETRIEVE_CALL_LOGS(state, call_logs) {
             state.call_logs = call_logs;
+        },
+        RETRIEVE_ALL_VENDORS(state, vendors) {
+            state.vendors = vendors;
         },
 
     },
@@ -562,6 +569,16 @@ export default ({
             axios
                 .get(`/api/call_logs`)
                 .then(response => (context.commit('RETRIEVE_CALL_LOGS', response.data.data)))
+                .catch(function (error) {
+                    // handle error
+
+                    context.commit('catchErrors', error.response.data)
+                })
+        },
+        RETRIEVE_ALL_VENDORS(context) {
+            axios
+                .get(`/api/vendors/all/get`)
+                .then(response => (context.commit('RETRIEVE_ALL_VENDORS', response.data.data)))
                 .catch(function (error) {
                     // handle error
 

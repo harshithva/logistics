@@ -97,3 +97,5 @@ Route::apiResource("call_logs", 'CallLogController');
 
 // vendors
 Route::apiResource("vendors", 'VendorController');
+Route::get("/vendors/all/get", 'VendorController@all_vendors');
+Route::get("/vendors/{vendor_id}/get", 'VendorController@vendor_shipments');

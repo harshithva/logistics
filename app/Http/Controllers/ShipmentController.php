@@ -7,6 +7,7 @@ use Mail;
 use App\Shipment;
 use App\User;
 use App\Package;
+use App\Vendor;
 use App\Payment;
 use App\ShipmentStatus;
 use App\ShipmentInsurance;
@@ -95,6 +96,7 @@ class ShipmentController extends Controller
             "sender_id"=>"required|max:255",
             "remarks" => 'max:500',
             "bill_to" => 'max:500|required',
+            "vendor_id" => 'max:500|required',
            
         ]);
  
@@ -138,6 +140,7 @@ class ShipmentController extends Controller
         $shipment->sender_id = $request->sender_id;
         $shipment->remarks = $request->remarks;
         $shipment->bill_to = $request->bill_to;
+        $shipment->vendor_id = $request->vendor_id;
 
 
         if($request->bill_to == 'consignor')
@@ -224,6 +227,14 @@ class ShipmentController extends Controller
             }
           
         }
+        // vendor
+        $vendor = new Vendor;
+        $vendor->shipment_id = $shipment->id;
+        $vendor->vendor_id = $request->vendor_id;
+        $vendor->total = $request->vendor_total;
+        $vendor->advance = $request->vendor_advance;
+        $vendor->save();
+
 
         $shipment_status = new ShipmentStatus;
         $shipment_status->status = 'Awaiting Pickup';
