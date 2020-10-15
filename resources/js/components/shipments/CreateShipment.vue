@@ -1030,6 +1030,9 @@ export default {
     selectPaymentType(e) {
       this.form.payment_type = e.name;
     },
+    selectVendor(e) {
+      this.form.vendor_id = e.id;
+    },
     addPackage() {
       this.form.package.push({
         uid: uuidv4(),
