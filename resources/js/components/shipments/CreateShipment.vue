@@ -405,20 +405,47 @@
                     </div>
                   </div>
                 </div>
-
-                <div class="row mb-2">
-                  <div class="col-md-6">
+                <h6 class="mb-4">Vendor Details</h6>
+                <div class="row">
+                  <div class="col-md-3">
+                    <h6 class="mb-2">Select Vendor</h6>
                     <div class="form-group">
-                      <label for>Vendor</label>
+                      <v-select
+                        :options="vendors"
+                        label="name"
+                        @input="selectVendor($event)"
+                      ></v-select>
+                      <div class="mt-2">
+                        <router-link to="/admin/customers/create"
+                          >Add new</router-link
+                        >
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <h6 class="mb-2">Total</h6>
                       <input
                         type="text"
                         class="form-control"
-                        v-model="form.vendor"
-                        placeholder="Vendor"
+                        v-model="form.vendor_total"
                       />
                     </div>
                   </div>
-                  <div class="col-md-6">
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <h6 class="mb-2">Advance</h6>
+                      <input
+                        type="text"
+                        class="form-control"
+                        v-model="form.vendor_advance"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row mb-2">
+                  <div class="col-md-3">
                     <div class="form-group">
                       <label for>Payment Type</label>
                       <v-select
@@ -953,7 +980,6 @@ export default {
         charge_total: 0,
         charge_advance_paid: 0,
         charge_balance: 0,
-        vendor: "",
         bill_to: "",
         document: "",
         remarks: "",
@@ -961,6 +987,9 @@ export default {
         package: [],
         insurance: [],
         payment_type: "",
+        vendor_id: "",
+        vendor_total: 0,
+        vendor_advance: 0,
       }),
       file: null,
       paymentType: null,

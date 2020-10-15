@@ -97,6 +97,8 @@ class ShipmentController extends Controller
             "remarks" => 'max:500',
             "bill_to" => 'max:500|required',
             "vendor_id" => 'max:500|required',
+            "vendor_total" => 'max:500|required',
+            "vendor_advance" => 'max:500|required',
            
         ]);
  
