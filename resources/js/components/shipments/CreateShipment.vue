@@ -703,18 +703,6 @@
 
                 <div class="form-group">
                   <div class="col-sm-12">
-                    <!-- <button
-                      type="button"
-                      class="btn btn-outline-success btn-confirmation"
-                      data-toggle="modal"
-                      data-target="#paymentmodal"
-                    >
-                      Add Payment
-                      <span>
-                        <i class="icon-ok"></i>
-                      </span>
-                    </button>
-                    -->
                     <button
                       class="btn btn-outline-primary block"
                       type="submit"

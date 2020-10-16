@@ -5,7 +5,7 @@
         <div class="col">
           <div class="card">
             <div class="card-body">
-              <div id="loader" style="display:none"></div>
+              <div id="loader" style="display: none"></div>
               <div id="msgholder"></div>
               <h4 class="mb-4">Shipment Info</h4>
               <!-- show errors -->
@@ -15,30 +15,38 @@
                 dismissible
                 show
                 variant="danger"
-              >{{shipment.errors.get('sender_id')}}</b-alert>
+                >{{ shipment.errors.get("sender_id") }}</b-alert
+              >
 
               <b-alert
                 v-if="shipment.errors.has('receiver_id')"
                 dismissible
                 show
                 variant="danger"
-              >{{shipment.errors.get('receiver_id')}}</b-alert>
+                >{{ shipment.errors.get("receiver_id") }}</b-alert
+              >
 
               <b-alert
                 v-if="shipment.errors.has('charge_total')"
                 dismissible
                 show
                 variant="danger"
-              >{{shipment.errors.get('charge_total')}}</b-alert>
+                >{{ shipment.errors.get("charge_total") }}</b-alert
+              >
 
               <b-alert
                 v-if="shipment.errors.has('document')"
                 dismissible
                 show
                 variant="danger"
-              >{{shipment.errors.get('document')}}</b-alert>
+                >{{ shipment.errors.get("document") }}</b-alert
+              >
               <!-- end errors -->
-              <form class="form" @keydown="shipment.errors.clear()" enctype="multipart/form-data">
+              <form
+                class="form"
+                @keydown="shipment.errors.clear()"
+                enctype="multipart/form-data"
+              >
                 <div class="row">
                   <div class="col-md-4">
                     <div class="form-group">
@@ -63,7 +71,9 @@
                         :value="shipment.sender.name"
                       ></v-select>
                       <div class="mt-2">
-                        <router-link to="/admin/customers/create">Add new</router-link>
+                        <router-link to="/admin/customers/create"
+                          >Add new</router-link
+                        >
                       </div>
                     </div>
                   </div>
@@ -77,7 +87,9 @@
                         :value="shipment.receiver.name"
                       ></v-select>
                       <div class="mt-2">
-                        <router-link to="/admin/customers/create">Add new</router-link>
+                        <router-link to="/admin/customers/create"
+                          >Add new</router-link
+                        >
                       </div>
                     </div>
                   </div>
@@ -139,7 +151,9 @@
                 <div class="row">
                   <div class="col-md-12">
                     <div class="form-group">
-                      <label for="exampleFormControlTextarea1">Pickup Address</label>
+                      <label for="exampleFormControlTextarea1"
+                        >Pickup Address</label
+                      >
                       <textarea
                         class="form-control"
                         id="pickup_address"
@@ -241,18 +255,45 @@
                     </div>
                   </div>
                 </div>
-                <div class="row mb-2">
-                  <div class="col-md-6">
+                <h6 class="mb-4">Vendor Details</h6>
+                <div class="row">
+                  <div class="col-md-3">
+                    <h6 class="mb-2">Select Vendor</h6>
                     <div class="form-group">
-                      <label for>Vendor</label>
+                      <v-select
+                        :options="vendors"
+                        label="name"
+                        @input="selectVendor($event)"
+                      ></v-select>
+                      <div class="mt-2">
+                        <router-link to="/admin/customers/create"
+                          >Add new</router-link
+                        >
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <h6 class="mb-2">Total</h6>
                       <input
                         type="text"
                         class="form-control"
-                        v-model="shipment.vendor"
-                        placeholder="Vendor"
+                        v-model="shipment.vendor_total"
                       />
                     </div>
                   </div>
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <h6 class="mb-2">Advance</h6>
+                      <input
+                        type="text"
+                        class="form-control"
+                        v-model="shipment.vendor_advance"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="row mb-2">
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for>Payment Type</label>
@@ -284,14 +325,14 @@
                   </thead>
                   <tbody>
                     <tr v-for="(item, index) in shipment.package" :key="index">
-                      <td>{{index+1}}</td>
-                      <td>{{item.description}}</td>
-                      <td>{{item.serial_no}}</td>
-                      <td>{{item.invoice_no}}</td>
-                      <td>{{item.size}}</td>
-                      <td>{{item.weight}}</td>
-                      <td>{{item.quantity}}</td>
-                      <td>{{item.cost}}</td>
+                      <td>{{ index + 1 }}</td>
+                      <td>{{ item.description }}</td>
+                      <td>{{ item.serial_no }}</td>
+                      <td>{{ item.invoice_no }}</td>
+                      <td>{{ item.size }}</td>
+                      <td>{{ item.weight }}</td>
+                      <td>{{ item.quantity }}</td>
+                      <td>{{ item.cost }}</td>
                       <td @click="deletePackage(item.uid)">
                         <i class="fas fa-times text-danger"></i>
                       </td>
@@ -303,7 +344,9 @@
                           class="btn btn-primary"
                           data-toggle="modal"
                           data-target="#exampleModal"
-                        >Add</button>
+                        >
+                          Add
+                        </button>
                       </td>
                     </tr>
                   </tbody>
@@ -323,11 +366,14 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr v-for="(item, index) in shipment.insurance" :key="index">
-                      <td>{{index+1}}</td>
-                      <td>{{item.eway_bill}}</td>
-                      <td>{{item.insurance_no}}</td>
-                      <td>{{item.insurance_agent}}</td>
+                    <tr
+                      v-for="(item, index) in shipment.insurance"
+                      :key="index"
+                    >
+                      <td>{{ index + 1 }}</td>
+                      <td>{{ item.eway_bill }}</td>
+                      <td>{{ item.insurance_no }}</td>
+                      <td>{{ item.insurance_agent }}</td>
 
                       <td @click="deleteInsurance(item.uid)">
                         <i class="fas fa-times text-danger"></i>
@@ -340,7 +386,9 @@
                           class="btn btn-primary"
                           data-toggle="modal"
                           data-target="#insurance_modal"
-                        >Add</button>
+                        >
+                          Add
+                        </button>
                       </td>
                     </tr>
                   </tbody>
@@ -356,7 +404,9 @@
                     <button
                       class="btn btn-primary"
                       @click.prevent="changeEditingExpense"
-                    >Edit Expenses</button>
+                    >
+                      Edit Expenses
+                    </button>
                   </div>
                 </div>
 
@@ -454,7 +504,7 @@
                         class="form-control float-right"
                         @change="calculateTotal"
                         v-model="charge_tax_amount"
-                        style="width:8rem;"
+                        style="width: 8rem"
                       />
                     </div>
                   </div>
@@ -469,7 +519,7 @@
                         @change="calculateTotal"
                         class="form-control float-right"
                         v-model="charge_total"
-                        style="width:8rem;"
+                        style="width: 8rem"
                       />
                     </div>
                   </div>
@@ -484,7 +534,7 @@
                         @change="calculateTotal"
                         class="form-control float-right"
                         v-model="charge_balance"
-                        style="width:8rem;"
+                        style="width: 8rem"
                       />
                     </div>
                   </div>
@@ -593,7 +643,7 @@
                         class="form-control float-right"
                         @change="calculateTotal"
                         v-model="shipment.charge_tax_amount"
-                        style="width:8rem;"
+                        style="width: 8rem"
                       />
                     </div>
                   </div>
@@ -609,7 +659,7 @@
                         @change="calculateTotal"
                         class="form-control float-right"
                         v-model="shipment.charge_total"
-                        style="width:8rem;"
+                        style="width: 8rem"
                       />
                     </div>
                   </div>
@@ -625,7 +675,7 @@
                         @change="calculateTotal"
                         class="form-control float-right"
                         v-model="shipment.charge_balance"
-                        style="width:8rem;"
+                        style="width: 8rem"
                       />
                     </div>
                   </div>
@@ -652,12 +702,14 @@
                         v-model="shipment.bill_to"
                         name="some-radios"
                         value="consignor"
-                      >Consignor</b-form-radio>
+                        >Consignor</b-form-radio
+                      >
                       <b-form-radio
                         v-model="shipment.bill_to"
                         name="some-radios"
                         value="consignee"
-                      >Consignee</b-form-radio>
+                        >Consignee</b-form-radio
+                      >
                     </b-form-group>
                   </div>
                 </div>
@@ -679,7 +731,13 @@
                       class="btn btn-outline-danger btn-confirmation"
                       name="dosubmit"
                       type="submit"
-                      :to="'/admin/customers/'+ shipment.sender.id +'/invoices/'+shipment.id+'/view'"
+                      :to="
+                        '/admin/customers/' +
+                        shipment.sender.id +
+                        '/invoices/' +
+                        shipment.id +
+                        '/view'
+                      "
                     >
                       Return
                       <span>
@@ -706,8 +764,15 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Package Details</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <h5 class="modal-title" id="exampleModalLabel">
+                Package Details
+              </h5>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
@@ -728,44 +793,76 @@
                 <div class="col-md-4">
                   <div class="form-group">
                     <label for="Serial Number">Serial Number</label>
-                    <input type="text" class="form-control" v-model="packagedetails.serial_no" />
+                    <input
+                      type="text"
+                      class="form-control"
+                      v-model="packagedetails.serial_no"
+                    />
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
                     <label for="Invoice">Invoice Number</label>
-                    <input type="text" class="form-control" v-model="packagedetails.invoice_no" />
+                    <input
+                      type="text"
+                      class="form-control"
+                      v-model="packagedetails.invoice_no"
+                    />
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
                     <label for="Size">Size</label>
-                    <input type="text" class="form-control" v-model="packagedetails.size" />
+                    <input
+                      type="text"
+                      class="form-control"
+                      v-model="packagedetails.size"
+                    />
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
                     <label for="docket">Weight</label>
-                    <input type="text" class="form-control" v-model="packagedetails.weight" />
+                    <input
+                      type="text"
+                      class="form-control"
+                      v-model="packagedetails.weight"
+                    />
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
                     <label for="docket">Quantity</label>
-                    <input type="text" class="form-control" v-model="packagedetails.quantity" />
+                    <input
+                      type="text"
+                      class="form-control"
+                      v-model="packagedetails.quantity"
+                    />
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
                     <label for="Size">Declared value</label>
-                    <input type="number" class="form-control" v-model="packagedetails.cost" />
+                    <input
+                      type="number"
+                      class="form-control"
+                      v-model="packagedetails.cost"
+                    />
                   </div>
                 </div>
               </div>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary" @click="addPackage">Add</button>
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                Close
+              </button>
+              <button type="button" class="btn btn-primary" @click="addPackage">
+                Add
+              </button>
             </div>
           </div>
         </div>
@@ -786,7 +883,12 @@
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">Insurance Info</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
@@ -831,13 +933,21 @@
           </div>
 
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
             <button
               type="button"
               class="btn btn-primary"
               @click="addInsurance"
               :disabled="!insuranceDetails.eway_bill"
-            >Add</button>
+            >
+              Add
+            </button>
           </div>
         </div>
       </div>
@@ -848,6 +958,7 @@
 
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   data() {
     return {
@@ -869,7 +980,7 @@ export default {
       charge_tax_percent: 0,
       charge_advance_paid: 0,
       charge_balance: 0,
-      vendor: "",
+
       payment_type: "",
       packagedetails: {
         description: "",
@@ -885,6 +996,9 @@ export default {
         insurance_no: "",
         insurance_agent: "",
       },
+      vendor_id: "",
+      vendor_total: 0,
+      vendor_advance: 0,
     };
   },
   methods: {
@@ -927,6 +1041,9 @@ export default {
     },
     selectPaymentType(e) {
       this.shipment.payment_type = e.name;
+    },
+    selectVendor(e) {
+      this.form.vendor_id = e.id;
     },
 
     addPackage() {
@@ -1020,6 +1137,9 @@ export default {
   },
 
   computed: {
+    ...mapGetters({
+      vendors: "getAllVendors",
+    }),
     data() {
       return this.$store.getters.getSingleShipment;
     },
@@ -1037,6 +1157,7 @@ export default {
     );
 
     this.$store.dispatch("retrieveCustomers");
+    this.$store.dispatch("RETRIEVE_ALL_VENDORS");
   },
 };
 </script>

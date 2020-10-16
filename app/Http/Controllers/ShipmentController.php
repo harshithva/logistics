@@ -310,6 +310,7 @@ class ShipmentController extends Controller
         $shipment->receiver;
         $shipment->payment;
         $shipment->insurance;
+        $shipment->vendor;
         return response()->json($shipment,200);
     }
 
