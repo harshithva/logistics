@@ -264,6 +264,7 @@
                         :options="vendors"
                         label="name"
                         @input="selectVendor($event)"
+                        :value="shipment.vendor.name"
                       ></v-select>
                       <div class="mt-2">
                         <router-link to="/admin/customers/create"

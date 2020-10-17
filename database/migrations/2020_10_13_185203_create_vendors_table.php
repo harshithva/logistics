@@ -20,6 +20,8 @@ class CreateVendorsTable extends Migration
             $table->integer('total')->default(0);
             $table->integer('advance')->default(0);
             $table->timestamps();
+            $table->foreign('shipment_id')->references('id')->on('shipments')->onDelete('cascade');
+            $table->foreign('vendor_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

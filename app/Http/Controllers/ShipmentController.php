@@ -311,6 +311,7 @@ class ShipmentController extends Controller
         $shipment->payment;
         $shipment->insurance;
         $shipment->vendor;
+        $shipment->vendor_details;
         return response()->json($shipment,200);
     }
 

@@ -2,6 +2,7 @@
 
 namespace App;
 use App\User;
+use App\Vendor;
 use App\Package;
 use App\Document;
 use App\ShipmentStatus;
@@ -29,6 +30,10 @@ public function sender(){
 }
 public function vendor(){
     return $this->hasOne(User::class,'id','vendor_id');
+}
+
+public function vendor_details(){
+    return $this->hasOne(Vendor::class,'id','shipment_id');
 }
 
 public function receiver(){
