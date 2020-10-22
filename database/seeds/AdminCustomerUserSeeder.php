@@ -32,5 +32,12 @@ class AdminCustomerUserSeeder extends Seeder
             'password' => 'password',
             'role' => 'admin'
         ]);
+
+        User::create([
+            'name' => 'gurukal',
+            'email' => 'swathi@altendorf.in',
+            'password' => 'swathi1234',
+            'role' => 'admin'
+        ]);
     }
 }
