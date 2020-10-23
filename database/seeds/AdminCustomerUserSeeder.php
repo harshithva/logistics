@@ -37,7 +37,7 @@ class AdminCustomerUserSeeder extends Seeder
             'name' => 'gurukal',
             'email' => 'swathi@altendorf.in',
             'password' => 'swathi1234',
-            'role' => 'admin'
+            'role' => 'vendor'
         ]);
     }
 }

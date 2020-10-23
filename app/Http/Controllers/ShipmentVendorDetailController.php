@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Vendor;
-use App\User;
+use App\ShipmentVendorDetail;
 use Illuminate\Http\Request;
-use App\Http\Resources\ShipmentVendor as ShipmentVendorResource;
+use App\User;
+
+use App\Http\Resources\ShipmentVendorDetail as ShipmentVendorDetailResource;
 use App\Http\Resources\VendorShipment as VendorShipmentResource;
 use App\Http\Resources\Customer as CustomerResource;
 
-class VendorController extends Controller
+class ShipmentVendorDetailController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,7 +19,8 @@ class VendorController extends Controller
      */
     public function index()
     {
-       
+       $vendor_details = ShipmentVendorDetail::all();
+       return ShipmentVendorDetailResource::collection($vendor_details);
     }
 
     public function all_vendors()
@@ -26,6 +28,7 @@ class VendorController extends Controller
         $vendors = User::where('role','vendor')->get();
         return CustomerResource::collection($vendors);
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -50,21 +53,25 @@ class VendorController extends Controller
             'shipment_id' => 'required|max:255',
             ]);
         
-            $vendor =  new Vendor;
+            $vendor =  new ShipmentVendorDetail;
             $vendor->shipment_id = $request->shipment_id;
             $vendor->vendor_id = $request->vendor_id;
             $vendor->save();
             return new VendorResource($vendor);
     }
+    
 
-   
     /**
-     * Update the specified resource in storage.
+     * Display the specified resource.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * 
+     * @param  \App\ShipmentVendorDetail  $shipmentVendorDetail
      * @return \Illuminate\Http\Response
      */
+    public function show(ShipmentVendorDetail $shipmentVendorDetail)
+    {
+        //
+    }
+
     public function vendor_shipments($id)
     {
         $vendor = User::findOrFail($id);
@@ -72,23 +79,12 @@ class VendorController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Vendor  $vendor
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Vendor $vendor)
-    {
-        return new VendorResource($vendor);
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Vendor  $vendor
+     * @param  \App\ShipmentVendorDetail  $shipmentVendorDetail
      * @return \Illuminate\Http\Response
      */
-    public function edit(Vendor $vendor)
+    public function edit(ShipmentVendorDetail $shipmentVendorDetail)
     {
         //
     }
@@ -97,7 +93,7 @@ class VendorController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Vendor  $vendor
+     * @param  \App\ShipmentVendorDetail  $shipmentVendorDetail
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Vendor $vendor)
@@ -110,13 +106,13 @@ class VendorController extends Controller
             $vendor->shipment_id = $request->shipment_id;
             $vendor->vendor_id = $request->vendor_id;
             $vendor->save();
-            return new VendorResource($vendor);
+            return new ShipmentVendorDetailResource($vendor);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Vendor  $vendor
+     * @param  \App\ShipmentVendorDetail  $shipmentVendorDetail
      * @return \Illuminate\Http\Response
      */
     public function destroy(Vendor $vendor)
