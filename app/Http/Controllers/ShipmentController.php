@@ -7,7 +7,7 @@ use Mail;
 use App\Shipment;
 use App\User;
 use App\Package;
-use App\Vendor;
+use App\ShipmentVendorDetail;
 use App\Payment;
 use App\ShipmentStatus;
 use App\ShipmentInsurance;
@@ -142,7 +142,7 @@ class ShipmentController extends Controller
         $shipment->sender_id = $request->sender_id;
         $shipment->remarks = $request->remarks;
         $shipment->bill_to = $request->bill_to;
-        $shipment->vendor_id = $request->vendor_id;
+      
 
 
         if($request->bill_to == 'consignor')
@@ -230,7 +230,7 @@ class ShipmentController extends Controller
           
         }
         // vendor
-        $vendor = new Vendor;
+        $vendor = new ShipmentVendorDetail;
         $vendor->shipment_id = $shipment->id;
         $vendor->vendor_id = $request->vendor_id;
         $vendor->total = $request->vendor_total;

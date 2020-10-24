@@ -57,7 +57,7 @@ class ShipmentVendorDetailController extends Controller
             $vendor->shipment_id = $request->shipment_id;
             $vendor->vendor_id = $request->vendor_id;
             $vendor->save();
-            return new VendorResource($vendor);
+            return new ShipmentVendorDetailResource($vendor);
     }
     
 

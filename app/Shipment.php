@@ -28,13 +28,6 @@ public function document(){
 public function sender(){
     return $this->hasOne(User::class,'id','sender_id');
 }
-public function vendor(){
-    return $this->hasOne(User::class,'id','vendor_id');
-}
-
-public function vendor_details(){
-    return $this->hasOne(Vendor::class,'id','shipment_id');
-}
 
 public function receiver(){
     return $this->hasOne(User::class,'id','receiver_id');
@@ -50,6 +43,10 @@ public function status(){
 
 public function track(){
     return $this->hasMany(ShipmentStatus::class,'shipment_id');
+}
+
+public function vendor_details(){
+    return $this->hasOne(ShipmentVendorDetail::class,'shipment_id');
 }
 
 }

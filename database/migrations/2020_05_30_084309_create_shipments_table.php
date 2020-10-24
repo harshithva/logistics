@@ -43,7 +43,7 @@ class CreateShipmentsTable extends Migration
             $table->decimal('charge_advance_paid',10,2)->nullable();
             $table->decimal('charge_balance',10,2)->nullable();
         //    extra
-            $table->string('vendor_id')->nullable();
+   
             $table->string('payment_type')->nullable();
             $table->text('remarks')->nullable();
             $table->string('document')->nullable();
@@ -58,7 +58,7 @@ class CreateShipmentsTable extends Migration
             $table->foreign('sender_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('receiver_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('bill_to_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('vendor_id')->references('id')->on('users')->onDelete('cascade');
+       
             $table->timestamps();
         });
     }
