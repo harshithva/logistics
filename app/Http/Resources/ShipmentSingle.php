@@ -50,7 +50,10 @@ class ShipmentSingle extends JsonResource
             "transport_driver_phone" => $this->transport_driver_phone,
             "transport_driver_vehicle" => $this->transport_driver_vehicle,
             "user_notes" => $this->user_notes,
-            "vendor_details" => $this->vendor_details,
+            "vendor_id" => $this->vendor_details->vendor_id,
+            "vendor_total" => $this->vendor_details->total,
+            "vendor_advance" => $this->vendor_details->advance,
+         
             'document'=>$this->document,
             'updated_at'=>$this->updated_at,
         

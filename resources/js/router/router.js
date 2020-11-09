@@ -123,6 +123,7 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
+    store.commit('AddLoading');
     NProgress.start()
     NProgress.set(0.1)
     NProgress.inc()
@@ -131,7 +132,10 @@ router.beforeEach((to, from, next) => {
 router.afterEach(() => {
     setTimeout(() => {
         NProgress.done()
-        store.commit('RemoveLoading');
+        setTimeout(() => {
+            store.commit('RemoveLoading');
+        }, 400);
+
     }, 500)
 })
 

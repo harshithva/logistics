@@ -394,7 +394,7 @@ class ShipmentController extends Controller
         $shipment->charge_advance_paid = $request->charge_advance_paid;
         $shipment->charge_balance = $request->charge_balance;
 
-        $shipment->vendor = $request->vendor;
+    
         $shipment->payment_type = $request->payment_type;
         $shipment->sender_id = $request->sender_id;
         $shipment->remarks = $request->remarks;
@@ -466,7 +466,7 @@ class ShipmentController extends Controller
         }
 
           // vendor
-          $vendor = ShipmentVendorDetail::where('shipment_id', $shipment->id)->get();
+          $vendor = $shipment->vendor_details;
           $vendor->shipment_id = $shipment->id;
           $vendor->vendor_id = $request->vendor_id;
           $vendor->total = $request->vendor_total;

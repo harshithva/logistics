@@ -204,6 +204,9 @@ export default ({
 
             state.tracking_details = tracking_details;
         },
+        AddLoading(state) {
+            state.isLoading = true;
+        },
         RemoveLoading(state) {
             state.isLoading = false;
         },

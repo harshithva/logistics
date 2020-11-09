@@ -263,8 +263,8 @@
                       <v-select
                         :options="vendors"
                         label="name"
-                        @input="selectVendor($event)"
-                        :value="shipment.vendor.name"
+                        v-model="shipment.vendor_id"
+                        :reduce="(vendor) => vendor.id"
                       ></v-select>
                       <div class="mt-2">
                         <router-link to="/admin/customers/create"
@@ -295,7 +295,7 @@
                   </div>
                 </div>
                 <div class="row mb-2">
-                  <div class="col-md-6">
+                  <div class="col-md-3">
                     <div class="form-group">
                       <label for>Payment Type</label>
                       <v-select
@@ -1044,7 +1044,7 @@ export default {
       this.shipment.payment_type = e.name;
     },
     selectVendor(e) {
-      this.form.vendor_id = e.id;
+      this.shipment.vendor_id = e.id;
     },
 
     addPackage() {

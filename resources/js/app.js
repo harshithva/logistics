@@ -108,6 +108,7 @@ Vue.use(Fragment.Plugin);
 // Add a request interceptor
 axios.interceptors.request.use(function (config) {
     // Do something before request is sent
+
     NProgress.start();
     return config;
 }, function (error) {
