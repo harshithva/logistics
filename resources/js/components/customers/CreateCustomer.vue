@@ -5,7 +5,7 @@
         <div class="card">
           <div class="tab-content" id="pills-tabContent">
             <div class="card-body">
-              <div id="loader" style="display:none"></div>
+              <div id="loader" style="display: none"></div>
               <div id="msgholder"></div>
               <form
                 class="form-horizontal form-material"
@@ -20,9 +20,10 @@
                   variant="success"
                   dismissible
                   fade
-                  @dismissed="dismissCountDown=0"
+                  @dismissed="dismissCountDown = 0"
                   @dismiss-count-down="countDownChanged"
-                >Well Done! You just created a customer</b-alert>
+                  >Well Done! You just created a customer</b-alert
+                >
 
                 <!-- show errors -->
 
@@ -31,63 +32,72 @@
                   dismissible
                   show
                   variant="danger"
-                >{{form.errors.get('email')}}</b-alert>
+                  >{{ form.errors.get("email") }}</b-alert
+                >
 
                 <b-alert
                   v-if="form.errors.has('password')"
                   dismissible
                   show
                   variant="danger"
-                >{{form.errors.get('password')}}</b-alert>
+                  >{{ form.errors.get("password") }}</b-alert
+                >
 
                 <b-alert
                   v-if="form.errors.has('name')"
                   dismissible
                   show
                   variant="danger"
-                >{{form.errors.get('name')}}</b-alert>
+                  >{{ form.errors.get("name") }}</b-alert
+                >
 
                 <b-alert
                   v-if="form.errors.has('company_name')"
                   dismissible
                   show
                   variant="danger"
-                >{{form.errors.get('company_name')}}</b-alert>
+                  >{{ form.errors.get("company_name") }}</b-alert
+                >
 
                 <b-alert
                   v-if="form.errors.has('gst')"
                   dismissible
                   show
                   variant="danger"
-                >{{form.errors.get('gst')}}</b-alert>
+                  >{{ form.errors.get("gst") }}</b-alert
+                >
 
                 <b-alert
                   v-if="form.errors.has('phone')"
                   dismissible
                   show
                   variant="danger"
-                >{{form.errors.get('phone')}}</b-alert>
+                  >{{ form.errors.get("phone") }}</b-alert
+                >
 
                 <b-alert
                   v-if="form.errors.has('address')"
                   dismissible
                   show
                   variant="danger"
-                >{{form.errors.get('address')}}</b-alert>
+                  >{{ form.errors.get("address") }}</b-alert
+                >
 
                 <b-alert
                   v-if="form.errors.has('user_notes')"
                   dismissible
                   show
                   variant="danger"
-                >{{ form.errors.get('user_notes')}}</b-alert>
+                  >{{ form.errors.get("user_notes") }}</b-alert
+                >
 
                 <b-alert
                   v-if="form.errors.has('show_rates')"
                   dismissible
                   show
                   variant="danger"
-                >{{ form.errors.get('show_rates')}}</b-alert>
+                  >{{ form.errors.get("show_rates") }}</b-alert
+                >
                 <!-- end errors -->
                 <section>
                   <div class="row">
@@ -98,7 +108,9 @@
                           class="form-control"
                           v-model="form.email"
                           placeholder="Email"
-                          :class="{'border border-danger': form.errors.has('email')}"
+                          :class="{
+                            'border border-danger': form.errors.has('email'),
+                          }"
                         />
                       </div>
                     </div>
@@ -109,7 +121,9 @@
                           class="form-control"
                           v-model="form.password"
                           placeholder="Password"
-                          :class="{'border border-danger': form.errors.has('password')}"
+                          :class="{
+                            'border border-danger': form.errors.has('password'),
+                          }"
                         />
                       </div>
                     </div>
@@ -122,7 +136,9 @@
                           class="form-control"
                           v-model="form.name"
                           placeholder="Name"
-                          :class="{'border border-danger': form.errors.has('name')}"
+                          :class="{
+                            'border border-danger': form.errors.has('name'),
+                          }"
                         />
                       </div>
                     </div>
@@ -132,7 +148,11 @@
                           type="text"
                           class="form-control"
                           v-model="form.company_name"
-                          :class="{'border border-danger': form.errors.has('company_name')}"
+                          :class="{
+                            'border border-danger': form.errors.has(
+                              'company_name'
+                            ),
+                          }"
                           placeholder="Company Name"
                         />
                       </div>
@@ -145,7 +165,9 @@
                           type="text"
                           class="form-control"
                           v-model="form.gst"
-                          :class="{'border border-danger': form.errors.has('gst')}"
+                          :class="{
+                            'border border-danger': form.errors.has('gst'),
+                          }"
                           placeholder="GST No"
                         />
                       </div>
@@ -156,7 +178,9 @@
                           type="text"
                           class="form-control"
                           v-model="form.phone"
-                          :class="{'border border-danger': form.errors.has('phone')}"
+                          :class="{
+                            'border border-danger': form.errors.has('phone'),
+                          }"
                           placeholder="Phone Number"
                         />
                       </div>
@@ -172,7 +196,9 @@
                           class="form-control"
                           id="exampleFormControlTextarea1"
                           rows="3"
-                          :class="{'border border-danger': form.errors.has('address')}"
+                          :class="{
+                            'border border-danger': form.errors.has('address'),
+                          }"
                         ></textarea>
                       </div>
                     </div>
@@ -184,7 +210,11 @@
                         <textarea
                           class="form-control"
                           v-model="form.user_notes"
-                          :class="{'border border-danger': form.errors.has('user_notes')}"
+                          :class="{
+                            'border border-danger': form.errors.has(
+                              'user_notes'
+                            ),
+                          }"
                           rows="6"
                           placeholder="User Notes - For internal use only."
                         ></textarea>
@@ -194,22 +224,34 @@
                   <div class="row mb-3">
                     <div class="col">
                       <span>Show Rates</span>
-                      <b-form-checkbox switch size="lg" v-model="form.show_rates"></b-form-checkbox>
+                      <b-form-checkbox
+                        switch
+                        size="lg"
+                        v-model="form.show_rates"
+                      ></b-form-checkbox>
                     </div>
                   </div>
                 </section>
                 <div class="form-group">
                   <div class="col-sm-12">
-                    <button type="submit" class="btn btn-primary" :disabled="form.errors.any()">
+                    <button
+                      type="submit"
+                      class="btn btn-primary"
+                      :disabled="form.errors.any()"
+                    >
                       Add Customer
                       <span>
                         <i class="icon-ok"></i>
                       </span>
                     </button>
-                    <router-link to="/admin" class="btn btn-outline-secondary btn-confirmation">
+                    <router-link
+                      to="/admin"
+                      class="btn btn-outline-secondary btn-confirmation"
+                    >
                       <span>
                         <i class="ti-share-alt"></i>
-                      </span> Return to the dashboard
+                      </span>
+                      Return to the dashboard
                     </router-link>
                   </div>
                 </div>

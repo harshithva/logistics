@@ -4,7 +4,7 @@
       <div class="col-lg-8 col-xlg-12 col-md-12">
         <div class="card">
           <div class="card-body">
-            <div id="loader" style="display:none"></div>
+            <div id="loader" style="display: none"></div>
             <div id="msgholder"></div>
             <form
               class="form-horizontal form-material"
@@ -18,41 +18,47 @@
                 dismissible
                 show
                 variant="danger"
-              >{{form.errors.get('email')}}</b-alert>
+                >{{ form.errors.get("email") }}</b-alert
+              >
               <b-alert
                 v-if="form.errors.has('role')"
                 dismissible
                 show
                 variant="danger"
-              >{{form.errors.get('role')}}</b-alert>
+                >{{ form.errors.get("role") }}</b-alert
+              >
 
               <b-alert
                 v-if="form.errors.has('password')"
                 dismissible
                 show
                 variant="danger"
-              >{{form.errors.get('password')}}</b-alert>
+                >{{ form.errors.get("password") }}</b-alert
+              >
 
               <b-alert
                 v-if="form.errors.has('name')"
                 dismissible
                 show
                 variant="danger"
-              >{{form.errors.get('name')}}</b-alert>
+                >{{ form.errors.get("name") }}</b-alert
+              >
 
               <b-alert
                 v-if="form.errors.has('phone')"
                 dismissible
                 show
                 variant="danger"
-              >{{form.errors.get('phone')}}</b-alert>
+                >{{ form.errors.get("phone") }}</b-alert
+              >
 
               <b-alert
                 v-if="form.errors.has('user_notes')"
                 dismissible
                 show
                 variant="danger"
-              >{{ form.errors.get('user_notes')}}</b-alert>
+                >{{ form.errors.get("user_notes") }}</b-alert
+              >
               <!-- end errors -->
               <section>
                 <div class="row">
@@ -63,7 +69,9 @@
                         class="form-control"
                         v-model="form.email"
                         placeholder="Email"
-                        :class="{'border border-danger': form.errors.has('email')}"
+                        :class="{
+                          'border border-danger': form.errors.has('email'),
+                        }"
                       />
                     </div>
                   </div>
@@ -74,7 +82,9 @@
                         class="form-control"
                         v-model="form.password"
                         placeholder="Password"
-                        :class="{'border border-danger': form.errors.has('password')}"
+                        :class="{
+                          'border border-danger': form.errors.has('password'),
+                        }"
                       />
                     </div>
                   </div>
@@ -87,7 +97,9 @@
                         class="form-control"
                         v-model="form.name"
                         placeholder="Name"
-                        :class="{'border border-danger': form.errors.has('name')}"
+                        :class="{
+                          'border border-danger': form.errors.has('name'),
+                        }"
                       />
                     </div>
                   </div>
@@ -109,13 +121,16 @@
                       <select
                         v-model="form.role"
                         class="custom-select"
-                        :class="{'border border-danger': form.errors.has('role')}"
+                        :class="{
+                          'border border-danger': form.errors.has('role'),
+                        }"
                       >
                         <option selected disabled>Roles</option>
                         <option value="admin">Admin</option>
                         <option value="employee">Employee</option>
                         <!-- <option value="driver">Driver</option> -->
                         <option value="customer">Customer</option>
+                        <option value="vendor">Vendor</option>
                       </select>
                     </div>
                   </div>
@@ -129,7 +144,9 @@
                         v-model="form.user_notes"
                         rows="6"
                         placeholder="User Notes - For internal use only."
-                        :class="{'border border-danger': form.errors.has('user_notes')}"
+                        :class="{
+                          'border border-danger': form.errors.has('user_notes'),
+                        }"
                       ></textarea>
                     </div>
                   </div>
@@ -150,7 +167,8 @@
                   <router-link to="/admin" class="btn btn-outline-secondary">
                     <span>
                       <i class="ti-share-alt"></i>
-                    </span> Return to the dashboard
+                    </span>
+                    Return to the dashboard
                   </router-link>
                 </div>
               </div>
@@ -173,31 +191,31 @@ export default {
         password: "",
         phone: "",
         role: "employee",
-        user_notes: ""
-      })
+        user_notes: "",
+      }),
     };
   },
   methods: {
     onSubmit() {
       this.form
         .submit("post", "/api/staffs")
-        .then(response => {
+        .then((response) => {
           Swal.fire({
             position: "top-end",
             icon: "success",
             title: "Staff Successfully created",
             showConfirmButton: false,
-            timer: 1500
+            timer: 1500,
           });
         })
-        .catch(error =>
+        .catch((error) =>
           Swal.fire({
             icon: "error",
             title: "Oops...",
-            text: "Something went wrong!"
+            text: "Something went wrong!",
           })
         );
-    }
-  }
+    },
+  },
 };
 </script>
