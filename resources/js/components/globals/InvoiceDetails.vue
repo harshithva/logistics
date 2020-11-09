@@ -100,9 +100,10 @@
               </div>
               <div class="col-3">
                 <p>Vendor Details</p>
-                <p>Vender: {{ shipment.transport_driver_name }}</p>
-                <p>Total: {{ shipment.transport_driver_phone }}</p>
-                <p>Balance: {{ shipment.transport_driver_vehicle }}</p>
+                <p>Vender: {{ shipment.vendor_name }}</p>
+                <p>Total: {{ shipment.vendor_total }}</p>
+                <p>Advance: {{ shipment.vendor_advance }}</p>
+                <p>Balance: {{ shipment.vendor_balance }}</p>
               </div>
             </div>
           </div>

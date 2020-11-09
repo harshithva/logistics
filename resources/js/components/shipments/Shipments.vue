@@ -49,6 +49,16 @@
               </a>
             </span>
 
+            <span v-if="props.column.field == 'location'">
+              <span v-if="props.row.current_status.location"
+                >{{ props.row.current_status.location }} -
+                {{
+                  moment(props.row.current_status.created_at).format(
+                    "DD/MM/YYYY h:mm a"
+                  )
+                }}</span
+              >
+            </span>
             <span v-if="props.column.field == 'status'">
               <span
                 class="badge badge-pill badge-success"
@@ -125,6 +135,10 @@ export default {
         {
           label: "To",
           field: "delivery_address",
+        },
+        {
+          label: "Current Location",
+          field: "location",
         },
         {
           label: "Status",
