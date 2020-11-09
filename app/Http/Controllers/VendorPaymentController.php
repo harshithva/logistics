@@ -41,15 +41,13 @@ class VendorPaymentController extends Controller
             'vendor_id' => 'required',
             'shipment_id' => 'required',
             'amount' => 'required|numeric',
-         
-           
             ]);
         
             $payment = new VendorPayment;
      
             $payment->vendor_id = $request->vendor_id;
             $payment->shipment_id = $request->shipment_id;
-            $payment->amount_id = $request->amount_id;
+            $payment->amount = $request->amount;
             $payment->type = $request->type;
            
             $payment->save();

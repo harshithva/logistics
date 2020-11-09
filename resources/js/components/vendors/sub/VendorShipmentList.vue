@@ -1,60 +1,86 @@
 <template>
-  <vue-good-table
-    :columns="tableColumns1"
-    :rows="shipments"
-    :line-numbers="true"
-    :search-options="{
-      enabled: true,
-      placeholder: 'Type to search',
-    }"
-    :pagination-options="{
-      enabled: true,
-      mode: 'pages',
-    }"
-  >
-    <template slot="table-row" slot-scope="props">
-      <span v-if="props.column.field == 'payment'">
-        <span
-          class="badge badge-pill badge-success"
-          v-if="props.row.balance <= 0"
-          >Paid</span
-        >
-        <span
-          class="badge badge-pill badge-danger"
-          v-else-if="props.row.balance == props.row.total"
-          >Pending</span
-        >
+  <div>
+    <vue-good-table
+      :columns="tableColumns1"
+      :rows="shipments"
+      :line-numbers="true"
+      :search-options="{
+        enabled: true,
+        placeholder: 'Type to search',
+      }"
+      :pagination-options="{
+        enabled: true,
+        mode: 'pages',
+      }"
+    >
+      <template slot="table-row" slot-scope="props">
+        <span v-if="props.column.field == 'payment'">
+          <span
+            class="badge badge-pill badge-success"
+            v-if="props.row.balance <= 0"
+            >Paid</span
+          >
+          <span
+            class="badge badge-pill badge-danger"
+            v-else-if="props.row.balance == props.row.total"
+            >Pending</span
+          >
 
-        <span class="badge badge-pill badge-warning" v-else>Partial</span>
-      </span>
+          <span class="badge badge-pill badge-warning" v-else>Partial</span>
+        </span>
 
-      <span v-if="props.column.field == 'action'">
-        <router-link
-          :to="
-            '/admin/customers/' +
-            props.row.sender_id +
-            '/invoices/' +
-            props.row.shipment_id +
-            '/view'
-          "
-          data-toggle="tooltip"
-          data-placement="top"
-          title="View Customer"
-        >
-          <i class="fas fa-eye text-secondary"></i>
-        </router-link>
-      </span>
+        <span v-if="props.column.field == 'action'">
+          <router-link
+            :to="
+              '/admin/customers/' +
+              props.row.sender_id +
+              '/invoices/' +
+              props.row.shipment_id +
+              '/view'
+            "
+            data-toggle="tooltip"
+            data-placement="top"
+            title="View Customer"
+          >
+            <i class="fas fa-eye text-secondary"></i>
+          </router-link>
 
-      <span v-else>{{ props.formattedRow[props.column.field] }}</span>
-    </template>
-  </vue-good-table>
+          <a
+            v-b-modal.modal-1
+            variant="primary"
+            class="btn btn-sm"
+            @click="openPaymentModal(props.row)"
+          >
+            <i class="fas fa-rupee-sign text-secondary"></i>
+          </a>
+        </span>
+
+        <span v-else>{{ props.formattedRow[props.column.field] }}</span>
+      </template>
+    </vue-good-table>
+
+    <b-modal id="modal-1" title="Add Payment">
+      <AddVendorPayment
+        :shipment_id="data.shipment_id"
+        :vendor_id="data.vendor_id"
+      ></AddVendorPayment>
+      <template v-slot:modal-footer>
+        <div class="w-100"></div>
+      </template>
+    </b-modal>
+  </div>
 </template>
 
 <script>
+import AddVendorPayment from "./AddVendorPayment";
 export default {
   props: ["shipments"],
+  components: {
+    AddVendorPayment,
+  },
   data() {
     return {
+      data: {},
       tableColumns1: [
         {
           label: "Docket No",
@@ -89,6 +115,11 @@ export default {
         },
       ],
     };
+  },
+  methods: {
+    openPaymentModal(e) {
+      this.data = e;
+    },
   },
 };
 </script>

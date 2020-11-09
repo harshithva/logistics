@@ -11,23 +11,28 @@
           :rows="shipments"
           :line-numbers="true"
           :search-options="{
-    enabled: true,
-       placeholder: 'Type to search',
-  }"
+            enabled: true,
+            placeholder: 'Type to search',
+          }"
           :pagination-options="{
-    enabled: true,
-     mode: 'pages',
-     
-  }"
+            enabled: true,
+            mode: 'pages',
+          }"
           :sort-options="{
-    enabled: true,
-    initialSortBy: {field: 'docket_no', type: 'desc'}
-  }"
+            enabled: true,
+            initialSortBy: { field: 'docket_no', type: 'desc' },
+          }"
         >
           <template slot="table-row" slot-scope="props">
             <span v-if="props.column.field == 'action'">
               <router-link
-                :to="'/admin/customers/'+ props.row.sender_id +'/invoices/'+ props.row.id + '/view'"
+                :to="
+                  '/admin/customers/' +
+                  props.row.sender_id +
+                  '/invoices/' +
+                  props.row.id +
+                  '/view'
+                "
                 data-toggle="tooltip"
                 data-placement="top"
                 title="View"
@@ -48,20 +53,26 @@
               <span
                 class="badge badge-pill badge-success"
                 v-if="props.row.current_status.status"
-              >{{props.row.current_status.status}}</span>
+                >{{ props.row.current_status.status }}</span
+              >
             </span>
 
             <span v-if="props.column.field == 'payment'">
-              <span class="badge badge-pill badge-success" v-if="props.row.balance_amount <= 0">Paid</span>
+              <span
+                class="badge badge-pill badge-success"
+                v-if="props.row.balance_amount <= 0"
+                >Paid</span
+              >
               <span
                 class="badge badge-pill badge-danger"
                 v-else-if="props.row.balance_amount == props.row.charge_total"
-              >Pending</span>
+                >Pending</span
+              >
 
               <span class="badge badge-pill badge-warning" v-else>Partial</span>
             </span>
 
-            <span v-else>{{props.formattedRow[props.column.field]}}</span>
+            <span v-else>{{ props.formattedRow[props.column.field] }}</span>
           </template>
         </vue-good-table>
       </div>
@@ -69,17 +80,12 @@
 
     <!-- update status -->
     <b-modal id="modal-1" title="Update Status">
-      <UpdateStatus :shipment_id="shipment.id" :sender_id="shipment.sender_id"></UpdateStatus>
+      <UpdateStatus
+        :shipment_id="shipment.id"
+        :sender_id="shipment.sender_id"
+      ></UpdateStatus>
       <template v-slot:modal-footer>
-        <div class="w-100">
-          <!-- <b-button
-            type="submit"
-            @click="onSubmit"
-            variant="primary"
-            size="sm"
-            class="float-right"
-          >Add</b-button>-->
-        </div>
+        <div class="w-100"></div>
       </template>
     </b-modal>
   </fragment>
@@ -137,7 +143,6 @@ export default {
   },
   methods: {
     openUpdateStatus(e) {
-      console.log(e);
       this.shipment = e;
     },
     searchShipment() {

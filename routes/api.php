@@ -99,3 +99,6 @@ Route::apiResource("call_logs", 'CallLogController');
 Route::apiResource("vendor_details", 'ShipmentVendorDetailController');
 Route::get("/vendors/all/get", 'ShipmentVendorDetailController@all_vendors');
 Route::get("/vendors/{vendor_id}/get", 'ShipmentVendorDetailController@vendor_shipments');
+
+// vendor payment
+Route::apiResource("vendor_payments", 'VendorPaymentController');

@@ -18,7 +18,7 @@ class CreateVendorPaymentsTable extends Migration
             $table->unsignedBigInteger('shipment_id');
             $table->unsignedBigInteger('vendor_id');
             $table->decimal('amount',10,2)->default(0);
-            $table->string('type')->default('cash');
+            $table->string('type')->default('cash')->nullable();
             $table->foreign('shipment_id')->references('id')->on('shipments')->onDelete('cascade');
             $table->foreign('vendor_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
