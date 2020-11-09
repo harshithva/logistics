@@ -65,7 +65,14 @@ Vue.use(VueGoodTablePlugin);
 import Print from 'vue-print-nb'
 Vue.use(Print);
 
+// loading
+// import { ContentLoader } from "vue-content-loader";
+// Vue.use(ContentLoader);
+// import NProgress from 'vue-nprogress'
 
+import NProgress from 'nprogress'
+import 'nprogress/nprogress.css';
+Vue.use(NProgress)
 
 
 // const files = require.context('./', true, /\.vue$/i)
@@ -83,6 +90,7 @@ Vue.component('UpdateStatus', require('./components/globals/UpdateStatus.vue').d
 Vue.component('DisplayError', require('./components/globals/DisplayError.vue').default);
 
 
+
 Vue.component(VueQrcode.name, VueQrcode);
 Vue.component('barcode', VueBarcode);
 Vue.use(BootstrapVue);
@@ -91,16 +99,35 @@ Vue.component('pagination', require('laravel-vue-pagination'));
 Vue.use(Chartkick.use(Chart))
 
 
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- * 
- */
-
 
 
 Vue.use(Fragment.Plugin);
+
+
+
+// Add a request interceptor
+axios.interceptors.request.use(function (config) {
+    // Do something before request is sent
+    NProgress.start();
+    return config;
+}, function (error) {
+    // Do something with request error
+    console.error(error)
+    return Promise.reject(error);
+});
+
+// Add a response interceptor
+axios.interceptors.response.use(function (response) {
+    // Do something with response data
+    NProgress.done();
+
+
+    return response;
+}, function (error) {
+    // Do something with response error
+    console.error(error)
+    return Promise.reject(error);
+});
 
 const app = new Vue({
     el: '#wrapper',
@@ -123,3 +150,4 @@ const app = new Vue({
         )
     },
 });
+

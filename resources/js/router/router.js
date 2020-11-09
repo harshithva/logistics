@@ -1,5 +1,8 @@
 import Vue from 'vue'
+
 import VueRouter from 'vue-router'
+import NProgress from 'nprogress'
+import { store } from '../store/store'
 
 import Analytics from "../components/Analytics";
 
@@ -117,6 +120,19 @@ const router = new VueRouter({
     hashbang: false,
     mode: 'history',
 
+})
+
+router.beforeEach((to, from, next) => {
+    NProgress.start()
+    NProgress.set(0.1)
+    NProgress.inc()
+    next()
+})
+router.afterEach(() => {
+    setTimeout(() => {
+        NProgress.done()
+        store.commit('RemoveLoading');
+    }, 500)
 })
 
 

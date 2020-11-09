@@ -9,14 +9,13 @@
         :rows="customers"
         :line-numbers="true"
         :search-options="{
-    enabled: true,
-       placeholder: 'Type to search',
-  }"
+          enabled: true,
+          placeholder: 'Type to search',
+        }"
         :pagination-options="{
-    enabled: true,
-     mode: 'pages',
-     
-  }"
+          enabled: true,
+          mode: 'pages',
+        }"
       >
         <template slot="table-row" slot-scope="props">
           <span v-if="props.column.field == 'action'">
@@ -30,7 +29,7 @@
             </router-link>
           </span>
 
-          <span v-else>{{props.formattedRow[props.column.field]}}</span>
+          <span v-else>{{ props.formattedRow[props.column.field] }}</span>
         </template>
       </vue-good-table>
     </div>
@@ -49,7 +48,7 @@ export default {
         gst: "",
         phone: "",
         address: "",
-        user_notes: ""
+        user_notes: "",
       }),
       dismissSecs: 5,
       dismissCountDown: 0,
@@ -58,26 +57,26 @@ export default {
         {
           label: "Name",
           field: "name",
-          sortable: true
+          sortable: true,
         },
         {
           label: "Email",
-          field: "email"
+          field: "email",
         },
         {
           label: "Phone",
-          field: "phone"
+          field: "phone",
         },
         {
           label: "Location",
-          field: "address"
+          field: "address",
         },
 
         {
           label: "Action",
-          field: "action"
-        }
-      ]
+          field: "action",
+        },
+      ],
     };
   },
   created() {
@@ -86,7 +85,7 @@ export default {
   computed: {
     customers() {
       return this.$store.getters.getFilteredCustomers;
-    }
+    },
   },
   countDownChanged(dismissCountDown) {
     this.dismissCountDown = dismissCountDown;
@@ -97,7 +96,8 @@ export default {
   methods: {
     searchCustomer() {
       this.$store.commit("searchCustomer", this.search);
-    }
-  }
+    },
+  },
+  mounted() {},
 };
 </script>

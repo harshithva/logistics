@@ -20,7 +20,7 @@ export default ({
         payments: [],
         packages: [],
         tracking_details: {},
-        isLoading: false,
+        isLoading: true,
         filteredCustomers: {},
         filteredQuotes: {},
         filteredShipments: {},
@@ -204,11 +204,8 @@ export default ({
 
             state.tracking_details = tracking_details;
         },
-        ToggleIsLoading(state) {
-            state.isLoading = !state.isLoading
-            setTimeout(() => {
-                state.isLoading = !state.isLoading
-            }, 500)
+        RemoveLoading(state) {
+            state.isLoading = false;
         },
         searchCustomer(state, search) {
 
@@ -325,7 +322,7 @@ export default ({
     },
     actions: {
         retrieveCustomers(context) {
-            context.commit('ToggleIsLoading');
+
             axios
                 .get("/api/customers")
                 .then(response => (context.commit('retrieveCustomers', response.data.data)))
@@ -337,7 +334,7 @@ export default ({
         },
         retrieveSingleCustomer(context, customer_id) {
 
-            context.commit('ToggleIsLoading');
+
             axios
                 .get("/api/customers/" + customer_id)
                 .then(response => (context.commit('retrieveSingleCustomer', response.data.data)))
@@ -347,7 +344,7 @@ export default ({
                 })
         },
         retrieveShipments(context) {
-            context.commit('ToggleIsLoading');
+
             axios
                 .get("/api/shipments")
                 .then(response => {
@@ -361,7 +358,7 @@ export default ({
                 })
         },
         retrieveSingleShipment(context, invoice_id) {
-            context.commit('ToggleIsLoading');
+
 
             axios
                 .get(`/api/shipments/${invoice_id}`)
@@ -373,7 +370,7 @@ export default ({
                 })
         },
         retrieveShipmentBalanceAmount(context, invoice_id) {
-            // context.commit('ToggleIsLoading');
+            // 
             axios
                 .get("/api/shipments/" + invoice_id + "/balance_amount")
                 .then(response => (context.commit('retrieveShipmentBalanceAmount', response.data)))
@@ -384,7 +381,7 @@ export default ({
                 })
         },
         retrieveShipmentStatus(context, invoice_id) {
-            // context.commit('ToggleIsLoading');
+            // 
             axios
                 .get("/api/shipments/" + invoice_id + "/shipment_status")
                 .then(response => (context.commit('retrieveShipmentStatus', response.data)))
@@ -395,7 +392,7 @@ export default ({
                 })
         },
         retrieveSingleQuote(context, quote_id) {
-            context.commit('ToggleIsLoading');
+
             axios
                 .get("/api/quotations/" + quote_id)
                 .then(response => (context.commit('retrieveSingleQuote', response.data))
@@ -408,7 +405,7 @@ export default ({
         },
 
         retrieveQuotations(context) {
-            context.commit('ToggleIsLoading');
+
             axios
                 .get('/api/quotations')
                 .then(response => (context.commit('retrieveQuotations', response.data.data)))
@@ -419,7 +416,7 @@ export default ({
                 })
         },
         retrieveCustomerInvoice(context, customer_id) {
-            context.commit('ToggleIsLoading');
+
             axios
                 .get(`/api/customers/${customer_id}/invoices`)
                 .then(response => (context.commit('retrieveCustomerInvoice', response.data)))
@@ -430,7 +427,7 @@ export default ({
                 })
         },
         retrieveCustomerQuotes(context, customer_id) {
-            context.commit('ToggleIsLoading');
+
             axios
                 .get(`/api/customers/${customer_id}/quotes`)
                 .then(response => (context.commit('retrieveCustomerQuotes', response.data)))
@@ -441,7 +438,7 @@ export default ({
                 })
         },
         retrieveDashboardDetails(context, customer_id) {
-            context.commit('ToggleIsLoading');
+
             axios
                 .get(`/api/dashboard`)
                 .then(response => (context.commit('retrieveDashboardDetails', response.data)))
@@ -452,7 +449,7 @@ export default ({
                 })
         },
         retrieveStaffs(context) {
-            context.commit('ToggleIsLoading');
+
             axios
                 .get(`/api/staffs`)
                 .then(response => (context.commit('retrieveStaffs', response.data.data)))
@@ -463,7 +460,7 @@ export default ({
                 })
         },
         retrieveSingleStaff(context, staff_id) {
-            context.commit('ToggleIsLoading');
+
             axios
                 .get(`/api/staffs/${staff_id}`)
                 .then(response => (context.commit('retrieveSingleStaff', response.data)))
@@ -474,7 +471,7 @@ export default ({
                 })
         },
         retrieveAllPayments(context) {
-            context.commit('ToggleIsLoading');
+
             axios
                 .get(`/api/payments`)
                 .then(response => (context.commit('retrieveAllPayments', response.data.data)))
@@ -485,7 +482,7 @@ export default ({
                 })
         },
         retrievePackages(context) {
-            context.commit('ToggleIsLoading');
+
             axios
                 .get(`/api/packages`)
                 .then(response => {
@@ -502,7 +499,7 @@ export default ({
                 })
         },
         TrackShipment(context, tracking_no) {
-            context.commit('ToggleIsLoading');
+
             axios
                 .get(`/api/shipments/${tracking_no}/shipment_track`)
                 .then(response => (context.commit('TrackShipment', response.data)))
@@ -515,7 +512,7 @@ export default ({
 
         retrievePriceLists(context) {
 
-            context.commit('ToggleIsLoading');
+
             axios
                 .get(`/api/price_lists`)
                 .then(response => (context.commit('retrievePriceLists', response.data)))
