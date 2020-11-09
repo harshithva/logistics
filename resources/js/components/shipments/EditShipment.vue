@@ -41,6 +41,8 @@
                 variant="danger"
                 >{{ shipment.errors.get("document") }}</b-alert
               >
+
+              <DisplayError :form="shipment"></DisplayError>
               <!-- end errors -->
               <form
                 class="form"

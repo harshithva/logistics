@@ -1,12 +1,13 @@
 <template>
   <div>
-    <b-alert
-      variant="success"
-      class="mt-4"
-      v-for="(value, propertyName) in form.originalData"
-      :active.sync="form.errors.has(propertyName)"
+    <div
+      class="alert alert-danger"
+      role="alert"
+      v-for="(value, propertyName) in form.errors.errors"
       :key="propertyName"
-    >{{form.errors.get(propertyName)}}</b-alert>
+    >
+      {{ value[0] }}
+    </div>
   </div>
 </template>
 

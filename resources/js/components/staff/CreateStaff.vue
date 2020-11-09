@@ -13,52 +13,7 @@
             >
               <!-- show errors -->
 
-              <b-alert
-                v-if="form.errors.has('email')"
-                dismissible
-                show
-                variant="danger"
-                >{{ form.errors.get("email") }}</b-alert
-              >
-              <b-alert
-                v-if="form.errors.has('role')"
-                dismissible
-                show
-                variant="danger"
-                >{{ form.errors.get("role") }}</b-alert
-              >
-
-              <b-alert
-                v-if="form.errors.has('password')"
-                dismissible
-                show
-                variant="danger"
-                >{{ form.errors.get("password") }}</b-alert
-              >
-
-              <b-alert
-                v-if="form.errors.has('name')"
-                dismissible
-                show
-                variant="danger"
-                >{{ form.errors.get("name") }}</b-alert
-              >
-
-              <b-alert
-                v-if="form.errors.has('phone')"
-                dismissible
-                show
-                variant="danger"
-                >{{ form.errors.get("phone") }}</b-alert
-              >
-
-              <b-alert
-                v-if="form.errors.has('user_notes')"
-                dismissible
-                show
-                variant="danger"
-                >{{ form.errors.get("user_notes") }}</b-alert
-              >
+              <DisplayError :form="form"></DisplayError>
               <!-- end errors -->
               <section>
                 <div class="row">
