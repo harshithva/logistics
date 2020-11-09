@@ -120,7 +120,7 @@
           @click.prevent="onSubmit"
           v-if="this.$store.getters.getUserData.user.role == 'admin'"
         >
-          Update Customer
+          Update
           <span>
             <i class="icon-ok"></i>
           </span>

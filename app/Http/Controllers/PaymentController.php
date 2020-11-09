@@ -41,8 +41,8 @@ class PaymentController extends Controller
         $request->validate([
         'payment_type' => 'max:255',
         'received_from' => 'max:255',
-        'customer_id' => 'required|max:255',
-        'shipment_id' => 'required|max:255',
+        'customer_id' => 'required',
+        'shipment_id' => 'required',
         'amount' => 'required|max:255',
         'payment_date' =>'required|max:255',
         'bank_name' => 'max:255',

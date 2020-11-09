@@ -74,8 +74,8 @@ class ShipmentVendorDetailController extends Controller
 
     public function vendor_shipments($id)
     {
-        $vendor = User::findOrFail($id);
-        return new VendorShipmentResource($vendor);
+        $vendor_details = ShipmentVendorDetail::where('vendor_id',$id)->latest()->get();
+        return VendorShipmentResource::collection($vendor_details);
     }
 
     /**

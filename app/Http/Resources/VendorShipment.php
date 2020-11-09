@@ -16,17 +16,11 @@ class VendorShipment extends JsonResource
     {
         return [
             'id' => $this->id,
-            'name' => $this->name,
-            'email' => $this->email,
-            'role' => $this->role,
-            'company_name' => $this->company_name,
-            'gst' => $this->gst,
-            'phone' => $this->phone,
-            'address' => $this->address,
-            'user_notes' => $this->user_notes,
-            'status' => $this->status,
-            'created_at' => $this->created_at,
-            'vendor_shipments' => $this->vendor_shipments,
+            'total' => $this->total,
+            'advance' => $this->advance,
+            'advance' => $this->shipment_id,
+            'balance' => (int)$this->total - ((int)$this->advance + VendorPayment::where('vendor_id', $this->vendor_id)->sum('amount')),
+            // 'shipment' => $this->shipment
         ];
     }
 }

@@ -36,6 +36,7 @@ import Expense from "../components/reports/Expense";
 import CallLog from "../components/reports/CallLog";
 
 import Vendor from "../components/vendors/Vendor";
+import VendorView from "../components/vendors/VendorView";
 
 
 import Settings from "../components/settings/Settings";
@@ -96,6 +97,7 @@ const routes = [
     { path: '/admin/call_logs', component: CallLog },
     // vendors
     { path: '/admin/vendors', component: Vendor },
+    { path: '/admin/vendors/:id', component: VendorView },
 
 
     { path: '/admin/settings', component: Settings },

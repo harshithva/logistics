@@ -60,8 +60,8 @@ class User extends Authenticatable
         }
 
         
-        public function vendor_shipments(){
-            return $this->hasMany(Shipment::class,'vendor_id');
+        public function vendor_details(){
+            return $this->hasMany(ShipmentVendorDetail::class,'vendor_id');
         }
 
 }

@@ -11,6 +11,6 @@ class ShipmentVendorDetail extends Model
     }
 
     public function shipment(){
-        return $this->belongsTo(Shipment::class,'id','shipment_id');
+        return $this->belongsTo(Shipment::class,'shipment_id');
     }
 }

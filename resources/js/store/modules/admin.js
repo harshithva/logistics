@@ -31,7 +31,8 @@ export default ({
         expenses: [],
         expense_categories: [],
         call_logs: [],
-        vendors: []
+        vendors: [],
+        vendor_shipments: []
 
 
     },
@@ -124,6 +125,9 @@ export default ({
         },
         getAllVendors(state) {
             return state.vendors;
+        },
+        getVendorShipments(state) {
+            return state.vendor_shipments;
         },
     },
     mutations: {
@@ -320,6 +324,9 @@ export default ({
         },
         RETRIEVE_ALL_VENDORS(state, vendors) {
             state.vendors = vendors;
+        },
+        RETRIEVE_VENDOR_SHIPMENTS(state, vendor_shipments) {
+            state.vendor_shipments = vendor_shipments;
         },
 
     },
@@ -579,6 +586,16 @@ export default ({
             axios
                 .get(`/api/vendors/all/get`)
                 .then(response => (context.commit('RETRIEVE_ALL_VENDORS', response.data.data)))
+                .catch(function (error) {
+                    // handle error
+
+                    context.commit('catchErrors', error.response.data)
+                })
+        },
+        RETRIEVE_VENDOR_SHIPMENTS(context, vendor_id) {
+            axios
+                .get(`/api/vendors/${vendor_id}/get`)
+                .then(response => (context.commit('RETRIEVE_VENDOR_SHIPMENTS', response.data.data)))
                 .catch(function (error) {
                     // handle error
 

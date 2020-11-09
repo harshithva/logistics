@@ -21,7 +21,7 @@
         <template slot="table-row" slot-scope="props">
           <span v-if="props.column.field == 'action'">
             <router-link
-              :to="'/admin/customers/' + props.row.id"
+              :to="'/admin/vendors/' + props.row.id"
               data-toggle="tooltip"
               data-placement="top"
               title="View Customer"
