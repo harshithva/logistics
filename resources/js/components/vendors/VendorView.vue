@@ -10,7 +10,7 @@
           <div>
             <b-tabs content-class="mt-3">
               <b-tab title="Shipments" active>
-                <VendorShipmentList :shipments="user"></VendorShipmentList>
+                <VendorShipmentList :shipments="shipments"></VendorShipmentList>
               </b-tab>
               <b-tab title="Edit"
                 ><p><EditUser v-if="user" :form="user"></EditUser></p
@@ -36,6 +36,9 @@ import Switches from "vue-switches";
 import UserDetails from "../globals/UserDetails";
 import EditUser from "../globals/EditUser";
 import VendorShipmentList from "./sub/VendorShipmentList";
+
+import { mapGetters } from "vuex";
+
 export default {
   components: {
     Switches,
@@ -51,9 +54,13 @@ export default {
     user() {
       return new Form(this.$store.getters.getSingleCustomer);
     },
+    ...mapGetters({
+      shipments: "getVendorShipments",
+    }),
   },
   created() {
     this.$store.dispatch("retrieveSingleCustomer", this.$route.params.id);
+    this.$store.dispatch("RETRIEVE_VENDOR_SHIPMENTS", this.$route.params.id);
   },
 };
 </script>

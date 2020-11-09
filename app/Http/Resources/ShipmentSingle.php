@@ -18,6 +18,7 @@ class ShipmentSingle extends JsonResource
             'id' => $this->id,
              "bill_to" => $this->bill_to,
             "bill_to_id" => $this->bill_to_id,
+            "docket_no" => $this->docket_no,
             "charge_Insurance" => $this->charge_Insurance,
             "charge_advance_paid" => $this->charge_advance_paid,
             "charge_balance" => $this->charge_balance,
