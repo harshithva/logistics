@@ -7,17 +7,27 @@
           <span
             class="badge badge-pill badge-primary"
             v-model="shipment_status.status !== ''"
-          >{{shipment_status.status}}</span>
+            >{{ shipment_status.status }}</span
+          >
         </p>
-        <p>Balance Amount : {{balance_amount.balance_amount}}</p>
+        <p>Balance Amount : {{ balance_amount.balance_amount }}</p>
       </div>
       <div class="col-9">
-        <a class="btn btn-primary text-white btn-sm" onclick="javascript:window.print()">
+        <a
+          class="btn btn-primary text-white btn-sm"
+          onclick="javascript:window.print()"
+        >
           <i class="fas fa-print"></i> Print Invoice
         </a>
 
         <router-link
-          :to="'/admin/customers/'+ shipment.sender.id +'/invoices/'+ shipment.id +'/view/docket'"
+          :to="
+            '/admin/customers/' +
+            shipment.sender.id +
+            '/invoices/' +
+            shipment.id +
+            '/view/docket'
+          "
           class="btn btn-warning ml-2 btn-sm"
         >
           <i class="fas fa-check"></i> Docket
@@ -35,17 +45,16 @@
           data-toggle="modal"
           data-target="#updatestatus"
         >
-          <span>
-            <i class="fas fa-scroll"></i>
-          </span>&nbsp;
-          Status
+          <span> <i class="fas fa-scroll"></i> </span>&nbsp; Status
         </button>
         <button
           type="button"
           class="btn btn-success btn-sm ml-2"
           data-toggle="modal"
           data-target="#paymentmodal"
-          @click="payment.payment_date = moment(new Date).format('DD/MM/YYYY')"
+          @click="
+            payment.payment_date = moment(new Date()).format('DD/MM/YYYY')
+          "
         >
           <span>
             <i class="fas fa-rupee-sign"></i>
@@ -53,7 +62,7 @@
           Add Payment
         </button>
         <router-link
-          :to="'/admin/shipments/' + shipment.id +'/edit'"
+          :to="'/admin/shipments/' + shipment.id + '/edit'"
           class="btn btn-dark ml-2 btn-sm"
           v-if="this.$store.getters.getUserData.user.role == 'admin'"
         >
@@ -71,33 +80,40 @@
               dismissible
               show
               variant="danger"
-            >{{payment.errors.get('amount')}}</b-alert>
+              >{{ payment.errors.get("amount") }}</b-alert
+            >
             <div class="row">
-              <div class="col-4">
+              <div class="col-3">
                 <p>Sender Details</p>
                 <p>
                   Pickup Location :
                   <br />
-                  {{shipment.package_pickup_address}}
+                  {{ shipment.package_pickup_address }}
                 </p>
-                <p>Sender name : {{shipment.sender.name}}</p>
-                <p>Contact : {{shipment.sender.phone}}</p>
+                <p>Sender name : {{ shipment.sender.name }}</p>
+                <p>Contact : {{ shipment.sender.phone }}</p>
               </div>
-              <div class="col-4">
+              <div class="col-3">
                 <p>Receiver Details</p>
                 <p>
                   Dropoff Location :
                   <br />
-                  {{shipment.delivery_address}}
+                  {{ shipment.delivery_address }}
                 </p>
-                <p>Receiver Name : {{shipment.receiver.name}}</p>
-                <p>Contact : {{shipment.receiver.phone}}</p>
+                <p>Receiver Name : {{ shipment.receiver.name }}</p>
+                <p>Contact : {{ shipment.receiver.phone }}</p>
               </div>
-              <div class="col-4">
+              <div class="col-3">
                 <p>Transport Details</p>
-                <p>Driver Name : {{shipment.transport_driver_name}}</p>
-                <p>Contact : {{shipment.transport_driver_phone}}</p>
-                <p>Vehicle Details : {{shipment.transport_driver_vehicle}}</p>
+                <p>Driver Name : {{ shipment.transport_driver_name }}</p>
+                <p>Contact : {{ shipment.transport_driver_phone }}</p>
+                <p>Vehicle Details : {{ shipment.transport_driver_vehicle }}</p>
+              </div>
+              <div class="col-3">
+                <p>Vendor Details</p>
+                <p>Vender: {{ shipment.transport_driver_name }}</p>
+                <p>Total: {{ shipment.transport_driver_phone }}</p>
+                <p>Balance: {{ shipment.transport_driver_vehicle }}</p>
               </div>
             </div>
           </div>
@@ -125,7 +141,12 @@
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">Payment Details</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
@@ -136,7 +157,11 @@
                   <div class="form-group">
                     <label for="Serial Number">Payment Date</label>
 
-                    <input type="text" class="form-control" v-model="payment.payment_date" />
+                    <input
+                      type="text"
+                      class="form-control"
+                      v-model="payment.payment_date"
+                    />
                   </div>
                 </div>
                 <div class="col-md-4">
@@ -159,7 +184,11 @@
                 <div class="col-md-4">
                   <div class="form-group">
                     <label for="Size">Amount</label>
-                    <input type="text" class="form-control" v-model="payment.amount" />
+                    <input
+                      type="text"
+                      class="form-control"
+                      v-model="payment.amount"
+                    />
                   </div>
                 </div>
               </div>
@@ -168,7 +197,11 @@
                 <div class="col">
                   <div class="form-group">
                     <label for="Size">Bank Name</label>
-                    <input type="text" class="form-control" v-model="payment.bank_name" />
+                    <input
+                      type="text"
+                      class="form-control"
+                      v-model="payment.bank_name"
+                    />
                   </div>
                 </div>
               </div>
@@ -176,7 +209,11 @@
                 <div class="col">
                   <div class="form-group">
                     <label for="Size">UPI Ref ID</label>
-                    <input type="text" class="form-control" v-model="payment.upi_ref_id" />
+                    <input
+                      type="text"
+                      class="form-control"
+                      v-model="payment.upi_ref_id"
+                    />
                   </div>
                 </div>
               </div>
@@ -184,20 +221,32 @@
                 <div class="col">
                   <div class="form-group">
                     <label for="Size">Cheque No</label>
-                    <input type="text" class="form-control" v-model="payment.cheque_no" />
+                    <input
+                      type="text"
+                      class="form-control"
+                      v-model="payment.cheque_no"
+                    />
                   </div>
                 </div>
               </div>
             </div>
           </form>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
             <button
               type="button"
               class="btn btn-primary"
               @click.prevent="addPayment"
               data-dismiss="modal"
-            >Add</button>
+            >
+              Add
+            </button>
           </div>
         </div>
       </div>
@@ -217,13 +266,21 @@
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">Update Status</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
 
           <div class="modal-body">
-            <UpdateStatus :shipment_id="shipment.id" :sender_id="shipment.sender.id"></UpdateStatus>
+            <UpdateStatus
+              :shipment_id="shipment.id"
+              :sender_id="shipment.sender.id"
+            ></UpdateStatus>
           </div>
 
           <div class="modal-footer"></div>

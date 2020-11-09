@@ -149,7 +149,7 @@
             <td>{{balance_amount.balance_amount}}</td>
           </tr>
         </table>
-        <p>Vendor: {{shipment.vendor}}</p>
+
         <div class="row">
           <div class="col">
             <h6 class="mt-4">Remarks: {{shipment.remarks}}</h6>

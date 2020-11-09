@@ -12,6 +12,7 @@ use App\Payment;
 use App\ShipmentStatus;
 use App\ShipmentInsurance;
 use App\Http\Resources\Shipment as ShipmentResource;
+use App\Http\Resources\ShipmentSingle as ShipmentSingleResource;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
@@ -305,14 +306,15 @@ class ShipmentController extends Controller
     {
     
        
-        $shipment->sender;
-        $shipment->package;
-        $shipment->receiver;
-        $shipment->payment;
-        $shipment->insurance;
-        $shipment->vendor;
-        $shipment->vendor_details;
-        return response()->json($shipment,200);
+        // $shipment->sender;
+        // $shipment->package;
+        // $shipment->receiver;
+        // $shipment->payment;
+        // $shipment->insurance;
+        // $shipment->vendor;
+        // $shipment->vendor_details;
+        // return response()->json($shipment,200);
+        return new ShipmentSingleResource($shipment);
     }
 
     /**
@@ -361,7 +363,9 @@ class ShipmentController extends Controller
             "sender_id"=>"required|max:255",
             "remarks" => 'max:500',
             "bill_to" => 'max:500',
-           
+            "vendor_id" => 'max:500|required',
+            "vendor_total" => 'max:500|required',
+            "vendor_advance" => 'max:500|required',
         ]);
 
       
@@ -468,6 +472,14 @@ class ShipmentController extends Controller
             }
           
         }
+
+          // vendor
+          $vendor = ShipmentVendorDetail::where('shipment_id', $shipment->id)->get();
+          $vendor->shipment_id = $shipment->id;
+          $vendor->vendor_id = $request->vendor_id;
+          $vendor->total = $request->vendor_total;
+          $vendor->advance = $request->vendor_advance;
+          $vendor->save();
 
         return response()->json($shipment,200);
     }

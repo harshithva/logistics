@@ -365,7 +365,7 @@ export default ({
 
             axios
                 .get(`/api/shipments/${invoice_id}`)
-                .then(response => (context.commit('retrieveSingleShipment', response.data)))
+                .then(response => (context.commit('retrieveSingleShipment', response.data.data)))
                 .catch(function (error) {
                     // handle error
 

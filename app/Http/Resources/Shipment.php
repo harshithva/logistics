@@ -26,6 +26,8 @@ class Shipment extends JsonResource
             'sender_id' => $this->sender->id,
             'balance_amount' => $this->balance_amount,
             'charge_total' => $this->charge_total,
+      
+           
           ];
     }
 }
