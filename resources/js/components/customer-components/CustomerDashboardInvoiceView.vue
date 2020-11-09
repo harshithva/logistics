@@ -7,20 +7,26 @@
           <span
             class="badge badge-pill badge-primary"
             v-if="shipment_status.status !== ''"
-          >{{shipment_status.status}}</span>
+            >{{ shipment_status.status }}</span
+          >
         </p>
 
-        <p v-if="shipment_status.location">Location : {{shipment_status.location}}</p>
+        <p v-if="shipment_status.location">
+          Location : {{ shipment_status.location }}
+        </p>
         <p v-else>Location: Not Updated</p>
       </div>
       <div class="col"></div>
       <div class="col">
-        <a class="btn btn-primary text-white" onclick="javascript:window.print()">
+        <a
+          class="btn btn-primary text-white"
+          onclick="javascript:window.print()"
+        >
           <i class="fas fa-print"></i> Print Invoice
         </a>
 
         <router-link
-          :to="'/customer/invoice/'+shipment.id+'/docket/view'"
+          :to="'/customer/invoice/' + shipment.id + '/docket/view'"
           class="btn btn-warning ml-2"
         >
           <i class="fas fa-check"></i> Docket
@@ -40,11 +46,11 @@
         </div>
         <div class="row mt-2">
           <div class="col">
-            <img :src="logo" style="max-width:10rem" />
+            <img :src="logo" style="max-width: 10rem" />
           </div>
           <div class="col"></div>
           <div class="col">
-            <h5 style="font-size:2rem">
+            <h5 style="font-size: 2rem">
               <b>FREIGHT INVOICE</b>
             </h5>
             <qrcode :value="qrcode" :options="{ width: 120 }"></qrcode>
@@ -54,34 +60,41 @@
           <div class="col">
             <p>
               GURUKAL LOGISTICS
-              <br />Anchepalya, Bangalore - 560073
-              <br />Mob: +91 9620202001
-              <br />E-mail : logistics@gurukal.co.in
-              <br />Website: www.gurukal.co.in
+              <br />Anchepalya, Bangalore - 560073 <br />Mob: +91 9620202001
+              <br />E-mail : logistics@gurukal.co.in <br />Website:
+              www.gurukal.co.in
               <br />
             </p>
           </div>
           <div class="col"></div>
           <div class="col">
-            <p style="font-size:1.1rem">
-              <b>Invoice No: {{shipment.freight_invoice_number}}</b>
+            <p style="font-size: 1.1rem">
+              <b>Invoice No: {{ shipment.freight_invoice_number }}</b>
             </p>
-            <p>Date of Invoice: {{moment(shipment.date).format('DD/MM/YYYY')}}</p>
+            <p>
+              Date of Invoice: {{ moment(shipment.date).format("DD/MM/YYYY") }}
+            </p>
 
             <p>Transaction Type</p>
             <p>
-              <span class="badge badge-pill badge-success">{{shipment.package_transaction_type}}</span>
+              <span class="badge badge-pill badge-success">{{
+                shipment.package_transaction_type
+              }}</span>
             </p>
             <p>
               Payment Status :
               <span
                 class="badge badge-pill badge-success"
                 v-if="balance_amount.balance_amount <= 0"
-              >Paid</span>
+                >Paid</span
+              >
               <span
                 class="badge badge-pill badge-danger"
-                v-else-if="balance_amount.balance_amount == shipment.charge_total"
-              >Pending</span>
+                v-else-if="
+                  balance_amount.balance_amount == shipment.charge_total
+                "
+                >Pending</span
+              >
 
               <span class="badge badge-pill badge-warning" v-else>Partial</span>
             </p>
@@ -93,42 +106,42 @@
             <p>BILL TO</p>
 
             <p v-if="shipment.bill_to == 'consignor'">
-              {{shipment.sender.company_name}}
+              {{ shipment.sender.company_name }}
               <br />
-              {{shipment.sender.address}}
+              {{ shipment.sender.address }}
             </p>
             <p v-else-if="shipment.bill_to == 'consignee'">
-              {{shipment.receiver.company_name}}
+              {{ shipment.receiver.company_name }}
               <br />
-              {{shipment.receiver.address}}
+              {{ shipment.receiver.address }}
             </p>
 
             <p v-else>
-              {{shipment.sender.company_name}}
+              {{ shipment.sender.company_name }}
               <br />
-              {{shipment.sender.address}}
+              {{ shipment.sender.address }}
             </p>
           </div>
 
           <div class="col">
             Consignor Name:
             <br />
-            {{shipment.sender.company_name}}
+            {{ shipment.sender.company_name }}
             <br />
-            {{shipment.sender.address}}
+            {{ shipment.sender.address }}
             <br />
-            GST: {{shipment.sender.gst}}
+            GST: {{ shipment.sender.gst }}
           </div>
 
           <div class="col">
             <p>
               Consignee Name:
               <br />
-              {{shipment.receiver.company_name}}
+              {{ shipment.receiver.company_name }}
               <br />
-              {{shipment.receiver.address}}
+              {{ shipment.receiver.address }}
               <br />
-              GST: {{shipment.receiver.gst}}
+              GST: {{ shipment.receiver.gst }}
             </p>
           </div>
         </div>
@@ -138,37 +151,40 @@
             <table class="table-bordered table table-responsive-sm font-dark">
               <thead>
                 <th scope="col">SL No.</th>
-                <th scope="col" style="width:20rem">Description</th>
+                <th scope="col" style="width: 20rem">Description</th>
                 <th scope="col">Weight</th>
                 <th scope="col">Quantity</th>
                 <th scope="col">Serial No.</th>
                 <th scope="col">Docket No.</th>
                 <th scope="col">Invoice No.</th>
               </thead>
-              <tr v-for="(item,index) in shipment.package">
-                <th scope="row">{{index+1}}</th>
-                <td>{{item.description}}</td>
-                <td>{{item.weight}} kg</td>
-                <td>{{item.quantity}}</td>
-                <td>{{item.serial_no}}</td>
-                <td>{{shipment.docket_no}}</td>
-                <td>{{item.invoice_no}}</td>
+              <tr v-for="(item, index) in shipment.package">
+                <th scope="row">{{ index + 1 }}</th>
+                <td>{{ item.description }}</td>
+                <td>{{ item.weight }} kg</td>
+                <td>{{ item.quantity }}</td>
+                <td>{{ item.serial_no }}</td>
+                <td>{{ shipment.docket_no }}</td>
+                <td>{{ item.invoice_no }}</td>
               </tr>
             </table>
 
-            <table class="table-bordered table table-responsive-sm font-dark" style>
+            <table
+              class="table-bordered table table-responsive-sm font-dark"
+              style
+            >
               <tr>
                 <th scope="row">Advance Paid</th>
-                <td>{{shipment.charge_advance_paid}}</td>
+                <td>{{ shipment.charge_advance_paid }}</td>
               </tr>
               <tr>
                 <th scope="row">Balance Amount</th>
-                <td>{{balance_amount.balance_amount}}</td>
+                <td>{{ balance_amount.balance_amount }}</td>
               </tr>
             </table>
 
             <h6 class="mt-4">Remarks</h6>
-            <p>{{shipment.remarks}}</p>
+            <p>{{ shipment.remarks }}</p>
           </div>
           <div class="col">
             <table class="table-bordered table">
@@ -177,34 +193,34 @@
               </thead>-->
               <tr>
                 <th scope="row">Transportation</th>
-                <td>{{shipment.charge_transportation}}</td>
+                <td>{{ shipment.charge_transportation }}</td>
               </tr>
 
               <tr>
                 <th scope="row">Handling</th>
-                <td>{{shipment.charge_handling}}</td>
+                <td>{{ shipment.charge_handling }}</td>
               </tr>
               <tr>
                 <th scope="row">ODC Charges</th>
-                <td>{{shipment.charge_odc}}</td>
+                <td>{{ shipment.charge_odc }}</td>
               </tr>
 
               <tr>
                 <th scope="row">Halting</th>
-                <td>{{shipment.charge_halting}}</td>
+                <td>{{ shipment.charge_halting }}</td>
               </tr>
 
               <tr>
                 <th scope="row">Insurance</th>
-                <td>{{shipment.charge_Insurance}}</td>
+                <td>{{ shipment.charge_Insurance }}</td>
               </tr>
               <tr>
                 <th scope="row">GST</th>
-                <td>{{shipment.charge_tax_amount}}</td>
+                <td>{{ shipment.charge_tax_amount }}</td>
               </tr>
               <tr>
                 <th>Total</th>
-                <td>{{shipment.charge_total}}</td>
+                <td>{{ shipment.charge_total }}</td>
               </tr>
             </table>
           </div>
@@ -215,7 +231,9 @@
             <h6>Terms & Conditions</h6>
             <ol>
               <li>Remittance of payment within 7 days of invoice receipt.</li>
-              <li>A 10 % charge will be applied for every month of late payment.</li>
+              <li>
+                A 10 % charge will be applied for every month of late payment.
+              </li>
               <li>GST Payable by Freight Bearer</li>
             </ol>
           </div>
@@ -225,10 +243,8 @@
           <div class="col">
             <p>
               Bank Details
-              <br />Name : Axis Bank
-              <br />8th Mile Branch
-              <br />A/c No.: 918020030455515
-              <br />IFSC: UTIB0002926
+              <br />Name : Axis Bank <br />8th Mile Branch <br />A/c No.:
+              918020030455515 <br />IFSC: UTIB0002926
               <br />
             </p>
             <!-- <p class="mt-4">This is a computer generated invoice.</p> -->
@@ -236,7 +252,12 @@
           <div class="col-6"></div>
           <div class="col">
             <p>For and behalf of</p>
-            <img :src="sign" alt="Rohith" class="img-fluid" style="width:5.5rem;" />
+            <img
+              :src="sign"
+              alt="Rohith"
+              class="img-fluid"
+              style="width: 5.5rem"
+            />
             <br />
             <br />
 
@@ -245,9 +266,10 @@
         </div>
 
         <div class="row">
-          <div
-            class="col text-center"
-          >This is a computer generated document No seal and signature required.</div>
+          <div class="col text-center">
+            This is a computer generated document No seal and signature
+            required.
+          </div>
         </div>
       </div>
     </div>
@@ -306,7 +328,12 @@
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">Payment Details</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
@@ -317,7 +344,11 @@
                   <div class="form-group">
                     <label for="Serial Number">Payment Date</label>
 
-                    <input type="text" class="form-control" v-model="payment.payment_date" />
+                    <input
+                      type="text"
+                      class="form-control"
+                      v-model="payment.payment_date"
+                    />
                   </div>
                 </div>
                 <div class="col-md-4">
@@ -340,7 +371,11 @@
                 <div class="col-md-4">
                   <div class="form-group">
                     <label for="Size">Amount</label>
-                    <input type="text" class="form-control" v-model="payment.amount" />
+                    <input
+                      type="text"
+                      class="form-control"
+                      v-model="payment.amount"
+                    />
                   </div>
                 </div>
               </div>
@@ -349,7 +384,11 @@
                 <div class="col">
                   <div class="form-group">
                     <label for="Size">Bank Name</label>
-                    <input type="text" class="form-control" v-model="payment.bank_name" />
+                    <input
+                      type="text"
+                      class="form-control"
+                      v-model="payment.bank_name"
+                    />
                   </div>
                 </div>
               </div>
@@ -357,7 +396,11 @@
                 <div class="col">
                   <div class="form-group">
                     <label for="Size">UPI Ref ID</label>
-                    <input type="text" class="form-control" v-model="payment.upi_ref_id" />
+                    <input
+                      type="text"
+                      class="form-control"
+                      v-model="payment.upi_ref_id"
+                    />
                   </div>
                 </div>
               </div>
@@ -365,20 +408,32 @@
                 <div class="col">
                   <div class="form-group">
                     <label for="Size">Cheque No</label>
-                    <input type="text" class="form-control" v-model="payment.cheque_no" />
+                    <input
+                      type="text"
+                      class="form-control"
+                      v-model="payment.cheque_no"
+                    />
                   </div>
                 </div>
               </div>
             </div>
           </form>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
             <button
               type="button"
               class="btn btn-primary"
               @click.prevent="addPayment"
               data-dismiss="modal"
-            >Add</button>
+            >
+              Add
+            </button>
           </div>
         </div>
       </div>
@@ -398,7 +453,12 @@
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">Update Status</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
@@ -457,7 +517,11 @@
 
                 <div class="row m-1">
                   <div class="col">
-                    <b-form-file v-model="status.document" ref="file-input" class="mb-2"></b-form-file>
+                    <b-form-file
+                      v-model="status.document"
+                      ref="file-input"
+                      class="mb-2"
+                    ></b-form-file>
                   </div>
                   <div class="col">
                     <b-button @click="clearFiles" class="mr-2">Reset</b-button>
@@ -484,13 +548,21 @@
           </div>
 
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
             <button
               type="button"
               class="btn btn-primary"
               @click.prevent="updateStatus"
               data-dismiss="modal"
-            >Update</button>
+            >
+              Update
+            </button>
           </div>
         </div>
       </div>

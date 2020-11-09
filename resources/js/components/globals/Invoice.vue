@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" v-if="shipment">
     <div class="row">
       <div class="col text-center">
         <h1 class="border-top text-white bg-box-dark p-4">FREIGHT INVOICE</h1>
@@ -18,8 +18,10 @@
       <div class="col-6 bg-light-box border-top">
         <h1
           class="main-title"
-          style="font-family:'Times New Roman'; margin-bottom: -1rem;"
-        >GURUKAL LOGISTICS</h1>
+          style="font-family: 'Times New Roman'; margin-bottom: -1rem"
+        >
+          GURUKAL LOGISTICS
+        </h1>
         <h5>
           <br />Anchepalya, Bangalore - 560073
           <br />
@@ -27,90 +29,93 @@
           <br />
           <i class="fas fa-envelope"></i> &nbsp;logistics@gurukal.co.in
           <br />
-          <b>
-            <i class="fas fa-globe-americas"></i> &nbsp;www.gurukal.in
-          </b>
+          <b> <i class="fas fa-globe-americas"></i> &nbsp;www.gurukal.in </b>
           <br />GST No: 29AYGPS3509N2ZQ
         </h5>
       </div>
       <div class="col"></div>
       <div class="col-3 logo">
-        <img :src="logo_text" style="max-width: 20rem;" />
+        <img :src="logo_text" style="max-width: 20rem" />
       </div>
     </div>
     <div class="row">
       <div class="col">
         <h3 class="sub-title-red pt-2">
-          <b>INVOICE NO: {{shipment.freight_invoice_number}}</b>
+          <b>INVOICE NO: {{ shipment.freight_invoice_number }}</b>
           <h6 class="border-top-dark pt-1">
             PAYMENT STATUS:
             <span v-if="balance_amount.balance_amount <= 0">PAID</span>
-            <span v-else-if="balance_amount.balance_amount == shipment.charge_total">PENDING</span>
+            <span
+              v-else-if="balance_amount.balance_amount == shipment.charge_total"
+              >PENDING</span
+            >
 
             <span v-else>PARTIAL</span>
           </h6>
         </h3>
       </div>
       <div class="col">
-        <h6 class="sub-title-red pt-1">DATE: {{moment(shipment.date).format('DD/MM/YYYY')}}</h6>
-        <h6 class="border-top-dark pt-1">VEHICLE NO: {{shipment.transport_driver_vehicle}}</h6>
-        <h6 class="border-top-dark pt-1">TRANSACTION TYPE: {{shipment.package_transaction_type}}</h6>
+        <h6 class="sub-title-red pt-1">
+          DATE: {{ moment(shipment.date).format("DD/MM/YYYY") }}
+        </h6>
+        <h6 class="border-top-dark pt-1">
+          VEHICLE NO: {{ shipment.transport_driver_vehicle }}
+        </h6>
+        <h6 class="border-top-dark pt-1">
+          TRANSACTION TYPE: {{ shipment.package_transaction_type }}
+        </h6>
       </div>
     </div>
     <div class="row">
       <div class="col">
-        <h5>
-          <i class="fas fa-user icon"></i>&nbsp;&nbsp;BILL TO
-        </h5>
+        <h5><i class="fas fa-user icon"></i>&nbsp;&nbsp;BILL TO</h5>
         <h5 v-if="shipment.bill_to == 'consignor'">
-          {{shipment.sender.company_name}}
+          {{ shipment.sender.company_name }}
           <br />
-          {{shipment.sender.address}}
+          {{ shipment.sender.address }}
           <br />
-          GST: {{shipment.sender.gst}}
+          GST: {{ shipment.sender.gst }}
         </h5>
         <h5 v-else-if="shipment.bill_to == 'consignee'">
-          {{shipment.receiver.company_name}}
+          {{ shipment.receiver.company_name }}
           <br />
-          {{shipment.receiver.address}}
+          {{ shipment.receiver.address }}
           <br />
-          GST: {{shipment.receiver.gst}}
+          GST: {{ shipment.receiver.gst }}
         </h5>
         <h5 v-else>
-          {{shipment.sender.company_name}}
+          {{ shipment.sender.company_name }}
           <br />
-          {{shipment.sender.address}}
+          {{ shipment.sender.address }}
           <br />
-          GST: {{shipment.sender.gst}}
+          GST: {{ shipment.sender.gst }}
         </h5>
       </div>
       <div class="col">
-        <h5>
-          <i class="fas fa-user icon"></i>&nbsp;&nbsp;CONSIGNOR
-        </h5>
+        <h5><i class="fas fa-user icon"></i>&nbsp;&nbsp;CONSIGNOR</h5>
         <h5 class="underline">
-          {{shipment.sender.company_name}}
+          {{ shipment.sender.company_name }}
           <br />
-          {{shipment.sender.address}}
+          {{ shipment.sender.address }}
           <br />
-          GST: {{shipment.sender.gst}}
+          GST: {{ shipment.sender.gst }}
         </h5>
-        <h5>
-          <i class="fas fa-user icon"></i>&nbsp;&nbsp;CONSIGNEE
-        </h5>
+        <h5><i class="fas fa-user icon"></i>&nbsp;&nbsp;CONSIGNEE</h5>
         <h5 class="underline">
-          {{shipment.receiver.company_name}}
+          {{ shipment.receiver.company_name }}
           <br />
-          {{shipment.receiver.address}}
+          {{ shipment.receiver.address }}
           <br />
-          GST: {{shipment.receiver.gst}}
+          GST: {{ shipment.receiver.gst }}
         </h5>
       </div>
     </div>
 
     <div class="row">
       <div class="col-12">
-        <table class="table-print table-bordered table-responsive-sm table-print-border-bottom">
+        <table
+          class="table-print table-bordered table-responsive-sm table-print-border-bottom"
+        >
           <thead>
             <th class="bg-red">SL No.</th>
             <th class="bg-red">Description</th>
@@ -122,16 +127,16 @@
             <th>Quantity</th>
             <th class="bg-red">Weight</th>
           </thead>
-          <tr v-for="(item,index) in shipment.package">
-            <th scope="row">{{index+1}}</th>
-            <td>{{item.description}}</td>
+          <tr v-for="(item, index) in shipment.package">
+            <th scope="row">{{ index + 1 }}</th>
+            <td>{{ item.description }}</td>
 
-            <td>{{item.serial_no}}</td>
-            <td>{{shipment.docket_no}}</td>
-            <td>{{item.invoice_no}}</td>
+            <td>{{ item.serial_no }}</td>
+            <td>{{ shipment.docket_no }}</td>
+            <td>{{ item.invoice_no }}</td>
 
-            <td>{{item.quantity}}</td>
-            <td>{{item.weight}} kg</td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.weight }} kg</td>
           </tr>
         </table>
       </div>
@@ -142,23 +147,21 @@
         <table class="table-bordered table-print">
           <tr>
             <th class="bg-red">Advance Paid</th>
-            <td>{{shipment.charge_advance_paid}}</td>
+            <td>{{ shipment.charge_advance_paid }}</td>
           </tr>
           <tr>
             <th class="bg-red">Balance Amount</th>
-            <td>{{balance_amount.balance_amount}}</td>
+            <td>{{ balance_amount.balance_amount }}</td>
           </tr>
         </table>
 
         <div class="row">
           <div class="col">
-            <h6 class="mt-4">Remarks: {{shipment.remarks}}</h6>
+            <h6 class="mt-4">Remarks: {{ shipment.remarks }}</h6>
             <p class="mt-2">
               Bank Details
-              <br />Name : Axis Bank
-              <br />8th Mile Branch
-              <br />A/c No.: 918020030455515
-              <br />IFSC: UTIB0002926
+              <br />Name : Axis Bank <br />8th Mile Branch <br />A/c No.:
+              918020030455515 <br />IFSC: UTIB0002926
             </p>
           </div>
         </div>
@@ -167,31 +170,31 @@
         <table class="table-print table-bordered table-responsive-sm font-dark">
           <tr>
             <th class="bg-red">Transportation</th>
-            <td>{{shipment.charge_transportation}}</td>
+            <td>{{ shipment.charge_transportation }}</td>
           </tr>
           <tr>
             <th class="bg-red">Handling</th>
-            <td>{{shipment.charge_handling}}</td>
+            <td>{{ shipment.charge_handling }}</td>
           </tr>
           <tr>
             <th class="bg-red">ODC Charges</th>
-            <td>{{shipment.charge_odc}}</td>
+            <td>{{ shipment.charge_odc }}</td>
           </tr>
           <tr>
             <th class="bg-red">Halting</th>
-            <td>{{shipment.charge_halting}}</td>
+            <td>{{ shipment.charge_halting }}</td>
           </tr>
           <tr>
             <th class="bg-red">Insurance</th>
-            <td>{{shipment.charge_Insurance}}</td>
+            <td>{{ shipment.charge_Insurance }}</td>
           </tr>
           <tr>
             <th class="bg-red">GST</th>
-            <td>{{shipment.charge_tax_amount}}</td>
+            <td>{{ shipment.charge_tax_amount }}</td>
           </tr>
           <tr>
             <th class="bg-red">Total</th>
-            <td>{{shipment.charge_total}}</td>
+            <td>{{ shipment.charge_total }}</td>
           </tr>
         </table>
       </div>
@@ -205,7 +208,9 @@
         <h5>Terms & Conditions</h5>
         <ol>
           <li>Remittance of payment within 7 days of invoice receipt.</li>
-          <li>A 10 % charge will be applied for every month of late payment.</li>
+          <li>
+            A 10 % charge will be applied for every month of late payment.
+          </li>
           <li>GST Payable by Freight Bearer</li>
         </ol>
         <p class="ml-2 text-white">Subject to Bangalore Jurisdiction</p>
@@ -213,7 +218,7 @@
 
       <div class="col">
         <p>For and behalf of</p>
-        <img :src="sign" alt="Rohith" class="img-fluid" style="width: 5.5rem;" />
+        <img :src="sign" alt="Rohith" class="img-fluid" style="width: 5.5rem" />
         <br />
         <br />
         <u>Gurukal Logistics</u>
@@ -222,7 +227,9 @@
 
     <div class="row mt-1">
       <div class="col text-center">
-        <p>This is a computer generated document No seal and signature required.</p>
+        <p>
+          This is a computer generated document No seal and signature required.
+        </p>
       </div>
     </div>
   </div>
@@ -241,7 +248,11 @@ export default {
   },
   computed: {
     qrcode() {
-      return `https://crm.gurukal.in/customer/docket/8jZSqbGNmzk25EcBgMsWYyDP4LDEAS7amrVevmqcTE67ByuajGaks8UqmLmJ/${this.shipment.id}/urMrnM6JNuGPCnEdnmDqzfWfDYAUSYb8rkveHF9mWGPgD2XxH4SYRXjRCnmx/view`;
+      if (this.shipment.id) {
+        return `https://crm.gurukal.in/customer/docket/8jZSqbGNmzk25EcBgMsWYyDP4LDEAS7amrVevmqcTE67ByuajGaks8UqmLmJ/${this.shipment.id}/urMrnM6JNuGPCnEdnmDqzfWfDYAUSYb8rkveHF9mWGPgD2XxH4SYRXjRCnmx/view`;
+      } else {
+        return "QRCODE not generated";
+      }
     },
   },
 };

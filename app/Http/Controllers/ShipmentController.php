@@ -305,15 +305,7 @@ class ShipmentController extends Controller
     public function show(Request $request, Shipment $shipment)
     {
     
-       
-        // $shipment->sender;
-        // $shipment->package;
-        // $shipment->receiver;
-        // $shipment->payment;
-        // $shipment->insurance;
-        // $shipment->vendor;
-        // $shipment->vendor_details;
-        // return response()->json($shipment,200);
+
         return new ShipmentSingleResource($shipment);
     }
 
