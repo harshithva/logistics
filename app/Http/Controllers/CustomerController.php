@@ -182,6 +182,22 @@ class CustomerController extends Controller
         return new CustomerInvoiceResource($customer);
     }
 
+    public function get_customer_partial_invoices($id)
+    {
+        
+       $customer = User::findOrFail($id);
+      $customer->type = 'partial' ;
+        return new CustomerInvoiceResource($customer);
+    }
+    
+    public function get_customer_pending_invoices($id)
+    {
+        
+       $customer = User::findOrFail($id);
+      $customer->type = 'pending' ;
+        return new CustomerInvoiceResource($customer);
+    }
+
 
 
     public function get_customer_quotes($id)

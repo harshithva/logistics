@@ -173,6 +173,7 @@ export default {
 
           this.balance_amount = this.$store.getters.getShipmentBalanceAmount;
 
+          this.payment.payment_date = moment(new Date()).format("DD/MM/YYYY");
           this.payment.received_from = "consignor";
           this.payment.amount = 0;
           this.payment.payment_type = "cash";
