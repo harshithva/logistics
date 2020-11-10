@@ -12,7 +12,7 @@
         </div>
       </div>
       <!-- Footer -->
-      <footer class="sticky-footer bg-white">
+      <footer class="sticky-footer bg-white d-print-none">
         <div class="container my-auto">
           <div class="copyright text-center my-auto">
             <span>Copyright &copy; Gurukal 2020</span>
@@ -29,7 +29,7 @@ import CustomerHeader from "./CustomerHeader";
 
 export default {
   components: {
-    CustomerHeader
-  }
+    CustomerHeader,
+  },
 };
 </script>
