@@ -39,4 +39,56 @@ use Carbon\Carbon;
     }
 
 
+    public static function getPaidInvoices($shipments, $type)
+    {
+
+      $FilteredInvoices = [];
+      foreach($shipments as $item)
+      {
+       $item->total_paid = $item->payment->sum('amount');
+       $item->shipment_status =  $item->status;
+
+       switch($type) {
+        //  paid invoices
+         case 'paid':{
+     
+          if($item->total_paid >=  $item->charge_total)
+          {
+            array_push($FilteredInvoices,$item);
+          }
+        
+         }
+        break;
+            //  pending invoices
+        case 'pending':{
+          if($item->total_paid <=0)
+          {
+            array_push($FilteredInvoices,$item);
+          }  
+        
+         }
+        break;
+
+         //  partial invoices
+        case 'partial': {
+          if($item->total_paid > 0) 
+          {
+            array_push($FilteredInvoices,$item);
+          }
+        }
+      break;
+         default:{
+      
+            array_push($FilteredInvoices,$item);
+     
+         }
+        break;
+       }
+      
+      }
+
+        return $FilteredInvoices;
+    }
+
+
  }

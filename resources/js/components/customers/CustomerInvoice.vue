@@ -121,7 +121,21 @@
 
         <div class="card mb-4 mt-2">
           <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Invoices</h6>
+            <div class="row">
+              <div class="col">
+                <h6 class="m-0 font-weight-bold text-primary">Invoices</h6>
+              </div>
+              <div class="col-6"></div>
+              <div class="col">
+                <b-form-select
+                  :options="options"
+                  size="sm"
+                  @change="FilterInvoices($event)"
+                  v-model="selected"
+                  style="width: 8rem"
+                ></b-form-select>
+              </div>
+            </div>
           </div>
           <div class="card-body">
             <div class="table-responsive">
@@ -143,47 +157,37 @@
                       <thead>
                         <tr role="row">
                           <th
-                            class="sorting_asc"
                             tabindex="0"
                             aria-controls="dataTable"
                             rowspan="1"
                             colspan="1"
-                            aria-sort="ascending"
-                            aria-label="Name: activate to sort column descending"
                             style="width: 58px"
                           >
                             Frieght Invoice No
                           </th>
                           <th
-                            class="sorting"
-                            tabindex="0"
                             aria-controls="dataTable"
                             rowspan="1"
                             colspan="1"
-                            aria-label="Position: activate to sort column ascending"
                             style="width: 40px"
                           >
                             Date
                           </th>
 
                           <th
-                            class="sorting"
                             tabindex="0"
                             aria-controls="dataTable"
                             rowspan="1"
                             colspan="0.2"
-                            aria-label="Age: activate to sort column ascending"
                             style="width: 31px"
                           >
                             Amount
                           </th>
                           <th
-                            class="sorting"
                             tabindex="0"
                             aria-controls="dataTable"
                             rowspan="1"
                             colspan="0.2"
-                            aria-label="Age: activate to sort column ascending"
                             style="width: 31px"
                           >
                             Status
@@ -194,7 +198,6 @@
                             aria-controls="dataTable"
                             rowspan="1"
                             colspan="1"
-                            aria-label="Start date: activate to sort column ascending"
                             style="width: 69px"
                           >
                             Action
@@ -366,6 +369,13 @@ export default {
   data() {
     return {
       search: "",
+      selected: "all",
+      options: [
+        { value: "all", text: "All" },
+        { value: "pending", text: "Pending" },
+        { value: "partial", text: "Partial" },
+        { value: "paid", text: "Paid" },
+      ],
     };
   },
   components: {
@@ -393,6 +403,28 @@ export default {
   mounted() {
     this.$store.dispatch("retrieveCustomerInvoice", this.$route.params.id);
   },
-  methods: {},
+  methods: {
+    FilterInvoices(e) {
+      switch (e) {
+        case "pending": {
+          console.log("hello");
+          break;
+        }
+
+        case "partial": {
+          console.log("hello2");
+          break;
+        }
+
+        case "paid": {
+          break;
+        }
+
+        default: {
+          console.log("hello4");
+        }
+      }
+    },
+  },
 };
 </script>

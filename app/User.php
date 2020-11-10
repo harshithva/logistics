@@ -55,6 +55,10 @@ class User extends Authenticatable
             return $this->hasMany(Quote::class, 'customer_id','id');
         }
 
+        public function payments(){
+            return $this->hasMany(Payment::class, 'customer_id','id');
+        }
+
         public function receiver(){
             return $this->hasMany(Shipment::class, 'receiver_id');
         }

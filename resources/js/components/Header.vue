@@ -1,5 +1,7 @@
 <template>
-  <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+  <nav
+    class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow"
+  >
     <!-- Sidebar Toggle (Topbar) -->
     <button
       id="sidebarToggleTop"
@@ -50,13 +52,13 @@
 
       <!-- Nav Item - User Information -->
       <li class="nav-item dropdown no-arrow">
-        <a class="nav-link text-primary" href="#" id="userDropdown" @click="logout">
+        <a
+          class="nav-link text-primary"
+          href="#"
+          id="userDropdown"
+          @click="logout"
+        >
           <i class="fas fa-sign-out-alt text-primary"></i>&nbsp;&nbsp;Logout
-          <!-- <span class="mr-2 d-none d-lg-inline text-gray-600 small">Gurukal Logistics</span>
-          <img
-            class="img-profile rounded-circle"
-            src="https://i.ibb.co/WFdrW4M/Logo-Color-Text-Below.jpg"
-          />-->
         </a>
       </li>
     </ul>
@@ -74,8 +76,9 @@ export default {
 
     isToggled() {
       return this.$store.getters.getIsToggled;
-    }
+    },
   },
+  components: {},
   methods: {
     toggleSidebar() {
       this.$store.commit("toggleSidebar");
@@ -84,9 +87,9 @@ export default {
       const swalWithBootstrapButtons = Swal.mixin({
         customClass: {
           confirmButton: "btn btn-success",
-          cancelButton: "btn btn-danger"
+          cancelButton: "btn btn-danger",
         },
-        buttonsStyling: false
+        buttonsStyling: false,
       });
 
       swalWithBootstrapButtons
@@ -97,9 +100,9 @@ export default {
           showCancelButton: true,
           confirmButtonText: "Yes, Logout",
           cancelButtonText: "No, cancel!",
-          reverseButtons: true
+          reverseButtons: true,
         })
-        .then(result => {
+        .then((result) => {
           if (result.value) {
             this.$store.dispatch("logout");
             swalWithBootstrapButtons.fire(
@@ -115,7 +118,7 @@ export default {
             swalWithBootstrapButtons.fire("Cancelled", "Logout :)", "error");
           }
         });
-    }
-  }
+    },
+  },
 };
 </script>

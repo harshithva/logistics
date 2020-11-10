@@ -5,7 +5,9 @@
       <h1
         class="h3 mb-0 text-gray-800"
         v-if="this.$store.getters.getUserData.user.role == 'admin'"
-      >Dashboard</h1>
+      >
+        Dashboard
+      </h1>
       <h1 class="h3 mb-0 text-gray-800" v-else>Staff Dashboard</h1>
     </div>
 
@@ -19,8 +21,12 @@
               <div class="col mr-2">
                 <div
                   class="text-xs font-weight-bold text-primary text-uppercase mb-1"
-                >Total Earnings</div>
-                <div class="h5 mb-0 font-weight-bold text-gray-800">₹ {{dashboard.earnings}}</div>
+                >
+                  Total Earnings
+                </div>
+                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                  ₹ {{ dashboard.earnings }}
+                </div>
               </div>
               <div class="col-auto">
                 <i class="fas fa-rupee-sign fa-2x text-gray-300"></i>
@@ -38,8 +44,12 @@
               <div class="col mr-2">
                 <div
                   class="text-xs font-weight-bold text-success text-uppercase mb-1"
-                >Total Shipments</div>
-                <div class="h5 mb-0 font-weight-bold text-gray-800">{{dashboard.shipments}}</div>
+                >
+                  Total Shipments
+                </div>
+                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                  {{ dashboard.shipments }}
+                </div>
               </div>
               <div class="col-auto">
                 <i class="fas fa-truck fa-2x text-gray-300"></i>
@@ -57,8 +67,12 @@
               <div class="col mr-2">
                 <div
                   class="text-xs font-weight-bold text-danger text-uppercase mb-1"
-                >Pending Delivery</div>
-                <div class="h5 mb-0 font-weight-bold text-gray-800">{{dashboard.pending_delivery}}</div>
+                >
+                  Pending Delivery
+                </div>
+                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                  {{ dashboard.pending_delivery }}
+                </div>
               </div>
               <div class="col-auto">
                 <i class="fas fa-truck-loading fa-2x text-gray-300"></i>
@@ -74,12 +88,16 @@
           <div class="card-body">
             <div class="row no-gutters align-items-center">
               <div class="col mr-2">
-                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Total Quotations</div>
+                <div
+                  class="text-xs font-weight-bold text-info text-uppercase mb-1"
+                >
+                  Total Quotations
+                </div>
                 <div class="row no-gutters align-items-center">
                   <div class="col-auto">
-                    <div
-                      class="h5 mb-0 mr-3 font-weight-bold text-gray-800"
-                    >{{dashboard.quotations}}</div>
+                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+                      {{ dashboard.quotations }}
+                    </div>
                   </div>
                   <div class="col">
                     <div class="progress progress-sm mr-2">
@@ -111,8 +129,12 @@
               <div class="col mr-2">
                 <div
                   class="text-xs font-weight-bold text-warning text-uppercase mb-1"
-                >Total Customers</div>
-                <div class="h5 mb-0 font-weight-bold text-gray-800">{{dashboard.customers}}</div>
+                >
+                  Total Customers
+                </div>
+                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                  {{ dashboard.customers }}
+                </div>
               </div>
               <div class="col-auto">
                 <i class="fas fa-user fa-2x text-gray-300"></i>
@@ -130,8 +152,12 @@
               <div class="col mr-2">
                 <div
                   class="text-xs font-weight-bold text-danger text-uppercase mb-1"
-                >Pending Payment</div>
-                <div class="h5 mb-0 font-weight-bold text-gray-800">{{dashboard.pending_payment}}</div>
+                >
+                  Pending Payment
+                </div>
+                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                  {{ dashboard.pending_payment }}
+                </div>
               </div>
               <div class="col-auto">
                 <i class="fas fa-truck-loading fa-2x text-gray-300"></i>
@@ -149,8 +175,12 @@
       <div class="col-xl-8 col-lg-7">
         <div class="card shadow mb-4">
           <!-- Card Header - Dropdown -->
-          <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-            <h6 class="m-0 font-weight-bold text-primary">Shipments Overview</h6>
+          <div
+            class="card-header py-3 d-flex flex-row align-items-center justify-content-between"
+          >
+            <h6 class="m-0 font-weight-bold text-primary">
+              Shipments Overview
+            </h6>
             <div class="dropdown no-arrow">
               <a
                 class="dropdown-toggle"
@@ -188,7 +218,9 @@
       <div class="col-xl-4 col-lg-5">
         <div class="card shadow mb-4">
           <!-- Card Header - Dropdown -->
-          <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+          <div
+            class="card-header py-3 d-flex flex-row align-items-center justify-content-between"
+          >
             <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
             <div class="dropdown no-arrow">
               <a
@@ -241,17 +273,18 @@
 
 <script>
 import Header from "./Header";
+
 export default {
   components: {
-    Header
+    Header,
   },
   computed: {
     dashboard() {
       return new Form(this.$store.getters.getDashboardDetails);
-    }
+    },
   },
   created() {
     this.$store.dispatch("retrieveDashboardDetails");
-  }
+  },
 };
 </script>

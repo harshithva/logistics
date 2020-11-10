@@ -9,7 +9,9 @@ use App\Quote;
 use App\Payment;
 use App\ShipmentStatus;
 use Carbon\Carbon;
+use Helpers;
 use App\Http\Resources\Customer as CustomerResource;
+use App\Http\Resources\CustomerInvoice as CustomerInvoiceResource;
 use Snowfire\Beautymail\Beautymail;
 
 class CustomerController extends Controller
@@ -153,12 +155,13 @@ class CustomerController extends Controller
         return response()->json(null,204);
     }
 
+
     public function get_customer_invoices($id)
     {
         $customer = User::findOrFail($id);
         // $customer->shipment->sum('charge_total');
-        $advance_paid = $customer->shipment->sum('charge_advance_paid');
-        $customer->paid_invoice = Payment::where('customer_id',$id)->sum('amount') + $advance_paid;
+       $advance_paid = $customer->shipment->sum('charge_advance_paid');
+       $customer->paid_invoice = Payment::where('customer_id',$id)->sum('amount') + $advance_paid;
        $customer->outstanding_invoice =$customer->shipment->sum('charge_total') -  $customer->paid_invoice;
        $customer->total_invoice = $customer->shipment->count();
       
@@ -167,10 +170,19 @@ class CustomerController extends Controller
         $item->total_paid = $item->payment->sum('amount');
         $item->shipment_status =  $item->status;
        }
-        // $customer->shipment_status = $shipment->status->sortByDesc('created_at')->first();
        
         return response()->json($customer,200);
     }
+
+    public function get_customer_paid_invoices($id)
+    {
+        
+       $customer = User::findOrFail($id);
+      $customer->type = 'paid' ;
+        return new CustomerInvoiceResource($customer);
+    }
+
+
 
     public function get_customer_quotes($id)
     {

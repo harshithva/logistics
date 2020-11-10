@@ -78,7 +78,12 @@ Route::apiResource("packages", 'PackageController');
 Route::post('/customer/feedback', 'ShipmentController@send_feedback');
 
 Route::apiResource("customers", 'CustomerController');
+
 Route::get("customers/{id}/invoices", 'CustomerController@get_customer_invoices');
+Route::get("customers/{id}/invoices/paid", 'CustomerController@get_customer_paid_invoices');
+Route::get("customers/{id}/invoices/partial", 'CustomerController@get_customer_partial_invoices');
+Route::get("customers/{id}/invoices/pending", 'CustomerController@get_customer_pending_invoices');
+
 Route::get("customers/{id}/quotes", 'CustomerController@get_customer_quotes');
 Route::get("dashboard", 'CustomerController@dashboard');
 
