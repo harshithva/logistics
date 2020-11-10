@@ -10,9 +10,12 @@
                 class="rounded-circle"
                 width="100"
               />
-              <h4 class="card-title m-t-10">{{customer.name}}</h4>
+              <h4 class="card-title m-t-10">{{ customer.name }}</h4>
               <h6 class="card-subtitle">
-                <div class="badge badge-pill badge-success font-16" v-if="customer.status == true">
+                <div
+                  class="badge badge-pill badge-success font-16"
+                  v-if="customer.status == true"
+                >
                   <span class="ti-user text-success"></span>
                   Active
                 </div>
@@ -32,17 +35,18 @@
           </div>
           <div class="card-body">
             <small class="text-muted">E-mail</small>
-            <h6>{{customer.email}}</h6>
+            <h6>{{ customer.email }}</h6>
             <small class="text-muted p-t-30 db">Phone</small>
-            <h6>{{customer.phone}}</h6>
+            <h6>{{ customer.phone }}</h6>
             <small class="text-muted p-t-30 db">Address</small>
-            <h6>{{customer.address}}</h6>
+            <h6>{{ customer.address }}</h6>
           </div>
           <div class="card-body row">
             <div class="col-12">
-              <p
-                class="font-s"
-              >Registration Date: {{moment(customer.created_at).format('YYYY-MM-DD')}}</p>
+              <p class="font-s">
+                Registration Date:
+                {{ moment(customer.created_at).format("YYYY-MM-DD") }}
+              </p>
               <p></p>
             </div>
           </div>
@@ -52,7 +56,7 @@
       <div class="col-lg-8 col-xlg-9 col-md-7">
         <div class="card">
           <div class="card-body">
-            <div id="loader" style="display:none"></div>
+            <div id="loader" style="display: none"></div>
             <div id="msgholder"></div>
             <div class="row mb-4">
               <Navigation></Navigation>
@@ -65,10 +69,12 @@
                       <div class="col mr-2">
                         <div
                           class="text-xs font-weight-bold text-danger text-uppercase mb-1"
-                        >Outstanding Invoices</div>
-                        <div
-                          class="h5 mb-0 font-weight-bold text-gray-800"
-                        >₹ {{customer.outstanding_invoice}}</div>
+                        >
+                          Outstanding Invoices
+                        </div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">
+                          ₹ {{ shipmentsInfo.outstanding_invoice }}
+                        </div>
                       </div>
                       <div class="col-auto">
                         <i class="fas fa-rupee-sign fa-2x text-gray-300"></i>
@@ -84,10 +90,12 @@
                       <div class="col mr-2">
                         <div
                           class="text-xs font-weight-bold text-success text-uppercase mb-1"
-                        >Paid Invoices</div>
-                        <div
-                          class="h5 mb-0 font-weight-bold text-gray-800"
-                        >₹ {{customer.paid_invoice}}</div>
+                        >
+                          Paid Invoices
+                        </div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">
+                          ₹ {{ shipmentsInfo.paid_invoice }}
+                        </div>
                       </div>
                       <div class="col-auto">
                         <i class="fas fa-rupee-sign fa-2x text-gray-300"></i>
@@ -103,12 +111,16 @@
                       <div class="col mr-2">
                         <div
                           class="text-xs font-weight-bold text-primary text-uppercase mb-1"
-                        >Total Invoices</div>
+                        >
+                          Total Invoices
+                        </div>
                         <div class="row no-gutters align-items-center">
                           <div class="col-auto">
                             <div
                               class="h5 mb-0 mr-3 font-weight-bold text-gray-800"
-                            >{{customer.total_invoice}}</div>
+                            >
+                              {{ shipmentsInfo.total_invoice }}
+                            </div>
                           </div>
                           <div class="col">
                             <div class="progress progress-sm mr-2">
@@ -118,14 +130,16 @@
                                 aria-valuemin="0"
                                 aria-valuemax="100"
                                 class="progress-bar bg-info"
-                                style="width: 50%;"
+                                style="width: 50%"
                               ></div>
                             </div>
                           </div>
                         </div>
                       </div>
                       <div class="col-auto">
-                        <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                        <i
+                          class="fas fa-clipboard-list fa-2x text-gray-300"
+                        ></i>
                       </div>
                     </div>
                   </div>
@@ -141,26 +155,10 @@
           </div>
           <div class="card-body">
             <div class="table-responsive">
-              <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                <div class="row">
-                  <div class="col-sm-12 col-md-6">
-                    <div class="dataTables_length" id="dataTable_length"></div>
-                  </div>
-                  <div class="col-sm-12 col-md-6 text-right">
-                    <div id="dataTable_filter" class="dataTables_filter">
-                      <label>
-                        Search: &nbsp;
-                        <input
-                          type="search"
-                          class="form-control form-control-sm"
-                          placeholder
-                          aria-controls="dataTable"
-                          v-model="search"
-                        />
-                      </label>
-                    </div>
-                  </div>
-                </div>
+              <div
+                id="dataTable_wrapper"
+                class="dataTables_wrapper dt-bootstrap4"
+              >
                 <div class="row">
                   <div class="col-sm-12">
                     <table
@@ -170,7 +168,7 @@
                       cellspacing="0"
                       role="grid"
                       aria-describedby="dataTable_info"
-                      style="width: 100%;"
+                      style="width: 100%"
                     >
                       <thead>
                         <tr role="row">
@@ -182,8 +180,10 @@
                             colspan="1"
                             aria-sort="ascending"
                             aria-label="Name: activate to sort column descending"
-                            style="width: 58px;"
-                          >Frieght Invoice No</th>
+                            style="width: 58px"
+                          >
+                            Frieght Invoice No
+                          </th>
                           <th
                             class="sorting"
                             tabindex="0"
@@ -191,8 +191,10 @@
                             rowspan="1"
                             colspan="1"
                             aria-label="Position: activate to sort column ascending"
-                            style="width: 40px;"
-                          >Date</th>
+                            style="width: 40px"
+                          >
+                            Date
+                          </th>
 
                           <th
                             class="sorting"
@@ -201,8 +203,10 @@
                             rowspan="1"
                             colspan="0.2"
                             aria-label="Age: activate to sort column ascending"
-                            style="width: 31px;"
-                          >Amount</th>
+                            style="width: 31px"
+                          >
+                            Amount
+                          </th>
                           <th
                             class="sorting"
                             tabindex="0"
@@ -210,8 +214,10 @@
                             rowspan="1"
                             colspan="0.2"
                             aria-label="Age: activate to sort column ascending"
-                            style="width: 31px;"
-                          >Status</th>
+                            style="width: 31px"
+                          >
+                            Status
+                          </th>
                           <th
                             class="text-center"
                             tabindex="0"
@@ -219,8 +225,10 @@
                             rowspan="1"
                             colspan="1"
                             aria-label="Start date: activate to sort column ascending"
-                            style="width: 69px;"
-                          >Action</th>
+                            style="width: 69px"
+                          >
+                            Action
+                          </th>
                         </tr>
                       </thead>
                       <tfoot>
@@ -230,31 +238,44 @@
 
                           <th rowspan="1" colspan="1">Amount</th>
                           <th rowspan="1" colspan="1">Status</th>
-                          <th rowspan="1" colspan="1" class="text-center">Action</th>
+                          <th rowspan="1" colspan="1" class="text-center">
+                            Action
+                          </th>
                         </tr>
                       </tfoot>
                       <tbody>
-                        <tr v-if="customer.shipment" v-for="shipment in customer.shipment">
-                          <td>{{shipment.freight_invoice_number}}</td>
-                          <td>{{shipment.date}}</td>
+                        <tr
+                          v-if="shipmentsInfo"
+                          v-for="shipment in shipmentsInfo.shipment"
+                        >
+                          <td>{{ shipment.freight_invoice_number }}</td>
+                          <td>{{ shipment.date }}</td>
 
-                          <td>{{shipment.charge_total}}</td>
+                          <td>{{ shipment.charge_total }}</td>
                           <td>
-                            <span class="badge badge-success">{{shipment.status.status}}</span>
+                            <span class="badge badge-success">{{
+                              shipment.status.status
+                            }}</span>
                             <span
                               class="badge badge-pill badge-danger"
                               v-if="shipment.total_paid <= 0"
-                            >Pending</span>
+                              >Pending</span
+                            >
                             <span
                               class="badge badge-pill badge-success"
-                              v-else-if="shipment.total_paid >= shipment.charge_total"
-                            >Paid</span>
+                              v-else-if="
+                                shipment.total_paid >= shipment.charge_total
+                              "
+                              >Paid</span
+                            >
 
-                            <span class="badge badge-pill badge-warning" v-else>Partial</span>
+                            <span class="badge badge-pill badge-warning" v-else
+                              >Partial</span
+                            >
                           </td>
                           <td align="center">
                             <router-link
-                              :to="'/customer/invoice/'+ shipment.id +'/view'"
+                              :to="'/customer/invoice/' + shipment.id + '/view'"
                               data-toggle="tooltip"
                               data-placement="top"
                               title="View Invoice"
@@ -286,7 +307,12 @@
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">Payment Details</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
@@ -336,7 +362,13 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
             <button type="button" class="btn btn-primary">Add</button>
           </div>
         </div>
@@ -353,38 +385,30 @@
 </style>
 
 <script>
+import { mapGetters } from "vuex";
 import Navigation from "./Navigation";
 export default {
   data() {
-    return {
-      search: "",
-    };
+    return {};
   },
   components: {
     Navigation,
   },
   computed: {
-    customer() {
-      if (this.search) {
-        return new Form(
-          this.$store.getters.getCustomerInvoices.filter((item) => {
-            return this.search
-              .toLowerCase()
-              .split(" ")
-              .every((v) =>
-                item.shipment.freight_invoice_number.toLowerCase().includes(v)
-              );
-          })
-        );
-      } else {
-        return new Form(this.$store.getters.getCustomerInvoices);
-      }
-    },
+    ...mapGetters({
+      customer: "getSingleCustomer",
+      shipmentsInfo: "getCustomerInvoices",
+    }),
   },
   created() {},
   mounted() {
     this.$store.dispatch(
       "retrieveCustomerInvoice",
+      this.$store.getters.getUserData.user.id
+    );
+
+    this.$store.dispatch(
+      "retrieveSingleCustomer",
       this.$store.getters.getUserData.user.id
     );
   },
