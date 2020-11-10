@@ -124,7 +124,7 @@
             <th class="bg-red">Docket No.</th>
             <th class="bg-red">Invoice No.</th>
 
-            <th>Quantity</th>
+            <th class="bg-red">Quantity</th>
             <th class="bg-red">Weight</th>
           </thead>
           <tr v-for="(item, index) in shipment.package">
