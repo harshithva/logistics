@@ -160,18 +160,22 @@ class CustomerController extends Controller
     {
         $customer = User::findOrFail($id);
         // $customer->shipment->sum('charge_total');
-       $advance_paid = $customer->shipment->sum('charge_advance_paid');
-       $customer->paid_invoice = Payment::where('customer_id',$id)->sum('amount') + $advance_paid;
-       $customer->outstanding_invoice =$customer->shipment->sum('charge_total') -  $customer->paid_invoice;
-       $customer->total_invoice = $customer->shipment->count();
+    //    $advance_paid = $customer->shipment->sum('charge_advance_paid');
+    //    $customer->paid_invoice = Payment::where('customer_id',$id)->sum('amount') + $advance_paid;
+    //    $customer->outstanding_invoice =$customer->shipment->sum('charge_total') -  $customer->paid_invoice;
+    //    $customer->total_invoice = $customer->shipment->count();
       
-       foreach($customer->shipment as $item)
-       {
-        $item->total_paid = $item->payment->sum('amount');
-        $item->shipment_status =  $item->status;
-       }
+    //    foreach($customer->shipment as $item)
+    //    {
+    //     $item->total_paid = $item->payment->sum('amount');
+    //     $item->shipment_status =  $item->status;
+    //    }
        
-        return response()->json($customer,200);
+    //     return response()->json($customer,200);
+
+    $customer = User::findOrFail($id);
+      $customer->type = 'all' ;
+        return new CustomerInvoiceResource($customer);
     }
 
     public function get_customer_paid_invoices($id)

@@ -71,7 +71,7 @@ use Carbon\Carbon;
 
          //  partial invoices
         case 'partial': {
-          if($item->total_paid > 0) 
+          if($item->total_paid > 0 && $item->total_paid < $item->charge_total) 
           {
             array_push($FilteredInvoices,$item);
           }

@@ -43,7 +43,7 @@
                           Outstanding Invoices
                         </div>
                         <div class="h5 mb-0 font-weight-bold text-gray-800">
-                          ₹ {{ customer.outstanding_invoice }}
+                          ₹ {{ shipmentsInfo.outstanding_invoice }}
                         </div>
                       </div>
                       <div class="col-auto">
@@ -64,7 +64,7 @@
                           Paid Invoices
                         </div>
                         <div class="h5 mb-0 font-weight-bold text-gray-800">
-                          ₹ {{ customer.paid_invoice }}
+                          ₹ {{ shipmentsInfo.paid_invoice }}
                         </div>
                       </div>
                       <div class="col-auto">
@@ -89,7 +89,7 @@
                             <div
                               class="h5 mb-0 mr-3 font-weight-bold text-gray-800"
                             >
-                              {{ customer.total_invoice }}
+                              {{ shipmentsInfo.total_invoice }}
                             </div>
                           </div>
                           <div class="col">
@@ -218,8 +218,8 @@
                       </tfoot>
                       <tbody>
                         <tr
-                          v-if="customer.shipment"
-                          v-for="shipment in customer.shipment"
+                          v-if="shipmentsInfo"
+                          v-for="shipment in shipmentsInfo.shipment"
                         >
                           <td>{{ shipment.freight_invoice_number }}</td>
                           <td>{{ shipment.date }}</td>
@@ -365,6 +365,7 @@
 
 <script>
 import UserDetails from "../globals/UserDetails";
+import { mapGetters } from "vuex";
 export default {
   data() {
     return {
@@ -382,46 +383,49 @@ export default {
     UserDetails,
   },
   computed: {
-    customer() {
-      if (this.search) {
-        return new Form(
-          this.$store.getters.getCustomerInvoices.filter((item) => {
-            return this.search
-              .toLowerCase()
-              .split(" ")
-              .every((v) =>
-                item.shipment.freight_invoice_number.toLowerCase().includes(v)
-              );
-          })
-        );
-      } else {
-        return new Form(this.$store.getters.getCustomerInvoices);
-      }
-    },
+    ...mapGetters({
+      customer: "getSingleCustomer",
+      shipmentsInfo: "getCustomerInvoices",
+    }),
   },
   created() {},
   mounted() {
     this.$store.dispatch("retrieveCustomerInvoice", this.$route.params.id);
+    this.$store.dispatch("retrieveSingleCustomer", this.$route.params.id);
   },
   methods: {
     FilterInvoices(e) {
       switch (e) {
         case "pending": {
-          console.log("hello");
+          this.$store.dispatch(
+            "retrieveCustomerPendingInvoice",
+            this.$route.params.id
+          );
+
           break;
         }
 
         case "partial": {
-          console.log("hello2");
+          this.$store.dispatch(
+            "retrieveCustomerPartialInvoice",
+            this.$route.params.id
+          );
           break;
         }
 
         case "paid": {
+          this.$store.dispatch(
+            "retrieveCustomerPaidInvoice",
+            this.$route.params.id
+          );
           break;
         }
 
         default: {
-          console.log("hello4");
+          this.$store.dispatch(
+            "retrieveCustomerInvoice",
+            this.$route.params.id
+          );
         }
       }
     },

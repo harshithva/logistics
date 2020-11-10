@@ -429,7 +429,40 @@ export default ({
 
             axios
                 .get(`/api/customers/${customer_id}/invoices`)
-                .then(response => (context.commit('retrieveCustomerInvoice', response.data)))
+                .then(response => (context.commit('retrieveCustomerInvoice', response.data.data)))
+                .catch(function (error) {
+                    // handle error
+
+                    context.commit('catchErrors', error.response.data)
+                })
+        },
+        retrieveCustomerPaidInvoice(context, customer_id) {
+
+            axios
+                .get(`/api/customers/${customer_id}/invoices/paid`)
+                .then(response => (context.commit('retrieveCustomerInvoice', response.data.data)))
+                .catch(function (error) {
+                    // handle error
+
+                    context.commit('catchErrors', error.response.data)
+                })
+        },
+        retrieveCustomerPendingInvoice(context, customer_id) {
+
+            axios
+                .get(`/api/customers/${customer_id}/invoices/pending`)
+                .then(response => (context.commit('retrieveCustomerInvoice', response.data.data)))
+                .catch(function (error) {
+                    // handle error
+
+                    context.commit('catchErrors', error.response.data)
+                })
+        },
+        retrieveCustomerPartialInvoice(context, customer_id) {
+
+            axios
+                .get(`/api/customers/${customer_id}/invoices/partial`)
+                .then(response => (context.commit('retrieveCustomerInvoice', response.data.data)))
                 .catch(function (error) {
                     // handle error
 
