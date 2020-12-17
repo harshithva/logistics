@@ -45,7 +45,7 @@ use Carbon\Carbon;
       $FilteredInvoices = [];
       foreach($shipments as $item)
       {
-       $item->total_paid = $item->payment->sum('amount');
+       $item->total_paid = $item->payment->sum('amount') + $item->charge_advance_paid;
        $item->shipment_status =  $item->status;
 
        switch($type) {
