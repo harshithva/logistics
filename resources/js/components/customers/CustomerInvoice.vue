@@ -229,17 +229,18 @@
                             <span class="badge badge-success">{{
                               shipment.status.status
                             }}</span>
-                            <span
-                              class="badge badge-pill badge-danger"
-                              v-if="shipment.total_paid <= 0"
-                              >Pending</span
-                            >
+
                             <span
                               class="badge badge-pill badge-success"
-                              v-else-if="
+                              v-if="
                                 shipment.total_paid >= shipment.charge_total
                               "
                               >Paid</span
+                            >
+                            <span
+                              class="badge badge-pill badge-danger"
+                              v-else-if="shipment.total_paid <= 0"
+                              >Pending</span
                             >
 
                             <span class="badge badge-pill badge-warning" v-else

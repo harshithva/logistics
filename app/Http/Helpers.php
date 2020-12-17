@@ -61,7 +61,7 @@ use Carbon\Carbon;
         break;
             //  pending invoices
         case 'pending':{
-          if($item->total_paid <=0)
+          if(!($item->charge_total <= $item->total_paid))
           {
             array_push($FilteredInvoices,$item);
           }  
