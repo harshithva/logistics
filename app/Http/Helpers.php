@@ -48,6 +48,10 @@ use Carbon\Carbon;
        $item->total_paid = $item->payment->sum('amount') + $item->charge_advance_paid;
        $item->shipment_status =  $item->status;
 
+       //payment status
+       $item->payment_status = self::getPaymentStatus($item->charge_total, $item->total_paid);
+       $item->sender_name = $item->sender->name;
+
        switch($type) {
         //  paid invoices
          case 'paid':{
@@ -88,6 +92,18 @@ use Carbon\Carbon;
       }
 
         return $FilteredInvoices;
+    }
+
+    public static function getPaymentStatus($total, $total_paid)
+    {
+     
+        if($total_paid >= $total) 
+          return 'PAID';
+        else if (+$total <= 0) 
+          return 'PENDING';
+        else
+          return 'PARTIAL';
+        
     }
 
 

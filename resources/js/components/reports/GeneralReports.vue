@@ -25,7 +25,11 @@
           <button class="btn btn-danger ml-2 btn-sm" @click="generatePdf">
             <i class="fas fa-file-download"></i> &nbsp;PDF
           </button>
-          <export-excel :data="packages" :fields="json_fields" class="btn btn-success btn-sm">
+          <export-excel
+            :data="packages"
+            :fields="json_fields"
+            class="btn btn-success btn-sm"
+          >
             <i class="fas fa-cloud-download-alt"></i> &nbsp;Excel
           </export-excel>
           <b-form-select
@@ -33,7 +37,7 @@
             :options="options"
             size="sm"
             @change="selectMonth"
-            style="width:8rem"
+            style="width: 8rem"
           ></b-form-select>
         </div>
       </div>
@@ -46,25 +50,24 @@
           :rows="packages"
           :line-numbers="true"
           :search-options="{
-    enabled: true,
-       placeholder: 'Type to search',
-  }"
+            enabled: true,
+            placeholder: 'Type to search',
+          }"
           :pagination-options="{
-    enabled: true,
-     mode: 'pages',
-     
-  }"
+            enabled: true,
+            mode: 'pages',
+          }"
           :sort-options="{
-    enabled: true,
-    initialSortBy: {field: 'shipment_date', type: 'desc'}
-  }"
+            enabled: true,
+            initialSortBy: { field: 'shipment_date', type: 'desc' },
+          }"
         >
           <template slot="table-row" slot-scope="props">
             <span v-if="props.column.field == 'packages'">
-              <p v-for="p in props.row.packages">{{p.description}}</p>
+              <p v-for="p in props.row.packages">{{ p.description }}</p>
             </span>
 
-            <span v-else>{{props.formattedRow[props.column.field]}}</span>
+            <span v-else>{{ props.formattedRow[props.column.field] }}</span>
           </template>
         </vue-good-table>
       </div>

@@ -125,7 +125,7 @@
               <div class="col">
                 <h6 class="m-0 font-weight-bold text-primary">Invoices</h6>
               </div>
-              <div class="col-6"></div>
+              <div class="col-4"></div>
               <div class="col">
                 <b-form-select
                   :options="options"
@@ -134,6 +134,13 @@
                   v-model="selected"
                   style="width: 8rem"
                 ></b-form-select>
+                <export-excel
+                  :data="shipmentsInfo.shipment"
+                  :fields="json_fields"
+                  class="btn btn-success btn-sm"
+                >
+                  <i class="fas fa-cloud-download-alt"></i> &nbsp;Excel
+                </export-excel>
               </div>
             </div>
           </div>
@@ -378,6 +385,14 @@ export default {
         { value: "partial", text: "Partial" },
         { value: "paid", text: "Paid" },
       ],
+      json_fields: {
+        Date: "date",
+        "Sender Name": "sender_name",
+        "Freight Invoice Number": "freight_invoice_number",
+        "Charge Total": "charge_total",
+        "Shipment Status": "status.status",
+        "Payment Status": "payment_status",
+      },
     };
   },
   components: {

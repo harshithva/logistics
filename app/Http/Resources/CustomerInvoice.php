@@ -17,13 +17,16 @@ class CustomerInvoice extends JsonResource
     {
         $advance_paid = $this->shipment->sum('charge_advance_paid');
         $paid_invoice = $this->payments->sum('amount');
-   
+        $total_paid = $paid_invoice + $advance_paid;
+
+
         return [
             'advance_paid' => $advance_paid,
             'paid_invoice' =>  $paid_invoice + $advance_paid,
             'outstanding_invoice' => $this->shipment->sum('charge_total') -  $paid_invoice - $advance_paid,
             'total_invoice' => $this->shipment->count(),
-            'shipment'=> Helpers::getPaidInvoices($this->shipment, $this->type)
+            'shipment'=> Helpers::getPaidInvoices($this->shipment, $this->type),
+   
         ];
     }
 }
