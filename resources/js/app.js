@@ -89,6 +89,7 @@ Vue.component('Docket', require('./components/globals/Docket.vue').default);
 Vue.component('Invoice', require('./components/globals/Invoice.vue').default);
 Vue.component('UpdateStatus', require('./components/globals/UpdateStatus.vue').default);
 Vue.component('DisplayError', require('./components/globals/DisplayError.vue').default);
+Vue.component('Quote', require('./components/globals/Quote.vue').default);
 
 
 
