@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Carbon\Carbon;
 
 class VendorExpense extends JsonResource
 {
@@ -14,6 +15,12 @@ class VendorExpense extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            'name' => $this->name,
+            'amount' => $this->amount,
+            'note' => $this->note,
+            'vendor_name' => $this->vendor->name,
+            'date' => Carbon::parse( $this->created_at)->format('d-m-Y '),
+        ];
     }
 }

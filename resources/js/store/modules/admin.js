@@ -32,7 +32,8 @@ export default ({
         expense_categories: [],
         call_logs: [],
         vendors: [],
-        vendor_shipments: []
+        vendor_shipments: [],
+        vendor_expenses: []
 
 
     },
@@ -128,6 +129,9 @@ export default ({
         },
         getVendorShipments(state) {
             return state.vendor_shipments;
+        },
+        getVendorExpenses(state) {
+            return state.vendor_expenses;
         },
     },
     mutations: {
@@ -327,6 +331,9 @@ export default ({
         },
         RETRIEVE_VENDOR_SHIPMENTS(state, vendor_shipments) {
             state.vendor_shipments = vendor_shipments;
+        },
+        RETRIEVE_VENDOR_EXPENSES(state, vendor_expenses) {
+            state.vendor_expenses = vendor_expenses;
         },
 
     },
@@ -629,6 +636,36 @@ export default ({
             axios
                 .get(`/api/vendors/${vendor_id}/get`)
                 .then(response => (context.commit('RETRIEVE_VENDOR_SHIPMENTS', response.data.data)))
+                .catch(function (error) {
+                    // handle error
+
+                    context.commit('catchErrors', error.response.data)
+                })
+        },
+        RETRIEVE_VENDOR_EXPENSES(context) {
+            axios
+                .get(`/api/vendor_expenses`)
+                .then(response => (context.commit('RETRIEVE_VENDOR_EXPENSES', response.data.data)))
+                .catch(function (error) {
+                    // handle error
+
+                    context.commit('catchErrors', error.response.data)
+                })
+        },
+        RETRIEVE_THIS_MONTH_VENDOR_EXPENSES(context) {
+            axios
+                .get(`/api/this_month/get`)
+                .then(response => (context.commit('RETRIEVE_VENDOR_EXPENSES', response.data.data)))
+                .catch(function (error) {
+                    // handle error
+
+                    context.commit('catchErrors', error.response.data)
+                })
+        },
+        RETRIEVE_LAST_MONTH_VENDOR_EXPENSES(context) {
+            axios
+                .get(`/api/last_month/get`)
+                .then(response => (context.commit('RETRIEVE_VENDOR_EXPENSES', response.data.data)))
                 .catch(function (error) {
                     // handle error
 

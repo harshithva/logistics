@@ -100,11 +100,20 @@
           <span>Price List</span>
         </router-link>
       </li>
+      <!-- Heading -->
+      <div class="sidebar-heading">Vendors</div>
 
       <li class="nav-item">
         <router-link class="nav-link collapsed" to="/admin/vendors">
           <i class="fas fa-users"></i>
-          <span>Vendors</span>
+          <span>Vendors List</span>
+        </router-link>
+      </li>
+
+      <li class="nav-item">
+        <router-link class="nav-link collapsed" to="/admin/vendor/expenses">
+          <i class="fas fa-file-invoice"></i>
+          <span>Vendor Expenses</span>
         </router-link>
       </li>
 

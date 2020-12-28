@@ -108,3 +108,5 @@ Route::get("/vendors/{vendor_id}/get", 'ShipmentVendorDetailController@vendor_sh
 // vendor payment
 Route::apiResource("vendor_payments", 'VendorPaymentController');
 Route::apiResource("vendor_expenses", 'VendorExpenseController');
+Route::apiResource("vendor_expenses/this_month/get", 'VendorExpenseController@this_month');
+Route::apiResource("vendor_expenses/last_month/get", 'VendorExpenseController@last_month');
