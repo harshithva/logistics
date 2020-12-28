@@ -7,9 +7,7 @@
           <h6 class="m-0 font-weight-bold text-primary">Vendor List</h6>
         </div>
         <div class="col">
-          <router-link to="/admin/staff/create"
-            ><button class="btn btn-primary">Add Vendor</button></router-link
-          >
+          <button v-b-modal.modal-1 class="btn btn-primary">Add Vendor</button>
         </div>
       </div>
     </div>
@@ -43,12 +41,23 @@
         </template>
       </vue-good-table>
     </div>
+
+    <b-modal id="modal-1" title="Create Vendor">
+      <CreateVendor></CreateVendor>
+      <template v-slot:modal-footer>
+        <div class="w-100"></div>
+      </template>
+    </b-modal>
   </div>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
+import CreateVendor from "./sub/CreateVendor";
 export default {
+  components: {
+    CreateVendor,
+  },
   data() {
     return {
       dismissSecs: 5,
