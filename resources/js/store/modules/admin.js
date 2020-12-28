@@ -654,7 +654,7 @@ export default ({
         },
         RETRIEVE_THIS_MONTH_VENDOR_EXPENSES(context) {
             axios
-                .get(`/api/this_month/get`)
+                .get(`/api/vendor_expenses/this_month/get`)
                 .then(response => (context.commit('RETRIEVE_VENDOR_EXPENSES', response.data.data)))
                 .catch(function (error) {
                     // handle error
@@ -664,7 +664,7 @@ export default ({
         },
         RETRIEVE_LAST_MONTH_VENDOR_EXPENSES(context) {
             axios
-                .get(`/api/last_month/get`)
+                .get(`/api/vendor_expenses/last_month/get`)
                 .then(response => (context.commit('RETRIEVE_VENDOR_EXPENSES', response.data.data)))
                 .catch(function (error) {
                     // handle error

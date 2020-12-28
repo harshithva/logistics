@@ -160,9 +160,9 @@ export default {
     },
     deleteItem(item_id) {
       axios
-        .delete(`/api/expenses/${item_id}`)
+        .delete(`/api/vendor_expenses/${item_id}`)
         .then((response) => {
-          this.$store.dispatch("RETRIEVE_EXPENSES");
+          this.$store.dispatch("RETRIEVE_VENDOR_EXPENSES");
           Swal.fire({
             position: "top-end",
             icon: "success",

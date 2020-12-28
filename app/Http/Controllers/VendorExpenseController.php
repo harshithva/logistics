@@ -6,6 +6,7 @@ use App\VendorExpense;
 use Illuminate\Http\Request;
 use App\Http\Resources\VendorExpense as VendorExpenseResource;
 use Carbon\Carbon;
+use Helpers;
 
 
 class VendorExpenseController extends Controller
@@ -18,6 +19,19 @@ class VendorExpenseController extends Controller
     public function index()
     {
         $expenses = VendorExpense::latest()->get();
+        return VendorExpenseResource::collection($expenses);
+    }
+
+
+    public function this_month()
+    {
+        $expenses = Helpers::getThisMonth(VendorExpense::class);
+        return VendorExpenseResource::collection($expenses);
+    }
+
+    public function last_month()
+    {
+        $expenses = Helpers::getLastMonth(VendorExpense::class);
         return VendorExpenseResource::collection($expenses);
     }
 
