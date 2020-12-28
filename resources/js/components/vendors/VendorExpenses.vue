@@ -66,24 +66,10 @@
 
     <!-- add expense -->
     <b-modal id="modal-1" title="Create">
-      <b-tabs content-class="mt-3" fill active>
-        <b-tab title="Expense" active>
-          <AddExpense></AddExpense>
-        </b-tab>
-        <b-tab title="Expense Category">
-          <AddExpenseCategory></AddExpenseCategory>
-        </b-tab>
-      </b-tabs>
+      <AddVendorExpense></AddVendorExpense>
+
       <template v-slot:modal-footer>
-        <div class="w-100">
-          <!-- <b-button
-            type="submit"
-            @click="onSubmit"
-            variant="primary"
-            size="sm"
-            class="float-right"
-          >Add</b-button>-->
-        </div>
+        <div class="w-100"></div>
       </template>
     </b-modal>
   </fragment>
@@ -99,7 +85,7 @@ export default {
     return {
       show: false,
       form: new Form({
-        category_id: "",
+        vendor_id: "",
         date: "",
         name: "",
         note: "",
@@ -112,10 +98,10 @@ export default {
         { value: "last_month", text: "Last month" },
       ],
       json_fields: {
-        Name: "name",
+        "Vendor Name": "vendor_name",
+        "Expense Name": "name",
         Amount: "amount",
         Note: "note",
-        "Category Name": "category_name",
         Date: "date",
       },
       tableColumns1: [
@@ -155,10 +141,11 @@ export default {
     generatePdf() {
       const vm = this;
       const columns = [
+        { title: "Vendor name", dataKey: "vendor_name" },
         { title: "Name", dataKey: "name" },
         { title: "Amount", dataKey: "amount" },
         { title: "Note", dataKey: "note" },
-        { title: "Category name", dataKey: "category_name" },
+
         { title: "Date", dataKey: "date" },
       ];
       const doc = new jsPDF("p", "pt");
