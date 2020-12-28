@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\VendorExpense;
 use Illuminate\Http\Request;
+use App\Http\Resources\VendorExpense as VendorExpenseResource;
+use Carbon\Carbon;
+
 
 class VendorExpenseController extends Controller
 {
@@ -14,7 +17,8 @@ class VendorExpenseController extends Controller
      */
     public function index()
     {
-        //
+        $expenses = VendorExpense::latest()->get();
+        return VendorExpenseResource::collection($expenses);
     }
 
     /**
@@ -35,7 +39,21 @@ class VendorExpenseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+            'name'=>'required|min:1|max:255',
+            'vendor_id'=>'required|integer',
+            'note'=>'nullable|max:1000',
+            'amount'=>'required|numeric',
+        ]);
+        
+       $expense = new VendorExpense;
+       $expense->name = $request->name;
+       $expense->note = $request->note;
+       $expense->vendor_id = $request->vendor_id;
+       $expense->amount = $request->amount;
+       $expense->save();
+
+       return new VendorExpenseResource($expense);
     }
 
     /**
@@ -69,7 +87,20 @@ class VendorExpenseController extends Controller
      */
     public function update(Request $request, VendorExpense $vendorExpense)
     {
-        //
+        $this->validate($request,[
+            'name'=>'required|min:1|max:255',
+            'vendor_id'=>'required|integer',
+            'note'=>'nullable|max:1000',
+            'amount'=>'required|numeric',
+        ]);
+        
+       $vendorExpense->name = $request->name;
+       $vendorExpense->note = $request->note;
+       $vendorExpense->vendor_id = $request->vendor_id;
+       $vendorExpense->amount = $request->amount;
+       $vendorExpense->save();
+
+       return new VendorExpenseResource($vendorExpense);
     }
 
     /**
@@ -80,6 +111,7 @@ class VendorExpenseController extends Controller
      */
     public function destroy(VendorExpense $vendorExpense)
     {
-        //
+        $vendorExpense->delete();
+        return response()->json(null, 204); 
     }
 }

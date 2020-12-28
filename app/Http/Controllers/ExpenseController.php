@@ -58,8 +58,8 @@ class ExpenseController extends Controller
     {
         $this->validate($request,[
             'name'=>'required|min:1|max:255',
-            'category_id'=>'required|integer|max:255',
-            'note'=>'nullable|max:255',
+            'category_id'=>'required|integer',
+            'note'=>'nullable|max:1000',
             'date'=>'required',
             'amount'=>'required|numeric',
         ]);

@@ -2,7 +2,7 @@
   <div class="container" v-if="shipment">
     <div class="row">
       <div class="col text-center">
-        <h1 class="border-top text-white bg-box-dark p-4">FREIGHT INVOICE</h1>
+        <h1 class="text-white bg-box-dark py-2 px-4">FREIGHT INVOICE</h1>
       </div>
 
       <div class="col">
@@ -14,14 +14,14 @@
       </div>
     </div>
 
-    <div class="row p-3 only-print">
-      <div class="col-6 bg-light-box border-top">
-        <h1
+    <div class="row px-3 py-1 only-print">
+      <div class="col-6 bg-light-box">
+        <h2
           class="main-title"
           style="font-family: 'Times New Roman'; margin-bottom: -1rem"
         >
           GURUKAL LOGISTICS
-        </h1>
+        </h2>
         <h5>
           <br />Anchepalya, Bangalore - 560073
           <br />
@@ -40,7 +40,7 @@
     </div>
     <div class="row">
       <div class="col">
-        <h3 class="sub-title-red pt-2">
+        <h3 class="sub-title-red">
           <b>INVOICE NO: {{ shipment.freight_invoice_number }}</b>
           <h6 class="border-top-dark pt-1">
             PAYMENT STATUS:
@@ -225,7 +225,7 @@
       </div>
     </div>
 
-    <div class="row mt-1">
+    <div class="row">
       <div class="col text-center">
         <p>
           This is a computer generated document No seal and signature required.
@@ -347,7 +347,7 @@ body {
 }
 
 .logo img {
-  width: 20rem;
+  width: 17rem;
 }
 
 .main-title {

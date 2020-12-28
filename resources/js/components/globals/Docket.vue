@@ -1,5 +1,5 @@
 <template>
-  <fragment>
+  <div :class="[!display ? 'only-print' : '']">
     <div class="only-print">
       <img :src="logo" alt srcset class="bg-logo" />
     </div>
@@ -357,12 +357,12 @@
       </div>
     </div>
     <div class="pagebreak"></div>
-  </fragment>
+  </div>
 </template>
 
 <script>
 export default {
-  props: ["shipment", "copy"],
+  props: ["shipment", "copy", "display"],
   data() {
     return {
       logo: require("./assets/logo-png-2.png"),
@@ -487,3 +487,4 @@ body {
   }
 }
 </style>
+

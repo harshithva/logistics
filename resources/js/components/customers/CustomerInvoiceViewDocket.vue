@@ -2,7 +2,7 @@
   <div>
     <div class="row mt-3 mb-3 ml-3 d-print-none">
       <div class="col-2">
-        <select
+        <!-- <select
           class="custom-select"
           id="inputGroupSelect04"
           aria-label="Example select with button addon"
@@ -13,11 +13,14 @@
           <option value="CONSIGNOR">CONSIGNOR</option>
           <option value="CONSIGNEE">CONSIGNEE</option>
           <option value="CARGO COPY">CARGO COPY</option>
-        </select>
+        </select> -->
       </div>
       <div class="col-4"></div>
       <div class="col">
-        <a class="btn btn-primary text-white" onclick="javascript:window.print()">
+        <a
+          class="btn btn-primary text-white"
+          onclick="javascript:window.print()"
+        >
           <i class="fas fa-print"></i> Print Docket
         </a>
         <!-- <a class="btn btn-primary text-white" v-print="'#docket'">
@@ -40,25 +43,27 @@
             <div class="row">
               <div class="col-3">
                 <p>Sender Details</p>
-                <p>Pickup Location : {{shipment.package_pickup_address}}</p>
-                <p>Sender name : {{shipment.sender.name}}</p>
-                <p>Contact : {{shipment.sender.phone}}</p>
+                <p>Pickup Location : {{ shipment.package_pickup_address }}</p>
+                <p>Sender name : {{ shipment.sender.name }}</p>
+                <p>Contact : {{ shipment.sender.phone }}</p>
               </div>
               <div class="col-3">
                 <p>Receiver Details</p>
-                <p>Dropoff Location : {{shipment.delivery_address}}</p>
-                <p>Receiver Name : {{shipment.receiver.name}}</p>
-                <p>Contact : {{shipment.receiver.phone}}</p>
+                <p>Dropoff Location : {{ shipment.delivery_address }}</p>
+                <p>Receiver Name : {{ shipment.receiver.name }}</p>
+                <p>Contact : {{ shipment.receiver.phone }}</p>
               </div>
               <div class="col-3">
                 <p>Transport Details</p>
-                <p>Driver Name : {{shipment.transport_driver_name}}</p>
-                <p>Contact : {{shipment.transport_driver_phone}}</p>
-                <p>Vehicle Details : {{shipment.transport_driver_vehicle}}</p>
+                <p>Driver Name : {{ shipment.transport_driver_name }}</p>
+                <p>Contact : {{ shipment.transport_driver_phone }}</p>
+                <p>Vehicle Details : {{ shipment.transport_driver_vehicle }}</p>
               </div>
               <div class="col-3">
                 <p>Current Status</p>
-                <p v-if="shipment_status.location">Location : {{shipment_status.location}}</p>
+                <p v-if="shipment_status.location">
+                  Location : {{ shipment_status.location }}
+                </p>
                 <p v-else>Location: Not Updated</p>
               </div>
             </div>
@@ -67,10 +72,14 @@
       </div>
     </div>
     <div>
-      <Docket :shipment="shipment" :copy="docket_copy_text"></Docket>
-      <!-- <div>
-        <Docket :shipment="shipment" :copy="copy" v-for="(copy,index) in copies" :key="index"></Docket>
-      </div>-->
+      <Docket
+        :shipment="shipment"
+        :copy="docket_copy_text"
+        display="false"
+      ></Docket>
+      <Docket :shipment="shipment" copy="CONSIGNOR" display="false"></Docket>
+      <Docket :shipment="shipment" copy="CONSIGNEE" display="false"></Docket>
+      <Docket :shipment="shipment" copy="CARGO COPY" display="false"></Docket>
     </div>
   </div>
 </template>
