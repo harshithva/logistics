@@ -167,7 +167,7 @@
                 </div>
 
                 <h6 class="mb-4">Transport Details</h6>
-                <div class="row">
+                <!-- <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
                       <input
@@ -188,7 +188,7 @@
                       />
                     </div>
                   </div>
-                </div>
+                </div> -->
                 <div class="row mb-2">
                   <div class="col-md-4">
                     <div class="form-group">
@@ -247,7 +247,7 @@
                   </div>
                   <div class="col">
                     <div class="form-group">
-                      <label for>Docekt no</label>
+                      <label for>Docket no</label>
                       <input
                         type="text"
                         class="form-control"
@@ -273,6 +273,16 @@
                           >Add new</router-link
                         >
                       </div>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <h6 class="mb-2">Commission</h6>
+                      <input
+                        type="text"
+                        class="form-control"
+                        v-model="shipment.vendor_commission"
+                      />
                     </div>
                   </div>
                   <div class="col-md-3">

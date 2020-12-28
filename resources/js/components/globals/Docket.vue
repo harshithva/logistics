@@ -396,9 +396,8 @@ body {
 }
 
 .bg-logo {
-  top: 10%;
-  left: 8%;
-  position: absolute;
+  margin-bottom: -90rem;
+  margin-left: 5rem;
   width: 60rem;
   z-index: 2;
   opacity: 0.1;
@@ -466,9 +465,9 @@ body {
 }
 
 .logo {
-  position: absolute;
-  top: 15%;
-  right: 16%;
+  margin-left: -56rem;
+
+  margin-top: -8rem;
 }
 
 .logo img {
@@ -480,11 +479,6 @@ body {
   font-weight: bolder;
 }
 @media print {
-  .logo {
-    position: absolute;
-    top: 0.5%;
-    right: 16%;
-  }
 }
 </style>
 

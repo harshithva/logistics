@@ -131,7 +131,7 @@
                 </div>
 
                 <h6 class="mb-4">Transport Details</h6>
-                <div class="row">
+                <!-- <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
                       <input
@@ -152,7 +152,7 @@
                       />
                     </div>
                   </div>
-                </div>
+                </div> -->
                 <div class="row mb-2">
                   <div class="col-md-4">
                     <div class="form-group">
@@ -211,6 +211,16 @@
                           >Add new</router-link
                         >
                       </div>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <h6 class="mb-2">Commission</h6>
+                      <input
+                        type="text"
+                        class="form-control"
+                        v-model="form.vendor_commission"
+                      />
                     </div>
                   </div>
                   <div class="col-md-3">
@@ -769,6 +779,7 @@ export default {
         vendor_id: "",
         vendor_total: 0,
         vendor_advance: 0,
+        vendor_commission: 0,
       }),
       file: null,
       paymentType: null,

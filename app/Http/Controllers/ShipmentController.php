@@ -100,6 +100,7 @@ class ShipmentController extends Controller
             "vendor_id" => 'required|numeric',
             "vendor_total" => 'required|numeric',
             "vendor_advance" => 'required|numeric',
+            "vendor_commission" => 'required|numeric',
            
         ]);
  
@@ -236,6 +237,7 @@ class ShipmentController extends Controller
         $vendor->vendor_id = $request->vendor_id;
         $vendor->total = $request->vendor_total;
         $vendor->advance = $request->vendor_advance;
+        $vendor->commission = $request->vendor_commission;
         $vendor->save();
 
 
@@ -358,6 +360,7 @@ class ShipmentController extends Controller
             "vendor_id" => 'required|numeric',
             "vendor_total" => 'required|numeric',
             "vendor_advance" => 'required|numeric',
+            "vendor_commission" => 'required|numeric',
         ]);
 
       
@@ -471,6 +474,7 @@ class ShipmentController extends Controller
           $vendor->vendor_id = $request->vendor_id;
           $vendor->total = $request->vendor_total;
           $vendor->advance = $request->vendor_advance;
+          $vendor->commission = $request->vendor_commission;
           $vendor->save();
 
         return response()->json($shipment,200);

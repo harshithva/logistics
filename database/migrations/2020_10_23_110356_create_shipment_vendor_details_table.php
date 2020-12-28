@@ -18,6 +18,7 @@ class CreateShipmentVendorDetailsTable extends Migration
             $table->unsignedBigInteger('shipment_id');
             $table->unsignedBigInteger('vendor_id');
             $table->integer('total')->default(0);
+            $table->decimal('commission',10, 2)->default(0);
             $table->integer('advance')->default(0);
             $table->timestamps();
             $table->foreign('shipment_id')->references('id')->on('shipments')->onDelete('cascade');

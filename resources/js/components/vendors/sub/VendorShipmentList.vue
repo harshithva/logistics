@@ -93,6 +93,10 @@ export default {
           field: "delivery_address",
         },
         {
+          label: "Commission",
+          field: "commission",
+        },
+        {
           label: "Total",
           field: "total",
         },

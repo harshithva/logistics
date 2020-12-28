@@ -8,6 +8,8 @@ use App\Shipment;
 use App\Quote;
 use App\Payment;
 use App\ShipmentStatus;
+use App\ShipmentVendorDetail;
+use App\VendorPayment;
 use Carbon\Carbon;
 use Helpers;
 use App\Http\Resources\Customer as CustomerResource;
@@ -244,12 +246,16 @@ class CustomerController extends Controller
         $pending_payment = Shipment::sum('charge_total') - (Shipment::sum('charge_advance_paid') +  Payment::sum('amount'));
       
         $advance = Shipment::sum('charge_advance_paid') + Payment::sum('amount');
+
+        $upcoming_expense = ShipmentVendorDetail::sum('total') - (ShipmentVendorDetail::sum('advance') +VendorPayment::sum('amount'));
+
        $data =  (object) ['earnings' =>    $advance,
     'customers' => User::where('role','customer')->count(),
     'quotations' =>  Quote::count(),
     'shipments' =>  Shipment::count(),
     'pending_delivery' => $pending,
-    'pending_payment' => $pending_payment
+    'pending_payment' => $pending_payment,
+    'upcoming_expense' => $upcoming_expense,
     ];
 
     $data->overview = $overview;
