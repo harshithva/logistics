@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row">
       <div class="col text-center">
-        <h1 class="text-white bg-box-dark p-4">QUOTATION</h1>
+        <h1 class="text-white bg-box-dark p-4">{{ type }}</h1>
       </div>
 
       <div class="col">
@@ -53,7 +53,7 @@
         </h5>
       </div>
     </div>
-    <div class="row">
+    <div class="row" v-if="type === 'QUOTATION'">
       <div class="col text-center">
         <h3>FOR TRANSIT</h3>
       </div>
@@ -73,7 +73,7 @@
       </div>
     </div>
 
-    <div class="row mt-2">
+    <div class="row mt-2" v-if="type === 'QUOTATION'">
       <div class="col text-center">
         <h5 v-if="quote.list">
           SUB: TRANSIT QUOTE FOR
@@ -85,7 +85,7 @@
     </div>
 
     <div class="row mt-2">
-      <div class="col">
+      <div class="col" v-if="type === 'QUOTATION'">
         <p v-if="quote.list">
           Dear Sir,
           <br />
@@ -98,10 +98,24 @@
           }}.
         </p>
       </div>
+      <div class="col" v-else>
+        <p v-if="quote.list">
+          Dear Sir,
+          <br />
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          We request you to kindly release the following advance amount
+          mentioned for transportation to
+          {{
+            quote.list[0].to.charAt(0).toUpperCase() +
+            quote.list[0].to.slice(1)
+          }}.
+        </p>
+      </div>
     </div>
+
     <div class="row">
       <div class="col text-center">
-        <h4>QUOTATION</h4>
+        <h4>{{ type }}</h4>
       </div>
     </div>
     <div class="row mt-2">
@@ -136,6 +150,9 @@
         </table>
       </div>
     </div>
+    <div class="row mt-2" v-if="this.type === 'PROFORMA INVOICE'">
+      <div class="col">Remarks:</div>
+    </div>
 
     <div class="row mt-2 mr-1 ml-1">
       <div class="col bg-dark text-white pt-2">
@@ -169,12 +186,12 @@
 
     <div class="row mt-4">
       <div class="col-10">
-        <p>
+        <b>
           Bank Details
           <br />Name : Axis Bank <br />8th Mile Branch <br />A/c No.:
           918020030455515 <br />IFSC: UTIB0002926
           <br />
-        </p>
+        </b>
       </div>
 
       <div class="col">
@@ -203,7 +220,7 @@
 
 <script>
 export default {
-  props: ["quote"],
+  props: ["quote", "type"],
   data() {
     return {
       logo: require("./assets/logo-png-2.png"),

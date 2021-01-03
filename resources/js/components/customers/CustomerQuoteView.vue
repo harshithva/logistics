@@ -1,8 +1,8 @@
 <template>
   <fragment>
     <div class="row mt-3 mb-3 ml-3 d-print-none">
-      <div class="col-6"></div>
-      <div class="col-6">
+      <div class="col-4"></div>
+      <div class="col">
         <a
           class="btn btn-primary text-white"
           onclick="javascript:window.print()"
@@ -35,9 +35,23 @@
         >
           <i class="fas fa-edit"></i> Edit
         </router-link>
+        <button
+          class="btn btn-secondary ml-2"
+          @click.prevent="changeType"
+          v-if="this.type === 'QUOTATION'"
+        >
+          <i class="fas fa-scroll"></i> Proforma Invoice
+        </button>
+        <button
+          class="btn btn-secondary ml-2"
+          @click.prevent="changeType"
+          v-else
+        >
+          <i class="fas fa-scroll"></i> Quotation
+        </button>
       </div>
     </div>
-    <Quote v-if="quote" :quote="quote"></Quote>
+    <Quote v-if="quote" :quote="quote" :type="type"></Quote>
   </fragment>
 </template>
 
@@ -46,6 +60,7 @@ export default {
   data() {
     return {
       showUpdation: true,
+      type: "QUOTATION",
     };
   },
   methods: {
@@ -98,6 +113,11 @@ export default {
             footer: "Make sure customer email is valid.",
           });
         });
+    },
+    changeType() {
+      this.type === "QUOTATION"
+        ? (this.type = "PROFORMA INVOICE")
+        : (this.type = "QUOTATION");
     },
   },
   computed: {
