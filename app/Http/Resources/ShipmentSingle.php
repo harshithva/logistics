@@ -59,6 +59,7 @@ class ShipmentSingle extends JsonResource
             "vendor_name" => $this->vendor_details->vendor->name,
             "vendor_balance" => (int)$this->vendor_details->total-  ((int)$this->vendor_details->advance + (int)VendorPayment::where('vendor_id', $this->vendor_details->vendor_id)->where('shipment_id',$this->id)->sum('amount')),
        
+            'tds_amount'=>$this->tds_amount,
             'document'=>$this->document,
             'updated_at'=>$this->updated_at,
         

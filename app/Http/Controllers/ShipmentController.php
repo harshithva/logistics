@@ -702,4 +702,24 @@ class ShipmentController extends Controller
         return response()->json('sent',200);
     }
        
+
+      /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Shipment  $shipment
+     * @return \Illuminate\Http\Response
+     */
+    public function add_tds_payment(Request $request, Shipment $shipment)
+    {
+        $request->validate([
+        'tds_amount' => 'required',
+        ]);
+
+        $shipment->tds_amount = $request->tds_amount;
+        $shipment->save();
+
+        return response()->json($shipment,200);
+   
+    }
 }

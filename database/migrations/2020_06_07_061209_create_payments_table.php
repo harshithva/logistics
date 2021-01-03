@@ -17,6 +17,7 @@ class CreatePaymentsTable extends Migration
             $table->id();
             $table->string('payment_type')->default('cash');
             $table->decimal('amount',10,2)->default(0);
+ 
             $table->date('payment_date')->nullable();
             $table->string('bank_name')->nullable();
             $table->string('upi_ref_id')->nullable();

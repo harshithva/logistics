@@ -65,6 +65,7 @@ Route::post("quotations/{id}/quote_send_email", 'QuoteController@quote_send_emai
 
 Route::get("shipments/{id}/balance_amount", 'ShipmentController@balance_amount');
 Route::get("shipments/{id}/shipment_status", 'ShipmentController@shipment_status');
+Route::post("shipments/{shipment}/add_tds_payment", 'ShipmentController@add_tds_payment');
 Route::post("shipments/{id}/shipment_send_email", 'ShipmentController@shipment_send_email');
 Route::post("shipments/{id}/shipment_send_docket", 'ShipmentController@shipment_send_docket');
 

@@ -11,6 +11,7 @@
           >
         </p>
         <p>Balance Amount : {{ balance_amount.balance_amount }}</p>
+        <p>TDS Amount: {{ shipment.tds_amount }}</p>
       </div>
       <div class="col-9">
         <a
@@ -57,6 +58,17 @@
             <i class="fas fa-rupee-sign"></i>
           </span>
           Add Payment
+        </button>
+        <button
+          type="button"
+          class="btn btn-secondary btn-sm ml-2"
+          data-toggle="modal"
+          data-target="#tds_modal"
+        >
+          <span>
+            <i class="fas fa-rupee-sign"></i>
+          </span>
+          Update TCS Payment
         </button>
         <router-link
           :to="'/admin/shipments/' + shipment.id + '/edit'"
@@ -111,17 +123,20 @@
       </div>
     </div>
     <AddPayment :shipment="shipment"></AddPayment>
+    <UpdateTdsPayment :shipment="shipment"></UpdateTdsPayment>
   </div>
 </template>
 
 <script>
 import AddPayment from "../globals/AddPayment";
+import UpdateTdsPayment from "../globals/UpdateTdsPayment";
 export default {
   data() {
     return {};
   },
   components: {
     AddPayment,
+    UpdateTdsPayment,
   },
   props: ["shipment", "balance_amount", "shipment_status"],
   methods: {

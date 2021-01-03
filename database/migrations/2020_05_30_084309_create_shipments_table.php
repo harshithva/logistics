@@ -50,7 +50,9 @@ class CreateShipmentsTable extends Migration
             $table->string('bill_to')->nullable();
             $table->string('docket_no')->nullable();
             $table->date('date')->nullable();
-
+            
+            // tax
+            $table->decimal('tds_amount',10,2)->default(0);
 
             $table->unsignedBigInteger('sender_id');
             $table->unsignedBigInteger('receiver_id');
