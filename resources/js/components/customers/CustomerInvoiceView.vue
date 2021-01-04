@@ -8,7 +8,7 @@
     <Invoice
       :shipment="shipment"
       :shipment_status="shipment_status"
-      :balance_amount="balance_amount"
+      :balance_amount="shipment.balance"
     ></Invoice>
 
     <!-- Payment Modal-->

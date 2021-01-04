@@ -64,6 +64,7 @@ export default {
       }),
     };
   },
+
   props: ["shipment", "balance_amount"],
   methods: {
     addPayment() {
@@ -112,8 +113,12 @@ export default {
         });
     },
   },
-  mounted() {
-    this.tds_amount = this.balance_amount;
+  mounted() {},
+
+  watch: {
+    balance_amount: function (newVal, oldVal) {
+      this.payment.tds_amount = this.balance_amount;
+    },
   },
 };
 </script>

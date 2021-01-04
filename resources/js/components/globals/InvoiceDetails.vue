@@ -63,6 +63,7 @@
           Add Payment
         </button>
         <button
+          @click="updateBalance"
           type="button"
           class="btn btn-secondary btn-sm ml-2"
           data-toggle="modal"
@@ -71,7 +72,7 @@
           <span>
             <i class="fas fa-rupee-sign"></i>
           </span>
-          Update TCS Payment
+          Update TDS Payment
         </button>
         <router-link
           :to="'/admin/shipments/' + shipment.id + '/edit'"
@@ -175,6 +176,9 @@ export default {
             footer: "Check Whether Sender phone number is valid",
           });
         });
+    },
+    updateBalance() {
+      this.$store.commit("updateShipmentBalance", this.shipment.balance);
     },
   },
 };

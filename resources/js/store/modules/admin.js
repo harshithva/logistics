@@ -33,8 +33,8 @@ export default ({
         call_logs: [],
         vendors: [],
         vendor_shipments: [],
-        vendor_expenses: []
-
+        vendor_expenses: [],
+        shipment_balance: 0
 
     },
     getters: {
@@ -133,8 +133,15 @@ export default ({
         getVendorExpenses(state) {
             return state.vendor_expenses;
         },
+        getShipmentBalance(state) {
+            return state.shipment_balance;
+        },
     },
     mutations: {
+        updateShipmentBalance(state, balance) {
+
+            state.shipment_balance = balance;
+        },
         retrieveCustomers(state, customers) {
             state.customers = customers;
             state.filteredCustomers = customers
