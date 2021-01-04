@@ -29,24 +29,7 @@ class ShipmentController extends Controller
     public function index()
     {
        
-        $shipments = Shipment::all();
-
-        foreach ($shipments as $key => $shipment) {
-        
-            $total_paid = $shipment->payment->sum('amount');
-            
-            if($total_paid > 0)
-            {
-                $balance_amount = ($shipment->charge_total - $total_paid) -  $shipment->charge_advance_paid;
-            }
-        else {
-            $balance_amount = ($shipment->charge_total -  $shipment->charge_advance_paid);
-        }
-            $shipment->balance_amount = $balance_amount;
-
-        }
-
-        
+        $shipments = Shipment::all();    
         return ShipmentResource::collection($shipments);
 
 
@@ -138,6 +121,7 @@ class ShipmentController extends Controller
         $shipment->charge_total = $request->charge_total;
         $shipment->charge_advance_paid = $request->charge_advance_paid;
         $shipment->charge_balance = $request->charge_balance;
+        $shipment->discount = $request->discount;
 
        
         $shipment->payment_type = $request->payment_type;
@@ -361,6 +345,7 @@ class ShipmentController extends Controller
             "vendor_total" => 'required|numeric',
             "vendor_advance" => 'required|numeric',
             "vendor_commission" => 'required|numeric',
+            "discount" => 'required|numeric',
         ]);
 
       
@@ -396,6 +381,7 @@ class ShipmentController extends Controller
         $shipment->charge_total = $request->charge_total;
         $shipment->charge_advance_paid = $request->charge_advance_paid;
         $shipment->charge_balance = $request->charge_balance;
+        $shipment->discount = $request->discount;
 
     
         $shipment->payment_type = $request->payment_type;

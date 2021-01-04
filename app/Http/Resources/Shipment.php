@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Helpers;
 
 class Shipment extends JsonResource
 {
@@ -24,9 +25,10 @@ class Shipment extends JsonResource
             'current_status' => $this->status,
             'docket_no' => $this->docket_no,
             'sender_id' => $this->sender->id,
-            'balance_amount' => $this->balance_amount,
+            // 'balance_amount' => $this->balance_amount,
             'charge_total' => $this->charge_total,
-      
+            "balance" => Helpers::getShipmentBalanceAmount($this),
+            
            
           ];
     }

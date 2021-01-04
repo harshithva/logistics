@@ -343,7 +343,7 @@
                 <hr />
                 <h6 class="mb-4">Additional Expenses</h6>
                 <div class="row mb-2">
-                  <div class="col-md-4">
+                  <div class="col-md-3">
                     <div class="form-group">
                       <label for="transportation">Transportation</label>
                       <input
@@ -354,7 +354,7 @@
                       />
                     </div>
                   </div>
-                  <div class="col-md-4">
+                  <div class="col-md-3">
                     <div class="form-group">
                       <label>Handling</label>
                       <input
@@ -376,8 +376,6 @@
                       />
                     </div>
                   </div>
-                </div>
-                <div class="row">
                   <div class="col-md-3">
                     <div class="form-group">
                       <label>Insurance</label>
@@ -389,6 +387,8 @@
                       />
                     </div>
                   </div>
+                </div>
+                <div class="row">
                   <div class="col-md-3">
                     <div class="form-group">
                       <label>ODC Charges</label>
@@ -419,6 +419,17 @@
                         class="form-control"
                         @change="calculateTotal"
                         v-model="form.charge_advance_paid"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label>Discount</label>
+                      <input
+                        type="number"
+                        class="form-control"
+                        @change="calculateTotal"
+                        v-model="form.discount"
                       />
                     </div>
                   </div>
@@ -780,6 +791,7 @@ export default {
         vendor_total: 0,
         vendor_advance: 0,
         vendor_commission: 0,
+        discount: 0,
       }),
       file: null,
       paymentType: null,
@@ -918,7 +930,8 @@ export default {
 
       this.form.charge_tax_amount =
         (total * parseInt(this.form.charge_tax_percent)) / 100;
-      this.form.charge_total = this.form.charge_tax_amount + total;
+      this.form.charge_total =
+        this.form.charge_tax_amount + total - this.form.discount;
 
       if (this.form.charge_advance_paid > 0) {
         this.form.charge_balance =

@@ -70,12 +70,12 @@
             <span v-if="props.column.field == 'payment'">
               <span
                 class="badge badge-pill badge-success"
-                v-if="props.row.balance_amount <= 0"
+                v-if="props.row.balance <= 0"
                 >Paid</span
               >
               <span
                 class="badge badge-pill badge-danger"
-                v-else-if="props.row.balance_amount == props.row.charge_total"
+                v-else-if="props.row.balance == props.row.charge_total"
                 >Pending</span
               >
 

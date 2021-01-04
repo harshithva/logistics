@@ -107,4 +107,12 @@ use Carbon\Carbon;
     }
 
 
+
+    public static function getShipmentBalanceAmount($shipment)
+    {
+      $total_paid = $shipment->payment->sum('amount');
+      $balance_amount = $shipment->charge_total - $total_paid -  $shipment->charge_advance_paid - $shipment->tds_amount;
+      return $balance_amount;
+    }
+
  }

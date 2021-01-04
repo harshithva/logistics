@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 use App\VendorPayment;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Helpers;
 
 class ShipmentSingle extends JsonResource
 {
@@ -15,6 +16,7 @@ class ShipmentSingle extends JsonResource
      */
     public function toArray($request)
     {
+      
         return [
             'id' => $this->id,
              "bill_to" => $this->bill_to,
@@ -29,6 +31,9 @@ class ShipmentSingle extends JsonResource
             "charge_tax_amount" => $this->charge_tax_amount,
             "charge_tax_percent" => $this->charge_tax_percent,
             "charge_total" => $this->charge_total,
+            "balance" => Helpers::getShipmentBalanceAmount($this),
+            
+            "discount" => $this->discount,
             "charge_transportation" => $this->charge_transportation,
             "created_at" => $this->created_at,
             "date" => $this->date,

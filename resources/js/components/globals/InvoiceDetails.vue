@@ -10,7 +10,10 @@
             >{{ shipment_status.status }}</span
           >
         </p>
-        <p>Balance Amount : {{ balance_amount.balance_amount }}</p>
+        <p>
+          Balance Amount :
+          {{ shipment.balance }}
+        </p>
         <p>TDS Amount: {{ shipment.tds_amount }}</p>
       </div>
       <div class="col-9">
@@ -123,7 +126,10 @@
       </div>
     </div>
     <AddPayment :shipment="shipment"></AddPayment>
-    <UpdateTdsPayment :shipment="shipment"></UpdateTdsPayment>
+    <UpdateTdsPayment
+      :shipment="shipment"
+      :balance_amount="balance_amount.balance_amount"
+    ></UpdateTdsPayment>
   </div>
 </template>
 

@@ -243,13 +243,13 @@ class CustomerController extends Controller
             }
         }
 
-        $pending_payment = Shipment::sum('charge_total') - (Shipment::sum('charge_advance_paid') +  Payment::sum('amount'));
+        $pending_payment = Shipment::sum('charge_total') - (Shipment::sum('charge_advance_paid') +  Payment::sum('amount')) - Shipment::sum('tds_amount');
       
-        $advance = Shipment::sum('charge_advance_paid') + Payment::sum('amount');
+        $earnings = Shipment::sum('charge_advance_paid') + Payment::sum('amount') + Shipment::sum('tds_amount');
 
         $upcoming_expense = ShipmentVendorDetail::sum('total') - (ShipmentVendorDetail::sum('advance') +VendorPayment::sum('amount'));
 
-       $data =  (object) ['earnings' =>    $advance,
+       $data =  (object) ['earnings' =>    $earnings,
     'customers' => User::where('role','customer')->count(),
     'quotations' =>  Quote::count(),
     'shipments' =>  Shipment::count(),

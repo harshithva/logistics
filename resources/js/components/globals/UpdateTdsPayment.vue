@@ -64,7 +64,7 @@ export default {
       }),
     };
   },
-  props: ["shipment"],
+  props: ["shipment", "balance_amount"],
   methods: {
     addPayment() {
       this.payment.shipment_id = this.shipment.id;
@@ -112,6 +112,8 @@ export default {
         });
     },
   },
-  created() {},
+  mounted() {
+    this.tds_amount = this.balance_amount;
+  },
 };
 </script>

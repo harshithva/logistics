@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Helpers;
 
 class Package extends JsonResource
 {
@@ -35,6 +36,7 @@ class Package extends JsonResource
             'shipment_receiver_gst' => $this->receiver->gst,
             'packages_description' =>    $packages_description,
             'shipment_payment_type' => $this->payment_type,
+            'shipment_tds_amount' => $this->tds_amount,
           ];
     }
 

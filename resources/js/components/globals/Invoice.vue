@@ -44,9 +44,8 @@
           <b>INVOICE NO: {{ shipment.freight_invoice_number }}</b>
           <h6 class="border-top-dark pt-1">
             PAYMENT STATUS:
-            <span v-if="balance_amount.balance_amount <= 0">PAID</span>
-            <span
-              v-else-if="balance_amount.balance_amount == shipment.charge_total"
+            <span v-if="shipment.balance <= 0">PAID</span>
+            <span v-else-if="shipment.balance == shipment.charge_total"
               >PENDING</span
             >
 
@@ -150,8 +149,12 @@
             <td>{{ shipment.charge_advance_paid }}</td>
           </tr>
           <tr>
+            <th class="bg-red">Discount</th>
+            <td>{{ shipment.discount }}</td>
+          </tr>
+          <tr>
             <th class="bg-red">Balance Amount</th>
-            <td>{{ balance_amount.balance_amount }}</td>
+            <td>{{ shipment.balance }}</td>
           </tr>
         </table>
 

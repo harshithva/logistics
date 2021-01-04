@@ -91,6 +91,7 @@ export default {
         To: "shipment_delivery_address",
         Docket: "shipment_docket_no",
         "Freight Invoice Number": "shipment_freight_invoice_number",
+        TDS: "shipment_tds_amount",
         "Charge Total": "shipment_charge_total",
         "Sender Name": "shipment_sender_name",
         "Receiver Name": "shipment_receiver_name",
@@ -145,6 +146,11 @@ export default {
           field: "shipment_charge_total",
           numeric: false,
         },
+        {
+          label: "TDS",
+          field: "shipment_tds_amount",
+          numeric: false,
+        },
 
         {
           label: "Sender Name",
@@ -190,6 +196,7 @@ export default {
           title: "Invoice Number",
           dataKey: "shipment_freight_invoice_number",
         },
+        { title: "TDS", dataKey: "shipment_tds_amount" },
         { title: "Charge Total", dataKey: "shipment_charge_total" },
         { title: "Sender Name", dataKey: "shipment_sender_name" },
         { title: "Receiver Name", dataKey: "shipment_receiver_name" },

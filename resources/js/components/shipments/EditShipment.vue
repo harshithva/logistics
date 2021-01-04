@@ -425,7 +425,7 @@
 
                 <div v-if="editExpenses">
                   <div class="row mb-2">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                       <div class="form-group">
                         <label for="transportation">Transportation</label>
                         <input
@@ -436,7 +436,7 @@
                         />
                       </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                       <div class="form-group">
                         <label>Handling</label>
                         <input
@@ -458,8 +458,6 @@
                         />
                       </div>
                     </div>
-                  </div>
-                  <div class="row">
                     <div class="col-md-3">
                       <div class="form-group">
                         <label>Insurance</label>
@@ -471,6 +469,8 @@
                         />
                       </div>
                     </div>
+                  </div>
+                  <div class="row">
                     <div class="col-md-3">
                       <div class="form-group">
                         <label>ODC Charges</label>
@@ -501,6 +501,17 @@
                           class="form-control"
                           @change="calculateTotal"
                           v-model="charge_advance_paid"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label>Discount</label>
+                        <input
+                          type="number"
+                          class="form-control"
+                          @change="calculateTotal"
+                          v-model="discount"
                         />
                       </div>
                     </div>
@@ -556,7 +567,7 @@
                 <!-- dont edit expenses -->
                 <div v-else>
                   <div class="row mb-2">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                       <div class="form-group">
                         <label for="transportation">Transportation</label>
                         <input
@@ -568,7 +579,7 @@
                         />
                       </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                       <div class="form-group">
                         <label>Handling</label>
                         <input
@@ -592,8 +603,6 @@
                         />
                       </div>
                     </div>
-                  </div>
-                  <div class="row">
                     <div class="col-md-3">
                       <div class="form-group">
                         <label>Insurance</label>
@@ -606,6 +615,8 @@
                         />
                       </div>
                     </div>
+                  </div>
+                  <div class="row">
                     <div class="col-md-3">
                       <div class="form-group">
                         <label>ODC Charges</label>
@@ -639,6 +650,18 @@
                           class="form-control"
                           @change="calculateTotal"
                           v-model="shipment.charge_advance_paid"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label>Discount</label>
+                        <input
+                          disabled
+                          type="number"
+                          class="form-control"
+                          @change="calculateTotal"
+                          v-model="shipment.discount"
                         />
                       </div>
                     </div>
@@ -993,6 +1016,7 @@ export default {
       charge_tax_percent: 0,
       charge_advance_paid: 0,
       charge_balance: 0,
+      discount: 0,
 
       payment_type: "",
       packagedetails: {
@@ -1104,7 +1128,7 @@ export default {
 
       this.charge_tax_amount =
         (total * parseInt(this.charge_tax_percent)) / 100;
-      this.charge_total = this.charge_tax_amount + total;
+      this.charge_total = this.charge_tax_amount + total - this.discount;
 
       if (this.charge_advance_paid > 0) {
         this.charge_balance =
@@ -1134,6 +1158,7 @@ export default {
       this.charge_tax_percent = this.shipment.charge_tax_percent;
       this.charge_advance_paid = this.shipment.charge_advance_paid;
       this.charge_balance = this.shipment.charge_balance;
+      this.discount = this.shipment.discount;
     },
     getData() {
       this.shipment.charge_transportation = this.charge_transportation;
@@ -1146,6 +1171,7 @@ export default {
       this.shipment.charge_tax_percent = this.charge_tax_percent;
       this.shipment.charge_advance_paid = this.charge_advance_paid;
       this.shipment.charge_balance = this.charge_balance;
+      this.shipment.discount = this.discount;
     },
   },
 

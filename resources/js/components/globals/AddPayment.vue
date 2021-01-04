@@ -172,6 +172,10 @@ export default {
           );
 
           this.balance_amount = this.$store.getters.getShipmentBalanceAmount;
+          this.$store.dispatch(
+            "retrieveSingleShipment",
+            this.$route.params.invoice_id
+          );
 
           this.payment.payment_date = moment(new Date()).format("DD/MM/YYYY");
           this.payment.received_from = "consignor";

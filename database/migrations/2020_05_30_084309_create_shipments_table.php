@@ -53,6 +53,7 @@ class CreateShipmentsTable extends Migration
             
             // tax
             $table->decimal('tds_amount',10,2)->default(0);
+            $table->decimal('discount',10,2)->default(0);
 
             $table->unsignedBigInteger('sender_id');
             $table->unsignedBigInteger('receiver_id');
