@@ -93,6 +93,7 @@ Vue.component('Quote', require('./components/globals/Quote.vue').default);
 
 
 
+
 Vue.component(VueQrcode.name, VueQrcode);
 Vue.component('barcode', VueBarcode);
 Vue.use(BootstrapVue);
