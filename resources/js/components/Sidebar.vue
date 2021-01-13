@@ -33,7 +33,10 @@
       </li>
 
       <!-- Nav Item - Dashboard -->
-      <li class="nav-item active">
+      <li
+        class="nav-item active"
+        v-if="this.$store.getters.getUserData.user.role == 'admin'"
+      >
         <router-link class="nav-link" to="/admin">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span>

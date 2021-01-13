@@ -1,5 +1,5 @@
 <template>
-  <div class="container" v-if="shipment">
+  <div v-if="shipment">
     <div class="row">
       <div class="col text-center">
         <h1 class="text-white bg-box-dark py-2 px-4">FREIGHT INVOICE</h1>
@@ -66,7 +66,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col">
+      <div class="col-6">
         <h5><i class="fas fa-user icon"></i>&nbsp;&nbsp;BILL TO</h5>
         <h5 v-if="shipment.bill_to == 'consignor'">
           {{ shipment.sender.company_name }}
@@ -90,7 +90,7 @@
           GST: {{ shipment.sender.gst }}
         </h5>
       </div>
-      <div class="col">
+      <div class="col-6">
         <h5><i class="fas fa-user icon"></i>&nbsp;&nbsp;CONSIGNOR</h5>
         <h5 class="underline">
           {{ shipment.sender.company_name }}
@@ -330,7 +330,7 @@ body {
 
 .table-print th,
 .table-print td {
-  padding: 0.75rem;
+  padding: 0.5rem;
   vertical-align: top;
   border-top: 1px solid #dee2e6;
 }
@@ -350,7 +350,7 @@ body {
 }
 
 .logo img {
-  width: 17rem;
+  width: 15rem;
 }
 
 .main-title {

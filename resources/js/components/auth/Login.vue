@@ -4,9 +4,10 @@
       :show="dismissCountDown"
       dismissible
       variant="danger"
-      @dismissed="dismissCountDown=0"
+      @dismissed="dismissCountDown = 0"
       @dismiss-count-down="countDownChanged"
-    >Invalid Credentials</b-alert>
+      >Invalid Credentials</b-alert
+    >
 
     <div class="form">
       <div id="username-field" class="field-wrapper input">
@@ -65,19 +66,31 @@
         <div class="field-wrapper toggle-pass">
           <p class="d-inline-block">Show Password</p>
           <label class="switch s-primary">
-            <input type="checkbox" id="toggle-password" class="d-none" @click="showPassword" />
+            <input
+              type="checkbox"
+              id="toggle-password"
+              class="d-none"
+              @click="showPassword"
+            />
             <span class="slider round"></span>
           </label>
         </div>
         <div class="field-wrapper">
-          <button type="submit" class="btn btn-primary" value="submit">Log In</button>
+          <button type="submit" class="btn btn-primary" value="submit">
+            Log In
+          </button>
         </div>
       </div>
 
       <div class="field-wrapper text-center keep-logged-in">
         <div class="n-chk new-checkbox checkbox-outline-primary">
           <label class="new-control new-checkbox checkbox-outline-primary">
-            <input class="new-control-input" type="checkbox" name="remember" id="remember" />
+            <input
+              class="new-control-input"
+              type="checkbox"
+              name="remember"
+              id="remember"
+            />
 
             <span class="new-control-indicator"></span>Keep me logged in
           </label>
@@ -97,7 +110,7 @@ export default {
       email: "",
       password: "",
       dismissSecs: 5,
-      dismissCountDown: 0
+      dismissCountDown: 0,
     };
   },
 
@@ -107,7 +120,7 @@ export default {
       this.$store
         .dispatch("login", {
           email: this.email,
-          password: this.password
+          password: this.password,
         })
         .then(() => {
           this.email = "";
@@ -117,12 +130,12 @@ export default {
           if (userInfo.user.role == "admin") {
             window.location = "/admin";
           } else if (userInfo.user.role == "employee") {
-            window.location = "/admin";
+            window.location = "/admin/shipments/create";
           } else if (userInfo.user.role == "customer") {
             window.location = "/customer";
           }
         })
-        .catch(err => {
+        .catch((err) => {
           this.dismissCountDown = 10;
         });
     },
@@ -139,7 +152,7 @@ export default {
       } else {
         x.type = "password";
       }
-    }
-  }
+    },
+  },
 };
 </script>

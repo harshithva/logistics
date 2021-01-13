@@ -1,5 +1,5 @@
 <template>
-  <fragment>
+  <fragment v-if="this.$store.getters.getUserData.user.role == 'admin'">
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
       <h1

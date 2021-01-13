@@ -4,7 +4,7 @@
       <footer class="sticky-footer bg-white d-print-none">
         <div class="container my-auto">
           <div class="copyright text-center my-auto">
-            <span>Copyright &copy; Your Website 2020</span>
+            <span>Copyright &copy; Your Website {{year}}</span>
           </div>
         </div>
       </footer>
@@ -41,3 +41,13 @@
   </div>
   </fragment>
 </template>
+
+<script>
+export default {
+  computed: {
+    year() {
+      return moment().format("YYYY");
+    },
+  },
+};
+</script>
