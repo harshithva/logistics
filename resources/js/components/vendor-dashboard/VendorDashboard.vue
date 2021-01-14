@@ -10,10 +10,7 @@
           <div>
             <b-tabs content-class="mt-3">
               <b-tab title="Shipments" active>
-                <VendorShipmentList
-                  :shipments="shipments"
-                  :role="$store.getters.getUserData.user.id"
-                ></VendorShipmentList>
+                <VendorShipmentList :shipments="shipments"></VendorShipmentList>
               </b-tab>
               <b-tab title="Edit"
                 ><p><EditUser v-if="user" :form="user"></EditUser></p

@@ -76,7 +76,7 @@
 <script>
 import AddVendorPayment from "./AddVendorPayment";
 export default {
-  props: ["shipments", "role"],
+  props: ["shipments"],
   components: {
     AddVendorPayment,
   },
@@ -125,6 +125,11 @@ export default {
   methods: {
     openPaymentModal(e) {
       this.data = e;
+    },
+  },
+  computed: {
+    role() {
+      return this.$store.getters.getUserData.user.role;
     },
   },
 };

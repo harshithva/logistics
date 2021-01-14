@@ -148,7 +148,7 @@
             <th class="bg-red">Advance Paid</th>
             <td>{{ shipment.charge_advance_paid }}</td>
           </tr>
-          <tr>
+          <tr v-if="shipment.discount > 0">
             <th class="bg-red">Discount</th>
             <td>{{ shipment.discount }}</td>
           </tr>
