@@ -121,7 +121,7 @@ class CustomerController extends Controller
         $request->validate([
             'name'=>'required|max:255',
             'email'=>'required|email|max:255',
-            'password'=>'max:255',
+        
             'gst'=>'max:255',
             'address'=>'max:500',
             'phone'=>'max:255',
@@ -130,10 +130,7 @@ class CustomerController extends Controller
         $customer = User::findOrFail($id);
         $customer->name = $request->name;
         $customer->email = $request->email;
-        if($request->password !== "")
-        {
-            $customer->password = $request->password;
-        }
+      
         $customer->company_name = $request->company_name;
         $customer->gst = $request->gst;
         $customer->phone = $request->phone;

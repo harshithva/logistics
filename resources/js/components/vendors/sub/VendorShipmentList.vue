@@ -31,6 +31,7 @@
 
         <span v-if="props.column.field == 'action'">
           <router-link
+            v-if="role == 'admin'"
             :to="
               '/admin/customers/' +
               props.row.sender_id +
@@ -46,6 +47,7 @@
           </router-link>
 
           <a
+            v-if="role == 'admin'"
             v-b-modal.modal-1
             variant="primary"
             class="btn btn-sm"
@@ -74,7 +76,7 @@
 <script>
 import AddVendorPayment from "./AddVendorPayment";
 export default {
-  props: ["shipments"],
+  props: ["shipments", "role"],
   components: {
     AddVendorPayment,
   },

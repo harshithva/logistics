@@ -54,6 +54,9 @@ import CustomerTrackShipment from '../components/customer-components/CustomerTra
 import CustomerCreateQuote from '../components/customer-components/CustomerCreateQuote'
 import Estimate from '../components/customer-components/Estimate'
 
+// vendor dashboard
+import VendorDashboard from '../components/vendor-dashboard/VendorDashboard'
+
 
 
 // import Login from "../components/auth/Login.vue";
@@ -116,6 +119,9 @@ const routes = [
     { path: '/customer/track/shipment', component: CustomerTrackShipment },
     { path: '/customer/quote/create', component: CustomerCreateQuote },
     { path: '/customer/price_list', component: Estimate },
+
+    // Vendor Dashboard
+    { path: '/vendor_dashboard', component: VendorDashboard },
 ]
 
 

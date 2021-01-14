@@ -4,7 +4,7 @@
       class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow"
     >
       <VueInputCalculator enableKeyboard v-model="targetValue">
-        <i class="fas fa-calculator text-warning"></i>
+        <i class="fas fa-calculator"></i>
       </VueInputCalculator>
       <!-- Sidebar Toggle (Topbar) -->
       <button
@@ -73,7 +73,7 @@
 
 <script>
 import { mapGetters } from "vuex";
-import Calculator from "./globals/Calculator.vue";
+
 import VueInputCalculator from "vue-input-calculator";
 
 export default {

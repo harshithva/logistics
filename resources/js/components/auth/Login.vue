@@ -133,6 +133,8 @@ export default {
             window.location = "/admin/shipments/create";
           } else if (userInfo.user.role == "customer") {
             window.location = "/customer";
+          } else if (userInfo.user.role == "vendor") {
+            window.location = "/vendor_dashboard";
           }
         })
         .catch((err) => {

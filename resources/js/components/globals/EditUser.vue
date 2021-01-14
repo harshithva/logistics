@@ -86,7 +86,10 @@
           </div>
         </div>
       </div>
-      <div class="row">
+      <div
+        class="row"
+        v-if="this.$store.getters.getUserData.user.role == 'admin'"
+      >
         <div class="col-md-12">
           <div class="form-group">
             <textarea
@@ -100,7 +103,10 @@
         </div>
       </div>
       <div class="row mb-3">
-        <div class="col">
+        <div
+          class="col"
+          v-if="this.$store.getters.getUserData.user.role == 'admin'"
+        >
           <span>Show Rates</span>
           <b-form-checkbox
             switch
@@ -118,7 +124,6 @@
           type="submit"
           :disabled="form.errors.any()"
           @click.prevent="onSubmit"
-          v-if="this.$store.getters.getUserData.user.role == 'admin'"
         >
           Update
           <span>
@@ -139,6 +144,7 @@
         </button>
         <router-link
           to="/admin"
+          v-if="this.$store.getters.getUserData.user.role == 'admin'"
           class="btn btn-outline-secondary btn-confirmation"
         >
           <span>
