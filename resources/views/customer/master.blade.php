@@ -22,6 +22,12 @@
     <link href="{{asset('dashboard/css/sb-admin-2.min.css')}}" rel="stylesheet">
 
     <script src="{{asset('css/app.css')}}"></script>
+
+    <style>
+        .sc-7dvmpp-1 {
+            display: none !important;
+        }
+    </style>
 </head>
 
 <body id="page-top">
@@ -51,6 +57,18 @@
 
     <script src="{{asset('js/app.js')}}"></script>
     {{-- tidio --}}
-    <script src="//code.tidio.co/ctz6trzsw27v38m6o4w6x2l0ytl7ff5l.js" async></script>
+    <script type="text/javascript">
+        (function () {
+    var options = {
+        whatsapp: "919663222686", // WhatsApp number
+        call_to_action: "Message us", // Call to action
+        position: "right", // Position may be 'right' or 'left'
+    };
+    var proto = document.location.protocol, host = "getbutton.io", url = proto + "//static." + host;
+    var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = url + '/widget-send-button/js/init.js';
+    s.onload = function () { WhWidgetSendButton.init(host, proto, options); };
+    var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x);
+})();
+    </script>
 
 </body>

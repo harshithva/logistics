@@ -75,7 +75,7 @@
       <Docket
         :shipment="shipment"
         copy="CONSIGNOR"
-        display="false"
+        :display="true"
         :is_terms="true"
       ></Docket>
       <Docket

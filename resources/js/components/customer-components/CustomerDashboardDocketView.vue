@@ -17,7 +17,12 @@
     </div>
 
     <div>
-      <Docket :shipment="shipment" :copy="docket_copy_text"></Docket>
+      <Docket
+        :shipment="shipment"
+        :copy="docket_copy_text"
+        :display="true"
+        :is_terms="true"
+      ></Docket>
       <!-- <div>
         <Docket :shipment="shipment" :copy="copy" v-for="(copy,index) in copies" :key="index"></Docket>
       </div>-->

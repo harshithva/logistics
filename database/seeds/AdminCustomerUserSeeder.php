@@ -39,5 +39,11 @@ class AdminCustomerUserSeeder extends Seeder
             'password' => 'swathi1234',
             'role' => 'vendor'
         ]);
+        User::create([
+            'name' => 'gurukal',
+            'email' => 'test@gurukal.in',
+            'password' => 'Gurukal123#',
+            'role' => 'customer'
+        ]);
     }
 }
