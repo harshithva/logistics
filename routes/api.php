@@ -74,6 +74,8 @@ Route::get("shipments/{tracking_no}/shipment_track", 'ShipmentController@shipmen
 
 Route::apiResource("payments", 'PaymentController');
 Route::apiResource("packages", 'PackageController');
+// general reports
+Route::get("packages/{customer_id}/get/{month}", 'PackageController@get_packages');
 
 // feedback
 Route::post('/customer/feedback', 'ShipmentController@send_feedback');

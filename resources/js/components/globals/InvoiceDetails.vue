@@ -14,7 +14,7 @@
           Balance Amount :
           {{ shipment.balance }}
         </p>
-        <p>TDS Amount: {{ shipment.tds_amount }}</p>
+        <!-- <p>TDS Amount: {{ shipment.tds_amount }}</p> -->
       </div>
       <div class="col-9">
         <a
@@ -62,7 +62,7 @@
           </span>
           Add Payment
         </button>
-        <button
+        <!-- <button
           @click="updateBalance"
           type="button"
           class="btn btn-secondary btn-sm ml-2"
@@ -73,7 +73,7 @@
             <i class="fas fa-rupee-sign"></i>
           </span>
           Update TDS Payment
-        </button>
+        </button> -->
         <router-link
           :to="'/admin/shipments/' + shipment.id + '/edit'"
           class="btn btn-dark ml-2 btn-sm"

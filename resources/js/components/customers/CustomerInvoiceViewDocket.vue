@@ -74,12 +74,28 @@
     <div>
       <Docket
         :shipment="shipment"
-        :copy="docket_copy_text"
+        copy="CONSIGNOR"
         display="false"
+        :is_terms="true"
       ></Docket>
-      <Docket :shipment="shipment" copy="CONSIGNOR" display="false"></Docket>
-      <Docket :shipment="shipment" copy="CONSIGNEE" display="false"></Docket>
-      <Docket :shipment="shipment" copy="CARGO COPY" display="false"></Docket>
+      <Docket
+        :shipment="shipment"
+        copy="CONSIGNEE"
+        :display="false"
+        :is_terms="false"
+      ></Docket>
+      <Docket
+        :shipment="shipment"
+        copy="CARGO COPY"
+        :display="false"
+        :is_terms="false"
+      ></Docket>
+      <Docket
+        :shipment="shipment"
+        copy="EXTRA"
+        :display="false"
+        :is_terms="false"
+      ></Docket>
     </div>
   </div>
 </template>

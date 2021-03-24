@@ -8,6 +8,9 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+import VueInputCalculator from "vue-input-calculator";
+Vue.component('vue-input-calculator', VueInputCalculator);
+
 import Fragment from 'vue-fragment'
 import VueRouter from 'vue-router'
 import { store } from './store/store'
@@ -90,6 +93,7 @@ Vue.component('Invoice', require('./components/globals/Invoice.vue').default);
 Vue.component('UpdateStatus', require('./components/globals/UpdateStatus.vue').default);
 Vue.component('DisplayError', require('./components/globals/DisplayError.vue').default);
 Vue.component('Quote', require('./components/globals/Quote.vue').default);
+Vue.component('DocketTerms', require('./components/globals/DocketTerms.vue').default);
 
 
 

@@ -146,11 +146,11 @@ export default {
           field: "shipment_charge_total",
           numeric: false,
         },
-        {
-          label: "TDS",
-          field: "shipment_tds_amount",
-          numeric: false,
-        },
+        // {
+        //   label: "TDS",
+        //   field: "shipment_tds_amount",
+        //   numeric: false,
+        // },
 
         {
           label: "Sender Name",
