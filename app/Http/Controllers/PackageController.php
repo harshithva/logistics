@@ -7,7 +7,7 @@ use App\Package;
 use App\Shipment;
 use App\Http\Resources\Package as PackageResource;
 use Carbon\Carbon;
-
+use Helpers;
 class PackageController extends Controller
 {
     /**
@@ -27,53 +27,73 @@ class PackageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function get_packages($customer_id, $month)
+    public function get_packages($customer_id, $month, $status)
     {
-        
+       // status - paid, pending, partial;
+        // get details to search
+        $date = Carbon::now();
+        $year = $date->year;
+        if($month == 'this_month')
+        {
+            $month = $date->month;
+        }
+        else if($month == 'last_month') {
+            $month = $date->month - 1;
+        }else if($month == 'last_year') {
+            $month = null;
+            $year--;
+        }else{
+            $month = null;
+        }
+         if ($month && $month < 10) {
+                $month = '0' . $month;
+            }
+        $search = $year . '-' . $month;
+          
 
         if($customer_id != 'all')
         {
-            $shipments = Shipment::where('sender_id', $customer_id)->latest()->get();
-            // return PackageResource::collection($shipments);
+
+            $shipments = Shipment::where('sender_id', $customer_id)->where('created_at', 'like', $search .'%')->latest()->get();
+            $filtered = Helpers::getPaidInvoices($shipments, $status);
+            return PackageResource::collection($filtered);
         }else {
-            $shipments = Shipment::latest()->get();
-            // return PackageResource::collection($shipments);
+            $shipments = Shipment::where('created_at', 'like', $search .'%')->latest()->get();
+             $filtered = Helpers::getPaidInvoices($shipments, $status);
+             return PackageResource::collection($filtered);
         }
 
-        if($month == 'all')
-        {
-            return PackageResource::collection($shipments);
-        }else{
-            $date = Carbon::now();
-            $year = $date->year;
-            if($month == 'this_month')
-            {
-                $month = $date->month;
-            }
-            else if($month == 'last_month') {
-                $month = $date->month - 1;
-            }
+        // if($month == 'all')
+        // {
+        //     return PackageResource::collection($shipments);
+        // }else{
+            // $date = Carbon::now();
+            // $year = $date->year;
+            // if($month == 'this_month')
+            // {
+            //     $month = $date->month;
+            // }
+            // else if($month == 'last_month') {
+            //     $month = $date->month - 1;
+            // }
     
-            if ($month < 10) {
-                $month = '0' . $month;
-            }
+            // if ($month < 10) {
+            //     $month = '0' . $month;
+            // }
     
-            $search = $year . '-' . $month;
-            $filtered = [];
+            // $search = $year . '-' . $month;
+            
+            // $filtered = $shipments->where(function ($query) use ($search) {
+            //     $query->where('created_at', 'like', $search .'%');
+            // });
+        
            
      
-            foreach ($shipments as $key => $shipment) {
-                $exp = "'/'  .$search. '/' ";
-                return preg_match($exp, $shipment->created_at);
-                if(strpos($search, strval($shipment->created_at)));
-                {
-                    array_push($filtered, $shipment);
-                }
-            }
             
-            return PackageResource::collection($filtered);
+            
+            // return PackageResource::collection($shipments);
 
-        }
+        // }
        
     }
 
