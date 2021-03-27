@@ -101,7 +101,7 @@ export default ({
         getAllPackages(state) {
             // let allPackages = state.packages;
             // allPackages.map(el => el.shipment_date = moment(el.shipment_date).format('DD/MM/YYYY'));
-            return state.filteredPackages;
+            return state.packages;
         },
         getTrackingDetails(state) {
             return state.tracking_details;
@@ -213,7 +213,7 @@ export default ({
         retrievePackages(state, packages) {
 
             state.packages = packages;
-            state.filteredPackages = packages;
+            // state.filteredPackages = packages;
         },
         TrackShipment(state, tracking_details) {
 
@@ -281,42 +281,42 @@ export default ({
             }
         },
 
-        selectMonth(state, month) {
+        // selectMonth(state, month) {
 
-            if (month === 1) {
+        //     if (month === 1) {
 
-                let thisMonth = moment().format('YYYY-MM');
+        //         let thisMonth = moment().format('YYYY-MM');
 
-                state.filteredPackages = state.packages.filter(item => {
-                    return item.shipment_date.includes(thisMonth)
-                        ;
+        //         state.filteredPackages = state.packages.filter(item => {
+        //             return item.shipment_date.includes(thisMonth)
+        //                 ;
 
-                })
+        //         })
 
-            } else if (month === 2) {
+        //     } else if (month === 2) {
 
-                let lastMonth = moment().subtract(1, 'months').endOf('month').format('YYYY-MM');
-                state.filteredPackages = state.packages.filter(item => {
-                    return item.shipment_date.includes(lastMonth)
-                        ;
+        //         let lastMonth = moment().subtract(1, 'months').endOf('month').format('YYYY-MM');
+        //         state.filteredPackages = state.packages.filter(item => {
+        //             return item.shipment_date.includes(lastMonth)
+        //                 ;
 
-                })
-            } else if (month === 3) {
+        //         })
+        //     } else if (month === 3) {
 
-                let thisYear = moment().format('YYYY');
+        //         let thisYear = moment().format('YYYY');
 
-                state.filteredPackages = state.packages.filter(item => {
-                    return item.shipment_date.includes(thisYear)
-                        ;
+        //         state.filteredPackages = state.packages.filter(item => {
+        //             return item.shipment_date.includes(thisYear)
+        //                 ;
 
-                })
-            } else {
-                state.filteredPackages = state.packages;
-            }
+        //         })
+        //     } else {
+        //         state.filteredPackages = state.packages;
+        //     }
 
 
 
-        },
+        // },
         toggleSidebar(state) {
             state.isToggled = !state.isToggled;
 
@@ -538,13 +538,13 @@ export default ({
                     context.commit('catchErrors', error.response.data)
                 })
         },
-        retrievePackages(context) {
-
+        retrievePackages(context, payload) {
+            console.log(`/api/packages/${payload.customer_id}/get/${payload.time}/status/${payload.status}`);
             axios
-                .get(`/api/packages`)
+                .get(`/api/packages/${payload.customer_id}/get/${payload.time}/status/${payload.status}`)
                 .then(response => {
 
-                    response.data.data.sort((a, b) => (a.shipment_freight_invoice_number > b.shipment_freight_invoice_number) ? 1 : ((b.shipment_freight_invoice_number > a.shipment_freight_invoice_number) ? -1 : 0));
+                    // response.data.data.sort((a, b) => (a.shipment_freight_invoice_number > b.shipment_freight_invoice_number) ? 1 : ((b.shipment_freight_invoice_number > a.shipment_freight_invoice_number) ? -1 : 0));
 
                     (context.commit('retrievePackages', response.data.data));
 

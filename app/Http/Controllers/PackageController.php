@@ -29,6 +29,7 @@ class PackageController extends Controller
      */
     public function get_packages($customer_id, $month, $status)
     {
+       $temp = $month;
        // status - paid, pending, partial;
         // get details to search
         $date = Carbon::now();
@@ -49,8 +50,12 @@ class PackageController extends Controller
                 $month = '0' . $month;
             }
         $search = $year . '-' . $month;
-          
 
+       if($temp == 'all'){
+            $search = "";
+        }
+
+        
         if($customer_id != 'all')
         {
 
@@ -58,9 +63,16 @@ class PackageController extends Controller
             $filtered = Helpers::getPaidInvoices($shipments, $status);
             return PackageResource::collection($filtered);
         }else {
-            $shipments = Shipment::where('created_at', 'like', $search .'%')->latest()->get();
-             $filtered = Helpers::getPaidInvoices($shipments, $status);
-             return PackageResource::collection($filtered);
+            if($month == 'all'){
+                $shipments = Shipment::latest()->get();
+             
+                return PackageResource::collection($shipments);
+            }else{
+                $shipments = Shipment::where('created_at', 'like', $search .'%')->latest()->get();
+                $filtered = Helpers::getPaidInvoices($shipments, $status);
+                return PackageResource::collection($filtered);
+            }
+           
         }
 
         // if($month == 'all')

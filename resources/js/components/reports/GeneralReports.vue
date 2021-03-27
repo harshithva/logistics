@@ -20,8 +20,8 @@
             <i class="fas fa-rupee-sign fa-sm"></i> Payment Log
           </router-link>
         </div>
-        <div class="col-6"></div>
-        <div class="col">
+
+        <div class="col-9">
           <button class="btn btn-danger ml-2 btn-sm" @click="generatePdf">
             <i class="fas fa-file-download"></i> &nbsp;PDF
           </button>
@@ -32,13 +32,46 @@
           >
             <i class="fas fa-cloud-download-alt"></i> &nbsp;Excel
           </export-excel>
+          &nbsp;&nbsp;
+          <span>Time</span>
           <b-form-select
-            v-model="selectedMonth"
-            :options="options"
+            v-model="selectedTime"
+            :options="timeOptions"
             size="sm"
-            @change="selectMonth"
+            @change="retrievePackages"
             style="width: 8rem"
           ></b-form-select>
+
+          <span>Status</span>
+          <b-form-select
+            v-model="selectedStatus"
+            :options="statusOptions"
+            size="sm"
+            @change="retrievePackages"
+            style="width: 8rem"
+          ></b-form-select>
+          <!-- <b-form-select
+            v-model="selectedCustomer"
+            :options="customers"
+            value-field="id"
+            text-field="name"
+            size="sm"
+            @change="retrievePackages"
+            style="width: 8rem"
+          ></b-form-select>
+           <b-form-group id="input-group-1" label="Select Expense Category"> -->
+          <span>Sender</span>
+          <div
+            style="width: 15rem; display: inline-block; background-color: white"
+          >
+            <v-select
+              :options="customers"
+              label="name"
+              :reduce="(customer) => customer.id"
+              v-model="selectedCustomer"
+              @input="retrievePackages"
+            ></v-select>
+          </div>
         </div>
       </div>
     </div>
@@ -83,7 +116,9 @@ import "jspdf-autotable";
 export default {
   data() {
     return {
-      selectedMonth: 0,
+      selectedTime: "this_year",
+      selectedCustomer: "all",
+      selectedStatus: "all",
       json_fields: {
         Date: "shipment_date",
         Product: "packages_description",
@@ -91,21 +126,28 @@ export default {
         To: "shipment_delivery_address",
         Docket: "shipment_docket_no",
         "Freight Invoice Number": "shipment_freight_invoice_number",
-        TDS: "shipment_tds_amount",
+        // TDS: "shipment_tds_amount",
         "Charge Total": "shipment_charge_total",
         "Sender Name": "shipment_sender_name",
         "Receiver Name": "shipment_receiver_name",
         "Sender GST": "shipment_sender_gst",
         "Receiver GST": "shipment_receiver_gst",
       },
-      options: [
-        { value: 0, text: "All" },
-        { value: 1, text: "This month" },
-        { value: 2, text: "Last month" },
-        { value: 3, text: "This year" },
+      timeOptions: [
+        { value: "all", text: "All" },
+        { value: "this_month", text: "This month" },
+        { value: "last_month", text: "Last month" },
+        { value: "this_year", text: "This year" },
+        { value: "last_year", text: "Last year" },
+      ],
+      statusOptions: [
+        { value: "all", text: "All" },
+        { value: "paid", text: "Paid" },
+        { value: "pending", text: "Pending" },
+        { value: "partial", text: "Partial" },
+        // { value: "pandp", text: "Pending & Partial" },
       ],
       file: null,
-      status: "pickup",
 
       tableColumns1: [
         {
@@ -181,8 +223,16 @@ export default {
     };
   },
   methods: {
-    selectMonth() {
-      this.$store.commit("selectMonth", this.selectedMonth);
+    selectTime() {
+      this.retrievePackages();
+    },
+
+    retrievePackages() {
+      this.$store.dispatch("retrievePackages", {
+        customer_id: this.selectedCustomer,
+        time: this.selectedTime,
+        status: this.selectedStatus,
+      });
     },
     generatePdf() {
       const vm = this;
@@ -196,7 +246,7 @@ export default {
           title: "Invoice Number",
           dataKey: "shipment_freight_invoice_number",
         },
-        { title: "TDS", dataKey: "shipment_tds_amount" },
+        // { title: "TDS", dataKey: "shipment_tds_amount" },
         { title: "Charge Total", dataKey: "shipment_charge_total" },
         { title: "Sender Name", dataKey: "shipment_sender_name" },
         { title: "Receiver Name", dataKey: "shipment_receiver_name" },
@@ -215,12 +265,22 @@ export default {
     },
   },
   created() {
-    this.$store.dispatch("retrievePackages");
+    this.$store.dispatch("retrieveCustomers");
+    this.$store.dispatch("retrievePackages", {
+      customer_id: "all",
+      time: "this_year",
+      status: "all",
+    });
   },
   computed: {
     ...mapGetters({
       packages: "getAllPackages",
     }),
+    customers() {
+      const customers = this.$store.getters.getAllCustomers;
+      customers.unshift({ id: "all", name: "All" });
+      return customers;
+    },
   },
 };
 </script>

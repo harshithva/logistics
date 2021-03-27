@@ -53,7 +53,7 @@ use Carbon\Carbon;
        $item->sender_name = $item->sender->name;
 
        switch($type) {
-        //  paid invoices
+    
          case 'paid':{
      
           if($item->total_paid >=  $item->charge_total)
@@ -80,7 +80,15 @@ use Carbon\Carbon;
             array_push($FilteredInvoices,$item);
           }
         }
-      break;
+        break;
+        // pending and partial
+        // case 'pandp': {
+        //   if($item->total_paid > 0 && $item->total_paid < $item->charge_total || !($item->charge_total <= $item->total_paid)) 
+        //   {
+        //     array_push($FilteredInvoices,$item);
+        //   }
+        // }
+      // break;
          default:{
       
             array_push($FilteredInvoices,$item);
