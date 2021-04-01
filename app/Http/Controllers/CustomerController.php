@@ -242,11 +242,18 @@ class CustomerController extends Controller
 
         $pending_payment = Shipment::sum('charge_total') - (Shipment::sum('charge_advance_paid') +  Payment::sum('amount')) - Shipment::sum('tds_amount');
       
-        $earnings = Shipment::sum('charge_advance_paid') + Payment::sum('amount') + Shipment::sum('tds_amount');
+        // $earnings = Shipment::sum('charge_advance_paid') + Payment::sum('amount') + Shipment::sum('tds_amount');
+       
+        $dateS = new Carbon("first day of April 2021");
+        $dateE = new Carbon("first day of April 2022");
+        $earnings = Shipment::whereBetween('created_at', [$dateS->format('Y-m-d')." 00:00:00", $dateE->format('Y-m-d')." 23:59:59"])->sum('charge_advance_paid')
+         + Payment::whereBetween('created_at', [$dateS->format('Y-m-d')." 00:00:00", $dateE->format('Y-m-d')." 23:59:59"])->sum('amount') 
+         + Shipment::sum('tds_amount');
 
         $upcoming_expense = ShipmentVendorDetail::sum('total') - (ShipmentVendorDetail::sum('advance') +VendorPayment::sum('amount'));
 
-       $data =  (object) ['earnings' =>    $earnings,
+       $data =  (object) [
+    'earnings' =>    $earnings,
     'customers' => User::where('role','customer')->count(),
     'quotations' =>  Quote::count(),
     'shipments' =>  Shipment::count(),
