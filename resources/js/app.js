@@ -94,6 +94,7 @@ Vue.component('UpdateStatus', require('./components/globals/UpdateStatus.vue').d
 Vue.component('DisplayError', require('./components/globals/DisplayError.vue').default);
 Vue.component('Quote', require('./components/globals/Quote.vue').default);
 Vue.component('DocketTerms', require('./components/globals/DocketTerms.vue').default);
+Vue.component('TermsConditionPage', require('./components/globals/TermsConditionPage.vue').default);
 
 
 

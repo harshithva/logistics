@@ -14,6 +14,7 @@ import CustomerQuote from "../components/customers/CustomerQuote";
 import CustomerQuoteView from "../components/customers/CustomerQuoteView";
 import CustomerInvoiceView from "../components/customers/CustomerInvoiceView";
 import CustomerInvoiceViewDocket from "../components/customers/CustomerInvoiceViewDocket";
+// import TermsConditionPage from "../components/customers/TermsConditionPage";
 
 import CreateQuote from "../components/quotes/CreateQuote";
 import Quotes from "../components/quotes/Quotes";
@@ -119,6 +120,7 @@ const routes = [
     { path: '/customer/track/shipment', component: CustomerTrackShipment },
     { path: '/customer/quote/create', component: CustomerCreateQuote },
     { path: '/customer/price_list', component: Estimate },
+    // { path: '/terms', component: TermsConditionPage },
 
     // Vendor Dashboard
     { path: '/vendor_dashboard', component: VendorDashboard },

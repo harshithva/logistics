@@ -151,7 +151,7 @@
             IN CASE OF LOSS OR DAMAGE TO GOOOS THE LIABILITY OF THE CARRIER
             SHALL NOT EXCEED A SUM OF Rs 500). (FIVE HUNDRED ONLY) The company
             is not responsible for leakage, Breakage & Accident Damage Subject
-            to Terms & Conditions of carriage printed overleaf.
+            to Terms & Conditions of carriage https://crm.gurukal.in/terms.
           </li>
         </ol>
       </div>
@@ -181,9 +181,9 @@
     </div>
 
     <div class="page-break"></div>
-    <div v-if="is_terms">
+    <!-- <div v-if="is_terms">
       <DocketTerms></DocketTerms>
-    </div>
+    </div> -->
 
     <div class="pagebreak"></div>
   </div>

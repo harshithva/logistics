@@ -57,6 +57,10 @@ Route::get('/vendor_dashboard/{any}', function () {
     return view('customer.master');
 })->where('any','.*');
 
+Route::get('/terms', function () {
+    return view('terms');
+})->where('any','.*');
+
 
 
 
