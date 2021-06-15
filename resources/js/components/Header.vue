@@ -1,18 +1,14 @@
 <template>
   <div>
     <nav
-      class="
-        navbar navbar-expand navbar-light
-        bg-white
-        topbar
-        mb-4
-        static-top
-        shadow
-      "
+      class="navbar navbar-expand navbar-light topbar mb-4 static-top shadow"
     >
       <VueInputCalculator enableKeyboard v-model="targetValue">
         <i class="fas fa-calculator"></i>
       </VueInputCalculator>
+      <div class="ml-4 mt-3">
+        <switches v-model="enabled" @input="change"></switches>
+      </div>
       <!-- Sidebar Toggle (Topbar) -->
       <button
         id="sidebarToggleTop"
@@ -76,10 +72,6 @@
             <i class="fas fa-sign-out-alt text-primary"></i>&nbsp;&nbsp;Logout
           </a>
         </li>
-
-        <li class="nav-item dropdown no-arrow">
-          <switches v-model="enabled" @input="change"></switches>
-        </li>
       </ul>
     </nav>
   </div>
@@ -107,21 +99,46 @@ export default {
   },
   components: { VueInputCalculator, Switches },
   methods: {
+    changeMultiple(className, styleProperty, value) {
+      var items = document.querySelectorAll(className);
+      for (var i = 0; i < items.length; i++) {
+        items[i]["style"][styleProperty] = value;
+      }
+    },
     change() {
       if (this.enabled) {
         document.getElementById("accordionSidebar").style.backgroundColor =
           "red";
         document.getElementById("accordionSidebar").style.backgroundImage =
-          "linear-gradient(180deg,#222831 10%,#DDDDDD 100%)";
+          "linear-gradient(180deg,#000 100%,#000 100%)";
 
-        document.querySelector(".card-header").style.backgroundColor = "red";
+        document.querySelector(
+          "nav.navbar.navbar-expand.navbar-light.topbar.mb-4.static-top.shadow"
+        ).style.backgroundColor = "black";
+
+        this.changeMultiple(".card", "backgroundColor", "black");
+        this.changeMultiple(".card-header", "backgroundColor", "black");
+        this.changeMultiple("#content", "backgroundColor", "#222831");
+        this.changeMultiple(".card-body", "backgroundColor", "black");
+
+        document.querySelector(".fa-calculator").classList.add("text-white");
       } else {
         document.getElementById("accordionSidebar").style.backgroundColor =
           "#4e73df";
         document.getElementById("accordionSidebar").style.backgroundImage =
           "linear-gradient(180deg,#4e73df 10%,#224abe 100%)";
+
+        document.querySelector(
+          "nav.navbar.navbar-expand.navbar-light.topbar.mb-4.static-top.shadow"
+        ).style.backgroundColor = "white";
+
+        this.changeMultiple(".card", "backgroundColor", "white");
+        this.changeMultiple(".card-header", "backgroundColor", "#f8f9fc");
+        this.changeMultiple("#content", "backgroundColor", "white");
+        this.changeMultiple(".card-body", "backgroundColor", "white");
+
+        document.querySelector(".fa-calculator").classList.remove("text-white");
       }
-      document.querySelector(".card-header").style.backgroundColor = "#f8f9fc";
     },
     toggleSidebar() {
       this.$store.commit("toggleSidebar");
