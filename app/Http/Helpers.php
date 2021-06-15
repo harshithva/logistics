@@ -107,7 +107,7 @@ use Carbon\Carbon;
      
         if($total_paid >= $total) 
           return 'PAID';
-        else if (+$total <= 0) 
+        else if (+$total_paid <= 0) 
           return 'PENDING';
         else
           return 'PARTIAL';

@@ -9,7 +9,14 @@
         <div class="col">
           <router-link
             to="/admin/reports"
-            class="d-sm-inline-block btn btn-sm btn-outline-primary shadow-sm ml-2 mr-2 active"
+            class="
+              d-sm-inline-block
+              btn btn-sm btn-outline-primary
+              shadow-sm
+              ml-2
+              mr-2
+              active
+            "
           >
             <i class="fas fa-scroll fa-sm"></i> Reports
           </router-link>
@@ -132,6 +139,8 @@ export default {
         "Receiver Name": "shipment_receiver_name",
         "Sender GST": "shipment_sender_gst",
         "Receiver GST": "shipment_receiver_gst",
+        Insurance: "shipment_charge_Insurance",
+        "Payment By": "shipment_bill_to",
       },
       timeOptions: [
         { value: "all", text: "All" },
@@ -219,6 +228,16 @@ export default {
           field: "shipment_payment_type",
           numeric: false,
         },
+        {
+          label: "Insurance",
+          field: "shipment_charge_Insurance",
+          numeric: true,
+        },
+        {
+          label: "Payment By",
+          field: "shipment_bill_to",
+          numeric: false,
+        },
       ],
     };
   },
@@ -252,6 +271,8 @@ export default {
         { title: "Receiver Name", dataKey: "shipment_receiver_name" },
         { title: "Sender GST", dataKey: "shipment_sender_gst" },
         { title: "Receiver GST", dataKey: "shipment_receiver_gst" },
+        { title: "Insurance", dataKey: "shipment_charge_Insurance" },
+        { title: "Payment By", dataKey: "shipment_bill_to" },
       ];
       const doc = new jsPDF("p", "pt");
 

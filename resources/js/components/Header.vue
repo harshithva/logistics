@@ -1,7 +1,14 @@
 <template>
   <div>
     <nav
-      class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow"
+      class="
+        navbar navbar-expand navbar-light
+        bg-white
+        topbar
+        mb-4
+        static-top
+        shadow
+      "
     >
       <VueInputCalculator enableKeyboard v-model="targetValue">
         <i class="fas fa-calculator"></i>
@@ -32,7 +39,12 @@
           </a>
           <!-- Dropdown - Messages -->
           <div
-            class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+            class="
+              dropdown-menu dropdown-menu-right
+              p-3
+              shadow
+              animated--grow-in
+            "
             aria-labelledby="searchDropdown"
           >
             <form class="form-inline mr-auto w-100 navbar-search">
@@ -64,6 +76,10 @@
             <i class="fas fa-sign-out-alt text-primary"></i>&nbsp;&nbsp;Logout
           </a>
         </li>
+
+        <li class="nav-item dropdown no-arrow">
+          <switches v-model="enabled" @input="change"></switches>
+        </li>
       </ul>
     </nav>
   </div>
@@ -76,9 +92,11 @@ import { mapGetters } from "vuex";
 
 import VueInputCalculator from "vue-input-calculator";
 
+import Switches from "vue-switches";
+
 export default {
   data() {
-    return { targetValue: 0 };
+    return { targetValue: 0, enabled: false };
   },
   computed: {
     ...mapGetters(["isLogged"]),
@@ -87,8 +105,24 @@ export default {
       return this.$store.getters.getIsToggled;
     },
   },
-  components: { VueInputCalculator },
+  components: { VueInputCalculator, Switches },
   methods: {
+    change() {
+      if (this.enabled) {
+        document.getElementById("accordionSidebar").style.backgroundColor =
+          "red";
+        document.getElementById("accordionSidebar").style.backgroundImage =
+          "linear-gradient(180deg,#222831 10%,#DDDDDD 100%)";
+
+        document.querySelector(".card-header").style.backgroundColor = "red";
+      } else {
+        document.getElementById("accordionSidebar").style.backgroundColor =
+          "#4e73df";
+        document.getElementById("accordionSidebar").style.backgroundImage =
+          "linear-gradient(180deg,#4e73df 10%,#224abe 100%)";
+      }
+      document.querySelector(".card-header").style.backgroundColor = "#f8f9fc";
+    },
     toggleSidebar() {
       this.$store.commit("toggleSidebar");
     },

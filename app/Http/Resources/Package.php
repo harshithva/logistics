@@ -37,6 +37,8 @@ class Package extends JsonResource
             'packages_description' =>    $packages_description,
             'shipment_payment_type' => $this->payment_type,
             'shipment_tds_amount' => $this->tds_amount,
+            'shipment_charge_Insurance' => $this->charge_Insurance,
+            'shipment_bill_to' => $this->bill_to,
           ];
     }
 
