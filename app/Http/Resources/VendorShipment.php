@@ -20,6 +20,7 @@ class VendorShipment extends JsonResource
             'total' => $this->total,
             'advance' => $this->advance,
             'commission' => $this->commission,
+            'memo_no' => $this->memo_no,
             'shipment_id' => $this->shipment_id,
             'vendor_id' => $this->vendor_id,
             'balance' => (int)$this->total - ((int)$this->advance + (int)VendorPayment::where('vendor_id', $this->vendor_id)->where('shipment_id',$this->shipment_id)->sum('amount')),

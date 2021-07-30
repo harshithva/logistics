@@ -10,38 +10,6 @@
               <h4 class="mb-4">Shipment Info</h4>
               <!-- show errors -->
 
-              <b-alert
-                v-if="shipment.errors.has('sender_id')"
-                dismissible
-                show
-                variant="danger"
-                >{{ shipment.errors.get("sender_id") }}</b-alert
-              >
-
-              <b-alert
-                v-if="shipment.errors.has('receiver_id')"
-                dismissible
-                show
-                variant="danger"
-                >{{ shipment.errors.get("receiver_id") }}</b-alert
-              >
-
-              <b-alert
-                v-if="shipment.errors.has('charge_total')"
-                dismissible
-                show
-                variant="danger"
-                >{{ shipment.errors.get("charge_total") }}</b-alert
-              >
-
-              <b-alert
-                v-if="shipment.errors.has('document')"
-                dismissible
-                show
-                variant="danger"
-                >{{ shipment.errors.get("document") }}</b-alert
-              >
-
               <DisplayError :form="shipment"></DisplayError>
               <!-- end errors -->
               <form
@@ -60,11 +28,9 @@
                       ></b-form-datepicker>
                     </div>
                   </div>
-                </div>
 
-                <div class="row">
-                  <div class="col-md-6">
-                    <h6 class="mb-2">Sender Info</h6>
+                  <div class="col-md-3">
+                    <h6 class="mb-3">Sender Info</h6>
                     <div class="form-group">
                       <v-select
                         :options="customers"
@@ -79,8 +45,8 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col-md-6">
-                    <h6 class="mb-2">Receiver Info</h6>
+                  <div class="col-md-3">
+                    <h6 class="mb-3">Receiver Info</h6>
                     <div class="form-group">
                       <v-select
                         :options="customers"
@@ -98,7 +64,7 @@
                 </div>
 
                 <div class="row">
-                  <div class="col-md-12">
+                  <div class="col-md-6">
                     <div class="form-group">
                       <label for="delivery_address">Delivery Address</label>
                       <textarea
@@ -114,7 +80,7 @@
                 <hr />
                 <h6 class="mb-4">Package Pickup Location</h6>
                 <div class="row">
-                  <div class="col-md-6">
+                  <div class="col-md-3">
                     <div class="form-group">
                       <input
                         type="text"
@@ -125,7 +91,7 @@
                     </div>
                   </div>
 
-                  <div class="col-md-6">
+                  <div class="col-md-3">
                     <div class="form-group">
                       <input
                         type="text"
@@ -135,23 +101,22 @@
                       />
                     </div>
                   </div>
+
+                  <div class="col-md-3 input-group mb-2">
+                    <select
+                      class="custom-select"
+                      aria-label="Select Transaction Type"
+                      v-model="shipment.package_transaction_type"
+                    >
+                      <option selected disabled>Transaction Type</option>
+
+                      <option value="Full Load">Full Load</option>
+                      <option value="Part Load">Part Load</option>
+                    </select>
+                  </div>
                 </div>
-
-                <div class="input-group mb-2">
-                  <select
-                    class="custom-select"
-                    aria-label="Select Transaction Type"
-                    v-model="shipment.package_transaction_type"
-                  >
-                    <option selected disabled>Transaction Type</option>
-
-                    <option value="Full Load">Full Load</option>
-                    <option value="Part Load">Part Load</option>
-                  </select>
-                </div>
-
                 <div class="row">
-                  <div class="col-md-12">
+                  <div class="col-md-6">
                     <div class="form-group">
                       <label for="exampleFormControlTextarea1"
                         >Pickup Address</label
@@ -166,31 +131,10 @@
                   </div>
                 </div>
 
-                <h6 class="mb-4">Transport Details</h6>
-                <!-- <div class="row">
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <input
-                        type="text"
-                        class="form-control"
-                        v-model="shipment.transport_company_name"
-                        placeholder="Company Name"
-                      />
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <input
-                        type="text"
-                        class="form-control"
-                        v-model="shipment.transport_company_phone"
-                        placeholder="Phone"
-                      />
-                    </div>
-                  </div>
-                </div> -->
+                <h6 class="mb-2 mt-2">Transport Details</h6>
+
                 <div class="row mb-2">
-                  <div class="col-md-4">
+                  <div class="col-md-3">
                     <div class="form-group">
                       <input
                         type="text"
@@ -200,7 +144,7 @@
                       />
                     </div>
                   </div>
-                  <div class="col-md-4">
+                  <div class="col-md-3">
                     <div class="form-group">
                       <input
                         type="text"
@@ -210,7 +154,7 @@
                       />
                     </div>
                   </div>
-                  <div class="col-md-4">
+                  <div class="col-md-3">
                     <div class="form-group">
                       <input
                         type="text"
@@ -221,12 +165,12 @@
                     </div>
                   </div>
 
-                  <div class="col-md-12">
+                  <div class="col-md-6">
                     <div class="form-group">
                       <textarea
                         class="form-control"
                         v-model="shipment.user_notes"
-                        rows="6"
+                        rows="3"
                         placeholder="User Notes - For internal use only."
                       ></textarea>
                     </div>
@@ -275,7 +219,17 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col-md-3">
+                  <div class="col-md-2">
+                    <div class="form-group">
+                      <h6 class="mb-2">Memo no</h6>
+                      <input
+                        type="text"
+                        class="form-control"
+                        v-model="shipment.vendor_memo_no"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-2">
                     <div class="form-group">
                       <h6 class="mb-2">Commission</h6>
                       <input
@@ -285,7 +239,7 @@
                       />
                     </div>
                   </div>
-                  <div class="col-md-3">
+                  <div class="col-md-2">
                     <div class="form-group">
                       <h6 class="mb-2">Total</h6>
                       <input
@@ -295,7 +249,7 @@
                       />
                     </div>
                   </div>
-                  <div class="col-md-3">
+                  <div class="col-md-2">
                     <div class="form-group">
                       <h6 class="mb-2">Advance</h6>
                       <input
@@ -303,19 +257,6 @@
                         class="form-control"
                         v-model="shipment.vendor_advance"
                       />
-                    </div>
-                  </div>
-                </div>
-                <div class="row mb-2">
-                  <div class="col-md-3">
-                    <div class="form-group">
-                      <label for>Payment Type</label>
-                      <v-select
-                        :options="payment_types"
-                        :value="shipment.payment_type"
-                        label="name"
-                        @input="selectPaymentType($event)"
-                      ></v-select>
                     </div>
                   </div>
                 </div>
@@ -425,7 +366,7 @@
 
                 <div v-if="editExpenses">
                   <div class="row mb-2">
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                       <div class="form-group">
                         <label for="transportation">Transportation</label>
                         <input
@@ -436,7 +377,7 @@
                         />
                       </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                       <div class="form-group">
                         <label>Handling</label>
                         <input
@@ -447,7 +388,7 @@
                         />
                       </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                       <div class="form-group">
                         <label>Halting</label>
                         <input
@@ -458,7 +399,29 @@
                         />
                       </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
+                      <div class="form-group">
+                        <label>Cartage charge</label>
+                        <input
+                          type="number"
+                          class="form-control"
+                          v-model="charge_cartage"
+                          @change="calculateTotal"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-2">
+                      <div class="form-group">
+                        <label>Over weight charge</label>
+                        <input
+                          type="number"
+                          class="form-control"
+                          v-model="charge_over_weight"
+                          @change="calculateTotal"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-2">
                       <div class="form-group">
                         <label>Insurance</label>
                         <input
@@ -469,9 +432,8 @@
                         />
                       </div>
                     </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-3">
+
+                    <div class="col-md-2">
                       <div class="form-group">
                         <label>ODC Charges</label>
                         <input
@@ -482,7 +444,7 @@
                         />
                       </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                       <div class="form-group">
                         <label>Tax Percent (%)</label>
                         <input
@@ -493,7 +455,7 @@
                         />
                       </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                       <div class="form-group">
                         <label>Advance Paid</label>
                         <input
@@ -504,7 +466,7 @@
                         />
                       </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                       <div class="form-group">
                         <label>Discount</label>
                         <input
@@ -567,7 +529,7 @@
                 <!-- dont edit expenses -->
                 <div v-else>
                   <div class="row mb-2">
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                       <div class="form-group">
                         <label for="transportation">Transportation</label>
                         <input
@@ -579,7 +541,7 @@
                         />
                       </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                       <div class="form-group">
                         <label>Handling</label>
                         <input
@@ -591,7 +553,7 @@
                         />
                       </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                       <div class="form-group">
                         <label>Halting</label>
                         <input
@@ -603,7 +565,32 @@
                         />
                       </div>
                     </div>
-                    <div class="col-md-3">
+
+                    <div class="col-md-2">
+                      <div class="form-group">
+                        <label>Cartage charge</label>
+                        <input
+                          type="number"
+                          class="form-control"
+                          v-model="shipment.charge_cartage"
+                          @change="calculateTotal"
+                          disabled
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-2">
+                      <div class="form-group">
+                        <label>Over weight charge</label>
+                        <input
+                          type="number"
+                          class="form-control"
+                          v-model="shipment.charge_over_weight"
+                          @change="calculateTotal"
+                          disabled
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-2">
                       <div class="form-group">
                         <label>Insurance</label>
                         <input
@@ -617,7 +604,7 @@
                     </div>
                   </div>
                   <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                       <div class="form-group">
                         <label>ODC Charges</label>
                         <input
@@ -629,7 +616,7 @@
                         />
                       </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                       <div class="form-group">
                         <label>Tax Percent (%)</label>
                         <input
@@ -641,7 +628,7 @@
                         />
                       </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                       <div class="form-group">
                         <label>Advance Paid</label>
                         <input
@@ -653,7 +640,7 @@
                         />
                       </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                       <div class="form-group">
                         <label>Discount</label>
                         <input
@@ -718,22 +705,20 @@
                 </div>
 
                 <!-- end edit expenses -->
-
-                <div class="col-md-12">
-                  <div class="form-group">
-                    <textarea
-                      class="form-control"
-                      rows="6"
-                      placeholder="Remarks"
-                      v-model="shipment.remarks"
-                    ></textarea>
-                  </div>
-                </div>
-
                 <div class="row m-2">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <textarea
+                        class="form-control"
+                        rows="3"
+                        placeholder="Remarks"
+                        v-model="shipment.remarks"
+                      ></textarea>
+                    </div>
+                  </div>
+                  <div class="col"></div>
                   <div class="col">
-                    <p class="form-check-inline">Bill To</p>
-                    <b-form-group label="Individual radios">
+                    <b-form-group label="Bill To">
                       <b-form-radio
                         v-model="shipment.bill_to"
                         name="some-radios"
@@ -998,10 +983,6 @@ import { mapGetters } from "vuex";
 export default {
   data() {
     return {
-      payment_types: [
-        { id: "1", name: "TDS" },
-        { id: "2", name: "TCS" },
-      ],
       file: null,
       paymentType: null,
       status: "pickup",
@@ -1009,6 +990,8 @@ export default {
       charge_transportation: 0,
       charge_handling: 0,
       charge_halting: 0,
+      charge_cartage: 0,
+      charge_over_weight: 0,
       charge_Insurance: 0,
       charge_odc: 0,
       charge_tax_amount: 0,
@@ -1018,7 +1001,6 @@ export default {
       charge_balance: 0,
       discount: 0,
 
-      payment_type: "",
       packagedetails: {
         description: "",
         serial_no: "",
@@ -1036,6 +1018,7 @@ export default {
       vendor_id: "",
       vendor_total: 0,
       vendor_advance: 0,
+      vendor_memo_no: "",
     };
   },
   methods: {
@@ -1114,8 +1097,10 @@ export default {
       });
 
       // reset
-      this.insuranceDetails.eway_bill = this.insuranceDetails.insurance_no = this.insuranceDetails.insurance_agent =
-        "";
+      this.insuranceDetails.eway_bill =
+        this.insuranceDetails.insurance_no =
+        this.insuranceDetails.insurance_agent =
+          "";
     },
 
     calculateTotal() {
@@ -1123,6 +1108,8 @@ export default {
         parseInt(this.charge_transportation) +
         parseInt(this.charge_handling) +
         parseInt(this.charge_halting) +
+        parseInt(this.charge_cartage) +
+        parseInt(this.charge_over_weight) +
         parseInt(this.charge_Insurance) +
         parseInt(this.charge_odc);
 
@@ -1151,6 +1138,8 @@ export default {
       this.charge_transportation = this.shipment.charge_transportation;
       this.charge_handling = this.shipment.charge_handling;
       this.charge_halting = this.shipment.charge_halting;
+      this.charge_cartage = this.shipment.charge_cartage;
+      this.charge_over_weight = this.shipment.charge_over_weight;
       this.charge_Insurance = this.shipment.charge_Insurance;
       this.charge_odc = this.shipment.charge_odc;
       this.charge_tax_amount = this.shipment.charge_tax_amount;
@@ -1164,6 +1153,8 @@ export default {
       this.shipment.charge_transportation = this.charge_transportation;
       this.shipment.charge_handling = this.charge_handling;
       this.shipment.charge_halting = this.charge_halting;
+      this.shipment.charge_cartage = this.charge_cartage;
+      this.shipment.charge_over_weight = this.charge_over_weight;
       this.shipment.charge_Insurance = this.charge_Insurance;
       this.shipment.charge_odc = this.charge_odc;
       this.shipment.charge_tax_amount = this.charge_tax_amount;
