@@ -135,7 +135,9 @@
 
     <div class="row">
       <div class="col font-dark">
-        <h6 class="mt-3">Remarks: {{ shipment.remarks }}</h6>
+        <h6 class="mt-3 bg-secondary text-white p-2">
+          Remarks: {{ shipment.remarks }}
+        </h6>
       </div>
     </div>
 

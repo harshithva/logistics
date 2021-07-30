@@ -35,6 +35,8 @@ class CreateShipmentsTable extends Migration
             $table->decimal('charge_transportation',10,2)->nullable();
             $table->decimal('charge_handling',10,2)->nullable();
             $table->decimal('charge_halting',10,2)->nullable();
+            $table->decimal('charge_cartage',10,2)->nullable();
+            $table->decimal('charge_over_weight',10,2)->nullable();
             $table->decimal('charge_Insurance',10,2)->nullable();
             $table->decimal('charge_odc',10,2)->nullable();
             $table->decimal('charge_tax_percent',10,2)->nullable();

@@ -6,16 +6,17 @@
           <div class="card">
             <div class="card-body">
               <h4 class="mb-3">Edit Quote</h4>
-              <div id="loader" style="display:none"></div>
+              <div id="loader" style="display: none"></div>
               <div id="msgholder"></div>
               <form
                 class="form-horizontal form-material"
                 @submit.prevent="onSubmit"
                 @keydown="form.errors.clear()"
               >
+                <DisplayError :form="form"></DisplayError>
                 <section>
                   <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-3">
                       <div class="form-group">
                         <label for>Select Customer</label>
                         <v-select
@@ -26,7 +27,7 @@
                         ></v-select>
                       </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-3">
                       <div class="form-group">
                         <label for>Date</label>
                         <input
@@ -39,10 +40,8 @@
                         />
                       </div>
                     </div>
-                  </div>
 
-                  <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-3">
                       <div class="form-group">
                         <label for>Change Status</label>
                         <select class="custom-select" v-model="quote.status">
@@ -51,7 +50,7 @@
                         </select>
                       </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-3">
                       <div class="form-group">
                         <label for>Quotation no</label>
                         <input
@@ -64,10 +63,24 @@
                     </div>
                   </div>
 
+                  <div class="row">
+                    <div class="col-8 mb-2">
+                      <b-form-textarea
+                        id="textarea"
+                        v-model="quote.remarks"
+                        placeholder="Remarks"
+                        rows="3"
+                        max-rows="6"
+                      ></b-form-textarea>
+                    </div>
+                  </div>
                   <h6 class="mb-2 mt-2">Quotation Details</h6>
 
                   <div>
-                    <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                    <div
+                      id="dataTable_wrapper"
+                      class="dataTables_wrapper dt-bootstrap4"
+                    >
                       <div class="row">
                         <div class="col-sm-12">
                           <table
@@ -77,7 +90,7 @@
                             cellspacing="0"
                             role="grid"
                             aria-describedby="dataTable_info"
-                            style="width: 100%;"
+                            style="width: 100%"
                           >
                             <thead>
                               <tr>
@@ -94,16 +107,19 @@
                                 <th scope="col">Action</th>
                               </tr>
                             </thead>
-                            <tr v-for="(quotation,index) in quote.list" :key="index">
-                              <td>{{index+1}}</td>
-                              <td>{{quotation.from}}</td>
-                              <td>{{quotation.to}}</td>
-                              <td>{{quotation.description}}</td>
-                              <td>{{quotation.size}}</td>
-                              <td>{{quotation.weight}}</td>
-                              <td>{{quotation.eta}}</td>
-                              <td>{{quotation.rate}}</td>
-                              <td>{{quotation.advance}}</td>
+                            <tr
+                              v-for="(quotation, index) in quote.list"
+                              :key="index"
+                            >
+                              <td>{{ index + 1 }}</td>
+                              <td>{{ quotation.from }}</td>
+                              <td>{{ quotation.to }}</td>
+                              <td>{{ quotation.description }}</td>
+                              <td>{{ quotation.size }}</td>
+                              <td>{{ quotation.weight }}</td>
+                              <td>{{ quotation.eta }}</td>
+                              <td>{{ quotation.rate }}</td>
+                              <td>{{ quotation.advance }}</td>
                               <td @click="deleteQuotation(quotation.id)">
                                 <i class="fas fa-times text-danger"></i>
                               </td>
@@ -114,7 +130,9 @@
                                 class="btn btn-primary mt-3"
                                 data-toggle="modal"
                                 data-target="#quotation"
-                              >Add</button>
+                              >
+                                Add
+                              </button>
                             </tbody>
                           </table>
                         </div>
@@ -135,10 +153,14 @@
                       </span>
                     </button>
 
-                    <router-link to="/admin" class="btn btn-outline-secondary btn-confirmation">
+                    <router-link
+                      to="/admin"
+                      class="btn btn-outline-secondary btn-confirmation"
+                    >
                       <span>
                         <i class="ti-share-alt"></i>
-                      </span> Return to the dashboard
+                      </span>
+                      Return to the dashboard
                     </router-link>
                   </div>
                 </div>
@@ -163,8 +185,15 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Add Quotation Details</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <h5 class="modal-title" id="exampleModalLabel">
+              Add Quotation Details
+            </h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
@@ -230,13 +259,21 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
             <button
               type="button"
               class="btn btn-primary"
               @click="addQuotation"
               data-dismiss="modal"
-            >Add</button>
+            >
+              Add
+            </button>
           </div>
         </div>
       </div>
@@ -255,7 +292,7 @@ export default {
       weight: "",
       eta: "",
       rate: "",
-      advance: ""
+      advance: "",
     };
   },
   methods: {
@@ -272,7 +309,7 @@ export default {
         weight: this.weight,
         eta: this.eta,
         rate: this.rate,
-        advance: this.advance
+        advance: this.advance,
       });
 
       // reset
@@ -292,39 +329,38 @@ export default {
         const customer_id = this.quote.customer_id;
         this.quote
           .submit("patch", `/api/quotations/${customer_id}`)
-          .then(response => {
+          .then((response) => {
             Swal.fire({
               position: "top-end",
               icon: "success",
               title: "Well done! Quote has been Updated",
               showConfirmButton: false,
-              timer: 1500
+              timer: 1500,
             });
             this.$router.push(
               `/admin/customers/${customer_id}/quotes/${response.id}/view`
             );
           })
-          .catch(error =>
+          .catch((error) =>
             Swal.fire({
               icon: "error",
               title: "Oops...",
-              text: "Something went wrong!"
+              text: "Something went wrong!",
             })
           );
       } else {
         Swal.fire({
           icon: "error",
           title: "Oops...",
-          text: "Add Package!"
+          text: "Add Package!",
         });
       }
     },
     deleteQuotation(id) {
-      let i = this.quote.list.map(item => item.id).indexOf(id); // find index of your object
-      console.log(i);
+      let i = this.quote.list.map((item) => item.id).indexOf(id); // find index of your object
 
       this.quote.list.splice(i, 1); // remove it from array
-    }
+    },
   },
   computed: {
     customers() {
@@ -335,12 +371,12 @@ export default {
     },
     quote() {
       return new Form(this.data);
-    }
+    },
   },
   created() {
     this.$store.dispatch("retrieveCustomers");
 
     this.$store.dispatch("retrieveSingleQuote", this.$route.params.quote_id);
-  }
+  },
 };
 </script>

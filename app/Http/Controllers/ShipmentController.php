@@ -113,6 +113,8 @@ class ShipmentController extends Controller
         $shipment->charge_transportation = $request->charge_transportation;
         $shipment->charge_handling = $request->charge_handling;
         $shipment->charge_halting = $request->charge_halting;
+        $shipment->charge_cartage = $request->charge_cartage;
+        $shipment->charge_over_weight = $request->charge_over_weight;
         $shipment->charge_Insurance = $request->charge_Insurance;
         $shipment->user_notes = $request->user_notes;
         $shipment->charge_odc = $request->charge_odc;
@@ -222,6 +224,7 @@ class ShipmentController extends Controller
         $vendor->total = $request->vendor_total;
         $vendor->advance = $request->vendor_advance;
         $vendor->commission = $request->vendor_commission;
+        $vendor->memo_no = $request->vendor_memo_no;
         $vendor->save();
 
 
@@ -373,6 +376,8 @@ class ShipmentController extends Controller
         $shipment->charge_transportation = $request->charge_transportation;
         $shipment->charge_handling = $request->charge_handling;
         $shipment->charge_halting = $request->charge_halting;
+        $shipment->charge_cartage = $request->charge_cartage;
+        $shipment->charge_over_weight = $request->charge_over_weight;
         $shipment->charge_Insurance = $request->charge_Insurance;
         $shipment->user_notes = $request->user_notes;
         $shipment->charge_odc = $request->charge_odc;
@@ -461,6 +466,7 @@ class ShipmentController extends Controller
           $vendor->total = $request->vendor_total;
           $vendor->advance = $request->vendor_advance;
           $vendor->commission = $request->vendor_commission;
+          $vendor->memo_no = $request->vendor_memo_no;
           $vendor->save();
 
         return response()->json($shipment,200);

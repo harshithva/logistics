@@ -18,6 +18,8 @@ class CreateQuotesTable extends Migration
             $table->unsignedBigInteger('customer_id');
             $table->string('quotation_no')->nullable();
             $table->string('status')->nullable();
+            $table->text('remarks')->nullable();
+            $table->boolean('sent')->default(0);
             $table->foreign('customer_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });

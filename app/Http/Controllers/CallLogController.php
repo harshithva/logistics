@@ -39,7 +39,7 @@ class CallLogController extends Controller
     {
        
         $request->validate([
-            "customer_id" => "required|max:255|integer",
+            "customer_id" => "required|integer",
             "duration" => "required|max:255",
         ]);
         $callLog = new CallLog;

@@ -26,11 +26,9 @@
                       ></b-form-datepicker>
                     </div>
                   </div>
-                </div>
 
-                <div class="row">
-                  <div class="col-md-6">
-                    <h6 class="mb-2">Sender Info</h6>
+                  <div class="col-md-4">
+                    <h6 class="mb-3">Sender Info</h6>
                     <div class="form-group">
                       <v-select
                         :options="customers"
@@ -44,8 +42,8 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col-md-6">
-                    <h6 class="mb-2">Receiver Info</h6>
+                  <div class="col-md-4">
+                    <h6 class="mb-3">Receiver Info</h6>
                     <div class="form-group">
                       <v-select
                         :options="customers"
@@ -62,7 +60,7 @@
                 </div>
 
                 <div class="row">
-                  <div class="col-md-12">
+                  <div class="col-md-6">
                     <div class="form-group">
                       <label for="delivery_address">Delivery Address</label>
                       <textarea
@@ -78,7 +76,7 @@
                 <hr />
                 <h6 class="mb-4">Package Pickup Location</h6>
                 <div class="row">
-                  <div class="col-md-6">
+                  <div class="col-md-3">
                     <div class="form-group">
                       <input
                         type="text"
@@ -89,7 +87,7 @@
                     </div>
                   </div>
 
-                  <div class="col-md-6">
+                  <div class="col-md-3">
                     <div class="form-group">
                       <input
                         type="text"
@@ -99,23 +97,22 @@
                       />
                     </div>
                   </div>
-                </div>
-                <label for>Transaction Type</label>
-                <div class="input-group mb-2">
-                  <select
-                    class="custom-select"
-                    aria-label="Select Transaction Type"
-                    v-model="form.package_transaction_type"
-                  >
-                    <option selected disabled>Transaction Type</option>
 
-                    <option value="Full Load">Full Load</option>
-                    <option value="Part Load">Part Load</option>
-                  </select>
-                </div>
+                  <div class="col-md-3">
+                    <select
+                      class="custom-select"
+                      aria-label="Select Transaction Type"
+                      v-model="form.package_transaction_type"
+                    >
+                      <option disabled>Transaction Type</option>
 
+                      <option value="Full Load" selected>Full Load</option>
+                      <option value="Part Load">Part Load</option>
+                    </select>
+                  </div>
+                </div>
                 <div class="row">
-                  <div class="col-md-12">
+                  <div class="col-md-6">
                     <div class="form-group">
                       <label for="exampleFormControlTextarea1"
                         >Pickup Address</label
@@ -131,30 +128,8 @@
                 </div>
 
                 <h6 class="mb-4">Transport Details</h6>
-                <!-- <div class="row">
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <input
-                        type="text"
-                        class="form-control"
-                        v-model="form.transport_company_name"
-                        placeholder="Company Name"
-                      />
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <input
-                        type="text"
-                        class="form-control"
-                        v-model="form.transport_company_phone"
-                        placeholder="Phone"
-                      />
-                    </div>
-                  </div>
-                </div> -->
                 <div class="row mb-2">
-                  <div class="col-md-4">
+                  <div class="col-md-3">
                     <div class="form-group">
                       <input
                         type="text"
@@ -164,7 +139,7 @@
                       />
                     </div>
                   </div>
-                  <div class="col-md-4">
+                  <div class="col-md-3">
                     <div class="form-group">
                       <input
                         type="text"
@@ -174,7 +149,7 @@
                       />
                     </div>
                   </div>
-                  <div class="col-md-4">
+                  <div class="col-md-3">
                     <div class="form-group">
                       <input
                         type="text"
@@ -185,12 +160,12 @@
                     </div>
                   </div>
 
-                  <div class="col-md-12">
+                  <div class="col-md-6">
                     <div class="form-group">
                       <textarea
                         class="form-control"
                         v-model="form.user_notes"
-                        rows="6"
+                        rows="3"
                         placeholder="User Notes - For internal use only."
                       ></textarea>
                     </div>
@@ -213,7 +188,17 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col-md-3">
+                  <div class="col-md-2">
+                    <div class="form-group">
+                      <h6 class="mb-2">Memo no</h6>
+                      <input
+                        type="text"
+                        class="form-control"
+                        v-model="form.vendor_memo_no"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-2">
                     <div class="form-group">
                       <h6 class="mb-2">Commission</h6>
                       <input
@@ -223,7 +208,7 @@
                       />
                     </div>
                   </div>
-                  <div class="col-md-3">
+                  <div class="col-md-2">
                     <div class="form-group">
                       <h6 class="mb-2">Total</h6>
                       <input
@@ -233,7 +218,7 @@
                       />
                     </div>
                   </div>
-                  <div class="col-md-3">
+                  <div class="col-md-2">
                     <div class="form-group">
                       <h6 class="mb-2">Advance</h6>
                       <input
@@ -245,7 +230,7 @@
                   </div>
                 </div>
 
-                <div class="row mb-2">
+                <!-- <div class="row mb-2">
                   <div class="col-md-3">
                     <div class="form-group">
                       <label for>Payment Type</label>
@@ -256,7 +241,7 @@
                       ></v-select>
                     </div>
                   </div>
-                </div>
+                </div> -->
                 <h6 class="mb-4">Package Details</h6>
 
                 <table class="table table-responsive-sm">
@@ -343,7 +328,7 @@
                 <hr />
                 <h6 class="mb-4">Additional Expenses</h6>
                 <div class="row mb-2">
-                  <div class="col-md-3">
+                  <div class="col-md-2">
                     <div class="form-group">
                       <label for="transportation">Transportation</label>
                       <input
@@ -354,7 +339,7 @@
                       />
                     </div>
                   </div>
-                  <div class="col-md-3">
+                  <div class="col-md-2">
                     <div class="form-group">
                       <label>Handling</label>
                       <input
@@ -365,7 +350,7 @@
                       />
                     </div>
                   </div>
-                  <div class="col-md-3">
+                  <div class="col-md-2">
                     <div class="form-group">
                       <label>Halting</label>
                       <input
@@ -376,7 +361,7 @@
                       />
                     </div>
                   </div>
-                  <div class="col-md-3">
+                  <div class="col-md-2">
                     <div class="form-group">
                       <label>Insurance</label>
                       <input
@@ -387,9 +372,30 @@
                       />
                     </div>
                   </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-3">
+                  <div class="col-md-2">
+                    <div class="form-group">
+                      <label>Cartage</label>
+                      <input
+                        type="number"
+                        class="form-control"
+                        v-model="form.charge_cartage"
+                        @change="calculateTotal"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <div class="form-group">
+                      <label>Over weight</label>
+                      <input
+                        type="number"
+                        class="form-control"
+                        v-model="form.charge_over_weight"
+                        @change="calculateTotal"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="col-md-2">
                     <div class="form-group">
                       <label>ODC Charges</label>
                       <input
@@ -400,7 +406,7 @@
                       />
                     </div>
                   </div>
-                  <div class="col-md-3">
+                  <div class="col-md-2">
                     <div class="form-group">
                       <label>Tax Percent (%)</label>
                       <input
@@ -411,7 +417,7 @@
                       />
                     </div>
                   </div>
-                  <div class="col-md-3">
+                  <div class="col-md-2">
                     <div class="form-group">
                       <label>Advance Paid</label>
                       <input
@@ -422,7 +428,7 @@
                       />
                     </div>
                   </div>
-                  <div class="col-md-3">
+                  <div class="col-md-2">
                     <div class="form-group">
                       <label>Discount</label>
                       <input
@@ -481,22 +487,20 @@
                     />
                   </div>
                 </div>
-
-                <div class="col-md-12">
-                  <div class="form-group">
-                    <textarea
-                      class="form-control"
-                      rows="6"
-                      placeholder="Remarks"
-                      v-model="form.remarks"
-                    ></textarea>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <textarea
+                        class="form-control"
+                        rows="3"
+                        placeholder="Remarks"
+                        v-model="form.remarks"
+                      ></textarea>
+                    </div>
                   </div>
-                </div>
-
-                <div class="row m-2">
+                  <div class="col-2"></div>
                   <div class="col">
-                    <p class="form-check-inline">Bill To</p>
-                    <b-form-group label="Individual radios">
+                    <b-form-group label="Bill To">
                       <b-form-radio
                         v-model="form.bill_to"
                         name="some-radios"
@@ -538,7 +542,7 @@
                     </button>
                   </div>
                 </div>
-                <input name="locker" type="hidden" value="274218" />
+                <DisplayError :form="form"></DisplayError>
               </form>
             </div>
           </div>
@@ -754,14 +758,14 @@ import { mapGetters } from "vuex";
 export default {
   data() {
     return {
-      payment_types: [{ name: "TDS" }, { name: "TCS" }],
+      // payment_types: [{ name: "TDS" }, { name: "TCS" }],
       form: new Form({
         receiver_id: "",
         sender_id: "",
         delivery_address: "",
         package_contact_person: "",
         package_contact_person_phone: "",
-        package_transaction_type: "",
+        package_transaction_type: "Full Load",
         package_pickup_address: "",
         transport_company_name: "",
         transport_company_phone: "",
@@ -773,6 +777,8 @@ export default {
         charge_transportation: 0,
         charge_handling: 0,
         charge_halting: 0,
+        charge_cartage: 0,
+        charge_over_weight: 0,
         charge_Insurance: 0,
         charge_odc: 0,
         charge_tax_percent: 0,
@@ -786,11 +792,12 @@ export default {
         date: "",
         package: [],
         insurance: [],
-        payment_type: "",
+        // payment_type: "",
         vendor_id: "",
         vendor_total: 0,
         vendor_advance: 0,
         vendor_commission: 0,
+        vendor_memo_no: "",
         discount: 0,
       }),
       file: null,
@@ -865,8 +872,10 @@ export default {
       });
 
       // reset
-      this.insuranceDetails.eway_bill = this.insuranceDetails.insurance_no = this.insuranceDetails.insurance_agent =
-        "";
+      this.insuranceDetails.eway_bill =
+        this.insuranceDetails.insurance_no =
+        this.insuranceDetails.insurance_agent =
+          "";
     },
     onSubmit() {
       let timerInterval;
@@ -925,6 +934,8 @@ export default {
         parseInt(this.form.charge_transportation) +
         parseInt(this.form.charge_handling) +
         parseInt(this.form.charge_halting) +
+        parseInt(this.form.charge_cartage) +
+        parseInt(this.form.charge_over_weight) +
         parseInt(this.form.charge_Insurance) +
         parseInt(this.form.charge_odc);
 

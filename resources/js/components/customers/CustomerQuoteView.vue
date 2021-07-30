@@ -36,12 +36,22 @@
           <i class="fas fa-edit"></i> Edit
         </router-link>
         <button
+          class="btn btn-info ml-2"
+          @click.prevent="updateSentStatus"
+          v-if="
+            this.$store.getters.getUserData.user.role == 'admin' && !quote.sent
+          "
+        >
+          <i class="fas fa-marker"></i> Mark as sent
+        </button>
+        <button
           class="btn btn-secondary ml-2"
           @click.prevent="changeType"
           v-if="this.type === 'QUOTATION'"
         >
           <i class="fas fa-scroll"></i> Proforma Invoice
         </button>
+
         <button
           class="btn btn-secondary ml-2"
           @click.prevent="changeType"
@@ -64,6 +74,31 @@ export default {
     };
   },
   methods: {
+    updateSentStatus() {
+      axios
+        .post(`api/quotations/${this.quote.id}/update_sent_status`)
+        .then((response) => {
+          this.$store.dispatch(
+            "retrieveSingleQuote",
+            this.$route.params.quote_id
+          );
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Quote has been marked sent",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        })
+        .catch((err) => {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Something went wrong!",
+            footer: "Mark sure internet connection is stable",
+          });
+        });
+    },
     updateStatus(status) {
       if (status == "approve") {
         axios

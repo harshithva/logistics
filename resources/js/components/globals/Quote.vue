@@ -121,7 +121,12 @@
     <div class="row mt-2">
       <div class="col">
         <table
-          class="table-print table-bordered table-responsive-sm table-print-border-bottom"
+          class="
+            table-print
+            table-bordered
+            table-responsive-sm
+            table-print-border-bottom
+          "
         >
           <thead>
             <th class="bg-red">SL</th>
@@ -150,8 +155,10 @@
         </table>
       </div>
     </div>
-    <div class="row mt-2" v-if="this.type === 'PROFORMA INVOICE'">
-      <div class="col">Remarks:</div>
+    <div class="row mr-1 ml-1" v-if="this.type !== 'PROFORMA INVOICE'">
+      <div class="col bg-secondary text-white pt-2 pb-2">
+        Remarks: {{ quote.remarks }}
+      </div>
     </div>
 
     <div class="row mt-2 mr-1 ml-1">

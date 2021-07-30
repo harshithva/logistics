@@ -113,7 +113,12 @@
     <div class="row">
       <div class="col-12">
         <table
-          class="table-print table-bordered table-responsive-sm table-print-border-bottom"
+          class="
+            table-print
+            table-bordered
+            table-responsive-sm
+            table-print-border-bottom
+          "
         >
           <thead>
             <th class="bg-red">SL No.</th>
@@ -160,7 +165,9 @@
 
         <div class="row">
           <div class="col">
-            <h6 class="mt-4">Remarks: {{ shipment.remarks }}</h6>
+            <h6 class="bg-secondary text-white p-2">
+              Remarks: {{ shipment.remarks }}
+            </h6>
             <p class="mt-2">
               Bank Details
               <br />Name : Axis Bank <br />8th Mile Branch <br />A/c No.:

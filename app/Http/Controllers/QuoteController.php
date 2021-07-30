@@ -40,6 +40,11 @@ class QuoteController extends Controller
      */
     public function store(Request $request)
     {
+     
+        $request->validate([
+            "customer_id" => "required|integer",
+            "remarks" => "nullable|max:2000",
+        ]);
         $quote = new Quote;
         $quote->customer_id = $request->customer_id;
         $quote->save();
@@ -47,6 +52,7 @@ class QuoteController extends Controller
         $my_id = sprintf('%04d', $quote->id);
         $quotation_no = 'GLQ' .  $my_id;
         $quote->quotation_no = $quotation_no;
+        $quote->remarks = $request->remarks;
         $quote->save();
         
         $request->quotations = json_encode($request->quotations);
@@ -105,10 +111,16 @@ class QuoteController extends Controller
      */
     public function update(Request $request, Quote $quote)
     {
+        
+        $request->validate([
+            "customer_id" => "required|integer",
+            "remarks" => "nullable|max:2000",
+        ]);
         $quote = Quote::findOrFail($request->id);
         $quote->customer_id = $request->customer_id; 
         $quote->quotation_no = $request->quotation_no;
         $quote->status = $request->status;
+        $quote->remarks = $request->remarks;
         $quote->save();
         
         $request->list= json_encode($request->list);
@@ -131,6 +143,21 @@ class QuoteController extends Controller
         }
 
         return response()->json($quote,200);
+    }
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Quote  $quote
+     * @return \Illuminate\Http\Response
+     */
+    public function update_sent_status(Request $request, Quote $quote)
+    {
+    //  return $quote;  
+    $quote->update(["sent" => 1]);
+    // $quote->sent = 1;
+    // $quote->save();
+        // return response()->json($quote,200);
     }
 
     /**
