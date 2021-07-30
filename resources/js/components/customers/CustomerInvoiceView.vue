@@ -51,11 +51,16 @@
   </div>
 </template>
 
+
 <style>
 @media print {
   #wrapper #content-wrapper {
     background-color: white !important;
   }
+}
+
+#content {
+  background-color: white !important;
 }
 </style>
 
