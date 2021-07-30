@@ -1,7 +1,13 @@
 <template>
   <fragment>
     <div class="row mt-3 mb-3 ml-3 d-print-none">
-      <div class="col-4"></div>
+      <div class="col-2"></div>
+      <div class="col-2">
+        <span class="badge badge-pill badge-success" v-if="quote.sent">
+          Sent</span
+        >
+        <span class="badge badge-pill badge-warning" v-else>Not sent</span>
+      </div>
       <div class="col">
         <a
           class="btn btn-primary text-white"
@@ -35,15 +41,7 @@
         >
           <i class="fas fa-edit"></i> Edit
         </router-link>
-        <button
-          class="btn btn-info ml-2"
-          @click.prevent="updateSentStatus"
-          v-if="
-            this.$store.getters.getUserData.user.role == 'admin' && !quote.sent
-          "
-        >
-          <i class="fas fa-marker"></i> Mark as sent
-        </button>
+
         <button
           class="btn btn-secondary ml-2"
           @click.prevent="changeType"

@@ -62,7 +62,7 @@ Route::apiResource("quotations", 'QuoteController');
 Route::post("quotations/{quotation}/status/approve", 'QuoteController@approve_status');
 Route::post("quotations/{quotation}/status/decline", 'QuoteController@decline_status');
 Route::post("quotations/{id}/quote_send_email", 'QuoteController@quote_send_email');
-Route::post("quotations/{quotation}/update_sent_status", 'QuoteController@update_sent_status');
+// Route::post("quotations/{quotation}/update_sent_status", 'QuoteController@update_sent_status');
 
 Route::get("shipments/{id}/balance_amount", 'ShipmentController@balance_amount');
 Route::get("shipments/{id}/shipment_status", 'ShipmentController@shipment_status');

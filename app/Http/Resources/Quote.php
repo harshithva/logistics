@@ -18,8 +18,8 @@ class Quote extends JsonResource
             'id' => $this->id,
             'quotation_no'=> $this->quotation_no,
             'customer_name'=> $this->customer->name,
-            'from' => $this->list[0]->from,
-            'to' => $this->list[0]->to,
+            'from' => count($this->list) ? $this->list[0]->from: "NO INFO",
+            'to' => count($this->list) ? $this->list[0]->to: "NO INFO",
             'status' => $this->status,
             'customer_id' => $this->customer->id
           ];

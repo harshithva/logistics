@@ -18,7 +18,7 @@ class QuoteController extends Controller
      */
     public function index()
     {
-        $quotes = Quote::with('customer','list')->get();
+        $quotes = Quote::all();
         return QuoteResource::collection($quotes);
     }
 
@@ -144,19 +144,18 @@ class QuoteController extends Controller
 
         return response()->json($quote,200);
     }
-    /**
-     * Update the specified resource in storage.
+   /**
+     * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Quote  $quote
      * @return \Illuminate\Http\Response
      */
-    public function update_sent_status(Request $request, Quote $quote)
+    public function update_sent_status(Request $request)
     {
     //  return $quote;  
-    $quote->update(["sent" => 1]);
-    // $quote->sent = 1;
-    // $quote->save();
+    // $q = Quote::find($request);
+    // $q->sent = true;
+    // $q->save();
         // return response()->json($quote,200);
     }
 
@@ -182,6 +181,7 @@ class QuoteController extends Controller
     {
      $quote = Quote::find($request);
      $quote->status = 'approved';
+      $quote->sent = true;
      $quote->save();
     }
 
@@ -189,6 +189,7 @@ class QuoteController extends Controller
     {
      $quote = Quote::find($request);
      $quote->status = 'declined';
+     $quote->sent = true;
      $quote->save();
     }
     
@@ -215,5 +216,8 @@ class QuoteController extends Controller
                 // ->cc('gurukallogistics@gmail.com')
                 ->subject('Quote');
         });
+
+        $quote->sent = true;
+        $quote->save();
     }
 }
