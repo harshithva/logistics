@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Resources;
-
+use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\VendorPayment;
 
@@ -15,6 +15,16 @@ class VendorShipment extends JsonResource
      */
     public function toArray($request)
     {
+        $query = VendorPayment::where('vendor_id', $this->vendor_id)->where('shipment_id',$this->shipment_id);
+        if($query->count() > 0)
+        {
+            $payment_date = Carbon::parse($query->orderBy('created_at','DESC')->first()->created_at)->format("d/m/Y h:i A");
+        }else if($this->advance > 0){
+            $payment_date = Carbon::parse($this->created_at)->format("d/m/Y h:i A");
+        }else{
+            $payment_date = "NOT PAID";
+        }
+       
         return [
             'id' => $this->id,
             'total' => $this->total,
@@ -27,7 +37,8 @@ class VendorShipment extends JsonResource
             'docket_no' => $this->shipment->docket_no,
             'from' => $this->shipment->package_pickup_address,
             'delivery_address' => $this->shipment->delivery_address,
-            'sender_id' => $this->shipment->sender_id
+            'sender_id' => $this->shipment->sender_id,
+            'payment_date' =>       $payment_date
             // 'shipment' => $this->shipment
         ];
     }

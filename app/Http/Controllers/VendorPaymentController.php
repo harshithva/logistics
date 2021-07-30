@@ -41,7 +41,7 @@ class VendorPaymentController extends Controller
             'vendor_id' => 'required',
             'shipment_id' => 'required',
             'amount' => 'required|numeric',
-            'commission' => 'required|numeric',
+            // 'commission' => 'required|numeric',
             ]);
         
             $payment = new VendorPayment;
@@ -50,7 +50,7 @@ class VendorPaymentController extends Controller
             $payment->shipment_id = $request->shipment_id;
             $payment->amount = $request->amount;
             $payment->type = $request->type;
-            $payment->commission = $request->commission;
+            // $payment->commission = $request->commission;
            
             $payment->save();
             return new VendorPaymentResource($payment);

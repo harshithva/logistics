@@ -1,5 +1,17 @@
 <template>
   <div>
+    <div class="row mb-2 mt-2">
+      <div class="col-10"></div>
+      <div class="col">
+        <export-excel
+          :data="shipments"
+          :fields="json_fields"
+          class="btn btn-success btn-sm"
+        >
+          <i class="fas fa-cloud-download-alt"></i> &nbsp;Excel
+        </export-excel>
+      </div>
+    </div>
     <vue-good-table
       :columns="tableColumns1"
       :rows="shipments"
@@ -83,10 +95,25 @@ export default {
   data() {
     return {
       data: {},
+      json_fields: {
+        Docket: "docket_no",
+        "Memo no": "memo_no",
+        "Delivery Address": "delivery_address",
+        Commission: "commission",
+        Total: "total",
+        Advance: "advance",
+        Payment: "payment",
+        "Payment Date": "payment_date",
+      },
       tableColumns1: [
         {
           label: "Docket No",
           field: "docket_no",
+          sortable: true,
+        },
+        {
+          label: "Memo No",
+          field: "memo_no",
           sortable: true,
         },
 
@@ -113,6 +140,10 @@ export default {
         {
           label: "Payment",
           field: "payment",
+        },
+        {
+          label: "Payment Date",
+          field: "payment_date",
         },
 
         {
