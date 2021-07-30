@@ -178,27 +178,35 @@
       </div>
       <div class="col">
         <table class="table-print table-bordered table-responsive-sm font-dark">
-          <tr>
+          <tr v-if="shipment.charge_transportation > 0">
             <th class="bg-red">Transportation</th>
             <td>{{ shipment.charge_transportation }}</td>
           </tr>
-          <tr>
+          <tr v-if="shipment.charge_handling > 0">
             <th class="bg-red">Handling</th>
             <td>{{ shipment.charge_handling }}</td>
           </tr>
-          <tr>
+          <tr v-if="shipment.charge_odc > 0">
             <th class="bg-red">ODC Charges</th>
             <td>{{ shipment.charge_odc }}</td>
           </tr>
-          <tr>
+          <tr v-if="shipment.charge_halting > 0">
             <th class="bg-red">Halting</th>
             <td>{{ shipment.charge_halting }}</td>
           </tr>
-          <tr>
+          <tr v-if="shipment.charge_cartage > 0">
+            <th class="bg-red">Cartage</th>
+            <td>{{ shipment.charge_cartage }}</td>
+          </tr>
+          <tr v-if="shipment.charge_over_weight > 0">
+            <th class="bg-red">Over weight</th>
+            <td>{{ shipment.charge_over_weight }}</td>
+          </tr>
+          <tr v-if="shipment.charge_Insurance > 0">
             <th class="bg-red">Insurance</th>
             <td>{{ shipment.charge_Insurance }}</td>
           </tr>
-          <tr>
+          <tr v-if="shipment.charge_tax_amount > 0">
             <th class="bg-red">GST</th>
             <td>{{ shipment.charge_tax_amount }}</td>
           </tr>

@@ -22,7 +22,7 @@ class VendorShipment extends JsonResource
         }else if($this->advance > 0){
             $payment_date = Carbon::parse($this->created_at)->format("d/m/Y h:i A");
         }else{
-            $payment_date = "NOT PAID";
+            $payment_date = "NO INFO";
         }
        
         return [

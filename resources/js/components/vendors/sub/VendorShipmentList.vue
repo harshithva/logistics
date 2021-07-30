@@ -102,7 +102,7 @@ export default {
         Commission: "commission",
         Total: "total",
         Advance: "advance",
-        Payment: "payment",
+
         "Payment Date": "payment_date",
       },
       tableColumns1: [
