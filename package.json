@@ -27,7 +27,7 @@
     },
     "dependencies": {
         "@chenfengyuan/vue-qrcode": "^1.0.2",
-        "@dangvanthanh/vue-clock": "^0.1.7",
+        "@dangvanthanh/vue-clock": "^0.1.9",
         "animejs": "^3.2.1",
         "bootstrap-vue": "^2.16.0",
         "chart.js": "^2.9.3",

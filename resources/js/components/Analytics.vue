@@ -1,7 +1,7 @@
 <template>
   <fragment v-if="this.$store.getters.getUserData.user.role == 'admin'">
     <!-- Page Heading -->
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <div class="d-sm-flex align-items-center justify-content-between">
       <h1
         class="h3 mb-0 text-gray-800"
         v-if="this.$store.getters.getUserData.user.role == 'admin'"
@@ -11,6 +11,39 @@
       <h1 class="h3 mb-0 text-gray-800" v-else>Staff Dashboard</h1>
     </div>
 
+    <div class="row mb-4">
+      <div class="col"></div>
+      <div class="col">
+        <router-link
+          :to="'/admin/shipments/create'"
+          class="btn btn-primary ml-2"
+          v-if="this.$store.getters.getUserData.user.role == 'admin'"
+        >
+          <i class="fas fa-truck-loading"></i> Create Shipment
+        </router-link>
+        <router-link
+          :to="'/admin/customers/create'"
+          class="btn btn-danger ml-2"
+          v-if="this.$store.getters.getUserData.user.role == 'admin'"
+        >
+          <i class="fas fa-user-plus"></i> Create Customer
+        </router-link>
+        <router-link
+          :to="'/admin/quotes/create'"
+          class="btn btn-success ml-2"
+          v-if="this.$store.getters.getUserData.user.role == 'admin'"
+        >
+          <i class="fas fa-scroll"></i> Create Quote
+        </router-link>
+        <router-link
+          :to="'/admin/staff/create'"
+          class="btn btn-info ml-2"
+          v-if="this.$store.getters.getUserData.user.role == 'admin'"
+        >
+          <i class="fas fa-plus"></i> Create Staff
+        </router-link>
+      </div>
+    </div>
     <!-- Content Row -->
     <div class="row">
       <!-- Earnings (Monthly) Card Example -->
@@ -20,7 +53,12 @@
             <div class="row no-gutters align-items-center">
               <div class="col mr-2">
                 <div
-                  class="text-xs font-weight-bold text-primary text-uppercase mb-1"
+                  class="
+                    text-xs
+                    font-weight-bold
+                    text-primary text-uppercase
+                    mb-1
+                  "
                 >
                   Total Earnings
                 </div>
@@ -43,7 +81,12 @@
             <div class="row no-gutters align-items-center">
               <div class="col mr-2">
                 <div
-                  class="text-xs font-weight-bold text-success text-uppercase mb-1"
+                  class="
+                    text-xs
+                    font-weight-bold
+                    text-success text-uppercase
+                    mb-1
+                  "
                 >
                   Total Shipments
                 </div>
@@ -66,7 +109,12 @@
             <div class="row no-gutters align-items-center">
               <div class="col mr-2">
                 <div
-                  class="text-xs font-weight-bold text-danger text-uppercase mb-1"
+                  class="
+                    text-xs
+                    font-weight-bold
+                    text-danger text-uppercase
+                    mb-1
+                  "
                 >
                   Pending Delivery
                 </div>
@@ -128,7 +176,12 @@
             <div class="row no-gutters align-items-center">
               <div class="col mr-2">
                 <div
-                  class="text-xs font-weight-bold text-warning text-uppercase mb-1"
+                  class="
+                    text-xs
+                    font-weight-bold
+                    text-warning text-uppercase
+                    mb-1
+                  "
                 >
                   Total Customers
                 </div>
@@ -151,7 +204,12 @@
             <div class="row no-gutters align-items-center">
               <div class="col mr-2">
                 <div
-                  class="text-xs font-weight-bold text-danger text-uppercase mb-1"
+                  class="
+                    text-xs
+                    font-weight-bold
+                    text-danger text-uppercase
+                    mb-1
+                  "
                 >
                   Pending Payment
                 </div>
@@ -173,7 +231,12 @@
             <div class="row no-gutters align-items-center">
               <div class="col mr-2">
                 <div
-                  class="text-xs font-weight-bold text-danger text-uppercase mb-1"
+                  class="
+                    text-xs
+                    font-weight-bold
+                    text-danger text-uppercase
+                    mb-1
+                  "
                 >
                   Upcoming Expenses
                 </div>
@@ -198,7 +261,14 @@
         <div class="card shadow mb-4">
           <!-- Card Header - Dropdown -->
           <div
-            class="card-header py-3 d-flex flex-row align-items-center justify-content-between"
+            class="
+              card-header
+              py-3
+              d-flex
+              flex-row
+              align-items-center
+              justify-content-between
+            "
           >
             <h6 class="m-0 font-weight-bold text-primary">
               Shipments Overview
@@ -216,7 +286,11 @@
                 <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
               </a>
               <div
-                class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                class="
+                  dropdown-menu dropdown-menu-right
+                  shadow
+                  animated--fade-in
+                "
                 aria-labelledby="dropdownMenuLink"
               >
                 <div class="dropdown-header">Dropdown Header:</div>
@@ -230,7 +304,19 @@
           <!-- Card Body -->
           <div class="card-body">
             <div class="chart-area">
-              <column-chart :data="dashboard.overview"></column-chart>
+              <line-chart
+                :data="dashboard.overview"
+                :colors="['#1cc88a', '#e74a3b']"
+                :discrete="true"
+                xtitle="Days"
+                ytitle="Payment Received"
+                prefix="₹"
+                :legend="true"
+                :dataset="{ borderWidth: 4 }"
+                :download="true"
+              >
+                ></line-chart
+              >
             </div>
           </div>
         </div>
@@ -241,51 +327,38 @@
         <div class="card shadow mb-4">
           <!-- Card Header - Dropdown -->
           <div
-            class="card-header py-3 d-flex flex-row align-items-center justify-content-between"
+            class="
+              card-header
+              py-3
+              d-flex
+              flex-row
+              align-items-center
+              justify-content-between
+            "
           >
             <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
-            <div class="dropdown no-arrow">
-              <a
-                class="dropdown-toggle"
-                href="#"
-                role="button"
-                id="dropdownMenuLink"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-              </a>
-              <div
-                class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                aria-labelledby="dropdownMenuLink"
-              >
-                <div class="dropdown-header">Dropdown Header:</div>
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Something else here</a>
-              </div>
-            </div>
           </div>
           <!-- Card Body -->
           <div class="card-body">
-            <div class="chart-pie pt-4 pb-2">
-              <area-chart :data="dashboard.overview"></area-chart>
+            <div class="chart-pie pb-4">
+              <pie-chart
+                :data="dashboard.overview"
+                :donut="true"
+                prefix="₹"
+                :colors="[
+                  '#4e73df',
+                  '#1cc88a',
+                  '#36b9cc',
+                  '#f6c23e',
+                  '#e74a3b',
+                  '#858796',
+                  '#f8f9fc',
+                  '#5a5c69',
+                ]"
+                :download="true"
+              ></pie-chart>
             </div>
             <br />
-
-            <div class="mt-4 text-center small">
-              <span class="mr-2">
-                <i class="fas fa-circle text-primary"></i> Direct
-              </span>
-              <span class="mr-2">
-                <i class="fas fa-circle text-success"></i> Social
-              </span>
-              <span class="mr-2">
-                <i class="fas fa-circle text-info"></i> Referral
-              </span>
-            </div>
           </div>
         </div>
       </div>

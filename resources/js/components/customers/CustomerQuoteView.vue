@@ -6,7 +6,7 @@
         <span class="badge badge-pill badge-success" v-if="quote.sent">
           Sent</span
         >
-        <span class="badge badge-pill badge-warning" v-else>Not sent</span>
+        <span class="badge badge-pill badge-warning" v-else>Drafted</span>
       </div>
       <div class="col">
         <a
