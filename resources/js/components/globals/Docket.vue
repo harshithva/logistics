@@ -36,7 +36,9 @@
           <i class="fas fa-envelope"></i> &nbsp;logistics@gurukal.co.in
           <br />
           <b> <i class="fas fa-globe-americas"></i> &nbsp;www.gurukal.in </b>
-          <br />GST No: 29AYGPS3509N2ZQ
+          <br />
+          <span v-if="checkDate"> GST No: 29AYGPS3509N2ZQ </span>
+          <span v-else> GST No: 29BAYPR5950F1ZU </span>
         </h5>
       </div>
       <div class="col"></div>
@@ -202,6 +204,15 @@ export default {
     };
   },
   computed: {
+    checkDate() {
+      let day = "01/08/2021";
+      let parsed = moment(day, "DD/MM/YYYY");
+      if (parsed.diff(moment(this.shipment.created_at)) > 0) {
+        return true;
+      } else {
+        return false;
+      }
+    },
     qrcode() {
       return `https://crm.gurukal.in/customer/docket/8jZSqbGNmzk25EcBgMsWYyDP4LDEAS7amrVevmqcTE67ByuajGaks8UqmLmJ/${this.shipment.id}/urMrnM6JNuGPCnEdnmDqzfWfDYAUSYb8rkveHF9mWGPgD2XxH4SYRXjRCnmx/view`;
     },

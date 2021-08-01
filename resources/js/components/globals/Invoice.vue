@@ -30,7 +30,9 @@
           <i class="fas fa-envelope"></i> &nbsp;logistics@gurukal.co.in
           <br />
           <b> <i class="fas fa-globe-americas"></i> &nbsp;www.gurukal.in </b>
-          <br />GST No: 29AYGPS3509N2ZQ
+          <br />
+          <span v-if="checkDate"> GST No: 29AYGPS3509N2ZQ </span>
+          <span v-else> GST No: 29BAYPR5950F1ZU </span>
         </h5>
       </div>
       <div class="col"></div>
@@ -168,10 +170,19 @@
             <h6 class="bg-secondary text-white p-2">
               Remarks: {{ shipment.remarks }}
             </h6>
-            <p class="mt-2">
+            <p class="mt-2" v-if="checkDate">
               Bank Details
               <br />Name : Axis Bank <br />8th Mile Branch <br />A/c No.:
               918020030455515 <br />IFSC: UTIB0002926
+            </p>
+            <p class="mt-2" v-else>
+              Bank Details
+              <br /><span class="text-primary font-weight-bold">
+                Name: GURUKAL LOGISTICS </span
+              ><br />
+              Bank name: Axis Bank <br />8th Mile Branch <br />A/c No:
+              918020022199928 <br />
+              IFSC: UTIB0002926
             </p>
           </div>
         </div>

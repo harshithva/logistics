@@ -30,7 +30,8 @@
           &nbsp;logistics@gurukal.co.in <br /><b
             ><i class="fas fa-globe-americas"></i> &nbsp;www.gurukal.in</b
           >
-          <br />GST No: 29AYGPS3509N2ZQ
+          <br /><span v-if="checkDate"> GST No: 29AYGPS3509N2ZQ </span>
+          <span v-else> GST No: 29BAYPR5950F1ZU </span>
         </h5>
       </div>
       <div class="col"></div>
@@ -193,12 +194,20 @@
 
     <div class="row mt-4">
       <div class="col-10">
-        <b>
+        <p class="mt-2" v-if="checkDate">
           Bank Details
           <br />Name : Axis Bank <br />8th Mile Branch <br />A/c No.:
           918020030455515 <br />IFSC: UTIB0002926
-          <br />
-        </b>
+        </p>
+        <p class="mt-2" v-else>
+          Bank Details
+          <br /><span class="text-primary font-weight-bold">
+            Name: GURUKAL LOGISTICS </span
+          ><br />
+          Bank name: Axis Bank <br />8th Mile Branch <br />A/c No:
+          918020022199928 <br />
+          IFSC: UTIB0002926
+        </p>
       </div>
 
       <div class="col">
@@ -233,6 +242,17 @@ export default {
       logo: require("./assets/logo-png-2.png"),
       sign: "https://i.ibb.co/W6vkYqs/seal.png",
     };
+  },
+  computed: {
+    checkDate() {
+      let day = "01/08/2021";
+      let parsed = moment(day, "DD/MM/YYYY");
+      if (parsed.diff(moment(this.quote.created_at)) > 0) {
+        return true;
+      } else {
+        return false;
+      }
+    },
   },
 };
 </script>
