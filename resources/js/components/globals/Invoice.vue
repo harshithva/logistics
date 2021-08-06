@@ -240,7 +240,17 @@
           <li>
             A 10 % charge will be applied for every month of late payment.
           </li>
-          <li>GST Payable by Freight Bearer</li>
+          <li>GST Payable by Freight Bearer.</li>
+          <li>
+            Notification No.17/2017-Central Tax (Rate), dated 28/06/2017 as
+            amended by Notification No.20/2017-Central Tax (Rate), dated
+            22/08/2017 the GST on GTA is 5%(CGST 2.5%, SGST 2.5%).
+          </li>
+          <li>
+            The person liable to pay GST on this Invoice is Consignor /
+            Consignee.
+          </li>
+          <li>ITC NOT availed by the service provider.</li>
         </ol>
         <p class="ml-2 text-white">Subject to Bangalore Jurisdiction</p>
       </div>

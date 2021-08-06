@@ -29,6 +29,37 @@ class CustomerController extends Controller
         return CustomerResource::collection($customers);
     }
 
+ /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function get_customer_details(Request $request)
+    {
+        $pending_shipments=0;
+        $delivered_shipments=0;
+       
+        $shipments = Shipment::where("sender_id", $request->id)->get();
+        foreach ($shipments as $key => $shipment) {
+            if($shipment->status->status == 'Delivered'){
+                $delivered_shipments++;
+            }
+        }
+        foreach ($shipments as $key => $shipment) {
+            if($shipment->status->status == 'Dispatched' || $shipment->status->status == 'Intransit' || $shipment->status->status == "Awaiting Pickup"){
+                $pending_shipments++;
+            }
+        }
+
+        $total_shipments = Shipment::where("sender_id", $request->id)->count();
+        return [
+            "total_shipments" => $total_shipments,
+            "delivered_shipments" => $delivered_shipments,
+            "pending_shipments" => $pending_shipments
+        ];
+    }
+
     /**
      * Show the form for creating a new resource.
      *
