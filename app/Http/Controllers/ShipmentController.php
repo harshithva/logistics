@@ -11,6 +11,7 @@ use App\ShipmentVendorDetail;
 use App\Payment;
 use App\ShipmentStatus;
 use App\ShipmentInsurance;
+use App\Settings;
 use App\Http\Resources\Shipment as ShipmentResource;
 use App\Http\Resources\ShipmentSingle as ShipmentSingleResource;
 use Illuminate\Http\Request;
@@ -176,9 +177,14 @@ class ShipmentController extends Controller
 
 
         $shipment->save();
-        $my_id = sprintf('%04d', $shipment->id);
-        $freight_invoice_no = 'GL202122' .  $my_id;
-        $docket_no = 'GLBNG' . $my_id;
+
+        $settings = Settings::first();
+        $settings = Settings::find($settings->id);
+        $settings->shipment_id = $settings->shipment_id + 1;
+        $settings->save();
+        $my_id = sprintf('%03d', $settings->shipment_id);
+        $freight_invoice_no = 'GLFI21' .  $my_id;
+        $docket_no = 'GL21' . $my_id;
         $shipment->docket_no = $docket_no;
         $shipment->freight_invoice_number = $freight_invoice_no;
         $shipment->save();
