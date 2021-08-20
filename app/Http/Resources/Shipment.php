@@ -4,6 +4,8 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 use Helpers;
+use Carbon\Carbon;
+
 
 class Shipment extends JsonResource
 {
@@ -19,6 +21,7 @@ class Shipment extends JsonResource
         return [
             'id' => $this->id,
             'date'=> $this->date,
+            'created_at'=> Carbon::parse($this->created_at)->format('Y-m-d H:m:s'),
             'delivery_address'=> $this->delivery_address,
             'sender_name' => $this->sender->name,
             'sender_address' => $this->sender->address,

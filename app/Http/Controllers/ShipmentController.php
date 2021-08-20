@@ -30,7 +30,7 @@ class ShipmentController extends Controller
     public function index()
     {
        
-        $shipments = Shipment::all();    
+        $shipments = Shipment::latest()->get();
         return ShipmentResource::collection($shipments);
 
 

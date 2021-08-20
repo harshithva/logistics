@@ -19,8 +19,8 @@
             mode: 'pages',
           }"
           :sort-options="{
-            enabled: true,
-            initialSortBy: { field: 'docket_no', type: 'desc' },
+            enabled: false,
+            initialSortBy: { field: 'created_at', type: 'desc' },
           }"
         >
           <template slot="table-row" slot-scope="props">
@@ -115,13 +115,14 @@ export default {
         {
           label: "Tracking Number",
           field: "docket_no",
-          sortable: true,
+          // sortable: true,
         },
         {
           label: "Date",
-          field: "date",
-          type: "date",
-          dateInputFormat: "yyyy-mm-dd",
+          field: "created_at",
+          // sortable:true,
+          type: "datetime",
+          dateInputFormat: "yyyy-MM-d HH:mm:ss",
           dateOutputFormat: "dd/mm/yyyy",
         },
         {
