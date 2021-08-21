@@ -1,5 +1,5 @@
 <template>
-  <div :class="[!display ? 'only-print' : '']">
+  <div>
     <div class="only-print">
       <img :src="logo" alt srcset class="bg-logo" />
     </div>
