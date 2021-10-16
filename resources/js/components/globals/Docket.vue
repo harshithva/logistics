@@ -94,7 +94,7 @@
             <th class="bg-red">SL No.</th>
             <th style="width: 20rem" class="bg-red">Description</th>
             <th class="bg-red">Invoice No.</th>
-            <th class="bg-red">Serial No.</th>
+            <!-- <th class="bg-red">Serial No.</th> -->
             <th class="bg-red">Weight</th>
             <th class="bg-red">Quantity</th>
             <th class="bg-red">Declared value</th>
@@ -104,7 +104,7 @@
               <th scope="row">{{ index + 1 }}</th>
               <td>{{ data.description }}</td>
               <td>{{ data.invoice_no }}</td>
-              <td>{{ data.serial_no }}</td>
+              <!-- <td>{{ data.serial_no }}</td> -->
               <td>{{ data.weight }} Kg</td>
               <td>{{ data.quantity }}</td>
               <td>₹ {{ data.cost }}</td>

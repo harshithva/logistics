@@ -278,7 +278,7 @@
                     <tr>
                       <th scope="col">#</th>
                       <th scope="col">Description</th>
-                      <th scope="col">Serial No</th>
+                      <!-- <th scope="col">Serial No</th> -->
                       <th scope="col">Invoice No</th>
                       <th scope="col">Size</th>
                       <th scope="col">Weight</th>
@@ -291,7 +291,7 @@
                     <tr v-for="(item, index) in shipment.package" :key="index">
                       <td>{{ index + 1 }}</td>
                       <td>{{ item.description }}</td>
-                      <td>{{ item.serial_no }}</td>
+                      <!-- <td>{{ item.serial_no }}</td> -->
                       <td>{{ item.invoice_no }}</td>
                       <td>{{ item.size }}</td>
                       <td>{{ item.weight }}</td>
@@ -821,7 +821,7 @@
                   </div>
                 </div>
 
-                <div class="col-md-4">
+                <!-- <div class="col-md-4">
                   <div class="form-group">
                     <label for="Serial Number">Serial Number</label>
                     <input
@@ -830,7 +830,7 @@
                       v-model="packagedetails.serial_no"
                     />
                   </div>
-                </div>
+                </div> -->
                 <div class="col-md-4">
                   <div class="form-group">
                     <label for="Invoice">Invoice Number</label>

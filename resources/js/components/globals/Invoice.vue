@@ -126,18 +126,18 @@
             <th class="bg-red">SL No.</th>
             <th class="bg-red">Description</th>
 
-            <th class="bg-red">Serial No.</th>
+            <!-- <th class="bg-red">Serial No.</th> -->
             <th class="bg-red">Docket No.</th>
             <th class="bg-red">Invoice No.</th>
 
             <th class="bg-red">Quantity</th>
             <th class="bg-red">Weight</th>
           </thead>
-          <tr v-for="(item, index) in shipment.package">
+          <tr v-for="(item, index) in shipment.package" :key="index">
             <th scope="row">{{ index + 1 }}</th>
             <td>{{ item.description }}</td>
 
-            <td>{{ item.serial_no }}</td>
+            <!-- <td>{{ item.serial_no }}</td> -->
             <td>{{ shipment.docket_no }}</td>
             <td>{{ item.invoice_no }}</td>
 
