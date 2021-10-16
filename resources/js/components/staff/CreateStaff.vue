@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <div class="row justify-content-center">
-      <div class="col-lg-8 col-xlg-12 col-md-12">
+
         <div class="card">
           <div class="card-body">
             <div id="loader" style="display: none"></div>
@@ -69,11 +67,15 @@
                     </div>
                   </div>
                 </div>
-                <div class="row">
-                  <div class="col-md-6">
+                <div class="row"  v-if="is_role == '0'">
+                
+                </div>
+                <div class="row"  v-else>
+                   <div class="col-md-6">
                     <label for>Select Role</label>
                     <div class="form-group">
                       <select
+                    
                         v-model="form.role"
                         class="custom-select"
                         :class="{
@@ -130,14 +132,13 @@
             </form>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
+ 
 </template>
 
 
 <script>
 export default {
+  props:["is_role"],
   data() {
     return {
       form: new Form({
@@ -152,9 +153,12 @@ export default {
   },
   methods: {
     onSubmit() {
+      this.form.role = this.is_role ? "employee":"vendor"
       this.form
         .submit("post", "/api/staffs")
         .then((response) => {
+                        this.$store.dispatch("retrieveCustomers");
+              this.$store.dispatch("RETRIEVE_ALL_VENDORS");
           Swal.fire({
             position: "top-end",
             icon: "success",

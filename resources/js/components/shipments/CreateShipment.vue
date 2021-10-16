@@ -45,11 +45,20 @@
                         label="name"
                         @input="selectCustomer($event)"
                       ></v-select>
-                      <div class="mt-2">
+                      <!-- <div class="mt-2">
                         <router-link to="/admin/customers/create"
                           >Add new</router-link
                         >
+                      </div> -->
+
+                      <div>
+                        <a class="nav-link" v-b-modal.modal-1>Add new</a>
+
+                        <b-modal id="modal-1" title="Create customer">
+                          <CreateCustomer></CreateCustomer>
+                        </b-modal>
                       </div>
+
                     </div>
                   </div>
                   <div class="col-md-5">
@@ -60,11 +69,12 @@
                         label="name"
                         @input="selectReceiver($event)"
                       ></v-select>
-                      <div class="mt-2">
+                      <!-- <div class="mt-2">
                         <router-link to="/admin/customers/create"
                           >Add new</router-link
                         >
-                      </div>
+                      </div> -->
+                                              <a class="nav-link" v-b-modal.modal-1>Add new</a>
                     </div>
                   </div>
                 </div>
@@ -191,10 +201,17 @@
                         label="name"
                         @input="selectVendor($event)"
                       ></v-select>
-                      <div class="mt-2">
+                      <!-- <div class="mt-2">
                         <router-link to="/admin/customers/create"
                           >Add new</router-link
                         >
+                      </div> -->
+                      <div>
+                        <a class="nav-link" v-b-modal.modal-2>Add new</a>
+
+                        <b-modal id="modal-2" title="Create Vendor">
+                          <CreateStaff :is_role="0"></CreateStaff>
+                        </b-modal>
                       </div>
                     </div>
                   </div>
@@ -765,7 +782,14 @@
 
 <script>
 import { mapGetters } from "vuex";
+import CreateCustomer from "../customers/CreateCustomer.vue";
+import CreateStaff from "../staff/CreateStaff.vue";
+
 export default {
+  components:{
+    CreateCustomer,
+    CreateStaff
+  },
   data() {
     return {
       // payment_types: [{ name: "TDS" }, { name: "TCS" }],

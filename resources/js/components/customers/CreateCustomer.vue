@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <div class="row justify-content-center">
-      <div class="col-lg-8 col-xlg-12 col-md-12">
+
         <div class="card">
           <div class="tab-content" id="pills-tabContent">
             <div class="card-body">
@@ -260,9 +258,7 @@
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
+
 </template>
 
 <script>
@@ -290,7 +286,7 @@ export default {
     onSubmit() {
       let timerInterval;
       Swal.fire({
-        title: "Your shipment being created!",
+        title: "Customer being created!",
         html: "I will close in <b></b> milliseconds.",
         timer: 4000,
         timerProgressBar: true,
@@ -302,6 +298,8 @@ export default {
             .then((response) => {
               clearInterval(timerInterval);
               this.dismissCountDown = 10;
+              this.$store.dispatch("retrieveCustomers");
+              this.$store.dispatch("RETRIEVE_ALL_VENDORS");
             })
             .catch(clearInterval(timerInterval));
         },
