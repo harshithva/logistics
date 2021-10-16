@@ -40,6 +40,7 @@ class ShipmentSingle extends JsonResource
             "charge_transportation" => $this->charge_transportation,
             "created_at" => $this->created_at,
             "date" => $this->date,
+            "delivery_date" => $this->delivery_date,
             "delivery_address" => $this->delivery_address,
              "freight_invoice_number" => $this->freight_invoice_number,
             "insurance" => $this->insurance,

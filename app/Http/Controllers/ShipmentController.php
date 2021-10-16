@@ -368,6 +368,7 @@ class ShipmentController extends Controller
             "vendor_advance" => 'required|numeric',
             "vendor_commission" => 'required|numeric',
             "discount" => 'required|numeric',
+            "delivery_date" => 'required|date',
         ]);
 
       
@@ -432,6 +433,7 @@ class ShipmentController extends Controller
         $shipment->docket_no = $request->docket_no;
         $shipment->freight_invoice_number = $request->freight_invoice_number;
         $shipment->date = $request->date;
+        $shipment->delivery_date = $request->delivery_date;
         $shipment->save();
      
 
