@@ -13,6 +13,7 @@ use App\ShipmentStatus;
 use App\ShipmentInsurance;
 use App\Settings;
 use App\Http\Resources\Shipment as ShipmentResource;
+use App\Http\Resources\Undelivered as UndeliveredResource;
 use App\Http\Resources\ShipmentSingle as ShipmentSingleResource;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -29,11 +30,21 @@ class ShipmentController extends Controller
      */
     public function index()
     {
-       
         $shipments = Shipment::latest()->get();
         return ShipmentResource::collection($shipments);
+    }
 
-
+    public function undelivered_shipments()
+    {
+        // $shipments = Shipment::all();
+        // return $shipments[0]->status->status;
+        // $shipments = Shipment::with(['status' => function ($query) {
+        //     $query->where('status','<>', 'Delivexcred');
+        // }])->get();
+        $shipments = Shipment::where('delivery_date', '<', Carbon::now()->toDateString())->with(['status' => function ($query) {
+            $query->where('status', '=', 'Delivered');
+        }])->get();
+        return UndeliveredResource::collection($shipments);
     }
 
     /**
@@ -85,6 +96,7 @@ class ShipmentController extends Controller
             "vendor_total" => 'required|numeric',
             "vendor_advance" => 'required|numeric',
             "vendor_commission" => 'required|numeric',
+            "delivery_date" => 'required|date',
            
         ]);
  
@@ -93,6 +105,7 @@ class ShipmentController extends Controller
        
         $shipment->receiver_id = $request->receiver_id;
       
+        $shipment->delivery_date = $request->delivery_date;
         $shipment->delivery_address = $request->delivery_address;
    
 

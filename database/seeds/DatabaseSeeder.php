@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use App\User;
 use App\Shipment;
+use App\Setting;
 
 class DatabaseSeeder extends Seeder
 {
@@ -19,5 +20,6 @@ class DatabaseSeeder extends Seeder
       
        $this->call(AdminCustomerUserSeeder::class);
        $this->call(ShipmentRateSeeder::class);
+       $this->call(SettingSeeder::class);
     }
 }

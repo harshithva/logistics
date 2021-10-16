@@ -52,6 +52,7 @@ Route::post('/login', function (Request $request) {
 });
 
 Route::apiResource("shipments", 'ShipmentController');
+Route::get("undelivered_shipments", 'ShipmentController@undelivered_shipments');
 Route::apiResource("price_lists", 'ShipmentRateController');
 Route::post("price_lists/{id}/delete", 'ShipmentRateController@delete');
 

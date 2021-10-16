@@ -17,11 +17,11 @@ class CreateExpensesTable extends Migration
             $table->id();
             $table->string('name');
             $table->text('note')->nullable();
-            $table->unsignedBigInteger('category_id');
+            $table->unsignedInteger('category_id');
             $table->date('date')->nullable();
             $table->integer('amount');
             $table->timestamps();
-            $table->foreign('category_id')->references('id')->on('expense_categories')->onDelete('cascade');
+            // $table->foreign('category_id')->references('id')->on('expense_categories')->onDelete('cascade');
         });
     }
 

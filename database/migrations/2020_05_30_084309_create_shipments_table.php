@@ -44,14 +44,14 @@ class CreateShipmentsTable extends Migration
             $table->decimal('charge_total',10,2)->default(0);
             $table->decimal('charge_advance_paid',10,2)->nullable();
             $table->decimal('charge_balance',10,2)->nullable();
-        //    extra
-   
+             //    extra
             $table->string('payment_type')->nullable();
             $table->text('remarks')->nullable();
             $table->string('document')->nullable();
             $table->string('bill_to')->nullable();
             $table->string('docket_no')->nullable();
             $table->date('date')->nullable();
+            $table->date('delivery_date')->nullable();
             
             // tax
             $table->decimal('tds_amount',10,2)->default(0);

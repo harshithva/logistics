@@ -100,7 +100,7 @@
             <th class="bg-red">Declared value</th>
           </thead>
           <tbody>
-            <tr v-for="(data, index) in shipment.package">
+            <tr v-for="(data, index) in shipment.package" :key="index">
               <th scope="row">{{ index + 1 }}</th>
               <td>{{ data.description }}</td>
               <td>{{ data.invoice_no }}</td>
@@ -122,7 +122,7 @@
             <th class="bg-red" style="width: 13rem">Insurance No</th>
             <th class="bg-red" style="width: 13rem">Insurance Agent</th>
           </thead>
-          <tr v-for="data in shipment.insurance">
+          <tr v-for="data in shipment.insurance" :key="data.id">
             <td>{{ data.eway_bill }}</td>
             <td>{{ data.insurance_no }}</td>
             <td>{{ data.insurance_agent }}</td>

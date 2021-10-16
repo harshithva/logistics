@@ -26,8 +26,18 @@
                       ></b-form-datepicker>
                     </div>
                   </div>
-
                   <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="Date">Expected Delivery Date</label>
+                      <b-form-datepicker
+                        id="example-datepicker2"
+                        v-model="form.delivery_date"
+                        class="mb-2"
+                      ></b-form-datepicker>
+                    </div>
+                  </div>
+
+                  <div class="col-md-5">
                     <h6 class="mb-3">Sender Info</h6>
                     <div class="form-group">
                       <v-select
@@ -42,7 +52,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col-md-4">
+                  <div class="col-md-5">
                     <h6 class="mb-3">Receiver Info</h6>
                     <div class="form-group">
                       <v-select
@@ -790,6 +800,7 @@ export default {
         document: "",
         remarks: "",
         date: "",
+        delivery_date:"",
         package: [],
         insurance: [],
         // payment_type: "",
@@ -974,6 +985,7 @@ export default {
   },
   created() {
     this.form.date = moment(new Date()).format("YYYY-MM-DD");
+    this.form.delivery_date = moment(new Date()).add('days', 5).format("YYYY-MM-DD");
   },
 };
 </script>

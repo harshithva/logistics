@@ -34,7 +34,8 @@ export default ({
         vendors: [],
         vendor_shipments: [],
         vendor_expenses: [],
-        shipment_balance: 0
+        shipment_balance: 0,
+        notifications:[]
 
     },
     getters: {
@@ -135,6 +136,9 @@ export default ({
         },
         getShipmentBalance(state) {
             return state.shipment_balance;
+        },
+        getNotifications(state) {
+            return state.notifications;
         },
     },
     mutations: {
@@ -341,6 +345,9 @@ export default ({
         },
         RETRIEVE_VENDOR_EXPENSES(state, vendor_expenses) {
             state.vendor_expenses = vendor_expenses;
+        },
+        RETRIEVE_NOTIFICATIONS(state, notifications) {
+            state.notifications = notifications;
         },
 
     },
@@ -673,6 +680,16 @@ export default ({
             axios
                 .get(`/api/vendor_expenses/last_month/get`)
                 .then(response => (context.commit('RETRIEVE_VENDOR_EXPENSES', response.data.data)))
+                .catch(function (error) {
+                    // handle error
+
+                    context.commit('catchErrors', error.response.data)
+                })
+        },
+        RETRIEVE_NOTIFICATIONS(context) {
+            axios
+                .get(`/api/undelivered_shipments`)
+                .then(response => (context.commit('RETRIEVE_NOTIFICATIONS', response.data.data)))
                 .catch(function (error) {
                     // handle error
 

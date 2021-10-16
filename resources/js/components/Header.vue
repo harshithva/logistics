@@ -61,6 +61,10 @@
             </form>
           </div>
         </li>
+        <li class="nav-item dropdown no-arrow mx-1 show">
+          <NotificationComponent></NotificationComponent>
+                        </li>
+
 
         <li class="nav-item dropdown no-arrow">
           <a
@@ -85,6 +89,7 @@ import { mapGetters } from "vuex";
 import VueInputCalculator from "vue-input-calculator";
 
 import Switches from "vue-switches";
+import NotificationComponent from "./NotificationComponent";
 
 export default {
   data() {
@@ -97,7 +102,7 @@ export default {
       return this.$store.getters.getIsToggled;
     },
   },
-  components: { VueInputCalculator, Switches },
+  components: { VueInputCalculator, Switches,  NotificationComponent  },
   methods: {
     changeMultiple(className, styleProperty, value) {
       var items = document.querySelectorAll(className);
