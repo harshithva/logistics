@@ -1,6 +1,6 @@
 ## Logistics Management
 
-This powerful Laravel CRM was developed using Vuejs and Laravel API.
+This powerful CRM was developed using Laravel, Vuejs and Laravel API.
 
 ### Features
 
