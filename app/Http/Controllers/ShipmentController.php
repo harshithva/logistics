@@ -41,9 +41,16 @@ class ShipmentController extends Controller
         // $shipments = Shipment::with(['status' => function ($query) {
         //     $query->where('status','<>', 'Delivexcred');
         // }])->get();
-        $shipments = Shipment::where('delivery_date', '<', Carbon::now()->toDateString())->with(['status' => function ($query) {
-            $query->where('status', '=', 'Delivered');
-        }])->get();
+        $shipments = Shipment::where('delivery_date', '<', Carbon::now()->toDateString())->whereHas('status', function($q) {
+            $q->where('status', '!=','Delivered');
+        })->get();
+
+        foreach ($shipments as $key => $shipment) {
+            # code...
+            if($shipment->status->status == 'Delivered'){
+                unset($shipments[$key]);
+            }
+        }
         return UndeliveredResource::collection($shipments);
     }
 

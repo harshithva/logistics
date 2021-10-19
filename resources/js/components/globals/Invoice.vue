@@ -151,8 +151,8 @@
     <div class="row">
       <div class="col">
         <table class="table-bordered table-print">
-          <tr>
-            <th class="bg-red">Advance Paid</th>
+          <!-- <tr>
+            <th class="bg-red" v-if="shipment.Charge_advance_paid  > 0">Advance Paid</th>
             <td>{{ shipment.charge_advance_paid }}</td>
           </tr>
           <tr v-if="shipment.discount > 0">
@@ -162,7 +162,7 @@
           <tr>
             <th class="bg-red">Balance Amount</th>
             <td>{{ shipment.balance }}</td>
-          </tr>
+          </tr> -->
         </table>
 
         <div class="row">
@@ -224,6 +224,18 @@
           <tr>
             <th class="bg-red">Total</th>
             <td>{{ shipment.charge_total }}</td>
+          </tr>
+          <tr v-if="shipment.Charge_advance_paid  > 0">
+            <th class="bg-red" >Advance Paid</th>
+            <td>{{ shipment.charge_advance_paid }}</td>
+          </tr>
+          <tr v-if="shipment.discount > 0">
+            <th class="bg-red">Discount</th>
+            <td>{{ shipment.discount }}</td>
+          </tr>
+          <tr>
+            <th class="bg-red">Balance Amount</th>
+            <td>{{ shipment.balance }}</td>
           </tr>
         </table>
       </div>

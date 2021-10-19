@@ -295,8 +295,9 @@
                       <td>{{ item.weight }}</td>
                       <td>{{ item.quantity }}</td>
                       <td>{{ item.cost }}</td>
-                      <td @click="deletePackage(item.uid)">
-                        <i class="fas fa-times text-danger"></i>
+                      <td>
+                        <i class="fas fa-edit text-danger" @click="updatePackage(item)"></i>
+                        <i class="fas fa-times text-danger" @click="deletePackage(item.uid)"></i>
                       </td>
                     </tr>
                     <tr>
@@ -855,6 +856,9 @@ export default {
     };
   },
   methods: {
+    updatePackage(e){
+      console.log(e)
+    },
     clearFiles() {
       this.$refs["file-input"].reset();
     },
@@ -1009,7 +1013,7 @@ export default {
   },
   created() {
     this.form.date = moment(new Date()).format("YYYY-MM-DD");
-    this.form.delivery_date = moment(new Date()).add('days', 5).format("YYYY-MM-DD");
+    this.form.delivery_date = moment(new Date()).add('days', 1).format("YYYY-MM-DD");
   },
 };
 </script>

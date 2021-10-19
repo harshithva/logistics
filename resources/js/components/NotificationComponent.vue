@@ -25,7 +25,7 @@
                                     </div>
                                 </a>
                                 </router-link>
-                                <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+                                <a class="dropdown-item text-center small text-gray-500" href="#">Notifications</a>
                             </div>
     </b-collapse>
     </div>

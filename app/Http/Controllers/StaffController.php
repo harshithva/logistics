@@ -15,7 +15,7 @@ class StaffController extends Controller
      */
     public function index()
     {
-        $staff = User::where('role', '!=' , 'customer')->get();
+        $staff = User::where('role', '!=' , 'customer')->where('role', '!=' , 'vendor')->get();
         return StaffResource::collection($staff);
     }
 

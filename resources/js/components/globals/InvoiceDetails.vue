@@ -97,6 +97,7 @@
                 </p>
                 <p>Sender name : {{ shipment.sender.name }}</p>
                 <p>Contact : {{ shipment.sender.phone }}</p>
+                <p>Expected Delivery : {{ shipment.delivery_date }}</p>
               </div>
               <div class="col-3">
                 <p>Receiver Details</p>
