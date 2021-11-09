@@ -15,7 +15,8 @@ class VendorPaymentController extends Controller
      */
     public function index()
     {
-        //
+        $payments = VendorPayment::latest()->get();
+        return  VendorPaymentResource::collection($payments);
     }
 
     /**
@@ -25,7 +26,7 @@ class VendorPaymentController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -98,6 +99,7 @@ class VendorPaymentController extends Controller
      */
     public function destroy(VendorPayment $vendorPayment)
     {
-        //
+        $vendorPayment->delete();
+        return response()->json(null, 204); 
     }
 }

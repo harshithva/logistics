@@ -296,7 +296,7 @@
                       <td>{{ item.quantity }}</td>
                       <td>{{ item.cost }}</td>
                       <td>
-                        <i class="fas fa-edit text-danger" @click="updatePackage(item)"></i>
+                        <i class="fas fa-edit text-secondary" @click="openUpdatePackage(item)"  v-b-modal="'edit-package'"></i>
                         <i class="fas fa-times text-danger" @click="deletePackage(item.uid)"></i>
                       </td>
                     </tr>
@@ -692,6 +692,93 @@
           </div>
         </div>
       </div>
+      <!-- edit package modal -->
+
+    <b-modal id="edit-package"  hide-footer>
+
+      <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Description</label>
+                    <textarea
+                      class="form-control"
+                      id="exampleFormControlTextarea1"
+                      rows="3"
+                      v-model="packagedetails.description"
+                    ></textarea>
+                  </div>
+                </div>
+
+                <!-- <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="Serial Number">Serial Number</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      v-model="packagedetails.serial_no"
+                    />
+                  </div>
+                </div> -->
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="Invoice">Invoice Number</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      v-model="packagedetails.invoice_no"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="Size">Size</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      v-model="packagedetails.size"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="docket">Weight</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      v-model="packagedetails.weight"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="docket">Quantity</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      v-model="packagedetails.quantity"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="Size">Declared value</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      v-model="packagedetails.cost"
+                    />
+                  </div>
+                </div>
+              </div>
+                          <div class="modal-footer">
+          
+              <button type="button" class="btn btn-primary" @click="updatePackage">
+                Update
+              </button>
+            </div>
+
+    </b-modal>
+
 
       <!-- Insurance modal  -->
 
@@ -793,6 +880,7 @@ export default {
   },
   data() {
     return {
+      edit_package_uid:"",
       // payment_types: [{ name: "TDS" }, { name: "TCS" }],
       form: new Form({
         receiver_id: "",
@@ -856,8 +944,27 @@ export default {
     };
   },
   methods: {
-    updatePackage(e){
-      console.log(e)
+    openUpdatePackage(e){
+        (this.packagedetails.description = e.description),
+        (this.packagedetails.serial_no = e.serial_no),
+        (this.packagedetails.invoice_no = e.invoice_no),
+        (this.packagedetails.size = e.size),
+        (this.packagedetails.weight = e.weight),
+        (this.packagedetails.quantity = e.quantity),
+        (this.packagedetails.cost = e.cost);
+        this.edit_package_uid = e.uid;
+      // reset_package();
+    },
+    updatePackage(){
+      let objIndex = this.form.package.findIndex((obj => obj.uid == this.edit_package_uid));
+      this.form.package[objIndex].description = this.packagedetails.description;
+      this.form.package[objIndex].serial_no = this.packagedetails.serial_no;
+      this.form.package[objIndex].invoice_no = this.packagedetails.invoice_no;
+      this.form.package[objIndex].size = this.packagedetails.size;
+      this.form.package[objIndex].weight = this.packagedetails.weight;
+      this.form.package[objIndex].quantity = this.packagedetails.quantity;
+      this.form.package[objIndex].cost = this.packagedetails.cost;
+      this.reset_package();
     },
     clearFiles() {
       this.$refs["file-input"].reset();
@@ -881,6 +988,16 @@ export default {
     selectVendor(e) {
       this.form.vendor_id = e.id;
     },
+    reset_package(){
+            // reset
+      (this.packagedetails.description = ""),
+        (this.packagedetails.serial_no = ""),
+        (this.packagedetails.invoice_no = ""),
+        (this.packagedetails.size = ""),
+        (this.packagedetails.weight = ""),
+        (this.packagedetails.quantity = ""),
+        (this.packagedetails.cost = 0);
+    },
     addPackage() {
       this.form.package.push({
         uid: uuidv4(),
@@ -892,15 +1009,7 @@ export default {
         quantity: this.packagedetails.quantity,
         cost: this.packagedetails.cost,
       });
-
-      // reset
-      (this.packagedetails.description = ""),
-        (this.packagedetails.serial_no = ""),
-        (this.packagedetails.invoice_no = ""),
-        (this.packagedetails.size = ""),
-        (this.packagedetails.weight = ""),
-        (this.packagedetails.quantity = ""),
-        (this.packagedetails.cost = 0);
+      this.reset_package();
     },
     addInsurance() {
       this.form.insurance.push({

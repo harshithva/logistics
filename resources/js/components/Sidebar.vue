@@ -119,6 +119,12 @@
           <span>Vendor Expenses</span>
         </router-link>
       </li>
+      <li class="nav-item">
+        <router-link class="nav-link collapsed" to="/admin/vendor/payments">
+          <i class="fas fa-file-invoice"></i>
+          <span>Vendor Payments</span>
+        </router-link>
+      </li>
 
       <!-- customer -->
 

@@ -14,7 +14,7 @@ class AdminCustomerUserSeeder extends Seeder
     {
         User::create([
             'name' => 'gurukal',
-            'email' => 'admin@gurukal.co.in',
+            'email' => 'logistics@gurukal.in',
             'password' => 'Gurukal123#',
             'role' => 'admin'
         ]);
