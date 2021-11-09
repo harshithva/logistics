@@ -100,6 +100,7 @@ export default {
         "Memo no": "memo_no",
         "Delivery Address": "delivery_address",
         Commission: "commission",
+        Cash: "Cash",
         Total: "total",
         Advance: "advance",
 
@@ -124,6 +125,10 @@ export default {
         {
           label: "Commission",
           field: "commission",
+        },
+        {
+          label: "Cash",
+          field: "cash",
         },
         {
           label: "Total",

@@ -92,7 +92,7 @@ const routes = [
     { path: '/admin/shipments/:shipment_id/edit', component: EditShipment },
     { path: '/admin/price_list', component: PriceList },
 
-    { path: '/admin/staff/create', component: CreateStaff },
+    { path: '/admin/staff/create', component: CreateStaff, props: true },
     { path: '/admin/staff', component: Staff },
     { path: '/admin/staff/:staff_id/edit', component: EditStaff },
 

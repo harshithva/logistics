@@ -101,6 +101,7 @@ class ShipmentController extends Controller
             "bill_to" => 'required',
             "vendor_id" => 'required|numeric',
             "vendor_total" => 'required|numeric',
+            "vendor_cash" => 'numeric',
             "vendor_advance" => 'required|numeric',
             "vendor_commission" => 'required|numeric',
             "delivery_date" => 'required|date',
@@ -248,6 +249,7 @@ class ShipmentController extends Controller
         $vendor->shipment_id = $shipment->id;
         $vendor->vendor_id = $request->vendor_id;
         $vendor->total = $request->vendor_total;
+        $vendor->cash = $request->vendor_cash;
         $vendor->advance = $request->vendor_advance;
         $vendor->commission = $request->vendor_commission;
         $vendor->memo_no = $request->vendor_memo_no;
@@ -372,6 +374,7 @@ class ShipmentController extends Controller
             "bill_to" => 'required',
             "vendor_id" => 'required|numeric',
             "vendor_total" => 'required|numeric',
+            "vendor_cash" => 'numeric',
             "vendor_advance" => 'required|numeric',
             "vendor_commission" => 'required|numeric',
             "discount" => 'required|numeric',
@@ -492,6 +495,7 @@ class ShipmentController extends Controller
           $vendor->shipment_id = $shipment->id;
           $vendor->vendor_id = $request->vendor_id;
           $vendor->total = $request->vendor_total;
+          $vendor->cash = $request->vendor_cash;
           $vendor->advance = $request->vendor_advance;
           $vendor->commission = $request->vendor_commission;
           $vendor->memo_no = $request->vendor_memo_no;

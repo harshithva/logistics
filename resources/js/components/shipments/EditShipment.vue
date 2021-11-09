@@ -251,9 +251,19 @@
                   </div>
                   <div class="col-md-2">
                     <div class="form-group">
+                      <h6 class="mb-2">Cash</h6>
+                      <input
+                        type="number"
+                        class="form-control"
+                        v-model="shipment.vendor_cash"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <div class="form-group">
                       <h6 class="mb-2">Total</h6>
                       <input
-                        type="text"
+                        type="number"
                         class="form-control"
                         v-model="shipment.vendor_total"
                       />

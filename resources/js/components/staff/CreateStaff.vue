@@ -85,7 +85,6 @@
                         <option selected disabled>Roles</option>
                         <option value="admin">Admin</option>
                         <option value="employee">Employee</option>
-                        <!-- <option value="driver">Driver</option> -->
                         <option value="customer">Customer</option>
                         <option value="vendor">Vendor</option>
                       </select>
@@ -138,7 +137,14 @@
 
 <script>
 export default {
-  props:["is_role"],
+  props: {
+  is_role: {
+    default: 1,
+  },
+  role: {
+    type: String
+  }
+},
   data() {
     return {
       form: new Form({
@@ -153,7 +159,7 @@ export default {
   },
   methods: {
     onSubmit() {
-      this.form.role = this.is_role ? "employee":"vendor"
+      this.form.role = this.is_role ?  this.form.role : this.role
       this.form
         .submit("post", "/api/staffs")
         .then((response) => {

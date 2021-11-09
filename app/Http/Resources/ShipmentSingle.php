@@ -64,6 +64,7 @@ class ShipmentSingle extends JsonResource
             "vendor_id" => $this->vendor_details->vendor_id,
             "vendor_total" => $this->vendor_details->total,
             "vendor_advance" => $this->vendor_details->advance,
+            "vendor_cash" => $this->vendor_details->cash,
             "vendor_commission" => $this->vendor_details->commission,
             "vendor_name" => $this->vendor_details->vendor->name,
             "vendor_memo_no" => $this->vendor_details->memo_no,

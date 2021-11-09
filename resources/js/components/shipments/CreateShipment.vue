@@ -210,7 +210,7 @@
                         <a class="nav-link" v-b-modal.modal-2>Add new</a>
 
                         <b-modal id="modal-2" title="Create Vendor">
-                          <CreateStaff :is_role="0"></CreateStaff>
+                          <CreateStaff :is_role="0" role="vendor"></CreateStaff>
                         </b-modal>
                       </div>
                     </div>
@@ -229,7 +229,7 @@
                     <div class="form-group">
                       <h6 class="mb-2">Commission</h6>
                       <input
-                        type="text"
+                         type="number"
                         class="form-control"
                         v-model="form.vendor_commission"
                       />
@@ -237,9 +237,20 @@
                   </div>
                   <div class="col-md-2">
                     <div class="form-group">
+                      <h6 class="mb-2">Cash</h6>
+                      <input
+                        type="number"
+                        class="form-control"
+                        v-model="form.vendor_cash"
+                        @change="calculateVendorTotal"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <div class="form-group">
                       <h6 class="mb-2">Total</h6>
                       <input
-                        type="text"
+                        type="number"
                         class="form-control"
                         v-model="form.vendor_total"
                       />
@@ -919,6 +930,7 @@ export default {
         // payment_type: "",
         vendor_id: "",
         vendor_total: 0,
+        vendor_cash: 0,
         vendor_advance: 0,
         vendor_commission: 0,
         vendor_memo_no: "",
@@ -944,6 +956,9 @@ export default {
     };
   },
   methods: {
+    calculateVendorTotal(){
+      this.form.vendor_total = parseInt(this.form.vendor_cash) + parseInt(this.form.vendor_total);
+    },
     openUpdatePackage(e){
         (this.packagedetails.description = e.description),
         (this.packagedetails.serial_no = e.serial_no),
