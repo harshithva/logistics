@@ -123,4 +123,26 @@ use Carbon\Carbon;
       return $balance_amount;
     }
 
+    public static function send_whatsapp_update($phone, $docket_no, $status)
+    {
+     $ch = curl_init();
+
+    curl_setopt($ch, CURLOPT_URL, 'https://live-server-5799.wati.io/api/v1/sendTemplateMessage?whatsappNumber=91'.$phone);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, "{\"template_name\":\"shipment_update\",\"broadcast_name\":\"gurukal_crm\",\"parameters\":[{\"name\":\"docket_no\",\"value\":\"$docket_no\"},{\"name\":\"status\",\"value\":\"$status\"}]}");
+
+    $headers = array();
+    $headers[] = 'Accept: */*';
+    $headers[] = 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIwOWRkODVkNy02OWI1LTQyYjYtODJhMC1kMTRjMDg0YzI1MmYiLCJ1bmlxdWVfbmFtZSI6IndhdGlAZ3VydWthbC5pbiIsIm5hbWVpZCI6IndhdGlAZ3VydWthbC5pbiIsImVtYWlsIjoid2F0aUBndXJ1a2FsLmluIiwiYXV0aF90aW1lIjoiMTEvMDEvMjAyMSAwNTo0OTozNiIsImRiX25hbWUiOiI1Nzk5IiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQURNSU5JU1RSQVRPUiIsImV4cCI6MjUzNDAyMzAwODAwLCJpc3MiOiJDbGFyZV9BSSIsImF1ZCI6IkNsYXJlX0FJIn0.-oYkqhfGL69NL0eqA4B6VlLaCcYBvAkDEzu6h8x-N_E';
+    $headers[] = 'Content-Type: application/json-patch+json';
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+    $result = curl_exec($ch);
+    if (curl_errno($ch)) {
+        echo 'Error:' . curl_error($ch);
+    }
+    curl_close($ch);
+    }
+
  }

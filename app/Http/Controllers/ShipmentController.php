@@ -17,6 +17,9 @@ use App\Http\Resources\Undelivered as UndeliveredResource;
 use App\Http\Resources\ShipmentSingle as ShipmentSingleResource;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Helpers;
+
+use App\Events\NewShipmentCreatedEvent;
 
 use Snowfire\Beautymail\Beautymail;
 
@@ -270,11 +273,11 @@ class ShipmentController extends Controller
      
         if($shipment->status == 'Awaiting Pickup' || $shipment->status == 'Awaiting pickup')
         {
-            $msg = 'SHIPMENT CREATED Your Consignment is ready for dispatch with docket number '.$shipment->docket_no.' Login at gurukal.co.in Or track your consignment at Gurukal.co.in Regards Gurukal Logistics.';
+            $msg = 'SHIPMENT CREATED Your Consignment is ready for dispatch with docket number '.$shipment->docket_no.' Login at gurukal.in Or track your consignment at Gurukal.co.in Regards Gurukal Logistics.';
         }else if($shipment->status->status == 'Dispatched') {
-            $msg =  'SHIPMENT DISPATCHED Your Consignment with docket number '.$shipment->docket_no.'is Dispatched Login at gurukal.co.in Or track your consignment at Gurukal.co.in Regards Gurukal Logistics.';
+            $msg =  'SHIPMENT DISPATCHED Your Consignment with docket number '.$shipment->docket_no.'is Dispatched Login at gurukal.in Or track your consignment at Gurukal.co.in Regards Gurukal Logistics.';
         }else if($shipment->status->status == 'Delivered') {
-            $msg =  'SHIPMENT DELIVERED Your Consignment with docket number '. $shipment->docket_no .' is DELIVERED Kindly let us know how was your experience by clicking the following link Gurukal.co.in/feedback Thank you. Regards Gurukal Logistics.';
+            $msg =  'SHIPMENT DELIVERED Your Consignment with docket number '. $shipment->docket_no .' is DELIVERED Kindly let us know how was your experience by clicking the following link Gurukal.in/feedback Thank you. Regards Gurukal Logistics.';
         }
         else if($shipment->status->status == 'Intrasit' || $shipment->status->status == 'Intransit'){
            $msg = 'Hi, This Message is to inform you that your shipment with Docket number '. $shipment->docket_no . ' is Intransit. Regards Gurukal Logistics.';
@@ -309,6 +312,8 @@ class ShipmentController extends Controller
         $err = curl_error($curl);
         
         curl_close($curl);
+
+        event(new NewShipmentCreatedEvent($shipment));
 
         return response()->json($shipment,201);
     }

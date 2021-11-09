@@ -64,3 +64,10 @@ export default {
   },
 };
 </script>
+
+<style>
+    * {
+        -webkit-print-color-adjust: exact !important; /*Chrome, Safari */
+        color-adjust: exact !important;  /*Firefox*/
+    }
+</style>
