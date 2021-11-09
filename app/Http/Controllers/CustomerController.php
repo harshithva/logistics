@@ -263,6 +263,16 @@ class CustomerController extends Controller
           ['Fri', Shipment::whereDate('created_at',Carbon::parse('last friday')->startOfDay())->sum('charge_total')],
           ['Sat', Shipment::whereDate('created_at',Carbon::parse('last saturday')->startOfDay())->sum('charge_total')],
         ];
+ 
+        $payments_overview = [
+            ['Sun', Payment::whereDate('created_at',Carbon::parse('last sunday')->startOfDay())->sum('amount') + Shipment::whereDate('created_at',Carbon::parse('last sunday')->startOfDay())->sum('charge_advance_paid')],
+            ['Mon' ,Payment::whereDate('created_at',Carbon::parse('last monday')->startOfDay())->sum('amount') + Shipment::whereDate('created_at',Carbon::parse('last monday')->startOfDay())->sum('charge_advance_paid')],
+            ['Tue' , Payment::whereDate('created_at',Carbon::parse('last tuesday')->startOfDay())->sum('amount') + Shipment::whereDate('created_at',Carbon::parse('last tuesday')->startOfDay())->sum('charge_advance_paid')],
+            ['Wed' ,Payment::whereDate('created_at',Carbon::parse('last wednesday')->startOfDay())->sum('amount') + Shipment::whereDate('created_at',Carbon::parse('last wednesday')->startOfDay())->sum('charge_advance_paid')],
+            ['Thu' ,Payment::whereDate('created_at',Carbon::parse('last thursday')->startOfDay())->sum('amount') + Shipment::whereDate('created_at',Carbon::parse('last thursday')->startOfDay())->sum('charge_advance_paid')],
+            ['Fri', Payment::whereDate('created_at',Carbon::parse('last friday')->startOfDay())->sum('amount') + Shipment::whereDate('created_at',Carbon::parse('last friday')->startOfDay())->sum('charge_advance_paid')],
+            ['Sat', Payment::whereDate('created_at',Carbon::parse('last saturday')->startOfDay())->sum('amount') + Shipment::whereDate('created_at',Carbon::parse('last saturday')->startOfDay())->sum('charge_advance_paid')],
+        ];
         $pending = 0;
         $shipments = Shipment::all();
         foreach ($shipments as $key => $shipment) {
@@ -294,6 +304,7 @@ class CustomerController extends Controller
     ];
 
     $data->overview = $overview;
+    $data->payments_overview = $payments_overview;
         return response()->json($data, 200);
     }
 }

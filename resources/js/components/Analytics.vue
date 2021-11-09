@@ -285,20 +285,7 @@
               >
                 <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
               </a>
-              <div
-                class="
-                  dropdown-menu dropdown-menu-right
-                  shadow
-                  animated--fade-in
-                "
-                aria-labelledby="dropdownMenuLink"
-              >
-                <div class="dropdown-header">Dropdown Header:</div>
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Something else here</a>
-              </div>
+           
             </div>
           </div>
           <!-- Card Body -->
@@ -309,7 +296,7 @@
                 :colors="['#1cc88a', '#e74a3b']"
                 :discrete="true"
                 xtitle="Days"
-                ytitle="Payment Received"
+                ytitle="Business"
                 prefix="₹"
                 :legend="true"
                 :dataset="{ borderWidth: 4 }"
@@ -336,13 +323,13 @@
               justify-content-between
             "
           >
-            <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Payment Received</h6>
           </div>
           <!-- Card Body -->
           <div class="card-body">
             <div class="chart-pie pb-4">
               <pie-chart
-                :data="dashboard.overview"
+                :data="dashboard.payments_overview"
                 :donut="true"
                 prefix="₹"
                 :colors="[
