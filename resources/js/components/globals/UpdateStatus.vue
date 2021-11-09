@@ -16,8 +16,21 @@
         </select>
       </div>
 
-      <div v-if="status.status == 'Delivered'">
-        <div class="col">
+
+    
+        <div class="col-12" v-if="status.status != 'Awaiting Pickup'">
+          <div class="form-group">
+            <input
+                          type="text"
+                          class="form-control"
+                          v-model="pincode"
+                          @change="fetchAddress"
+                          placeholder="Enter pincode to fetch address automatically"
+                        />
+          </div>
+        </div>
+
+       <div class="col-12" v-if="status.status != 'Awaiting Pickup'">
           <div class="form-group">
             <input
               type="text"
@@ -28,6 +41,7 @@
           </div>
         </div>
 
+      <div v-if="status.status == 'Delivered'">
         <div class="row m-1">
           <div class="col-md-6">
             <div class="form-group">
@@ -58,18 +72,7 @@
 
       <div v-else-if="status.status == 'Awaiting Pickup'" class="d-print-none"></div>
 
-      <div class="row m-2" v-else>
-        <div class="col">
-          <div class="form-group">
-            <input
-              type="text"
-              class="form-control d-print-none"
-              placeholder="Location"
-              v-model="status.location"
-            />
-          </div>
-        </div>
-      </div>
+
     </div>
     <div class="row">
       <div class="col">
@@ -89,6 +92,7 @@ export default {
   props: ["sender_id", "shipment_id"],
   data() {
     return {
+      pincode:"",
       status: new Form({
         status: "Awaiting Pickup",
         customer_id: "",
@@ -128,6 +132,33 @@ export default {
           });
         });
     },
+     fetchAddress(){
+      let test = this;
+      if(this.pincode){
+         var options = {
+          method: 'POST',
+          url: 'https://pincode.p.rapidapi.com/',
+          headers: {
+            'content-type': 'application/json',
+            'x-rapidapi-host': 'pincode.p.rapidapi.com',
+            'x-rapidapi-key': '566be8cd40msh03fd69b630e243ep1f78aajsnb216caf55e2b'
+          },
+          data: {searchBy: 'pincode', value: this.pincode}
+        };
+
+        axios.request(options).then(function (response) {
+          if(response.data.length > 0){
+            console.log(response.data)
+            test.status.location = `${response.data[0].taluk}, ${response.data[0].district}, ${response.data[0].circle} - ${response.data[0].pin}`;
+          }
+
+    }).catch(function (error) {
+      console.error(error);
+    });
+
+      }
+
+    }
   },
 };
 </script>

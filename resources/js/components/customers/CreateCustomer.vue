@@ -185,14 +185,32 @@
                     </div>
                   </div>
 
-                  <div class="row">
-                    <div class="col-md-12">
+<hr>  
+
+  <div class="row">
+                    <div class="col-md-4">
                       <div class="form-group">
-                        <label for="exampleFormControlTextarea1">Address</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          v-model="pincode"
+                          @change="fetchAddress"
+                          placeholder="Enter pincode to fetch address automatically"
+                        />
+                      </div>
+                    </div>
+                    </div>
+
+                  <div class="row">
+                 
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <!-- <label for="exampleFormControlTextarea1">Address</label> -->
                         <textarea
                           v-model="form.address"
                           class="form-control"
                           id="exampleFormControlTextarea1"
+                            placeholder="Address"
                           rows="3"
                           :class="{
                             'border border-danger': form.errors.has('address'),
@@ -200,10 +218,8 @@
                         ></textarea>
                       </div>
                     </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-md-12">
+             
+                    <div class="col-md-6">
                       <div class="form-group">
                         <textarea
                           class="form-control"
@@ -213,7 +229,7 @@
                               'user_notes'
                             ),
                           }"
-                          rows="6"
+                          rows="3"
                           placeholder="User Notes - For internal use only."
                         ></textarea>
                       </div>
@@ -265,6 +281,7 @@
 export default {
   data() {
     return {
+      pincode:"",
       form: new Form({
         name: "",
         email: "",
@@ -276,7 +293,6 @@ export default {
         user_notes: "",
         show_rates: false,
       }),
-
       dismissSecs: 5,
       dismissCountDown: 0,
       showDismissibleAlert: false,
@@ -319,6 +335,33 @@ export default {
     showAlert() {
       this.dismissCountDown = this.dismissSecs;
     },
+    fetchAddress(){
+      let test = this;
+      if(this.pincode){
+         var options = {
+          method: 'POST',
+          url: 'https://pincode.p.rapidapi.com/',
+          headers: {
+            'content-type': 'application/json',
+            'x-rapidapi-host': 'pincode.p.rapidapi.com',
+            'x-rapidapi-key': '566be8cd40msh03fd69b630e243ep1f78aajsnb216caf55e2b'
+          },
+          data: {searchBy: 'pincode', value: this.pincode}
+        };
+
+        axios.request(options).then(function (response) {
+          if(response.data.length > 0){
+            console.log(response.data)
+            test.form.address = `${response.data[0].taluk}, ${response.data[0].district}, ${response.data[0].circle} - ${response.data[0].pin}`;
+          }
+
+    }).catch(function (error) {
+      console.error(error);
+    });
+
+      }
+
+    }
   },
 };
 </script>
