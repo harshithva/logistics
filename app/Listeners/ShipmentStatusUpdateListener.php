@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Listeners;
-
+use App\Settings;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Helpers;
@@ -26,7 +26,7 @@ class ShipmentStatusUpdateListener
      */
     public function handle($event)
     {
-       Helpers::send_whatsapp_update($event->sender->phone, $event->shipment->docket_no, $event->shipment->status->status);
-    //    Helpers::send_whatsapp_update($event->receiver->phone,  $event->shipment->docket_no, $$event->shipment->status->status);
+        // Helpers::send_whatsapp_update($event->shipment->sender->phone, $event->shipment->docket_no, $event->shipment->status->status);
+        Helpers::send_whatsapp_update('9110650853','GLBN006','Delivered');
     }
 }
