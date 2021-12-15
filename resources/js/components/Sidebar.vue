@@ -173,6 +173,15 @@
         class="nav-item"
         v-if="this.$store.getters.getUserData.user.role == 'admin'"
       >
+        <router-link class="nav-link collapsed" to="/admin/leads">
+          <i class="fas fa-user"></i>
+          <span>Leads</span>
+        </router-link>
+      </li>
+      <li
+        class="nav-item"
+        v-if="this.$store.getters.getUserData.user.role == 'admin'"
+      >
         <router-link class="nav-link collapsed" to="/admin/call_logs">
           <i class="fas fa-phone"></i>
           <span>Call Logs</span>

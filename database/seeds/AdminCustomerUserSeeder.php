@@ -18,6 +18,12 @@ class AdminCustomerUserSeeder extends Seeder
             'password' => 'Gurukal123#',
             'role' => 'admin'
         ]);
+        User::create([
+            'name' => 'Demo',
+            'email' => 'demo@vawebsites.in',
+            'password' => 'demo123',
+            'role' => 'admin'
+        ]);
         
         User::create([
             'name' => 'customer 1',
@@ -42,7 +48,13 @@ class AdminCustomerUserSeeder extends Seeder
         User::create([
             'name' => 'gurukal',
             'email' => 'test@gurukal.in',
-            'password' => 'Gurukal123#',
+            'password' => 'Guru123kal#',
+            'role' => 'customer'
+        ]);
+        User::create([
+            'name' => '4manna',
+            'email' => '4manna123@gmail.com',
+            'password' => '4manna123',
             'role' => 'customer'
         ]);
     }

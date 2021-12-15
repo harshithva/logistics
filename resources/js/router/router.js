@@ -35,6 +35,7 @@ import PaymentLog from "../components/reports/PaymentLog";
 import DeliveryReports from "../components/reports/DeliveryReports";
 import Expense from "../components/reports/Expense";
 import CallLog from "../components/reports/CallLog";
+import Lead from "../components/reports/Lead";
 
 import Vendor from "../components/vendors/Vendor";
 import VendorView from "../components/vendors/VendorView";
@@ -107,6 +108,8 @@ const routes = [
     { path: '/admin/vendor/expenses', component: VendorExpenses },
     { path: '/admin/vendor/payments', component: VendorPayment },
 
+    // leads
+    { path: '/admin/leads', component: Lead },
 
     { path: '/admin/settings', component: Settings },
 

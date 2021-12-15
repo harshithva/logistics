@@ -116,3 +116,6 @@ Route::apiResource("vendor_payments", 'VendorPaymentController');
 Route::apiResource("vendor_expenses", 'VendorExpenseController');
 Route::get("vendor_expenses/this_month/get", 'VendorExpenseController@this_month');
 Route::get("vendor_expenses/last_month/get", 'VendorExpenseController@last_month');
+
+// leads
+Route::apiResource('leads', LeadController::class);

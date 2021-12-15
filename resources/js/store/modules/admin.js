@@ -36,7 +36,8 @@ export default ({
         vendor_expenses: [],
         shipment_balance: 0,
         notifications:[],
-        all_vendor_payments:[]
+        all_vendor_payments:[],
+        leads:[],
 
     },
     getters: {
@@ -143,6 +144,9 @@ export default ({
         },
         getAllVendorPayment(state) {
             return state.all_vendor_payments;
+        },
+        getLeads(state) {
+            return state.leads;
         },
     },
     mutations: {
@@ -355,6 +359,9 @@ export default ({
         },
         RETRIEVE_ALL_VENDOR_PAYMENTS(state, all_vendor_payments) {
             state.all_vendor_payments = all_vendor_payments;
+        },
+        RETRIEVE_LEADS(state, leads) {
+            state.leads = leads;
         },
 
     },
@@ -707,6 +714,16 @@ export default ({
             axios
                 .get(`/api/vendor_payments`)
                 .then(response => (context.commit('RETRIEVE_ALL_VENDOR_PAYMENTS', response.data.data)))
+                .catch(function (error) {
+                    // handle error
+
+                    context.commit('catchErrors', error.response.data)
+                })
+        },
+        RETRIEVE_LEADS(context) {
+            axios
+                .get(`/api/leads`)
+                .then(response => (context.commit('RETRIEVE_LEADS', response.data.data)))
                 .catch(function (error) {
                     // handle error
 
