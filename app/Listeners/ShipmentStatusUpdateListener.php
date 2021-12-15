@@ -26,7 +26,8 @@ class ShipmentStatusUpdateListener
      */
     public function handle($event)
     {
-        // Helpers::send_whatsapp_update($event->shipment->sender->phone, $event->shipment->docket_no, $event->shipment->status->status);
-        Helpers::send_whatsapp_update('9110650853','GLBN006','Delivered');
+        Helpers::send_whatsapp_update($event->shipment->sender->phone, $event->shipment->docket_no, $event->shipment->status->status);
+        Helpers::send_whatsapp_update($event->shipment->receiver->phone, $event->shipment->docket_no, $event->shipment->status->status);
+        // Helpers::send_whatsapp_update('9110650853','GLBN006','Delivered');
     }
 }

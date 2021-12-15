@@ -19,7 +19,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Helpers;
 
-use App\Events\NewShipmentCreatedEvent;
+use App\Events\ShipmentUpdatedEvent;
 
 use Snowfire\Beautymail\Beautymail;
 
@@ -264,56 +264,9 @@ class ShipmentController extends Controller
         $shipment_status->shipment_id = $shipment->id;
         $shipment_status->customer_id= $request->sender_id;
         $shipment_status->save();
+
+        event(new ShipmentUpdatedEvent($shipment));
        
-      
-// send sms
-     
-        $sender =  $shipment->sender;
-        $receiver =  $shipment->receiver;
-     
-        if($shipment->status == 'Awaiting Pickup' || $shipment->status == 'Awaiting pickup')
-        {
-            $msg = 'SHIPMENT CREATED Your Consignment is ready for dispatch with docket number '.$shipment->docket_no.' Login at gurukal.in Or track your consignment at Gurukal.co.in Regards Gurukal Logistics.';
-        }else if($shipment->status->status == 'Dispatched') {
-            $msg =  'SHIPMENT DISPATCHED Your Consignment with docket number '.$shipment->docket_no.'is Dispatched Login at gurukal.in Or track your consignment at Gurukal.co.in Regards Gurukal Logistics.';
-        }else if($shipment->status->status == 'Delivered') {
-            $msg =  'SHIPMENT DELIVERED Your Consignment with docket number '. $shipment->docket_no .' is DELIVERED Kindly let us know how was your experience by clicking the following link Gurukal.in/feedback Thank you. Regards Gurukal Logistics.';
-        }
-        else if($shipment->status->status == 'Intrasit' || $shipment->status->status == 'Intransit'){
-           $msg = 'Hi, This Message is to inform you that your shipment with Docket number '. $shipment->docket_no . ' is Intransit. Regards Gurukal Logistics.';
-        }
-        else{
-            $msg = 'Hi, This Message is to inform you that your shipment with Docket number '. $shipment->docket_no . ' has been successfully created. Regards Gurukal Logistics.';
-         }
-      
-      
-     
-        $curl = curl_init();
-        $authentication_key = '238341A2R5ezqRDIW5edd541bP1';
-
-        curl_setopt_array($curl, array(
-          CURLOPT_URL => "https://api.msg91.com/api/v2/sendsms",
-          CURLOPT_RETURNTRANSFER => true,
-          CURLOPT_ENCODING => "",
-          CURLOPT_MAXREDIRS => 10,
-          CURLOPT_TIMEOUT => 30,
-          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-          CURLOPT_CUSTOMREQUEST => "POST",
-          CURLOPT_POSTFIELDS => "{ \"sender\": \"GURUKL\", \"route\": \"4\", \"country\": \"91\", \"sms\": [ { \"message\": \"$msg\", \"to\": [ \"$sender->phone\",\"$receiver->phone\" ] }] }",
-          CURLOPT_SSL_VERIFYHOST => 0,
-          CURLOPT_SSL_VERIFYPEER => 0,
-          CURLOPT_HTTPHEADER => array(
-            "authkey: $authentication_key",
-            "content-type: application/json"
-          ),
-        ));
-        
-        $response = curl_exec($curl);
-        $err = curl_error($curl);
-        
-        curl_close($curl);
-
-        event(new NewShipmentCreatedEvent($shipment));
 
         return response()->json($shipment,201);
     }

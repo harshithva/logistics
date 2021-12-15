@@ -10,7 +10,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class NewShipmentCreatedEvent
+class ShipmentUpdatedEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -22,7 +22,7 @@ class NewShipmentCreatedEvent
      */
     public function __construct($shipment)
     {
-        $this->$shipment = $shipment;
+        $this->shipment = $shipment;
     }
 
     /**
