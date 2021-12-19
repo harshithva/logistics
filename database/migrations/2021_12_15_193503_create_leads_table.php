@@ -26,6 +26,12 @@ class CreateLeadsTable extends Migration
             $table->decimal('chance_of_sale')->nullable();
             $table->string('forecast_close')->nullable();
             $table->decimal('weighted_forecast')->nullable();
+            $table->string('name_company_individual')->nullable();
+            $table->string('pickup_pincode')->nullable();
+            $table->string('delivery_pincode')->nullable();
+            $table->longText('consignment_description')->nullable();
+            $table->string('weight')->nullable();
+            $table->string('dimension')->nullable();
             $table->timestamps();
         });
     }

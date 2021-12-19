@@ -150,6 +150,30 @@ export default {
           label: "Weighted forecast",
           field: "weighted_forecast",
         },
+                {
+          label: "Name (Company/Individual)",
+          field: "name_company_individual",
+        },
+                {
+          label: "Pickup pincode",
+          field: "pickup_pincode",
+        },
+                {
+          label: "Delivery pincode",
+          field: "delivery_pincode",
+        },
+                {
+          label: "Consignment description",
+          field: "consignment_description",
+        },
+                {
+          label: "Weight",
+          field: "weight",
+        },
+                {
+          label: "Dimension",
+          field: "dimension",
+        },
         {
           label: "Action",
           field: "action",

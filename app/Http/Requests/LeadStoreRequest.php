@@ -35,6 +35,12 @@ class LeadStoreRequest extends FormRequest
             'chance_of_sale' => ['nullable', 'numeric'],
             'forecast_close' => ['nullable', 'max:255', 'string'],
             'weighted_forecast' => ['nullable', 'numeric'],
+            'name_company_individual' => ['nullable', 'max:255', 'string'],
+            'pickup_pincode' => ['nullable', 'max:255', 'string'],
+            'delivery_pincode' => ['nullable', 'max:255', 'string'],
+            'consignment_description' => ['nullable', 'string'],
+            'weight' => ['nullable', 'max:255', 'string'],
+            'dimension' => ['nullable', 'max:255', 'string'],
         ];
     }
 }

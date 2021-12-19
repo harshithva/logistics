@@ -18,6 +18,12 @@ class Lead extends Model
         'chance_of_sale',
         'forecast_close',
         'weighted_forecast',
+        'name_company_individual',
+        'pickup_pincode',
+        'delivery_pincode',
+        'consignment_description',
+        'weight',
+        'dimension',
     ];
 
 }

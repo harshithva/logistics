@@ -134,6 +134,72 @@
     </div>
 </div>
 
+  <h6 class="mt-4 mb-2">Query Form</h6>
+<div class="row mb-2">
+
+  <div class="col">
+         <b-form-group >
+      <b-form-input
+        v-model="form.name_company_individual"
+        placeholder="Name (Company/Individual)"
+        type="text"
+      ></b-form-input>
+    </b-form-group>
+  </div>
+</div>
+<div class="row mb-2">
+  <div class="col">
+         <b-form-group>
+      <b-form-input
+        v-model="form.pickup_pincode"
+        placeholder="Pickup Pincode"
+        type="text"
+      ></b-form-input>
+    </b-form-group>
+  </div>
+  <div class="col">
+         <b-form-group>
+      <b-form-input
+        v-model="form.delivery_pincode"
+        placeholder="Delivery Pincode"
+        type="text"
+      ></b-form-input>
+    </b-form-group>
+  </div>
+</div>
+
+<div class="row mb-2">
+  <div class="col">
+      <b-form-textarea
+      id="textarea"
+      v-model="form.consignment_description"
+      placeholder="Consignment description"
+      rows="3"
+      max-rows="6"
+    ></b-form-textarea>
+  </div>
+</div>
+
+<div class="row mb-2">
+  <div class="col">
+             <b-form-group>
+      <b-form-input
+        v-model="form.weight"
+        placeholder="Weight"
+        type="text"
+      ></b-form-input>
+    </b-form-group>
+  </div>
+  <div class="col">
+             <b-form-group>
+      <b-form-input
+        v-model="form.dimension"
+        placeholder="Dimension/Truck Size"
+        type="text"
+      ></b-form-input>
+    </b-form-group>
+  </div>
+</div>
 
     <b-button type="submit" variant="primary">Submit</b-button>
     <b-button type="reset" variant="danger">Reset</b-button>
@@ -156,7 +222,14 @@ export default {
         potential_opportunity:0,
         chance_of_sale:0,
         forecast_close:"",
-        weighted_forecast:0
+        weighted_forecast:0,
+        name_company_individual:"",
+             pickup_pincode:"",
+            delivery_pincode:"",
+            consignment_description:"",
+            weight:"",
+            dimension:"",
+
       }),
     };
   },
