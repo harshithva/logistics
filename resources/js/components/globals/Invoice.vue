@@ -1,7 +1,7 @@
 <template>
   <div v-if="shipment">
     <div class="row">
-      <div class="col text-center">
+      <div class="col-12 col-md-6 text-center">
         <h1 class="text-white bg-box-dark py-2 px-4">FREIGHT INVOICE</h1>
       </div>
 
@@ -187,7 +187,7 @@
           </div>
         </div>
       </div>
-      <div class="col">
+      <div class="col-12 col-md-6">
         <table class="table-print table-bordered table-responsive-sm font-dark">
           <tr v-if="shipment.charge_transportation > 0">
             <th class="bg-red">Transportation</th>
@@ -245,7 +245,7 @@
       <div class="col">
         <qrcode :value="qrcode" :options="{ width: 120 }"></qrcode>
       </div>
-      <div class="col-8 bg-dark text-white pt-2">
+      <div class="col-12 col-md-8 bg-dark text-white pt-2">
         <h5>Terms & Conditions</h5>
         <ol>
           <li>Remittance of payment within 7 days of invoice receipt.</li>
@@ -267,7 +267,7 @@
         <p class="ml-2 text-white">Subject to Bangalore Jurisdiction</p>
       </div>
 
-      <div class="col">
+      <div class="col text-center">
         <p>For and behalf of</p>
         <img :src="sign" alt="Rohith" class="img-fluid" style="width: 5.5rem" />
         <br />
@@ -277,7 +277,7 @@
     </div>
 
     <div class="row">
-      <div class="col text-center">
+      <div class="col-12 text-center">
         <p>
           This is a computer generated document No seal and signature required.
         </p>
@@ -404,5 +404,17 @@ body {
 .main-title {
   color: #c0392b;
   font-weight: bolder;
+}
+
+@media only screen and (max-width: 600px) {
+  h5{
+    font-size: 0.83em !important;
+  }
+  h1{
+    font-size: 1.5rem;
+  }
+  p{
+    font-size: 0.83em;
+  }
 }
 </style>

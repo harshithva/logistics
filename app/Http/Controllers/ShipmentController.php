@@ -24,6 +24,7 @@ use App\Events\ShipmentUpdatedEvent;
 use Snowfire\Beautymail\Beautymail;
 
 
+
 class ShipmentController extends Controller
 {
     /**
@@ -640,6 +641,33 @@ class ShipmentController extends Controller
       $balance_amount->balance_amount = $balance;
         return view('invoice',compact('shipment', 'balance_amount'));
     }
+
+
+    public function invoicePDF($request){
+        $shipment = Shipment::find($request);
+        $shipment->sender;
+        $shipment->package;
+        $shipment->receiver;
+        $shipment->payment;
+
+        $total_paid = $shipment->payment->sum('amount');
+        if($total_paid > 0)
+        {
+            $balance = ($shipment->charge_total - $total_paid) -  $shipment->charge_advance_paid;
+        }
+      else {
+        $balance = ($shipment->charge_total -  $shipment->charge_advance_paid);
+      }
+
+      $shipment->qrcode = "https://crm.gurukal.in/customer/docket/8jZSqbGNmzk25EcBgMsWYyDP4LDEAS7amrVevmqcTE67ByuajGaks8UqmLmJ/$shipment->id/urMrnM6JNuGPCnEdnmDqzfWfDYAUSYb8rkveHF9mWGPgD2XxH4SYRXjRCnmx/view";
+    //   dd($balance);
+      $balance_amount = new \stdClass();
+      $balance_amount->balance_amount = $balance;
+      
+        return view('invoice_mobile',compact('shipment', 'balance_amount'));
+
+    }
+
 
     public function view_docket($request) {
   

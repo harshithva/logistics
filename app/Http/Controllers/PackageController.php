@@ -40,10 +40,18 @@ class PackageController extends Controller
         }
         else if($month == 'last_month') {
             $month = $date->month - 1;
-        }else if($month == 'last_year') {
+        }
+        
+        else if($month == 'last_year') {
             $month = null;
             $year--;
-        }else{
+        }
+        else if($month == '2y_back') {
+            $month = null;
+            $year= $year-2;
+        }
+        
+        else{
             $month = null;
         }
          if ($month && $month < 10) {

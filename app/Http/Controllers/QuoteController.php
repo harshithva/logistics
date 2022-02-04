@@ -199,6 +199,12 @@ class QuoteController extends Controller
      $quote->list;
      return view('quote',compact('quote'));
     }
+    public function view_quote_mobile($request)
+    {
+     $quote = Quote::find($request);
+     $quote->list;
+     return view('quote_mobile',compact('quote'));
+    }
 
 
     public function quote_send_email($request)

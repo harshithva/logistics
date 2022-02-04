@@ -148,6 +148,7 @@ export default {
         { value: "last_month", text: "Last month" },
         { value: "this_year", text: "This year" },
         { value: "last_year", text: "Last year" },
+        { value: "2y_back", text: "2years back" },
       ],
       statusOptions: [
         { value: "all", text: "All" },

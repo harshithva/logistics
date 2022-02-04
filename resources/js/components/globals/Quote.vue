@@ -1,7 +1,7 @@
 <template>
-  <div class="container">
+  <div class="container-fluid">
     <div class="row">
-      <div class="col text-center">
+      <div class="col-12 col-md-6 text-center">
         <h1 class="text-white bg-box-dark p-4">{{ type }}</h1>
       </div>
 
@@ -352,5 +352,20 @@ body {
 .main-title {
   color: #c0392b;
   font-weight: bolder;
+}
+
+@media only screen and (max-width: 600px) {
+  h5{
+    font-size: 0.83em !important;
+  }
+  h1{
+    font-size: 1.5rem;
+  }
+  p{
+    font-size: 0.83em;
+  }
+  h3{
+    font-size: 1.17em;
+  }
 }
 </style>

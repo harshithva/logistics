@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Mail\ShipmentCreated;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -36,6 +37,9 @@ Route::get('/customer/invoice/XSFQqLeeNrRTQjK95ea7mnkGbU74eLUEets272Lq2nnSXkEfLk
 Route::get('/customer/docket/8jZSqbGNmzk25EcBgMsWYyDP4LDEAS7amrVevmqcTE67ByuajGaks8UqmLmJ/{shipment_id}/urMrnM6JNuGPCnEdnmDqzfWfDYAUSYb8rkveHF9mWGPgD2XxH4SYRXjRCnmx/view', 'ShipmentController@view_docket');
 Route::get('/customer/feedback/{shipment_id}', 'ShipmentController@feedback');
 
+
+Route::get('invoices/mobile/{shipment_id}', 'ShipmentController@invoicePDF')->name('invoicePDF');
+Route::get('quotes/mobile/{quote_id}', 'QuoteController@view_quote_mobile')->name('view_quote_mobile');
 
 // Route::view('/admin/{any}', 'admin.master');
 
