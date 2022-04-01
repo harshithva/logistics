@@ -208,8 +208,8 @@ class ShipmentController extends Controller
         $settings->shipment_id = $settings->shipment_id + 1;
         $settings->save();
         $my_id = sprintf('%03d', $settings->shipment_id);
-        $freight_invoice_no = 'GLFI21' .  $my_id;
-        $docket_no = 'GL21' . $my_id;
+        $freight_invoice_no = 'GLFI22' .  $my_id;
+        $docket_no = 'GL22' . $my_id;
         $shipment->docket_no = $docket_no;
         $shipment->freight_invoice_number = $freight_invoice_no;
         $shipment->save();
