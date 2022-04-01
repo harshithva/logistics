@@ -285,8 +285,8 @@ class CustomerController extends Controller
       
         // $earnings = Shipment::sum('charge_advance_paid') + Payment::sum('amount') + Shipment::sum('tds_amount');
        
-        $dateS = new Carbon("first day of April 2021");
-        $dateE = new Carbon("first day of April 2022");
+        $dateS = new Carbon("first day of April 2022");
+        $dateE = new Carbon("first day of April 2023");
         $earnings = Shipment::whereBetween('created_at', [$dateS->format('Y-m-d')." 00:00:00", $dateE->format('Y-m-d')." 23:59:59"])->sum('charge_advance_paid')
          + Payment::whereBetween('created_at', [$dateS->format('Y-m-d')." 00:00:00", $dateE->format('Y-m-d')." 23:59:59"])->sum('amount') 
          + Shipment::sum('tds_amount');
