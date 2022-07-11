@@ -21,6 +21,7 @@ class Package extends JsonResource
         }
 
         $packages_description = implode (", ",   $packages_description);
+        // $bill_to_name = $this->bill_to_id == $this->sender->id ? $this->sender->name : $this->receiver->name;
         return [
             'id' => $this->id,
             'shipment_date'=> $this->date,
@@ -39,6 +40,8 @@ class Package extends JsonResource
             'shipment_tds_amount' => $this->tds_amount,
             'shipment_charge_Insurance' => $this->charge_Insurance,
             'shipment_bill_to' => $this->bill_to,
+            // 'shipment_bill_name' =>  $bill_to_name,
+            'shipment_transport_driver_vehicle' => $this->transport_driver_vehicle,
           ];
     }
 

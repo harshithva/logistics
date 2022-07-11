@@ -25,7 +25,7 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        $customers = User::where('role','customer')->get();
+        $customers = User::where('role','customer')->orderBy('name')->get();
         return CustomerResource::collection($customers);
     }
 
@@ -287,14 +287,24 @@ class CustomerController extends Controller
        
         $dateS = new Carbon("first day of April 2022");
         $dateE = new Carbon("first day of April 2023");
+      //last financial year
+      $lastYearDateS = new Carbon("first day of April 2021");
+      $lastYearDateE = new Carbon("first day of April 2022");
         $earnings = Shipment::whereBetween('created_at', [$dateS->format('Y-m-d')." 00:00:00", $dateE->format('Y-m-d')." 23:59:59"])->sum('charge_advance_paid')
          + Payment::whereBetween('created_at', [$dateS->format('Y-m-d')." 00:00:00", $dateE->format('Y-m-d')." 23:59:59"])->sum('amount') 
          + Shipment::sum('tds_amount');
+
+         
+         $last_year_earnings = Shipment::whereBetween('created_at', [$lastYearDateS->format('Y-m-d')." 00:00:00", $lastYearDateE->format('Y-m-d')." 23:59:59"])->sum('charge_advance_paid')
+         + Payment::whereBetween('created_at', [$lastYearDateS->format('Y-m-d')." 00:00:00", $lastYearDateE->format('Y-m-d')." 23:59:59"])->sum('amount') 
+         + Shipment::sum('tds_amount');
+
 
         $upcoming_expense = ShipmentVendorDetail::sum('total') - (ShipmentVendorDetail::sum('advance') +VendorPayment::sum('amount'));
 
        $data =  (object) [
     'earnings' =>    $earnings,
+    'last_year_earnings'=>$last_year_earnings,
     'customers' => User::where('role','customer')->count(),
     'quotations' =>  Quote::count(),
     'shipments' =>  Shipment::count(),

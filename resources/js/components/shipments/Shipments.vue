@@ -36,6 +36,7 @@
                 data-toggle="tooltip"
                 data-placement="top"
                 title="View"
+                 target="_blank"
               >
                 <i class="fas fa-eye text-secondary"></i>
               </router-link>

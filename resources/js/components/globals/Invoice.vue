@@ -27,9 +27,9 @@
           <br />
           <i class="fas fa-phone-alt"></i> &nbsp;+91 962 0202 001
           <br />
-          <i class="fas fa-envelope"></i> &nbsp;logistics@gurukal.co.in
+          <i class="fas fa-envelope"></i> &nbsp;logistics@gurukal.in
           <br />
-          <b> <i class="fas fa-globe-americas"></i> &nbsp;www.gurukal.in </b>
+          <b> <i class="fas fa-globe-americas"></i> &nbsp;www.gurukalindia.com </b>
           <br />
           <span v-if="checkDate"> GST No: 29AYGPS3509N2ZQ </span>
           <span v-else> GST No: 29BAYPR5950F1ZU </span>

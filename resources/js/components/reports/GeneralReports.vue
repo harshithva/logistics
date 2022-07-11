@@ -140,7 +140,7 @@ export default {
         "Sender GST": "shipment_sender_gst",
         "Receiver GST": "shipment_receiver_gst",
         Insurance: "shipment_charge_Insurance",
-        "Payment By": "shipment_bill_to",
+        "Payment By(Bill To)": "shipment_bill_to",
       },
       timeOptions: [
         { value: "all", text: "All" },
@@ -194,6 +194,11 @@ export default {
           numeric: false,
         },
         {
+          label: "Vehicle Number",
+          field: "shipment_transport_driver_vehicle",
+          numeric: false,
+        },
+        {
           label: "Charge Total",
           field: "shipment_charge_total",
           numeric: false,
@@ -235,7 +240,7 @@ export default {
           numeric: true,
         },
         {
-          label: "Payment By",
+          label: "Payment By(Bill To)",
           field: "shipment_bill_to",
           numeric: false,
         },
@@ -262,6 +267,7 @@ export default {
         { title: "From", dataKey: "shipment_sender_address" },
         { title: "To", dataKey: "shipment_delivery_address" },
         { title: "Docket", dataKey: "shipment_docket_no" },
+        { title: "vehicle number", dataKey: "shipment_transport_driver_vehicle" },
         {
           title: "Invoice Number",
           dataKey: "shipment_freight_invoice_number",
@@ -273,7 +279,7 @@ export default {
         { title: "Sender GST", dataKey: "shipment_sender_gst" },
         { title: "Receiver GST", dataKey: "shipment_receiver_gst" },
         { title: "Insurance", dataKey: "shipment_charge_Insurance" },
-        { title: "Payment By", dataKey: "shipment_bill_to" },
+        { title: "Payment By(Bill To)", dataKey: "shipment_bill_to" },
       ];
       const doc = new jsPDF("p", "pt");
 
