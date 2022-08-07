@@ -15,7 +15,7 @@ class CallLogController extends Controller
      */
     public function index()
     {
-        $callLogs = CallLog::all();
+        $callLogs = CallLog::latest()->get();
         return CallLogResource::collection($callLogs);
     }
 

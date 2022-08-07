@@ -1,7 +1,21 @@
 <template>
   <div class="card shadow mb-4">
     <div class="card-header py-3">
-      <h6 class="m-0 font-weight-bold text-primary">Customer List</h6>
+      <div class="row">
+        <div class="col-3">      <h6 class="m-0 font-weight-bold text-primary">Customer List</h6></div>
+        <div class="col-6"></div>
+        <div class="col-3">
+            <export-excel
+            :data="customers"
+            :fields="json_fields"
+            class="btn btn-success btn-sm"
+          >
+            <i class="fas fa-cloud-download-alt"></i> &nbsp;Excel
+          </export-excel>
+        </div>
+      </div>
+
+
     </div>
     <div class="card-body">
       <vue-good-table
@@ -57,6 +71,12 @@ export default {
       dismissSecs: 5,
       dismissCountDown: 0,
       showDismissibleAlert: false,
+            json_fields: {
+        name: "name",
+        email: "email",
+        phone: "phone",
+        location: "address",
+      },
       tableColumns1: [
         {
           label: "Name",

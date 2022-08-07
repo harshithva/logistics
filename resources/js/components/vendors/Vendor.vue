@@ -3,11 +3,18 @@
   <div class="card shadow mb-4">
     <div class="card-header py-3">
       <div class="row">
-        <div class="col-10">
+        <div class="col-8">
           <h6 class="m-0 font-weight-bold text-primary">Vendor List</h6>
         </div>
         <div class="col">
           <button v-b-modal.modal-1 class="btn btn-primary">Add Vendor</button>
+                  <export-excel
+            :data="vendors"
+            :fields="json_fields"
+            class="btn btn-success"
+          >
+            <i class="fas fa-cloud-download-alt"></i> &nbsp;Excel
+          </export-excel>
         </div>
       </div>
     </div>
@@ -63,6 +70,12 @@ export default {
       dismissSecs: 5,
       dismissCountDown: 0,
       showDismissibleAlert: false,
+              json_fields: {
+        name: "name",
+        email: "email",
+        phone: "phone",
+        location: "address",
+      },
       tableColumns1: [
         {
           label: "Name",
