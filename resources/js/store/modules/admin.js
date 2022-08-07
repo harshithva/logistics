@@ -366,10 +366,9 @@ export default ({
 
     },
     actions: {
-        retrieveCustomers(context) {
-
+        retrieveCustomers(context,payload) {
             axios
-                .get("/api/customers")
+                .get(`/api/customers?searchTerm=${payload ? payload.search : ''}`)
                 .then(response => (context.commit('retrieveCustomers', response.data.data)))
                 .catch(function (error) {
                     // handle error

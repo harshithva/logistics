@@ -5,6 +5,7 @@
     </div>
     <div class="card-body">
       <vue-good-table
+        mode="remote"
         :columns="tableColumns1"
         :rows="customers"
         :line-numbers="true"
@@ -12,6 +13,7 @@
           enabled: true,
           placeholder: 'Type to search',
         }"
+        @on-search="searchCustomer"
         :pagination-options="{
           enabled: true,
           mode: 'pages',
@@ -23,6 +25,7 @@
               :to="'/admin/customers/' + props.row.id"
               data-toggle="tooltip"
               data-placement="top"
+                  target="_blank"
               title="View Customer"
             >
               <i class="fas fa-eye text-secondary"></i>
@@ -50,6 +53,7 @@ export default {
         address: "",
         user_notes: "",
       }),
+      search:'',
       dismissSecs: 5,
       dismissCountDown: 0,
       showDismissibleAlert: false,
@@ -94,8 +98,9 @@ export default {
     this.dismissCountDown = this.dismissSecs;
   },
   methods: {
-    searchCustomer() {
-      this.$store.commit("searchCustomer", this.search);
+    searchCustomer(search) {
+       this.$store.dispatch("retrieveCustomers",{search: search.searchTerm});
+      // this.$store.commit("searchCustomer", this.search);
     },
   },
   mounted() {},

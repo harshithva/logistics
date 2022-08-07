@@ -146,9 +146,9 @@ export default {
         { value: "all", text: "All" },
         { value: "this_month", text: "This month" },
         { value: "last_month", text: "Last month" },
-        { value: "this_year", text: "This year" },
-        { value: "last_year", text: "Last year" },
-        { value: "2y_back", text: "2years back" },
+        { value: "this_year", text: "This year Financial Year" },
+        { value: "last_year", text: "Last year Financial Year" },
+        { value: "2y_back", text: "2years back Financial Year" },
       ],
       statusOptions: [
         { value: "all", text: "All" },
