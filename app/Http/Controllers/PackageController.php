@@ -48,12 +48,21 @@ class PackageController extends Controller
                    if($month == 'this_month')
                     {
                         $month = $date->month;
-                        $search = $year . '-' . $month;
+                        if($month > 9){
+                            $search = $year . '-' . $month;
+                        }else{
+                            $search = $year . '-0' . $month;
+                        }
+                        
                         $shipments = Shipment::where('created_at', 'like', $search .'%');
                     }
                     else if($month == 'last_month') {
                         $month = $date->month - 1;
-                        $search = $year . '-' . $month;
+                            if($month > 9){
+                            $search = $year . '-' . $month;
+                        }else{
+                            $search = $year . '-0' . $month;
+                        }
                         $shipments = Shipment::where('created_at', 'like', $search .'%');
                     }
                     
