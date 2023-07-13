@@ -2,6 +2,7 @@
 
 This powerful CRM was developed using Laravel, Vuejs Vuex and Laravel Sanctum.
 
+![Screenshot]("./work-1.jpg")
 ### Features
 
 + SPA
