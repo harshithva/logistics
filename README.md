@@ -2,7 +2,7 @@
 
 This powerful CRM was developed using Laravel, Vuejs Vuex and Laravel Sanctum.
 
-![Screenshot]("./work-1.jpg")
+![Screenshot]("[./work-1.jpg](https://github.com/harshithva/logistics/blob/master/work-1.jpg)")
 ### Features
 
 + SPA
