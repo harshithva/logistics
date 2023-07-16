@@ -2,6 +2,8 @@
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/yourusername/your-repo/blob/master/LICENSE)
 
+![Screenshot](https://github.com/harshithva/logistics/blob/master/screenshot.jpg)
+
 This is an open source Customer Relationship Management (CRM) system designed specifically for logistics companies. It provides a comprehensive set of features to help manage various aspects of logistics operations, including creating dockets, tracking shipments, and managing expenses. This powerful CRM was developed using Laravel, Vue.js, Vuex, and Laravel Sanctum.
 
 ## Features
@@ -90,24 +92,4 @@ We would like to thank the following individuals and projects for their contribu
 - [Vue.js](https://vuejs.org/)
 - [Vuex](https://vuex.vuejs.org/)
 - [Laravel Sanctum](https://laravel.com/docs/8.x/sanctum)
-
-
-![Screenshot](https://github.com/harshithva/logistics/blob/master/screenshot.jpg)
-### Features
-
-+ SPA
-+ Customizable
-+ Create Shipment
-+ Print Invoice
-+ Send quotes
-+ Download Reports
-+ Customer login
-+ Staff Login
-+ Send SMS
-+ Send Email
-+ Receive quotes
-+ Send Invoices
-+ Beautiful mail templates
-+ Expense Manager
-+ Vendor Management
 
